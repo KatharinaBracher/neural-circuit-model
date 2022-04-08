@@ -1,0 +1,145 @@
+# Thesis
+
+## Narain et al. (2018): A cerebellar mechanism for learning prior distributions of time intervals
+<details>
+<summary> Model with 3 components, based on Bayesian estimate </summary>
+anatomical motivated model (GC, PC, CF and DN in cerebellum) of learning prior on circuit level
+
+Bayesian estimator assumes:
+- uniform prior distribution perfectly learned by observer
+- scalar variability 
+- BLS estimate - expected value of posterior (vs. max likelihood - peak of posterior)
+- also shown with Gaussian prior (more realistic, a learned prior can only be as precise as the likelihood, which also is Gaussian)
+
+BLS estimator can be formulated as a deterministic nonlinear function
+
+To learn prior model needs: 
+- basis set of activity (Gaussian) that has a decay in amplitude (increase in std) to account for scalar variability
+- learning rule (LTD and LTP), where LTD is suppressing PC activity at the time of set (in RSG task) and LTP as restoring force to a basis level of w, here the prior is encoded 
+(should be same the other way round, in cortex)
+- integrator to estimate (not necessary as information already in learned activity)
+
+Open questions: 
+- mapping from DN activity to estimate 
+- reproduction of the learned interval
+- population activity of basis set
+</details>
+
+## Bi and Zhou (2020): Understanding the computation of time using neural network models. 
+<details>
+<summary> Recurrent net, trained in a supervised fashion 
+</summary>
+Recurrent neural network structure: 
+
+- 256 units
+- soft plus activation
+- recurrent inputs and all to all connection with learnable weights
+- noise inputs
+- input units depending on task, set weights
+- output unit(s) with set weights, number of units depending on target
+
+**Training**: 
+- Cost function (MSE), sum over output units
+- Adam optimizer
+
+**Population activity very similar to experimental findings**:
+- perceived time: stereotypical dynamic trajectories
+- delay period, maintain time: attractor dynamics in a complementary monotonic coding scheme (mapping of manifold to another, different speed but same space between trajectories)
+- production by scalinf evolution speed.
+- temporal and nontemporal information is coded in orthogonal subspaces with small mixed variance (interesting analyses)
+</details>
+
+**Thoughts**: 
+- Is there are more biological motivated way to train the network? (LTD, LTP) and not so DL motivated, maybe reinforcement learning? Learning in biological plausible way
+	- is the network still able to learn with a no so powerful learning rule?
+- what about inh and exc weights? need restriction that a unit can only project neg. or pos.
+
+
+
+## Egger, Le and Jazayeri (2020): A neural circuit model for human sensorimotor timing
+<details>
+<summary> Connecting thresholds and slopes with a inh/exc circuit 
+</summary>
+
+**absolute and predictive timing mechanisms**: 
+- absolute: integrates ticks from central clock, activity increases monotonically, rate of increase does not depend on interval, output levels serve as continuous 
+- predictive timing mechanism: rate of increase is adjusted so that the output reaches the same point after an anticipated interval, rate of increase has to be set
+
+**Circuit**: 
+- biological findings suggest change of rate of increase 
+- module that translates different input $I$ to different slops: shared input to $v$ and $u$, which inhibit each other and project inh and exc respectively on $y$
+- $y$ reaches threshold $y_0$, depending on slope (input $I$) the output is at different times
+- need to introduce reset mechanism to reset u and v for a new production 
+- need to introduce update mechanism for I to time inputs according to a stimulus, updating I dynamically at a rate proportional to the error signal $y_s - y_0$ 
+- when there is a stimulus u and v are also reset
+	+ we can implement the update instantaneous as $\Delta I$
+- after adjusting I the motor production module is outputting $y_p$ (and also reset)
+	- is the motor production module necessary? the prev. module is outputting I in which the interval is already encoded
+
+
+</details>
+
+**Thoughts**: 
+- we don't need the slope, the interval is encoded in I (rate) and is just translated in slope with the exc/inh circuit such that high rates have slow slope and low rates have steep slope
+- I functions as a threshold (absolute mechanism) and encodes the interval, slope is just the next step to reproduce the interval 
+
+**Steps**: 
+- implement and reproduce fig 3 with the update mechanism of I to encode stimulus interval 
+- look at u and v as populations, is there more information in the neural trajectories?
+- what about y?
+- is there a biological more plausible way to update I?
+- How can we learn the weights in u and v populations such that they can react on changes of stimuli ranges?
+
+
+
+## Simen, Holmes et al. (2011): A Model of Interval Timing by Neural Integration
+<details>
+<summary> Stochastic ramp and trigger circuit motivated by nonhomogeneous Poisson spike rate (and shot noise population model); can be reduced to a opponent poisson diffusion model 
+</summary>
+
+Stochastic ramp and trigger timing circuit
+- bistable start switch with a connections to a number of clock pulse generator neurons. Number of active generator neurons determines the strength of drive to the integrator (ramp), the drive then determines the rate of ramp of the integrator. A bistable trigger switch is turned on when a fixed threshold is passed.
+- 2 learning processes update the number of active units in the clock pulse generator that then directly influences the rate of the integrator 
+</details>
+
+**Thoughts**: 
+<details>
+<summary> Is it the same model as in Egger 2020? 
+</summary>
+Either the number of units is updated that determines the drive of the integrator (the more units the steeper the rate the shorter the interval); the learning rate incorporates the swap, the longer the interval, the smaller the number of active units has to be
+
+or the input I is updated (the stronger I the smaller the slope the longer the interval); the dynamics in u,v incorporates the swap from strong input to small slope, learning is just a difference between 
+</details>
+
+- Translation of stochastic ramp and trigger timing circuit to diffusion model, with keeping parameters 
+- Thresholds are implemented as bistable switches 
+
+
+
+-------------------------------------------------------------------------------
+
+<details>
+<summary> 
+</summary>
+
+</details>
+
+**Thoughts**: 
+
+
+
+# Plan
+
+- [x] 1-2-Go task, Code that returns production times of x trials
+- [ ] PCA on one trial 
+- [x] TOOL: behavior plot, std and trials
+- [ ] impact of parameter K,  $\sigma$, initI on behavior
+- [ ] Experiment simulation: different ranges 
+- [ ] TOOL: PCA on u,v,y, across trials (mean, same sampling) and stimuli
+- [ ] Population of u, v (y) with 100 cells, random weight matrix
+	- [ ] how are random weight matrices chosen in u and v? differently?
+	- [ ] noise in random weights; and different initials values
+	- [ ] how are u and v populations connected (all to all or subpopulations)
+- [ ] $\Delta$I is only the difference of a threshold and y, can the update of I be learned?
+	- [ ] Can an input I be kept in population weights of u and v? (no constant I input)
+
