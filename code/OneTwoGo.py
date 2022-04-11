@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import linregress
 
 def sigmoid(x):
     '''Activation function'''
@@ -48,8 +49,13 @@ class OneTwoGo_Task:
         simulation2, reset_lst2 = self.network(state_init, reset, K, nbin)
 
         if behavior:
+        #Check if the bound is reached (sometimes it's not!)
             production = []
             for i in range(self.ntrials):
+                #if np.where(np.diff(np.sign(simulation2[:,2,i]-self.th)))[0].size == 0:
+                    #p = np.inf #not crossing threshold
+                #else:
+                    #p = np.where(np.diff(np.sign(simulation2[:,2,i]-self.th)))[0][-1]+1
                 p = np.where(np.diff(np.sign(simulation2[:,2,i]-self.th)))[0][-1]+1
                 production.append(p)
             simulation = np.concatenate((simulation,simulation2))
@@ -108,27 +114,29 @@ class OneTwoGo_Task:
         simu, res, production = self.simulate_onetwogo(duration, K, initI)
 
         where = np.where(np.array(res)==1)[0] -1
-        fig, ax = plt. subplots(4,1, figsize=(10,7))
+        steps = len(simu[:,0])
+        fig, ax = plt. subplots(4,1, sharex=True, figsize=(10,7))
 
-        ax[0].plot(simu[:,0], c='grey', alpha=0.05)
-        ax[0].plot(simu[:,0, trial], c='b', linewidth=0.7,  alpha=0.5)
-        ax[0].vlines(where, np.min(np.array(simu[:,0])), np.max(np.array(simu[:,0])), color='grey',alpha=0.5)
+        ax[0].plot(np.arange(steps) * self.dt, simu[:,0], c='grey', alpha=0.05)
+        ax[0].plot(np.arange(steps) * self.dt, simu[:,0, trial], c='b', linewidth=0.7,  alpha=0.5)
+        ax[0].vlines(where* self.dt, np.min(np.array(simu[:,0])), np.max(np.array(simu[:,0])), color='grey',alpha=0.5)
         ax[0].set_title('du/dt')
-        ax[1].plot(simu[:,1], 'grey', alpha=0.05)
-        ax[1].plot(simu[:,1, trial], 'blue', linewidth=0.7, alpha=0.5)
-        ax[1].vlines(where, np.min(np.array(simu[:,1])), np.max(np.array(simu[:,1])), color='grey', alpha=0.5)
+        ax[1].plot(np.arange(steps) * self.dt, simu[:,1], 'grey', alpha=0.05)
+        ax[1].plot(np.arange(steps) * self.dt, simu[:,1, trial], 'blue', linewidth=0.7, alpha=0.5)
+        ax[1].vlines(where*self.dt, np.min(np.array(simu[:,1])), np.max(np.array(simu[:,1])), color='grey', alpha=0.5)
         ax[1].set_title('dv/dt')
-        ax[2].plot(simu[:,2], 'grey', label = duration, alpha=0.05)
-        ax[2].plot(simu[:,2, trial], 'blue',linewidth=0.7,  alpha=0.5)
-        ax[2].hlines(self.th, 0,self.first_duration/self.dt+duration/self.dt+2*duration/self.dt,linestyle='--', color='lightgray')
-        ax[2].vlines(where, np.min(np.array(simu[:,2])), np.max(np.array(simu[:,2])), color='grey',alpha=0.5)
-        ax[2].plot(self.first_duration/self.dt+duration/self.dt+production[trial], self.th, 'x', c='blue')
+        ax[2].plot(np.arange(steps) * self.dt, simu[:,2], 'grey', label = duration, alpha=0.05)
+        ax[2].plot(np.arange(steps) * self.dt, simu[:,2, trial], 'blue',linewidth=0.7,  alpha=0.5)
+        ax[2].hlines(self.th, 0,self.first_duration+duration+2*duration+2*self.dt,linestyle='--', color='lightgray')
+        ax[2].vlines(where* self.dt, np.min(np.array(simu[:,2])), np.max(np.array(simu[:,2])), color='grey',alpha=0.5)
+        ax[2].plot(self.first_duration+1*self.dt+duration+1*self.dt+production[trial]*self.dt, self.th, 'x', c='blue')
         ax[2].set_title('dy/dt')
         #ax[2].legend()
-        ax[3].plot(simu[:,3], 'grey', alpha=0.05)
-        ax[3].plot(simu[:,3, trial], 'blue',linewidth=0.7,  alpha=0.5)
-        ax[3].vlines(where, np.min(np.array(simu[:,3])), np.max(np.array(simu[:,3])), color='grey',alpha=0.5)
+        ax[3].plot(np.arange(steps) * self.dt, simu[:,3], 'grey', alpha=0.05)
+        ax[3].plot(np.arange(steps) * self.dt, simu[:,3, trial], 'blue',linewidth=0.7,  alpha=0.5)
+        ax[3].vlines(where* self.dt, np.min(np.array(simu[:,3])), np.max(np.array(simu[:,3])), color='grey',alpha=0.5)
         ax[3].set_title('dI/dt')
+        ax[3].set_xlabel('Time (ms)')
 
         plt.tight_layout()
         print('Stimulus:', duration, ', Production trial', trial, '(blue)):',production[trial]*self.dt)
@@ -137,16 +145,31 @@ class OneTwoGo_Task:
 
 
 
-    def plot_behavior(self, stimuli, K, initI):
-
+    def plot_behavior(self, stimuli, K, initI, ax=None):
+        mean_lst = []
+        std_lst = []
+        
         for stim in stimuli:
             simu, res, production = self.simulate_onetwogo(stim, K, initI)
             mean, std, _ = self.statistics(simu, production)
-            plt.errorbar(stim, mean, yerr=std, fmt='-o', c='k')
-
-        plt.xlabel('Stimulus (ms)')
-        plt.xlabel('Production (ms)')
-        plt.plot( [stimuli[0]-100,stimuli[-1]+100],[stimuli[0]-100,stimuli[-1]+100], c='grey', linestyle='--')
+            mean_lst.append(mean)
+            std_lst.append(std)
+            
+        reg = linregress(stimuli, mean_lst)
+        
+        if ax is None:
+            plt.errorbar(stimuli, mean_lst, yerr=std_lst, fmt='-o', c='k')
+            plt.plot( [stimuli[0]-100,stimuli[-1]+100],[stimuli[0]-100,stimuli[-1]+100], c='grey', linestyle='--')
+            plt.text(np.min(stimuli)-100, np.max(stimuli)+100, 'slope='+str(round(reg[0],3)))
+            plt.xlabel('Stimulus (ms)')
+            plt.ylabel('Production (ms)')
+        else:
+            subplot = ax.errorbar(stimuli, mean_lst, yerr=std_lst, fmt='-o', c='k')
+            ax.plot( [stimuli[0]-100,stimuli[-1]+100],[stimuli[0]-100,stimuli[-1]+100], c='grey', linestyle='--')
+            ax.text(np.min(stimuli)-100, np.max(stimuli)+50, 'slope='+str(round(reg[0],3)))
+            return subplot
+     
+        
 
 
 
