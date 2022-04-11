@@ -131,10 +131,13 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 # Plan
 
 - [x] 1-2-Go task, Code that returns production times of x trials
-- [ ] PCA on one trial 
+- [x] PCA on one trial
+	- *meaning?*
 - [x] TOOL: behavior plot, std and trials
-- [ ] impact of parameter K,  $\sigma$, initI on behavior
-- [ ] Experiment simulation: different ranges 
+- [x] impact of parameter K,  $\sigma$, initI on behavior
+	- *quantification?*
+- [ ] Experiment simulation: different ranges, keeping I
+	- *initial duration, stimulus, reproduction crossing, delay/variable, stimulus?*
 - [ ] TOOL: PCA on u,v,y, across trials (mean, same sampling) and stimuli
 - [ ] Population of u, v (y) with 100 cells, random weight matrix
 	- [ ] how are random weight matrices chosen in u and v? differently?
