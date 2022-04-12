@@ -126,23 +126,44 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 
 **Thoughts**: 
 
+-------------------------------------------------------------------------------
 
 
-# Plan
-
+# ToDo
 - [x] 1-2-Go task, Code that returns production times of x trials
-- [x] PCA on one trial
-	- *meaning?*
+- [x] PCA over trials and stimuli 
+	- separately components over time
+	- *influence of sampling actual lenght, upsampling?*
 - [x] TOOL: behavior plot, std and trials
-- [x] impact of parameter K,  $\sigma$, initI on behavior
-	- *quantification?*
+- [ ] impact of parameter K,  $\sigma$, initI on behavior
+	- quantify with slope and indiffrent point (normalized with middle of range)
+	- 150 tau, combination of K and initI
+	- 2 ranges combine initI and K, influence on slope and indiff point $\Delta$
 - [ ] Experiment simulation: different ranges, keeping I
-	- *initial duration, stimulus, reproduction crossing, delay/variable, stimulus?*
-- [ ] TOOL: PCA on u,v,y, across trials (mean, same sampling) and stimuli
+	- initial duration, stimulus, reproduction crossing, delay or no delay with reset or reset to initial cond, stimulus with initI from prev. trial
+	- [ ] **TOOL**: function to cut u,v,y and sort according to stimulus
+- [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli
+
+	
+
+## Model
+- [ ] Timeout: Check if the bound is reached (sometimes it's not!)
+ 	+ skip in behavioral plot
+ 	+ number of timeouts in plots
+- [ ] stim vs prod should be linear or concave
+	- Saturation in y -> higher tau, linear regime of y (not in saturation)
+	- threshold down
+	- why is model tuned to saturation?
 - [ ] Population of u, v (y) with 100 cells, random weight matrix
 	- [ ] how are random weight matrices chosen in u and v? differently?
 	- [ ] noise in random weights; and different initials values
 	- [ ] how are u and v populations connected (all to all or subpopulations)
 - [ ] $\Delta$I is only the difference of a threshold and y, can the update of I be learned?
 	- [ ] Can an input I be kept in population weights of u and v? (no constant I input)
+
+## Other
+- Latex in VS Code
+- Report Model and Figures
+- jupyter lab interactive plt. installation
+- adapter bildschirm keyboard
 
