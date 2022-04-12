@@ -145,11 +145,11 @@ class OneTwoGo_Task:
 
 
 
-    def plot_behavior(self, stimuli, K, initI, ax=None):
+    def plot_behavior(self, stimuli_range, K, initI, ax=None):
         mean_lst = []
         std_lst = []
         
-        for stim in stimuli:
+        for stim in stimuli_range:
             simu, res, production = self.simulate_onetwogo(stim, K, initI)
             mean, std, _ = self.statistics(simu, production)
             mean_lst.append(mean)
@@ -170,6 +170,77 @@ class OneTwoGo_Task:
             return subplot
      
         
+    def meas_prod_times(self, simu, prod, duration, sample):
+        meas_start = int(self.first_duration/self.dt+1)
+        meas_stop = int(self.first_duration/self.dt+1+duration/self.dt) #without flashes
+        measure = simu[meas_start:meas_stop]
+        measure = np.mean(measure,2)
+
+        prod_lst = []
+        for i,p in enumerate(prod):
+            p_start=int(self.first_duration/self.dt+duration/self.dt+2)
+            p_end=int(self.first_duration/self.dt+duration/self.dt+2+p)
+
+            prod_lst.append(simu[p_start:p_end,:,i])
+            #print(simu[p_start:p_end,:,i].shape)
+
+        prod_sampled = [signal.resample(trial, sample) for trial in prod_lst]
+        prod_sampled = np.array(prod_sampled)
+        prod_sampled = np.mean(prod_sampled, 0)
+
+        return measure, prod_sampled
 
 
 
+    
+    
+    def PCA(self, stimuli_range, data=None, K=None, initI=None, experiment=True):
+        if experiment:
+            #data, has to be sliced according to stimuli and in measure and prod
+            #return meas_all prod_all
+            #meas_all
+            #prod_all
+            pass
+        
+        else:
+            meas_all = []
+            prod_all = []
+            len_m = [0]
+            len_p = [0]
+            for stim in stimuli_range:
+                simu, res, production = self.simulate_onetwogo(stim, K, initI)
+                measure, prod = self.meas_prod_times(simu, prod, stim, stim/10+10)
+                meas_all.extend(measure)
+                prod_all.extend(prod)
+                len_m.extend(measure[:,:3].shape[0])
+                len_p.extend(prod[:,:3].shape[0])                
+        
+        pca_m = PCA()
+        M = pca_m.fit_transform(meas_all)
+        pca_p = PCA()
+        P = pca_p.fit_transform(prod_all)
+        
+        M_lst = []
+        P_lst = []
+        
+        for i in range(len(stimuli_range)):
+            M_lst.append(M[sum(M_lst[:i+1]):sum(M_lst[:i+2])])
+            P_lst.append(P[sum(P_lst[:i+1]):sum(P_lst[:i+2])])
+            
+        return M_lst, P_lst    
+        
+            
+        def plot_PCA(self, M_lst, P_lst, stimuli_range, colors):
+            fig = plt.figure(figsize=(10,8))
+            ax = plt.axes(projection='3d')
+            
+            for i in range(len(stimuli_range)):
+                ax.plot3D(M_lst[i][:,0],  M_lst[i][:,1],  M_lst[i][:,2], c=colors[i], alpha=0.5, marker='.')
+
+            ax.xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+            ax.yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+            ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+            plt.title('Measurement')
+            
+            plt.show()
+        
