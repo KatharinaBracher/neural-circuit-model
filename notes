@@ -142,7 +142,7 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 - [ ] Experiment simulation: different ranges, keeping I
 	- initial duration, stimulus, reproduction crossing, delay or no delay with reset or reset to initial cond, stimulus with initI from prev. trial
 	- [ ] **TOOL**: function to cut u,v,y and sort according to stimulus
-- [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli
+- [x] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli
 
 	
 
