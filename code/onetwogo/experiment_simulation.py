@@ -4,6 +4,12 @@ import numpy as np
 import random
 
 
+def remove_timeouts(production, timeout_trials):
+    production = np.delete(np.array(production), timeout_trials)
+
+    return production
+
+
 class ExperimentSimulation(BaseSimulation):
 
     def __init__(self, params):
@@ -55,8 +61,8 @@ class ExperimentSimulation(BaseSimulation):
 
         reset_lst[-1] = 1  # last production
         # stimulus_lst[] remove timout_indx
-
-        return SimulationResult(params, simulation, reset_lst, np.array(production_lst), timeout_idx, stimulus_lst)
+        production_lst = remove_timeouts(production_lst, timeout_idx)
+        return SimulationResult(params, simulation, reset_lst, production_lst, timeout_idx, stimulus_lst)
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
         params = self.params
@@ -71,11 +77,9 @@ class ExperimentSimulation(BaseSimulation):
         if np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0:
             timeout = 1
             print('timeout')
-            # production.append(np.inf)
+            production = np.inf
             # remove time out trial completly from u,v,y,I
-            # remove nbin/2 (measurement), 3 flashes and delay
-            simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]
-            # remove nbin/2 (measurement), 3 flashes and delay
+            simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]  # remove nbin/2 (stim), 3 flashes and delay
             reset_lst = reset_lst[:-int(nbin/2+3+params.delay/params.dt)]
         else:
             timeout = 0
@@ -85,4 +89,5 @@ class ExperimentSimulation(BaseSimulation):
                 0][0] + earlyphase  # +1 #cut first th crossing and then take first one
             simulation = np.concatenate((simulation, simulation2[:production+1]))
             reset_lst.extend(reset_lst2[:production+1])
+
         return simulation, reset_lst, production, timeout

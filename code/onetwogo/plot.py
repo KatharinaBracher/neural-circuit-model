@@ -128,4 +128,3 @@ class BehavioralPlot:
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
                     str(round(regression_line[0], 3))+', to='+str(data.ntimeouts))
             return subplot
-

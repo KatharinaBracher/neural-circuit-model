@@ -3,9 +3,10 @@ from .result import RangeParallelSimulationResult, SimulationResult
 import numpy as np
 
 
-def remove_timeouts(simu, timeout_trials):
+def remove_timeouts(simu, production, timeout_trials):
+    production = np.delete(np.array(production), timeout_trials)
     simu = np.delete(simu, timeout_trials, 2)  # delete all timeout trials
-    return simu
+    return simu, production
 
 
 class ParallelSimulation(BaseSimulation):
@@ -39,8 +40,8 @@ class ParallelSimulation(BaseSimulation):
         )
         reset_lst[nbinfirst+2*nbin] = 1  # where th sould be reached
 
-        simulation = remove_timeouts(simulation, timeout_trials)
-        return SimulationResult(params, simulation, reset_lst, np.array(production), timeout_trials, [stimulus])
+        simulation, production = remove_timeouts(simulation, production, timeout_trials)
+        return SimulationResult(params, simulation, reset_lst, production, timeout_trials, [stimulus])
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, _, earlyphase):
         params = self.params
@@ -51,9 +52,10 @@ class ParallelSimulation(BaseSimulation):
         for i in range(params.ntrials):
             if np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0].size == 0:
                 timeout_trials.append(i)
+                p = np.inf
             else:
                 p = np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0][0] + earlyphase
-                production.append(p)
+            production.append(p)
         simulation = np.concatenate((simulation, simulation2))
         reset_lst.extend(reset_lst2)
         return simulation, reset_lst, production, timeout_trials

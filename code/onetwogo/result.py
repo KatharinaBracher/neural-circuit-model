@@ -33,6 +33,9 @@ class SimulationResult:
         std = np.std(production)
         return mean, std
 
+    def number_of_timeouts(self):
+        return len(self.timeout_index)
+
     def create_behavioral_plot_data_experiment_simulation(self) -> BehavioralPlotData:
         stimulus_lst = self.stimulus_lst
         production = self.production
@@ -45,15 +48,16 @@ class SimulationResult:
         ntimeouts, production_means, production_stdts = [], [], []
         for stim in stimulus_range:
             ntimeouts.append(np.count_nonzero(stim_lst_unsuccess == stim))
-            production_s = production[np.ma.where(stim == stim_lst_success)]*self.params.dt  # productions of one stimulus
+            # productions of one stimulus
+            production_s = production[np.ma.where(stim == stim_lst_success)]*self.params.dt
             production_means.append(np.mean(production_s))
             production_stdts.append(np.std(production_s))
         print(stimulus_range, production_means)
 
         return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts, ntimeouts)
 
-    def number_of_timeouts(self):
-        return len(self.timeout_index)
+    def create_behavioral_plot(self):
+        return BehavioralPlot(self.create_behavioral_plot_data_experiment_simulation())
 
 
 class RangeParallelSimulationResult:
