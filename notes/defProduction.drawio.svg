@@ -1,137 +1,390 @@
-<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="471px" height="530px" viewBox="-0.5 -0.5 471 530" content="&lt;mxfile&gt;&lt;diagram id=&quot;_DKtWXEoeYkfIedtv28e&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
-    <defs/>
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="442px" height="661px" viewBox="-0.5 -0.5 442 661" content="&lt;mxfile&gt;&lt;diagram id=&quot;_DKtWXEoeYkfIedtv28e&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;diagram id=&quot;6sXgktQjmtTPO2bAS98c&quot; name=&quot;Page-2&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+    <defs>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            div.MathJax_SVG_Display { position: static; }
+span.MathJax_SVG { position: static !important; }
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            .MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            #MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            .MathJax_Preview .MJXf-math {color: inherit!important}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            #MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            .MathJax_Preview {color: #888; display: contents}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            .MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom &gt; * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd &gt; * {display: block!important}
+.MJXp-script-box &gt; *  {display: table!important; height: 50%}
+.MJXp-script-box &gt; * &gt; * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box &gt; *:last-child &gt; * {vertical-align: bottom}
+.MJXp-script-box &gt; * &gt; * &gt; * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over &gt; * {display: block!important}
+.MJXp-munderover &gt; *, .MJXp-munder &gt; * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable &gt; * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr &gt; .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child &gt; .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr &gt; .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child &gt; .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+        </style>
+        <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+            .MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_SVG &gt; div {display: inline-block}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block!important}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_test {font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow: hidden; height: 1px}
+.MathJax_SVG_test.mjx-test-display {display: table!important}
+.MathJax_SVG_test.mjx-test-inline {display: inline!important; margin-right: -1px}
+.MathJax_SVG_test.mjx-test-default {display: block!important; clear: both}
+.MathJax_SVG_ex_box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
+.mjx-test-inline .MathJax_SVG_left_box {display: inline-block; width: 0; float: left}
+.mjx-test-inline .MathJax_SVG_right_box {display: inline-block; width: 0; float: right}
+.mjx-test-display .MathJax_SVG_right_box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+        </style>
+    </defs>
     <g>
-        <path d="M 40 60 L 360 60" fill="none" stroke="#666666" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
-        <path d="M 40 240 L 360 240" fill="none" stroke="#666666" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
-        <rect x="153" y="0" width="120" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <rect x="51" y="44" width="340" height="160" rx="24" ry="24" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <rect x="101" y="424" width="240" height="50" fill="none" stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 10px; margin-left: 213px;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 242px; height: 1px; padding-top: 429px; margin-left: 100px;">
                         <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: nowrap;">
-                                <font color="#000000" face="Courier New" size="1">
-                                    <b style="font-size: 18px">
-                                        Production
-                                    </b>
+                            <div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font color="#000000" style="font-size: 14px">
+                                    $$ \tau\frac{du}{dt} = -u + \theta \ (W_{uI}I - W_{uv}v - sI_F)$$
+                                    <br style="font-size: 14px"/>
                                 </font>
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="213" y="14" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    Production
+                <text x="221" y="443" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="14px" text-anchor="middle">
+                    $$ \tau\frac{du}{dt} = -u + \theta...
                 </text>
             </switch>
         </g>
-        <rect x="360" y="240" width="100" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <rect x="101" y="490" width="240" height="60" fill="none" stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 98px; height: 1px; padding-top: 245px; margin-left: 361px;">
-                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 18px; font-family: &quot;Courier New&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                late timeout
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 238px; height: 1px; padding-top: 497px; margin-left: 102px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font color="#000000" style="font-size: 14px">
+                                    $$ \tau\frac{dv}{dt} = -v + \theta \ (W_{vI}I - W_{vu}u + sI_F)$$
+                                    <br style="font-size: 14px"/>
+                                    <br style="font-size: 14px"/>
+                                </font>
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="410" y="250" fill="#000000" font-family="Courier New" font-size="18px" text-anchor="middle">
-                    late timeout
+                <text x="221" y="511" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="14px" text-anchor="middle">
+                    $$ \tau\frac{dv}{dt} = -v + \theta...
                 </text>
             </switch>
         </g>
-        <path d="M 40 220 Q 50 250 55 260 Q 60 270 70 275 Q 80 280 130 270 Q 180 260 360 250" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 40 40 Q 50 80 60 90 Q 70 100 95 95 Q 120 90 180 75 Q 240 60 360 50" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 40 150 L 360 150" fill="none" stroke="#666666" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
-        <path d="M 40 130 Q 50 160 55 170 Q 60 180 70 185 Q 80 190 125 180 Q 170 170 210 155 Q 250 140 265 150 Q 280 160 300 150 Q 320 140 330 150 Q 340 160 360 150" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 40 330 L 360 330" fill="none" stroke="#666666" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
-        <path d="M 40 310 Q 40 340 50 360 Q 60 380 65 365 Q 70 350 80 330 Q 90 310 185 305 Q 280 300 360 300" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
-        <rect x="350" y="330" width="120" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <rect x="157" y="550" width="128" height="60" fill="none" stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 335px; margin-left: 351px;">
-                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 18px; font-family: &quot;Courier New&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                early timeout
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 126px; height: 1px; padding-top: 557px; margin-left: 158px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font color="#000000" style="font-size: 14px">
+                                    $$ \tau\frac{dy}{dt} = -y + u - v $$
+                                    <br style="font-size: 14px"/>
+                                    <br style="font-size: 14px"/>
+                                </font>
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="410" y="340" fill="#000000" font-family="Courier New" font-size="18px" text-anchor="middle">
-                    early timeout
+                <text x="221" y="571" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="14px" text-anchor="middle">
+                    $$ \tau\frac{dy}{d...
                 </text>
             </switch>
         </g>
-        <path d="M 110 380 L 110 30" fill="none" stroke="#006eaf" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 258 58.59 L 264.59 58.59 L 264.59 52 L 266.41 52 L 266.41 58.59 L 273 58.59 L 273 60.41 L 266.41 60.41 L 266.41 67 L 264.59 67 L 264.59 60.41 L 258 60.41 Z" fill="#006eaf" stroke="none" transform="rotate(-45,265.5,59.5)" pointer-events="all"/>
-        <path d="M 218 148.59 L 224.59 148.59 L 224.59 142 L 226.41 142 L 226.41 148.59 L 233 148.59 L 233 150.41 L 226.41 150.41 L 226.41 157 L 224.59 157 L 224.59 150.41 L 218 150.41 Z" fill="#006eaf" stroke="none" transform="rotate(-45,225.5,149.5)" pointer-events="all"/>
-        <path d="M 360 380 L 360 30" fill="none" stroke="#006eaf" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <rect x="0" y="490" width="360" height="30" fill="none" stroke="none" pointer-events="all"/>
+        <rect x="161" y="610" width="120" height="50" fill="none" stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 358px; height: 1px; padding-top: 505px; margin-left: 2px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 617px; margin-left: 162px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font color="#000000" style="font-size: 14px">
+                                    $$ \tau\frac{dI}{dt} = sK(y-y_0)  $$
+                                    <br style="font-size: 14px"/>
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="221" y="631" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="14px" text-anchor="middle">
+                    $$ \tau\frac{dI}{...
+                </text>
+            </switch>
+        </g>
+        <path d="M 41 124 L 76 124 L 76 174 L 103.76 174" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 108.76 174 L 103.76 176.5 L 103.76 171.5 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 41 124 L 76 124 L 76 74 L 103.76 74" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 108.76 74 L 103.76 76.5 L 103.76 71.5 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="21" cy="124" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 111px; margin-left: 2px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
                             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <font color="#000000" face="Courier New">
-                                    If timeout:
-                                    <br/>
-                                    <span style="white-space: pre">
-                                    </span>
-                                    <b>
-                                        delete trial
-                                    </b>
-                                    <br/>
-                                    <span style="white-space: pre">
-                                    </span>
-                                    update I according to late or early
-                                    <br/>
+                                <font style="font-size: 20px">
+                                    I
                                 </font>
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="2" y="509" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px">
-                    If timeout:...
+                <text x="21" y="123" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    I
                 </text>
             </switch>
         </g>
-        <rect x="20" y="400" width="100" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <path d="M 151 74 L 240.54 111.97" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 245.14 113.93 L 239.56 114.28 L 241.51 109.67 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="131" cy="74" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 98px; height: 1px; padding-top: 405px; margin-left: 21px;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 61px; margin-left: 112px;">
                         <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 18px; font-family: &quot;Courier New&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                early phase
-                                <span style="color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px">
-                                    %3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22late%20timeout%22%20style%3D%22text%3Bhtml%3D1%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dcenter%3BverticalAlign%3Dmiddle%3BwhiteSpace%3Dwrap%3Brounded%3D0%3BfontFamily%3DCourier%20New%3BfontSize%3D18%3BfontColor%3D%23000000%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22520%22%20y%3D%22420%22%20width%3D%22100%22%20height%3D%2210%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <span style="font-size: 20px">
+                                    u
                                 </span>
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="70" y="410" fill="#000000" font-family="Courier New" font-size="18px" text-anchor="middle">
-                    early phase...
+                <text x="131" y="73" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    u
                 </text>
             </switch>
         </g>
-        <rect x="175.5" y="400" width="100" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <path d="M 151 174 L 239.2 135.68" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 245.62 132.89 L 240.59 138.89 L 237.8 132.47 Z" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="131" cy="174" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 98px; height: 1px; padding-top: 405px; margin-left: 177px;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 161px; margin-left: 112px;">
                         <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 18px; font-family: &quot;Courier New&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                late phase
+                            <div style="display: inline-block; font-size: 20px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="226" y="410" fill="#000000" font-family="Courier New" font-size="18px" text-anchor="middle">
-                    late phase
+                <text x="131" y="181" fill="#000000" font-family="Helvetica" font-size="20px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <path d="M 286 124 L 341 124" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 266 104 L 266 84 Q 266 74 275.94 74 L 285.88 74" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 289.88 74 L 285.88 76 L 285.88 72 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="266" cy="124" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 111px; margin-left: 247px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 20px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                y
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="266" y="131" fill="#000000" font-family="Helvetica" font-size="20px" text-anchor="middle">
+                    y
+                </text>
+            </switch>
+        </g>
+        <path d="M 361 104 L 361 84 Q 361 74 351 74 L 337.12 74" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 332.12 74 L 337.12 71.5 L 337.12 76.5 Z" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="361" cy="124" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-end; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 141px; margin-left: 342px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                y
+                                <sub style="font-size: 12px">
+                                    0
+                                </sub>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="361" y="141" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    y0
+                </text>
+            </switch>
+        </g>
+        <path d="M 351 123 L 361 123 L 361 113 L 371 113" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 145.14 159.86 Q 171 124 150.54 95.63" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 146.45 89.96 L 153.38 93.59 L 147.71 97.68 Z" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 111.46 152.37 Q 91 124 116.86 88.14" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 115.55 158.04 L 108.62 154.41 L 114.29 150.32 Z" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 391 124 Q 441 124 441 194 Q 441 264 286 264 Q 131 264 131 219.62" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 131 215.12 L 133 221.12 L 131 219.62 L 129 221.12 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="97" y="238" width="40" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 243px; margin-left: 98px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font style="font-size: 15px">
+                                    reset
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="117" y="248" fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+                    reset
+                </text>
+            </switch>
+        </g>
+        <path d="M 311 54 Q 311 4 166 4 Q 21 4 21 98.38" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 21 102.88 L 19 96.88 L 21 98.38 L 23 96.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="311" cy="74" rx="20" ry="20" fill="none" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 74px; margin-left: 292px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font>
+                                    <span style="font-size: 7px">
+                                        $$K\int$$
+                                    </span>
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="311" y="78" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    $$K\in...
+                </text>
+            </switch>
+        </g>
+        <rect x="31" y="4" width="40" height="10" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 9px; margin-left: 32px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font style="font-size: 15px">
+                                    update
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="51" y="14" fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+                    update
                 </text>
             </switch>
         </g>
