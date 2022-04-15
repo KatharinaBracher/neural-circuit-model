@@ -1,5 +1,6 @@
 paper
-code/.ipynb_checkpoints
-code/__pycache__
+.ipynb_checkpoints
 leseliste.pdf
-notes.backup
+notes/notes.backup
+
+__pycache__
