@@ -31,7 +31,7 @@ class OneTwoGo_Task:
 
         u, v, y, I = state_init.copy()
         
-        #save sequence with resets of u,v
+        #save bool with resets=1 over time
         reset_lst = []
         simulation = np.zeros([nbin,4,self.ntrials])
 
@@ -52,20 +52,19 @@ class OneTwoGo_Task:
         state_init = simulation[-1]
         #next step simulation
         simulation2, reset_lst2 = self.network(state_init, reset, K, nbin)
-        
+        production = []
+        earlyphase = int(0.4*nbin/2) #0.4 of stim duration considered early phase
+                
         #for parallel simulation: production stage step
         if parallel_production:
-            production = []
             #Check if the bound is reached (sometimes it's not!)
             timeout_trials = []
             for i in range(self.ntrials):
-                if np.where(np.diff(np.sign(simulation2[:,2,i]-self.th)))[0].size == 0:
+                if np.where(np.diff(np.sign(simulation2[earlyphase:,2,i]-self.th)))[0].size == 0:
                     p = np.inf #timeout
                     timeout_trials.append(i)
-                    #print('timeout')
                 else:
-                    p = np.where(np.diff(np.sign(simulation2[:,2,i]-self.th)))[0][-1]+1
-                    #print('producing behavior')
+                    p = np.where(np.diff(np.sign(simulation2[earlyphase:,2,i]-self.th)))[0][0] + earlyphase
                 production.append(p)
             simulation = np.concatenate((simulation,simulation2))
             reset_lst.extend(reset_lst2)
@@ -73,20 +72,21 @@ class OneTwoGo_Task:
         
         #for experiment: production stage step 
         if experiment:
-            production = []
-            #timeout if th not reached in 2*stim or if th only reached in first time bin
-            if np.where(np.diff(np.sign(np.squeeze(simulation2[self.dt:])[:,2]-self.th)))[0].size == 0  & np.where(np.diff(np.sign(np.squeeze(simulation2)-self.th)))[0].size != 0:
-                print('th crossing too early')
-            if np.where(np.diff(np.sign(np.squeeze(simulation2[1*self.dt:])[:,2]-self.th)))[0].size == 0:
+            #timeout if threshold not reached in late phase (late timeout) or only reached in early phase (early timeout)
+            if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:,2])-self.th)))[0].size == 0) and (np.where(np.diff(np.sign(np.squeeze(simulation2[:,2])-self.th)))[0].size != 0)):
+                print(np.where(np.diff(np.sign(np.squeeze(simulation2[:,2])-self.th)))[0]) #only early phase
+                print('1: late timeout, 2: early timeout')
+            if np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:,2])-self.th)))[0].size == 0:
                 timeout=1
-                print('timeout')
+                print('late timeout')
                 #production.append(np.inf)
                 #remove time out trial completly from u,v,y,I
                 simulation = simulation[:-int(nbin/2+3+self.delay/self.dt)] #remove nbin/2 (measurement), 3 flashes and delay 
                 reset_lst = reset_lst[:-int(nbin/2+3+self.delay/self.dt)] #remove nbin/2 (measurement), 3 flashes and delay
             else:
                 timeout=0
-                p = np.where(np.diff(np.sign(np.squeeze(simulation2)[:,2]-self.th)))[0][-1]+1
+                #p = np.where(np.diff(np.sign(np.squeeze(simulation2)[:,2]-self.th)))[0][-1] #+1 #get last th crossing (problem if oscilating around th)
+                p = np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:,2])-self.th)))[0][0] + earlyphase  #+1 #cut first th crossing and then take first one
                 production.append(p)
                 simulation = np.concatenate((simulation,simulation2[:p+1]))
                 reset_lst.extend(reset_lst2[:p+1])
@@ -139,6 +139,7 @@ class OneTwoGo_Task:
         
         timeout_idx = []
         for i,stimulus in enumerate(stimulus_lst):
+            print(stimulus)
             nbin = int(stimulus / self.dt) #stimulus
             #reset after behavior
             simulation, reset_lst = self.trial_update(simulation, reset_lst, reset=1, K=0, nbin=1)
@@ -152,6 +153,8 @@ class OneTwoGo_Task:
             simulation, reset_lst, production, timeout = self.trial_update(simulation, reset_lst, reset=0, K=K, nbin=nbin*2, experiment=True)
             if timeout:
                 timeout_idx.append(i)
+                
+        reset_lst[-1] = 1 #last production
         #stimulus_lst[] remove timout_indx
         return simulation, reset_lst, timeout_idx
 
@@ -160,7 +163,7 @@ class OneTwoGo_Task:
     def remove_timeouts(self, simu, production, timeout_trials):
         #idx = [i for i, j in enumerate(to) if not np.isfinite(j).all()]
         production = np.delete(np.array(production), timeout_trials)
-        simu = np.delete(simu, timeout_trials, 2) #delet all timeout trials
+        simu = np.delete(simu, timeout_trials, 2) #delete all timeout trials
         return simu, production
 
 
@@ -170,51 +173,69 @@ class OneTwoGo_Task:
         mean = np.mean(production)
         std = np.std(production)
         return mean, std, std_s
-
-    def plot_trials(self, simu, res, production, timeout_trials, stimulus=False, trial=False):
-        
-        if production.size == 0:
-            print('all trials timeout')
-            return simu, res, production, timeout_trials
+    
+    def get_frames(self, reset_lst, trial=False):
         if trial:
-            alpha = 0.05
-        else:
-            alpha=1
-
-        where = np.where(np.array(res)==1)[0] -1
-        steps = len(simu[:,0])
-        fig, ax = plt. subplots(4,1, sharex=True, figsize=(10,7))
-
-        ax[0].plot(np.arange(steps) * self.dt, simu[:,0], c='grey', alpha=alpha)
-        ax[0].vlines(where* self.dt, np.min(np.array(simu[:,0])), np.max(np.array(simu[:,0])), color='grey',alpha=0.5)
-        ax[0].set_title('du/dt')
-        ax[1].plot(np.arange(steps) * self.dt, simu[:,1], 'grey', alpha=alpha)
-        ax[1].vlines(where*self.dt, np.min(np.array(simu[:,1])), np.max(np.array(simu[:,1])), color='grey', alpha=0.5)
-        ax[1].set_title('dv/dt')
-        ax[2].plot(np.arange(steps) * self.dt, simu[:,2], 'grey', alpha=alpha)
+            reset_lst = np.delete(reset_lst, 3)
+            
+        m_start = reset_lst[1::3]
+        m_stop = reset_lst[2::3]
         
+        p_start = reset_lst[2::3]
+        p_stop = reset_lst[3::3]
+        return zip(p_start, p_stop, m_start, m_stop)
+
+    
+    def plot_trials(self, simu, res, production, timeout_trials, stimulus=None, trial=False):
+        if production.size==0:
+            print('all trials timeout')
+            return None
+
+        where = (np.where(np.array(res)==1)[0]-1)*self.dt
+        steps = np.arange(len(simu[:,0]))* self.dt
+        alpha=1
+        
+        fig, ax = plt. subplots(4,1, sharex=True, figsize=(10,7))
+        if trial:
+            alpha = 0.01
+            ntrial=5
+            trial_production = self.first_duration+1*self.dt+stimulus+1*self.dt+production[ntrial]*self.dt
+            where = np.concatenate((np.array([0]),where,np.array([trial_production])))
+            ax[0].plot(steps, simu[:,0, ntrial], c='b', linewidth=0.7,  alpha=0.5)
+            ax[1].plot(steps, simu[:,1, ntrial], 'blue', linewidth=0.7, alpha=0.5)
+            ax[2].plot(steps, simu[:,2, ntrial], c='b',linewidth=0.7,  alpha=0.5)
+            print('Stimulus:', stimulus, ', Production trial', ntrial, '(blue)):',production[ntrial]*self.dt)
+            ax[2].plot(trial_production, self.th, 'x', c='blue')
+            ax[3].plot(steps, simu[:,3, ntrial], c='b',linewidth=0.7,  alpha=0.5)
+        
+        prod_frame = self.get_frames(where, trial)
+
+        ax[0].plot(steps, simu[:,0], c='grey', alpha=alpha)
+        ax[0].vlines(where, np.min(np.array(simu[:,0])), np.max(np.array(simu[:,0])), color='grey',alpha=0.5)
+        ax[0].set_title('du/dt')
+        
+        ax[1].plot(steps, simu[:,1], 'grey', alpha=alpha)
+        ax[1].vlines(where, np.min(np.array(simu[:,1])), np.max(np.array(simu[:,1])), color='grey', alpha=0.5)
+        ax[1].set_title('dv/dt')
+        
+        ax[2].plot(steps, simu[:,2], 'grey', alpha=alpha)
         ax[2].hlines(self.th, 0, simu.shape[0]*self.dt,linestyle='--', color='lightgray')
-        ax[2].vlines(where* self.dt, np.min(np.array(simu[:,2])), np.max(np.array(simu[:,2])), color='grey',alpha=0.5)
+        ax[2].vlines(where, np.min(np.array(simu[:,2])), np.max(np.array(simu[:,2])), color='grey',alpha=0.5)
         ax[2].set_title('dy/dt')
-        #ax[2].legend()
-        ax[3].plot(np.arange(steps) * self.dt, simu[:,3], 'grey', alpha=alpha)
-        ax[3].vlines(where* self.dt, np.min(np.array(simu[:,3])), np.max(np.array(simu[:,3])), color='grey',alpha=0.5)
+        
+        ax[3].plot(steps, simu[:,3], 'grey', alpha=alpha)
+        ax[3].vlines(where, np.min(np.array(simu[:,3])), np.max(np.array(simu[:,3])), color='grey',alpha=0.5)
         ax[3].set_title('dI/dt')
         ax[3].set_xlabel('Time (ms)')
         
-        if trial: 
-            trial=0
-            ax[0].plot(np.arange(steps) * self.dt, simu[:,0, trial], c='b', linewidth=0.7,  alpha=0.5)
-            ax[1].plot(np.arange(steps) * self.dt, simu[:,1, trial], 'blue', linewidth=0.7, alpha=0.5)
-            ax[2].plot(np.arange(steps) * self.dt, simu[:,2, trial], c='b',linewidth=0.7,  alpha=0.5)
-            ax[2].plot(self.first_duration+1*self.dt+stimulus+1*self.dt+production[trial]*self.dt, self.th, 'x', c='blue')
-            ax[3].plot(np.arange(steps) * self.dt, simu[:,3, trial], c='b',linewidth=0.7,  alpha=0.5)
+        for p_start, p_stop, m_start, m_stop in prod_frame:
+            for a in [0,1,2,3]:
+                ax[a].axvspan(p_start, p_stop, facecolor='r', alpha=0.1)
+                ax[a].axvspan(m_start, m_stop, facecolor='b', alpha=0.1)
 
         plt.tight_layout()
-        print('Stimulus:', stimulus, ', Production trial', trial, '(blue)):',production[trial]*self.dt)
+        
         print('timeouts =', len(timeout_trials))
-
-        return simu, res, production, timeout_trials
 
 
 
@@ -224,7 +245,7 @@ class OneTwoGo_Task:
         
         for stim in stimuli_range:
             simu, res, production, timeout_trials = self.simulate_parallel(stim, K, initI)
-            print('stimulus', stim, '; timout trials', len(timeout_trials))
+            #print('stimulus', stim, '; timout trials', len(timeout_trials))
             mean, std, _ = self.statistics(simu, production)
             mean_lst.append(mean)
             std_lst.append(std)
@@ -306,6 +327,10 @@ class OneTwoGo_Task:
             
     def plot_PCA(self, stimuli_range, K, initI, colors, separate=False):
         MPCA_lst, PPCA_lst = self.PCA(stimuli_range, data=None, K=K, initI=initI, experiment=False)
+        TOP = [3,2,2]
+        MIDDLE = [3,2,4]
+        BOTTOM = [3,2,6]
+        
         
         if separate: 
             fig = plt.figure(figsize=plt.figaspect(0.5))
@@ -320,14 +345,16 @@ class OneTwoGo_Task:
         ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
         plt.title('Measurement')
         
+        
+        
         if separate: 
-            ax = fig.add_subplot(3,2,2)
+            ax = fig.add_subplot(*TOP)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(MPCA_lst[i][:,0], c=c, alpha=0.5, marker='.')
-            ax = fig.add_subplot(3,2,4)
+            ax = fig.add_subplot(*MIDDLE)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(MPCA_lst[i][:,1], c=c, alpha=0.5, marker='.')
-            ax = fig.add_subplot(3,2,6)
+            ax = fig.add_subplot(*BOTTOM)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(MPCA_lst[i][:,2], c=c, alpha=0.5, marker='.')
         plt.tight_layout()
@@ -347,13 +374,13 @@ class OneTwoGo_Task:
         plt.title('Production')
         
         if separate: 
-            ax = fig.add_subplot(3,2,2)
+            ax = fig.add_subplot(*TOP)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(PPCA_lst[i][:,0], c=c, alpha=0.5, marker='.')
-            ax = fig.add_subplot(3,2,4)
+            ax = fig.add_subplot(*MIDDLE)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(PPCA_lst[i][:,1], c=c, alpha=0.5, marker='.')
-            ax = fig.add_subplot(3,2,6)
+            ax = fig.add_subplot(*BOTTOM)
             for i, c in zip(reversed(range(len(stimuli_range))), reversed(colors)):
                 ax.plot(PPCA_lst[i][:,2], c=c, alpha=0.5, marker='.')
         plt.tight_layout()
