@@ -1,6 +1,5 @@
 from typing import Dict
 import numpy as np
-from scipy.stats import linregress
 from scipy import signal
 from sklearn.decomposition import PCA
 from .functions import sigmoid
@@ -8,15 +7,14 @@ from .functions import sigmoid
 
 class Params:
     Wuv: float
-    """ Test"""
-
-    Wut: float
+    """Weight between u and v"""
+    Wui: float
 
     def __init__(
         self,
-        Wut=6,
+        Wui=6,
         Wuv=6,
-        Wvt=6,
+        Wvi=6,
         Wvu=6,
         dt=10,
         tau=150,
@@ -30,9 +28,9 @@ class Params:
         first_duration=750,
         delay=500
     ):
-        self.Wut = Wut
+        self.Wui = Wui
         self.Wuv = Wuv
-        self.Wvt = Wvt
+        self.Wvi = Wvi
         self.Wvu = Wvu
         self.dt = dt
         self.tau = tau
@@ -67,9 +65,9 @@ class BaseSimulation:
 
         for i in range(nbin):
             I += (reset * K * (y - params.th)) / params.tau * params.dt
-            u += (-u + sigmoid(params.Wut * I - params.Wuv * v - params.IF * reset +
+            u += (-u + sigmoid(params.Wui * I - params.Wuv * v - params.IF * reset +
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
-            v += (-v + sigmoid(params.Wvt * I - params.Wvu * u + params.IF * reset +
+            v += (-v + sigmoid(params.Wvi * I - params.Wvu * u + params.IF * reset +
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
             y += (-y + u - v + np.random.randn(ntrials)
                   * params.sigma) / params.tau * params.dt
@@ -100,41 +98,7 @@ class BaseSimulation:
     def production_step(_simulation, _reset_lst, _simulation2, _reset_lst2, _nbin: int, _earlyphase):
         pass
 
-    def statistics(self, s, production):
-        std_s = np.std(s, 2)
-        production = np.array(production)*self.dt
-        mean = np.mean(production)
-        std = np.std(production)
-        return mean, std, std_s
-
-    def plot_behavior(self, stimuli_range, K, initI, ax=None):
-        mean_lst = []
-        std_lst = []
-
-        for stim in stimuli_range:
-            simu, res, production, timeout_trials = self.simulate_parallel(stim, K, initI)
-            # print('stimulus', stim, '; timout trials', len(timeout_trials))
-            mean, std, _ = self.statistics(simu, production)
-            mean_lst.append(mean)
-            std_lst.append(std)
-
-        reg = linregress(stimuli_range, mean_lst)
-
-        if ax is None:
-            plt.errorbar(stimuli_range, mean_lst, yerr=std_lst, fmt='-o', c='k')
-            plt.plot([stimuli_range[0]-100, stimuli_range[-1]+100],
-                     [stimuli_range[0]-100, stimuli_range[-1]+100], c='grey', linestyle='--')
-            plt.text(np.min(stimuli_range)-100, np.max(stimuli_range)+100, 'slope='+str(round(reg[0], 3)))
-            plt.xlabel('Stimulus (ms)')
-            plt.ylabel('Production (ms)')
-        else:
-            subplot = ax.errorbar(stimuli_range, mean_lst, yerr=std_lst, fmt='-o', c='k')
-            ax.plot([stimuli_range[0]-100, stimuli_range[-1]+100],
-                    [stimuli_range[0]-100, stimuli_range[-1]+100], c='grey', linestyle='--')
-            ax.text(np.min(stimuli_range)-100, np.max(stimuli_range)+50, 'slope=' +
-                    str(round(reg[0], 3))+', to='+str(len(timeout_trials)))
-            return subplot
-
+    ######################################################################################################
     def meas_prod_times(self, simu, prod, stimulus, sample):
         meas_start = int(self.first_duration/self.dt+1)
         meas_stop = int(self.first_duration/self.dt+1+stimulus/self.dt)  # without flashes

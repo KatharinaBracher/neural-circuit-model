@@ -1,15 +1,11 @@
-
-
 from . import BaseSimulation
-from .result import SimulationResult
+from .result import RangeParallelSimulationResult, SimulationResult
 import numpy as np
 
 
-def remove_timeouts(simu, production, timeout_trials):
-    # idx = [i for i, j in enumerate(to) if not np.isfinite(j).all()]
-    production = np.delete(np.array(production), timeout_trials)
+def remove_timeouts(simu, timeout_trials):
     simu = np.delete(simu, timeout_trials, 2)  # delete all timeout trials
-    return simu, production
+    return simu
 
 
 class ParallelSimulation(BaseSimulation):
@@ -43,10 +39,10 @@ class ParallelSimulation(BaseSimulation):
         )
         reset_lst[nbinfirst+2*nbin] = 1  # where th sould be reached
 
-        simulation, production = remove_timeouts(simulation, production, timeout_trials)
-        return SimulationResult(params, simulation, reset_lst, production, timeout_trials)
+        simulation = remove_timeouts(simulation, timeout_trials)
+        return SimulationResult(params, simulation, reset_lst, np.array(production), timeout_trials, [stimulus])
 
-    def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
+    def production_step(self, simulation, reset_lst, simulation2, reset_lst2, _, earlyphase):
         params = self.params
         production = []
 
@@ -54,11 +50,14 @@ class ParallelSimulation(BaseSimulation):
         timeout_trials = []
         for i in range(params.ntrials):
             if np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0].size == 0:
-                p = np.inf  # timeout
                 timeout_trials.append(i)
             else:
                 p = np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0][0] + earlyphase
-            production.append(p)
+                production.append(p)
         simulation = np.concatenate((simulation, simulation2))
         reset_lst.extend(reset_lst2)
         return simulation, reset_lst, production, timeout_trials
+
+    def simulate_range(self, stimulus_range, K, initI) -> RangeParallelSimulationResult:
+        return RangeParallelSimulationResult([self.simulate(stim, K, initI) for stim in stimulus_range],
+                                             stimulus_range, self.params)
