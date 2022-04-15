@@ -160,6 +160,7 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 - [ ] Timeout: Check if the bound is reached (sometimes it's not!)
 	- [ ] regimes over/under th, how robust? - look at egger code
 	- *when considered timeout? too short guess, false positive has to be excluded*
+	- If timeout: delete trial and take prev. initial conditions, *update of I?*
 - [ ] Tuning: stim vs prod should be linear or concave
 	- Saturation in y -> higher tau, linear regime of y (not in saturation)
 	- threshold down
