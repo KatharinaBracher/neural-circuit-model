@@ -111,6 +111,7 @@ class BehavioralPlot:
         production_means = data.production_means
         stimulus_range = data.stimulus_range
         production_stds = data.production_stds
+        print('timeouts:', list(zip(stimulus_range, data.ntimeouts)))
 
         regression_line = linregress(data.stimulus_range, production_means)
 

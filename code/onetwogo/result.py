@@ -52,7 +52,6 @@ class SimulationResult:
             production_s = production[np.ma.where(stim == stim_lst_success)]*self.params.dt
             production_means.append(np.mean(production_s))
             production_stdts.append(np.std(production_s))
-        print(stimulus_range, production_means)
 
         return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts, ntimeouts)
 
