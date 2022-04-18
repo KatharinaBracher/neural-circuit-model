@@ -45,7 +45,7 @@ Recurrent neural network structure:
 **Population activity very similar to experimental findings**:
 - perceived time: stereotypical dynamic trajectories
 - delay period, maintain time: attractor dynamics in a complementary monotonic coding scheme (mapping of manifold to another, different speed but same space between trajectories)
-- production by scalinf evolution speed.
+- production by scaling evolution speed.
 - temporal and nontemporal information is coded in orthogonal subspaces with small mixed variance (interesting analyses)
 </details>
 
@@ -116,7 +116,7 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 
 
 
-## Thurley (2016): Noisy Integrator
+## Thurley (2016): Magnitude Estimation with Noisy Integrators Linked by an Adaptive Reference
 <details>
 <summary> 
 </summary>
@@ -143,27 +143,29 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 - [x] PCA over trials and stimuli 
 	- separately components over time
 	- *influence of sampling actual lenght, upsampling?*
-- [x] **TOOL**: behavior plot, std and trials
-	- extend for experiment setting
-- [ ] impact of parameter K,  $\sigma$, initI on behavior
-	- quantify with slope and indiffrent point (normalized with middle of range)
-	- 150 tau, combination of K and initI
-	- 2 ranges combine initI and K, influence on slope and indiff point $\Delta$
-- [ ] Tuning: stim vs prod should be linear or concave
-	- Saturation in y -> higher tau, linear regime of y (not in saturation)
-	- threshold down
-	- why is model tuned to saturation?
 - [x] Experiment simulation: different ranges, keeping I
 	- initial duration, stimulus, reproduction crossing, delay (or no delay with reset?) or reset to initial cond, stimulus with initI from prev. trial
+- [x] **TOOL**: behavior plot, std and trials
+	- extend for experiment setting
+- [ ] impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior
+	- [ ] quantify with slope and indifferent point (normalized with middle of range)
+	- parallelization of simulations with parameter space
+	- [ ] function that takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
+- [ ] Tuning: stim vs prod should be linear or concave
+	- Saturation in y -> higher tau, linear regime of y (not in saturation)
+	- set threshold down
+	- why is model tuned to saturation?
 - [ ] **TOOL**: function to cut u,v,y and sort according to stimulus to feed into PCA (experiment setting, parallel setting)
-- [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli
-- [ ] Code documentetion parameter, classes and function meta
+- [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli (parallel)
+	- [ ] adapt for experiment simulation 
+- [ ] Code documentation parameter, classes and function meta
 
 
 ## Model
 - [ ] **Timeout**:
 	- regimes over/under th, how robust? - look at egger code
 	- *when considered timeout? too short guess, false positive has to be excluded*
+	- most of the time not reaching threshold at all (late timeout without early phase crossing)
 	- [ ] If timeout: delete trial and take prev. initial conditions, *update of I?*
 
 - [ ] Population: extending units of u, v (y) with 100 cells, random weight matrix
@@ -171,15 +173,13 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 	- [ ] noise in random weights; and different initials values
 	- [ ] how are u and v populations connected (all to all or subpopulations)
 
-- [ ] $\Delta$I is only the difference of a threshold and y, can the update of I be learned?
+- [ ] $\Delta$ I is only the difference of a threshold and y, can the update of I be learned?
 	- [ ] Can an input I be kept in population weights of u and v? (no constant I input)
 
 
 ## Other
-- Latex in VS Code
-- documentation of model
-- documentaion of code
+- documentation of code structure and classes
 - Report Model and Figures
-- adapter bildschirm hdmi
+- adapter Bildschirm hdmi
 - Paper reading
 
