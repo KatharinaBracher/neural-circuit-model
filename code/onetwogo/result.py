@@ -1,6 +1,7 @@
 from typing import List
 from .plot import BehavioralPlot, BehavioralPlotData, SimulationPlot, SimulationPlotData
 import numpy as np
+from scipy.stats import linregress
 
 
 class SimulationResult:
@@ -36,27 +37,45 @@ class SimulationResult:
     def number_of_timeouts(self):
         return len(self.timeout_index)
 
-    def create_behavioral_plot_data_experiment_simulation(self) -> BehavioralPlotData:
+    def create_behavioral_data(self) -> BehavioralPlotData:
         stimulus_lst = self.stimulus_lst
         production = self.production
 
         stimulus_range = np.unique(stimulus_lst)
-
         stim_lst_success = np.delete(np.array(stimulus_lst), self.timeout_index)
         stim_lst_unsuccess = np.array(stimulus_lst)[self.timeout_index]
 
-        ntimeouts, production_means, production_stdts = [], [], []
+        ntimeouts, nstimuli, production_means, production_stdts = [], [], [], []
+        # If all trials are timeout retun 0 mean and 0 std
+        if production.size == 0:
+            for stim in stimulus_range:
+                nstimuli.append(np.count_nonzero(stimulus_lst == stim))
+                ntimeouts.append(np.count_nonzero(stim_lst_unsuccess == stim))
+                production_means.append(None)
+                production_stdts.append(None)
+            timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
+            slope = None
+            return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts,
+                                      timeouts, slope)
+
         for stim in stimulus_range:
+            nstimuli.append(np.count_nonzero(stimulus_lst == stim))
             ntimeouts.append(np.count_nonzero(stim_lst_unsuccess == stim))
             # productions of one stimulus
             production_s = production[np.ma.where(stim == stim_lst_success)]*self.params.dt
             production_means.append(np.mean(production_s))
             production_stdts.append(np.std(production_s))
 
-        return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts, ntimeouts)
+        timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
+        regression_line = linregress(stimulus_range, production_means)
+        slope = round(regression_line[0], 3)
+        # TODO return indifference point
+
+        return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts,
+                                  timeouts, slope)
 
     def create_behavioral_plot(self):
-        return BehavioralPlot(self.create_behavioral_plot_data_experiment_simulation())
+        return BehavioralPlot(self.create_behavioral_data())
 
 
 class RangeParallelSimulationResult:
@@ -70,7 +89,13 @@ class RangeParallelSimulationResult:
         production_means = [result.production_statistics()[0] for result in self.result_list]
         production_stdts = [result.production_statistics()[1] for result in self.result_list]
         ntimeouts = [result.number_of_timeouts() for result in self.result_list]
-        return BehavioralPlotData(self.params, self.stimulus_range, production_means, production_stdts, ntimeouts)
+        nstimuli = [self.params.ntrials for stim in self.stimulus_range]
+
+        timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
+        regression_line = linregress(self.stimulus_range, production_means)
+        slope = round(regression_line[0], 3)
+        return BehavioralPlotData(self.params, self.stimulus_range, production_means, production_stdts,
+                                  timeouts, slope)
 
     def create_behavioral_plot(self) -> BehavioralPlot:
         return BehavioralPlot(self.create_behavioral_plot_data())

@@ -76,7 +76,7 @@ class ExperimentSimulation(BaseSimulation):
             print('1: late timeout, 2: early timeout')
         if np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0:
             timeout = 1
-            print('timeout')
+            # print('timeout')
             production = np.inf
             # remove time out trial completly from u,v,y,I
             simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]  # remove nbin/2 (stim), 3 flashes and delay

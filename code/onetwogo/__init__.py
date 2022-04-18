@@ -17,7 +17,7 @@ class Params:
         Wvi=6,
         Wvu=6,
         dt=10,
-        tau=150,
+        tau=100,
         sigma=0.01,
         th=0.65,
         IF=50,

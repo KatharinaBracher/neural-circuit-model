@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import linregress
 
 
 class SimulationPlotData:
@@ -21,7 +20,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(10, 7))
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7))
 
     def plot_example_trial(self, stimulus, trial=0):
         params = self.data.params
@@ -93,12 +92,13 @@ class SimulationPlot:
 
 
 class BehavioralPlotData:
-    def __init__(self, params, stimulus_range, production_means, production_stds, ntimeouts):
+    def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope):
         self.params = params
         self.stimulus_range = stimulus_range
         self.production_means = production_means
         self.production_stds = production_stds
-        self.ntimeouts = ntimeouts
+        self.timeouts = timeouts
+        self.slope = slope
 
 
 class BehavioralPlot:
@@ -111,21 +111,25 @@ class BehavioralPlot:
         production_means = data.production_means
         stimulus_range = data.stimulus_range
         production_stds = data.production_stds
-        print('timeouts:', list(zip(stimulus_range, data.ntimeouts)))
-
-        regression_line = linregress(data.stimulus_range, production_means)
+        # print('timeouts:', list(zip(stimulus_range, data.timeouts)))
 
         if ax is None:
-            plt.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
+            if np.any(data.production_means):
+                plt.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
+            if np.any(data.timeouts):
+                plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+60, 'to='+str(data.timeouts), size=7)
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                      [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
-            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(round(regression_line[0], 3)))
+            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(data.slope))
             plt.xlabel('Stimulus (ms)')
             plt.ylabel('Production (ms)')
         else:
-            subplot = ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
-            ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
-                    [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
+            subplot = ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
+                              [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
+            if np.any(data.production_means):
+                ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
+            if np.any(data.timeouts):
+                ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
-                    str(round(regression_line[0], 3))+', to='+str(data.ntimeouts))
+                    str(data.slope))
             return subplot
