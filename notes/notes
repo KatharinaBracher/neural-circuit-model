@@ -138,7 +138,7 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 -------------------------------------------------------------------------------
 
 
-# ToDo
+# ToDo Implementation
 - [x] 1-2-Go task, Code that returns production times of x trials
 - [x] PCA over trials and stimuli 
 	- separately components over time
@@ -147,26 +147,30 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 	- initial duration, stimulus, reproduction crossing, delay (or no delay with reset?) or reset to initial cond, stimulus with initI from prev. trial
 - [x] **TOOL**: behavior plot, std and trials
 	- extend for experiment setting
-- [ ] impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior
-	- [ ] quantify with slope and indifferent point (normalized with middle of range)
-	- parallelization of simulations with parameter space
-	- [ ] function that takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
-- [ ] Tuning: stim vs prod should be linear or concave
-	- Saturation in y -> higher tau, linear regime of y (not in saturation)
-	- set threshold down
-	- why is model tuned to saturation?
+- [ ] **TOOL** Script for simulating on server: save each simulation result in file 
+    - [ ] parallelization of simulations with parameter space
+- [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior
+	- [ ] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
+	- [ ] **PLOT** combination of 2 parameter and error (slope, ind point) as color 
+	- [ ] **TOOL** **PLOT** function that takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
 - [ ] **TOOL**: function to cut u,v,y and sort according to stimulus to feed into PCA (experiment setting, parallel setting)
+    - simulation returns: params, simulation, reset_lst, production_lst (with inf), timeout_index, stimulus_lst
+    - [ ] create *dict* or *pandas data frame* with trial index, stimulus, production, simulation
 - [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli (parallel)
 	- [ ] adapt for experiment simulation 
+	- [ ] **PLOT**
 - [ ] Code documentation parameter, classes and function meta
 
 
 ## Model
 - [ ] **Timeout**:
-	- regimes over/under th, how robust? - look at egger code
+	- regimes over/under th, how robust? - look at egger code implementation of experiment
 	- *when considered timeout? too short guess, false positive has to be excluded*
-	- most of the time not reaching threshold at all (late timeout without early phase crossing)
-	- [ ] If timeout: delete trial and take prev. initial conditions, *update of I?*
+	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
+  
+- [ ] Analytical solutions: phase plane fixed point influence of parameter
+  - mechanistical understanding of parameter to behavior
+  - optimizing for K, how does K change when changing stimulus range/var?
 
 - [ ] Population: extending units of u, v (y) with 100 cells, random weight matrix
 	- [ ] how are random weight matrices chosen in u and v? differently?
@@ -180,6 +184,4 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 ## Other
 - documentation of code structure and classes
 - Report Model and Figures
-- adapter Bildschirm hdmi
-- Paper reading
 
