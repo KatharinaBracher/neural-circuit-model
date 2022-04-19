@@ -29,7 +29,8 @@ class SimulationPlot:
         _, ax = self.subplots
         steps = self.steps
 
-        if production.size == 0:
+        # if production.size == 0:
+        if not production:
             print('all trials timeout')
             return
 

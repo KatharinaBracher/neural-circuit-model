@@ -33,32 +33,31 @@ class ParallelSimulation(BaseSimulation):
         # flash update I in one bin
         simulation, reset_lst = self.trial_update(simulation, reset_lst, reset=1, K=K, nbin=1)
         # behavior
-        simulation, reset_lst, production, timeout_trials = self.trial_update(
+        simulation, reset_lst, production, timeout_index = self.trial_update(
             simulation, reset_lst,
             reset=0, K=K, nbin=nbin * 2,
             production_step=True
         )
         reset_lst[nbinfirst+2*nbin] = 1  # where th sould be reached
 
-        simulation, production = remove_timeouts(simulation, production, timeout_trials)
-        return SimulationResult(params, simulation, reset_lst, production, timeout_trials, [stimulus])
+        return SimulationResult(params, simulation, reset_lst, production, timeout_index, [stimulus])
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, _, earlyphase):
         params = self.params
         production = []
 
         # Check if the bound is reached (sometimes it's not!)
-        timeout_trials = []
+        timeout_index = []
         for i in range(params.ntrials):
             if np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0].size == 0:
-                timeout_trials.append(i)
+                timeout_index.append(i)
                 p = np.inf
             else:
                 p = np.where(np.diff(np.sign(simulation2[earlyphase:, 2, i]-params.th)))[0][0] + earlyphase
             production.append(p)
         simulation = np.concatenate((simulation, simulation2))
         reset_lst.extend(reset_lst2)
-        return simulation, reset_lst, production, timeout_trials
+        return simulation, reset_lst, production, timeout_index
 
     def simulate_range(self, stimulus_range, K, initI) -> RangeParallelSimulationResult:
         return RangeParallelSimulationResult([self.simulate(stim, K, initI) for stim in stimulus_range],

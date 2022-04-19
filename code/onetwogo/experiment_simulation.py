@@ -4,12 +4,6 @@ import numpy as np
 import random
 
 
-def remove_timeouts(production, timeout_trials):
-    production = np.delete(np.array(production), timeout_trials)
-
-    return production
-
-
 class ExperimentSimulation(BaseSimulation):
 
     def __init__(self, params):
@@ -35,7 +29,7 @@ class ExperimentSimulation(BaseSimulation):
         simulation, reset_lst = self.network(
             state_init, reset=0, K=0, nbin=nbinfirst)
 
-        timeout_idx = []
+        timeout_index = []
         production_lst = []
         for i, stimulus in enumerate(stimulus_lst):
             nbin = int(stimulus / params.dt)  # stimulus
@@ -57,12 +51,11 @@ class ExperimentSimulation(BaseSimulation):
                 simulation, reset_lst, reset=0, K=K, nbin=nbin * 2, production_step=True)
             production_lst.append(production)
             if timeout:
-                timeout_idx.append(i)
+                timeout_index.append(i)
 
         reset_lst[-1] = 1  # last production
-        # stimulus_lst[] remove timout_indx
-        production_lst = remove_timeouts(production_lst, timeout_idx)
-        return SimulationResult(params, simulation, reset_lst, production_lst, timeout_idx, stimulus_lst)
+
+        return SimulationResult(params, simulation, reset_lst, production_lst, timeout_index, stimulus_lst)
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
         params = self.params
@@ -83,8 +76,8 @@ class ExperimentSimulation(BaseSimulation):
 
             simulation = np.concatenate((simulation, simulation2))
             reset_lst.extend(reset_lst2)
-            # remove time out trial completly from u,v,y,I
-            # simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]  # remove nbin/2 (stim), 3 flashes and delay
+            # remove time out trial completly from u,v,y,I: remove nbin/2 (stim), 3 flashes and delay
+            # simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]
             # reset_lst = reset_lst[:-int(nbin/2+3+params.delay/params.dt)]
         else:
             timeout = 0
