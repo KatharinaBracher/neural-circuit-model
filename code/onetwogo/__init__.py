@@ -99,6 +99,7 @@ class BaseSimulation:
         pass
 
     ######################################################################################################
+    # TODO PCA in class
     def meas_prod_times(self, simu, prod, stimulus, sample):
         meas_start = int(self.first_duration/self.dt+1)
         meas_stop = int(self.first_duration/self.dt+1+stimulus/self.dt)  # without flashes

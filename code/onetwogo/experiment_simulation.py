@@ -67,20 +67,25 @@ class ExperimentSimulation(BaseSimulation):
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
         params = self.params
 
-        # timeout if threshold not reached in late phase (late timeout) or only reached in early phase (early timeout)
+        # Determine timeout
+        # timeout if threshold not reached in late phase (late timeout)
+        # timoeut if reached in early phase only (early timeout)
         if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0) and
                 (np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size != 0)):
-            # only early phase
-            print(
-                np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])
-            print('1: late timeout, 2: early timeout')
+            print(np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])
+            print('1: late timeout early crossing, 2: early timeout')
+        elif np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size == 0:
+            print('late timeout no crossing')
+
         if np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0:
             timeout = 1
-            # print('timeout')
             production = np.inf
+
+            simulation = np.concatenate((simulation, simulation2))
+            reset_lst.extend(reset_lst2)
             # remove time out trial completly from u,v,y,I
-            simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]  # remove nbin/2 (stim), 3 flashes and delay
-            reset_lst = reset_lst[:-int(nbin/2+3+params.delay/params.dt)]
+            # simulation = simulation[:-int(nbin/2+3+params.delay/params.dt)]  # remove nbin/2 (stim), 3 flashes and delay
+            # reset_lst = reset_lst[:-int(nbin/2+3+params.delay/params.dt)]
         else:
             timeout = 0
             # get last th crossing (problem if oscilating around th)
