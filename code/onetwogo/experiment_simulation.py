@@ -14,14 +14,14 @@ class ExperimentSimulation(BaseSimulation):
         stimulus_lst = [random.choice(stimulus_range) for i in range(params.ntrials)]
         return np.array(stimulus_lst)
 
-    def simulate(self, stimulus_lst, K, initI):
+    def simulate(self, stimulus_lst, K):
         # TODO generate random stimuli list of range
         params = self.params
 
         state_init = [np.ones(1) * params.uinit,
                       np.ones(1) * params.vinit,
                       np.ones(1) * params.yinit,
-                      np.ones(1) * initI]
+                      np.ones(1) * params.Iinit]
 
         nbinfirst = int(params.first_duration / params.dt)
         nbindelay = int(params.delay / params.dt)

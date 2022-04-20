@@ -6,9 +6,38 @@ from .functions import sigmoid
 
 
 class Params:
-    Wuv: float
-    """Weight between u and v"""
     Wui: float
+    """Weight of input to u"""
+    Wvi: float
+    """Weight of input to v"""
+    Wuv: float
+    """Weight from v to u"""
+    Wvu: float
+    """Weight from u to v"""
+    dt: float  # int?
+    """time step for simulation"""
+    tau: int
+    """time constant"""
+    sigma: float
+    """indicates the noise within each trial in u,v and y"""
+    th: float
+    """threshold for behavior, used to determine to determine rproduction"""
+    IF: int
+    """Impulse that functions as reset of u and v"""
+    ntrials: int
+    """number of parallel trials in paralell simulation or number of consecutive trials in experiment simulation"""
+    uinit: float
+    """initial value of u"""
+    vinit: float
+    """initial value of v"""
+    yinit: float
+    """initial value of y"""
+    Iinit: float
+    """initial value of Input I"""
+    first_duration: int
+    """duration first interval (ms) before trial or experiment starts"""
+    delay: int
+    """duration of interval (ms) between production phase and new stimulus in experiment simulation"""
 
     def __init__(
         self,
@@ -25,6 +54,7 @@ class Params:
         uinit=0.7,
         vinit=0.2,
         yinit=0.5,
+        Iinit=0.8,
         first_duration=750,
         delay=500
     ):
@@ -41,6 +71,7 @@ class Params:
         self.uinit = uinit
         self.vinit = vinit
         self.yinit = yinit
+        self.Iinit = Iinit
         self.first_duration = first_duration
         self.delay = delay
 
@@ -49,6 +80,31 @@ class Params:
 
 
 class BaseSimulation:
+    """
+    A class used to compute the simulation of u, v, y, I for a stage (measurement, production delay) 
+    and update the previous stages with the newly computed one
+
+
+    Attributes
+    ----------
+    state_init: array
+        inital values of u, v, y, I
+    reset: bool
+        1 if u, y are reseted 
+    K:
+        memory parameter, weighs how much input 
+    nbin:
+        number of steps of current duration
+
+
+    Methods
+    -------
+    network(self, state_init, reset, K, nbin)
+        returns the simulation of the current over nbins and a list of booleans when a reset happend in the trial
+
+    trial_update(self, simulation, reset_lst, reset, K, nbin, production_step=False)
+        returns the simulation and reset list extended with the new stage that was computed by the network  
+    """
 
     def __init__(self, params: Params):
         self.params = params
@@ -56,7 +112,7 @@ class BaseSimulation:
     def network(self, state_init, reset, K, nbin):
         params = self.params
 
-        u, v, y, I = state_init.copy()
+        u, v, y, Input = state_init.copy()
         ntrials = u.shape[0]
 
         # save bool with resets=1 over time
@@ -64,15 +120,15 @@ class BaseSimulation:
         simulation = np.zeros([nbin, 4, ntrials])
 
         for i in range(nbin):
-            I += (reset * K * (y - params.th)) / params.tau * params.dt
-            u += (-u + sigmoid(params.Wui * I - params.Wuv * v - params.IF * reset +
+            Input += (reset * K * (y - params.th)) / params.tau * params.dt
+            u += (-u + sigmoid(params.Wui * Input - params.Wuv * v - params.IF * reset +
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
-            v += (-v + sigmoid(params.Wvi * I - params.Wvu * u + params.IF * reset +
+            v += (-v + sigmoid(params.Wvi * Input - params.Wvu * u + params.IF * reset +
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
             y += (-y + u - v + np.random.randn(ntrials)
                   * params.sigma) / params.tau * params.dt
 
-            simulation[i] = [u.copy(), v.copy(), y.copy(), I.copy()]
+            simulation[i] = [u.copy(), v.copy(), y.copy(), Input.copy()]
             reset_lst.append(reset)
 
         return simulation, reset_lst

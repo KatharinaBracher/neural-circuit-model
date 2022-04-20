@@ -36,11 +36,11 @@ class SimulationPlot:
 
         print('Stimulus:', stimulus, ', Production of trial', trial, '(blue):', production[trial]*params.dt)
         trial_production = params.first_duration+1*params.dt+stimulus+1*params.dt+production[trial]*params.dt
-        ax[0].plot(steps, simulation[:, 0, trial], c='b', linewidth=0.7,  alpha=0.5)
-        ax[1].plot(steps, simulation[:, 1, trial], 'blue', linewidth=0.7, alpha=0.5)
-        ax[2].plot(steps, simulation[:, 2, trial], c='b', linewidth=0.7,  alpha=0.5)
+        ax[0].plot(steps, simulation[:, 0, trial], c='b', linewidth=0.9,  alpha=1)
+        ax[1].plot(steps, simulation[:, 1, trial], 'blue', linewidth=0.9, alpha=1)
+        ax[2].plot(steps, simulation[:, 2, trial], c='b', linewidth=0.9,  alpha=1)
         ax[2].plot(trial_production, params.th, 'x', c='blue')
-        ax[3].plot(steps, simulation[:, 3, trial], c='b', linewidth=0.7,  alpha=0.5)
+        ax[3].plot(steps, simulation[:, 3, trial], c='b', linewidth=0.9,  alpha=1)
 
     def get_frames(self):
         reset_indices = self.data.reset_indices

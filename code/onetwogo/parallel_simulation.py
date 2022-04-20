@@ -14,12 +14,12 @@ class ParallelSimulation(BaseSimulation):
     def __init__(self, params):
         super().__init__(params)
 
-    def simulate(self, stimulus, K, initI):
+    def simulate(self, stimulus, K):
         params = self.params
         state_init = [np.ones(params.ntrials) * params.uinit,
                       np.ones(params.ntrials) * params.vinit,
                       np.ones(params.ntrials) * params.yinit,
-                      np.ones(params.ntrials) * initI]
+                      np.ones(params.ntrials) * params.Iinit]
 
         nbin = int(stimulus / params.dt)  # stimulus
         nbinfirst = int(params.first_duration / params.dt)  # 750 ms
@@ -59,6 +59,6 @@ class ParallelSimulation(BaseSimulation):
         reset_lst.extend(reset_lst2)
         return simulation, reset_lst, production, timeout_index
 
-    def simulate_range(self, stimulus_range, K, initI) -> RangeParallelSimulationResult:
-        return RangeParallelSimulationResult([self.simulate(stim, K, initI) for stim in stimulus_range],
+    def simulate_range(self, stimulus_range, K) -> RangeParallelSimulationResult:
+        return RangeParallelSimulationResult([self.simulate(stim, K) for stim in stimulus_range],
                                              stimulus_range, self.params)
