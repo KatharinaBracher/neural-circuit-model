@@ -233,3 +233,15 @@ details
 - spelling add to dictionary not working
 - markdown (latex) extension not working (shortcuts etc)
 
+## Server
+1024
+- upload to server
+- ssh
+  - tmux
+    - source .bashrc
+      - conda activate time
+        - python script
+  - tmux attach
+    - python script
+- download results
+
