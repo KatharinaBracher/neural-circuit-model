@@ -1,38 +1,44 @@
 from onetwogo import Params
 from onetwogo.experiment_simulation import ExperimentSimulation
 from multiprocessing import Pool
+import pickle
+import time
+import numpy as np
 
 
 def execute(d):
     stimulus_range, K, th, t, delay = d
-    print("executing")
+    print("executing with", K, th, t, delay, "= K, th, t, delay")
 
     params = Params(ntrials=500, delay=delay, tau=t, th=th)
     expsim = ExperimentSimulation(params)
     stimulus_lst = expsim.generate_stimulus_lst(stimulus_range)
-    # save here in different files or in one? auf festplatte oder alles in Arbeitspeicher
     return expsim.simulate(stimulus_lst, K)
 
 
 # create seach space
 search_space = []
-stimulus_range_lst = [[400, 450, 500, 550, 600, 650, 700], [700, 750, 800, 850, 900, 950, 1000]]
-th_lst = [0.63, 0.65, 0.68, 0.7, 0.73]
-K_lst = [3, 4, 5, 6, 7]
-delay_lst = [500, 600, 700, 800]
-tau = [70, 80, 100, 125]
+stimulus_range = [400, 450, 500, 550, 600, 650, 700]  
+# stimulus_range = [700, 750, 800, 850, 900, 950, 1000]
+th_lst = np.arange(0.6, 0.75, 0.01)
+K_lst = np.arange(0.5, 10.5, 0.5)
+delay_lst = np.arange(400, 1000, 50)
+tau = np.arange(60, 200, 10)
 
-for stimulus_range in stimulus_range_lst:
-    for K in K_lst:
-        for th in th_lst:
-            for t in tau:
-                for delay in delay_lst:
-                    search_space.append((stimulus_range, K, th, t, delay))
-
-
-def run_parallel():
-    with Pool(4) as p:
-        return p.map(execute, search_space)
+for K in K_lst:
+    for th in th_lst:
+        for t in tau:
+            for delay in delay_lst:
+                search_space.append((stimulus_range, K, th, t, delay))
 
 
-results = run_parallel()
+def run_parallel(batchsize):
+    with open('/home/bracher/results/%s-output.pickle' % time.strftime("%Y%m%d-%H%M%S"), 'ab') as fp:
+        for i in range(0, len(search_space), batchsize):
+            with Pool(8) as p:
+                results = p.map(execute, search_space[i:i + batchsize])
+                print('writing to disk')
+                for result in results:
+                    pickle.dump(result, fp)         
+
+run_parallel(8) # 2.5 MB per result
