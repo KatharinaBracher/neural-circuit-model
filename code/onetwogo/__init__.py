@@ -94,22 +94,14 @@ class BaseSimulation:
     K:
         memory parameter, weighs how much input 
     nbin:
-        number of steps of current duration
-
-
-    Methods
-    -------
-    network(self, state_init, reset, K, nbin)
-        returns the simulation of the current over nbins and a list of booleans when a reset happend in the trial
-
-    trial_update(self, simulation, reset_lst, reset, K, nbin, production_step=False)
-        returns the simulation and reset list extended with the new stage that was computed by the network  
+        number of steps of current duration 
     """
 
     def __init__(self, params: Params):
         self.params = params
 
     def network(self, state_init, reset, K, nbin):
+        """returns the simulation of the current over nbins and a list of booleans when a reset happend in the trial"""
         params = self.params
 
         u, v, y, Input = state_init.copy()
@@ -134,6 +126,7 @@ class BaseSimulation:
         return simulation, reset_lst
 
     def trial_update(self, simulation, reset_lst, reset, K, nbin, production_step=False):
+        """returns the simulation and reset list extended with the new stage that was computed by the network"""
         # get prev I,v,u,y to continue trial or experiment
         state_init = simulation[-1]
         # next step simulation
