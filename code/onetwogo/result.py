@@ -46,10 +46,11 @@ class SimulationResult:
         return len(self.timeout_index)
 
     def create_behavioral_data(self) -> BehavioralPlotData:
-        production, stimulus_lst = remove_timeouts(self.production, self.timeout_index, self.stimulus_lst)
 
-        stimulus_range = np.unique(stimulus_lst)
-        stim_lst_unsuccess = np.array(stimulus_lst)[self.timeout_index]
+        stimulus_range = np.unique(self.stimulus_lst)
+        stim_lst_unsuccess = np.array(self.stimulus_lst)[self.timeout_index]
+
+        production, stimulus_lst = remove_timeouts(self.production, self.timeout_index, self.stimulus_lst)
 
         ntimeouts, nstimuli, production_means, production_stdts = [], [], [], []
         # If all trials are timeout retun 0 mean and 0 std
@@ -75,7 +76,7 @@ class SimulationResult:
         timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
         regression_line = linregress(stimulus_range, production_means)
         slope = round(regression_line[0], 3)
-        
+
         # TODO return indifference point
         # TODO return mean squared error over all trials 
 

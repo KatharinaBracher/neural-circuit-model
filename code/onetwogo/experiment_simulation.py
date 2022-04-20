@@ -66,7 +66,7 @@ class ExperimentSimulation(BaseSimulation):
         if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0) and
                 (np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size != 0)):
             print(np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])
-            print('1: late timeout early crossing, 2: early timeout')
+            print('n=1: late timeout early crossing, n>1: early timeout')
         elif np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size == 0:
             print('late timeout no crossing')
 
