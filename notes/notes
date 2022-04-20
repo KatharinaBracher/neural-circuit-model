@@ -113,24 +113,56 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 
 - Translation of stochastic ramp and trigger timing circuit to diffusion model, with keeping parameters 
 - Thresholds are implemented as bistable switches 
-
-
-
+ 
 ## Thurley (2016): Magnitude Estimation with Noisy Integrators Linked by an Adaptive Reference
 <details>
-<summary> 
+<summary> Drift diffusion model with two processes (measurement and reproduction) and adaptive threshold (depending on memory parameter a and previous thresholds).
 </summary>
 
+**Psychophysical characteristics of magnitude estimation**: 
+- Regression effect: over a range of stimuli, small stimuli are overestimated whereas large stimuli are underestimated
+- Range effect: regression becomes more pronounced for ranges that comprise larger stimulus values
+- Scalar variability: errors monotonically increase with the size of the stimulus
+- Sequential effect: the estimate of the stimulus in a particular trial is affected by the previous trial
+
+Effects result from an optimal strategy when noisy estimates are made about stimuli that itself depend on the statistics of the environment.
+
+**Model**:
+- Measurement (Reproduction): drift process with rate $A_m$ ($A_r$) corrupted by noise $\sigma_m$ ($\sigma_r$), dynamics described by stochastic differential equation 
+  - Measurement ends with stimulus, integration differential equation yields measurement: $m_T$ -> incorporated into the threshold of reproduction
+  - Measurement: drift-diffusion process that lasts a fixed time -> Gaussian distribution of level reached
+  - Reproduction: drift-diffusion process with fixed threshold -> Inverse Gaussian distribution of times that it takes to reach threshold
+- Threshold: depends on previous thresold (weighted by $1-a$) and measurement $m_T$ (weighted by $a$)
+  -  memory weight a has an immediate impact on the relation between stimulus and response
+  - history of thresholds from previous trials, serving as an internal reference
+- Formula for average reproduction $\bar{r}_T$ and its Bias and expected value yields full characterization of the model linking the stimuli $T$ to their reproduced values $\bar{r}_T$
+- Error: $MSE_r = [(r_T-T)^2]$
+  - memory a of the system can be adapted to minimize the mean squared error
+- Optimizing for $a$ shows dependency on internal processing (drift ratio for m and r, internal noise $\sigma_m$ (not $\sigma_r$)) and external variability (mean and variance of stimuli).
+  - Optimality predicts range and regression effects
+
+**Fitting parameter and predictions**:
+- fitting $A$, $\sigma$ to experimental data and optimize for $a$
+- make predictions about $a$ based on optimality (with other parameter fitted)
+- changing stimulus range predicts a different optimal $a$ - can be tested
+- Predictions of the model
+  - Reproduced magnitudes should depend on the stimulus distribution (Stimulus distributions with the same mean but larger variances should result in less regression)
+  - Regression to the mean should depend on the discrimination abilities of the individual (internal noise $\sigma_m$)
+  - Seldom stimuli with a low probability of occurrence and with a magnitude way below or way above the stimulus distribution, should not influence the internal reference
+  - For strong regression the convergence dynamics of the reference should be much slower then for subjects showing weak regression
 </details>
 
 **Thoughts**: 
+- find parameter range, what do the parameters mean? What happens when changing parameters?
+- Optimality and biological relevance
 
 -------------------------------------------------------------------------------
-
+### Template
 <details>
-<summary> 
+<summary> summary
 </summary>
 
+details
 </details>
 
 **Thoughts**: 
@@ -142,7 +174,7 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 - [x] 1-2-Go task, Code that returns production times of x trials
 - [x] PCA over trials and stimuli 
 	- separately components over time
-	- *influence of sampling actual lenght, upsampling?*
+	- *influence of sampling actual length, upsampling?*
 - [x] Experiment simulation: different ranges, keeping I
 	- initial duration, stimulus, reproduction crossing, delay (or no delay with reset?) or reset to initial cond, stimulus with initI from prev. trial
 - [x] **TOOL**: behavior plot, std and trials
@@ -159,29 +191,45 @@ or the input I is updated (the stronger I the smaller the slope the longer the i
 - [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli (parallel)
 	- [ ] adapt for experiment simulation 
 	- [ ] **PLOT**
-- [ ] Code documentation parameter, classes and function meta
 
 
 ## Model
 - [ ] **Timeout**:
-	- regimes over/under th, how robust? - look at egger code implementation of experiment
+	- regimes over/under th, how robust?
 	- *when considered timeout? too short guess, false positive has to be excluded*
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
+
+- [ ] Noise in Egger Simulation module
+    - is there noise on y??
+    - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
+      - is this only for parallel simulation
+    - sigma_sigma: indicates the noise within each trial added for each step for u,v,y (np.random.normal(loc=0, scale=self.sigma_sigma, size=len(self.ustate)))
+
+- [ ] look at egger code implementation of experiment
+
+- [ ] Weights
+  - introduce weights from u,v to y?
+  - adjusting weights between I and v,w $w_{vi}$ and $w_{wi}$ instead of I
+
   
 - [ ] Analytical solutions: phase plane fixed point influence of parameter
-  - mechanistical understanding of parameter to behavior
+  - [ ] **PLOT** phase plane of u,v
+  - mechanistically understanding of parameter to behavior
   - optimizing for K, how does K change when changing stimulus range/var?
 
 - [ ] Population: extending units of u, v (y) with 100 cells, random weight matrix
 	- [ ] how are random weight matrices chosen in u and v? differently?
 	- [ ] noise in random weights; and different initials values
-	- [ ] how are u and v populations connected (all to all or subpopulations)
+	- [ ] how are u and v populations connected (all to all or sub-populations)
 
 - [ ] $\Delta$ I is only the difference of a threshold and y, can the update of I be learned?
 	- [ ] Can an input I be kept in population weights of u and v? (no constant I input)
 
 
 ## Other
-- documentation of code structure and classes
+- code structure and classes figure
+- Code documentation parameter, classes and function meta
 - Report Model and Figures
+- spelling add to dictionary not working
+- markdown (latex) extension not working (shortcuts etc)
 

@@ -1,0 +1,1 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QToDo Implementation\nx 1-2-Go task, Code that returns production times of x trials\nx PCA over trials and stimuli\nseparately components over time\ninfluence of sampling actual length, upsampling?\\E$"}

@@ -1,2 +1,4 @@
-Irrealisf
 LTP
+upsampling
+bistable
+optimality
