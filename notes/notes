@@ -190,7 +190,8 @@ details
     - [ ] create *dict* or *pandas data frame* with trial index, stimulus, production, simulation
 - [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli (parallel)
 	- [ ] adapt for experiment simulation 
-	- [ ] **PLOT**
+	- [ ] **PLOT** PCA in 3d and 1d
+- [ ] add seed
 
 
 ## Model
