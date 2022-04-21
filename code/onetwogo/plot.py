@@ -93,13 +93,14 @@ class SimulationPlot:
 
 
 class BehavioralPlotData:
-    def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope):
-        self.params = params
-        self.stimulus_range = stimulus_range
-        self.production_means = production_means
-        self.production_stds = production_stds
-        self.timeouts = timeouts
-        self.slope = slope
+    def __init__(self, behavioral_data):
+        self.params = behavioral_data.params
+        self.stimulus_range = behavioral_data.stimulus_range
+        self.production_means = behavioral_data.production_means
+        self.production_stds = behavioral_data.production_stds
+        self.timeouts = behavioral_data.timeouts
+        self.slope = behavioral_data.slope
+        self.ind_point = behavioral_data.ind_point
 
 
 class BehavioralPlot:
@@ -121,7 +122,7 @@ class BehavioralPlot:
                 plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+60, 'to='+str(data.timeouts), size=7)
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                      [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
-            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(data.slope))
+            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(round(data.slope)))
             plt.xlabel('Stimulus (ms)')
             plt.ylabel('Production (ms)')
         else:
@@ -132,5 +133,5 @@ class BehavioralPlot:
             if np.any(data.timeouts):
                 ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
-                    str(data.slope))
+                    str(round(data.slope, 3)))
             return subplot

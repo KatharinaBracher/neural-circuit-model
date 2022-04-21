@@ -1,7 +1,10 @@
+# from tkinter import W
 from typing import List
 from .plot import BehavioralPlot, BehavioralPlotData, SimulationPlot, SimulationPlotData
 import numpy as np
 from scipy.stats import linregress
+import pickle
+from sklearn.metrics import mean_squared_error
 
 
 def remove_timeouts(production, timeout_index, stimulus_lst=None):
@@ -20,8 +23,31 @@ def production_statistics(production, params):
     return mean, std
 
 
+class BehavioralData:
+    def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope, ind_point, mse):
+        self.params = params
+        self.stimulus_range = stimulus_range
+        self.production_means = production_means
+        self.production_stds = production_stds
+        self.timeouts = timeouts
+        self.slope = slope
+        self.ind_point = ind_point
+        self.mse = mse
+        # TODO add seed
+
+    def write_to_disk(self, fp, srange, K):
+        # TODO: seed
+        tau = self.params.tau
+        th = self.params.th
+        delay = self.params.delay
+
+        result = dict({'range': srange, 'K': K, 'tau': tau, 'threshold': th, 'delay': delay,
+                      'slope': self.slope, 'ind_point': self.ind_point, 'MSE': self.mse})
+        pickle.dump(result, fp)
+
+
 class SimulationResult:
-    def __init__(self, params, simulation, reset_lst, production, timeout_index, stimulus_lst):
+    def __init__(self, params, simulation, reset_lst, production, timeout_index, stimulus_lst):  # TODO seed
         self.params = params
         self.simulation = simulation
         self.reset_lst = reset_lst
@@ -45,7 +71,7 @@ class SimulationResult:
     def number_of_timeouts(self):
         return len(self.timeout_index)
 
-    def create_behavioral_data(self) -> BehavioralPlotData:
+    def create_behavioral_data(self) -> BehavioralData:
 
         stimulus_range = np.unique(self.stimulus_lst)
         stim_lst_unsuccess = np.array(self.stimulus_lst)[self.timeout_index]
@@ -62,8 +88,10 @@ class SimulationResult:
                 production_stdts.append(None)
             timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
             slope = None
-            return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts,
-                                      timeouts, slope)
+            ind_point = None
+            mse = None
+            return BehavioralData(self.params, stimulus_range, production_means, production_stdts,
+                                  timeouts, slope, ind_point, mse)
 
         for stim in stimulus_range:
             nstimuli.append(np.count_nonzero(stimulus_lst == stim))
@@ -75,13 +103,17 @@ class SimulationResult:
 
         timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
         regression_line = linregress(stimulus_range, production_means)
-        slope = round(regression_line[0], 3)
+        slope = regression_line[0]
+        ind_point = regression_line[1]/(1-regression_line[0])
+        # TODO return mean squared error over all trials
+        # production, stimulus_lst (timeouts removed)
+        mse = mean_squared_error(stimulus_lst, production)
+        # TODO return seed
+        return BehavioralData(self.params, stimulus_range, production_means, production_stdts,
+                              timeouts, slope, ind_point, mse)
 
-        # TODO return indifference point
-        # TODO return mean squared error over all trials 
-
-        return BehavioralPlotData(self.params, stimulus_range, production_means, production_stdts,
-                                  timeouts, slope)
+    def crate_behavioral_plot_data(self):
+        return BehavioralPlotData(self.create_behavioral_data())
 
     def create_behavioral_plot(self):
         return BehavioralPlot(self.create_behavioral_data())
@@ -104,9 +136,11 @@ class RangeParallelSimulationResult:
 
         timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
         regression_line = linregress(self.stimulus_range, production_means)
-        slope = round(regression_line[0], 3)
-        return BehavioralPlotData(self.params, self.stimulus_range, production_means, production_stdts,
-                                  timeouts, slope)
+        slope = regression_line[0]
+        ind_point = regression_line[1]/(1-regression_line[0])
+        mse = None  # mean_squared_error(stimulus_lst, productions strip)
+        return BehavioralPlotData(BehavioralData(self.params, self.stimulus_range, production_means, production_stdts,
+                                  timeouts, slope, ind_point, mse))
 
     def create_behavioral_plot(self) -> BehavioralPlot:
         return BehavioralPlot(self.create_behavioral_plot_data())
