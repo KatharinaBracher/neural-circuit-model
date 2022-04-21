@@ -1,7 +1,7 @@
 from onetwogo import Params
 from onetwogo.experiment_simulation import ExperimentSimulation
 from multiprocessing import Pool
-import pickle
+# import pickle
 import time
 import numpy as np
 
@@ -13,32 +13,54 @@ def execute(d):
     params = Params(ntrials=500, delay=delay, tau=t, th=th)
     expsim = ExperimentSimulation(params)
     stimulus_lst = expsim.generate_stimulus_lst(stimulus_range)
-    return expsim.simulate(stimulus_lst, K)
+    # retunn BehavioralData def save to disk
+    sim_result = expsim.simulate(stimulus_lst, K)  # TODO seed
+    result = sim_result.create_behavioral_data()
+    return (result, K)
 
 
 # create seach space
-search_space = []
-stimulus_range = [400, 450, 500, 550, 600, 650, 700]  
-# stimulus_range = [700, 750, 800, 850, 900, 950, 1000]
-th_lst = np.arange(0.6, 0.75, 0.01)
-K_lst = np.arange(0.5, 10.5, 0.5)
-delay_lst = np.arange(400, 1000, 50)
-tau = np.arange(60, 200, 10)
+def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
+    search_space = []
 
-for K in K_lst:
-    for th in th_lst:
-        for t in tau:
-            for delay in delay_lst:
-                search_space.append((stimulus_range, K, th, t, delay))
+    if srange == 'short':
+        stimulus_range = [400, 450, 500, 550, 600, 650, 700]
+    if srange == 'long':
+        stimulus_range = [700, 750, 800, 850, 900, 950, 1000]
+
+    for K in K_lst:
+        for th in th_lst:
+            for t in tau:
+                for delay in delay_lst:
+                    search_space.append((stimulus_range, K, th, t, delay))
+    return search_space
 
 
-def run_parallel(batchsize):
-    with open('/home/bracher/results/%s-output.pickle' % time.strftime("%Y%m%d-%H%M%S"), 'ab') as fp:
+def run_parallel(batchsize, srange, K_lst, th_lst, tau, delay_lst, name):
+    search_space = create_search_space(srange, K_lst, th_lst, tau, delay_lst)
+    with open('/home/bracher/results/%s-%s-output.pickle' % (name, time.strftime("%Y%m%d-%H%M%S")), 'ab') as fp:
         for i in range(0, len(search_space), batchsize):
+            print(i, i+batchsize, 'of', len(search_space))
             with Pool(8) as p:
                 results = p.map(execute, search_space[i:i + batchsize])
                 print('writing to disk')
-                for result in results:
-                    pickle.dump(result, fp)         
+                for result, K in results:
+                    print('writing to disk', result, K)
+                    result.write_to_disk(fp, srange, K)
 
-run_parallel(8) # 2.5 MB per result
+
+K_lst = np.arange(0.5, 10.5, 0.5)
+th_lst = np.arange(0.6, 0.75, 0.01)
+delay_lst = np.arange(400, 1000, 50)
+tau = np.arange(60, 200, 10)
+
+# choose parameter range #############################################################
+srange = 'long'
+# K_lst = [5.0]
+th_lst = [0.7]
+# tau = [100]
+delay_lst = [700]
+name = 'LONG_KTAU_th07del700'
+
+# 2.5 MB per simulation result
+run_parallel(8, srange, K_lst, th_lst, tau, delay_lst, name)
