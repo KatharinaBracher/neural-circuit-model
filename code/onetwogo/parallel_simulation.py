@@ -3,18 +3,29 @@ from .result import RangeParallelSimulationResult, SimulationResult
 import numpy as np
 
 
-def remove_timeouts(simu, production, timeout_trials):
-    production = np.delete(np.array(production), timeout_trials)
-    simu = np.delete(simu, timeout_trials, 2)  # delete all timeout trials
-    return simu, production
-
-
 class ParallelSimulation(BaseSimulation):
+    """
+    A class that simulates trials parallel for one stimulus
+
+
+    Attributes
+    ----------
+    K: int
+        memory parameter, weighs how much input
+    stimulus: int
+        stimulus for the measuremnt stage of the trials
+    stimulus_range: list
+        stimulus range for measurment stage, for each stimulus the parallel simulation is performed
+    """
 
     def __init__(self, params):
         super().__init__(params)
 
     def simulate(self, stimulus, K):
+        '''function that carries out the different stages of a trial and returns the SimulationResult
+        (consisting of all parameters, the simulation, a list of production times, the timepoints of reset 
+        and the indices of timeout trials)'''
+
         params = self.params
         state_init = [np.ones(params.ntrials) * params.uinit,
                       np.ones(params.ntrials) * params.vinit,
@@ -43,6 +54,9 @@ class ParallelSimulation(BaseSimulation):
         return SimulationResult(params, simulation, reset_lst, production, timeout_index, [stimulus])
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, _, earlyphase):
+        '''function that defines the last stage of the trial (production stage)
+        and determines the production time and timeout trials'''
+
         params = self.params
         production = []
 
@@ -60,5 +74,14 @@ class ParallelSimulation(BaseSimulation):
         return simulation, reset_lst, production, timeout_index
 
     def simulate_range(self, stimulus_range, K) -> RangeParallelSimulationResult:
+        '''function that performess parallel simulation for a range of stimuli returns'''
+
         return RangeParallelSimulationResult([self.simulate(stim, K) for stim in stimulus_range],
                                              stimulus_range, self.params)
+
+
+'''def remove_timeouts(simu, production, timeout_trials):
+    ''''''removes all trials from production and simulation that were classified as timeout''''''
+    production = np.delete(np.array(production), timeout_trials)
+    simu = np.delete(simu, timeout_trials, 2)  # delete all timeout trials
+    return simu, production'''

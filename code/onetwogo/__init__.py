@@ -90,11 +90,11 @@ class BaseSimulation:
     state_init: array
         inital values of u, v, y, I
     reset: bool
-        1 if u, y are reseted 
-    K:
-        memory parameter, weighs how much input 
-    nbin:
-        number of steps of current duration 
+        1 if u, y are reseted
+    K: int
+        memory parameter, weighs how much input
+    nbin: int
+        number of steps of current duration
     """
 
     def __init__(self, params: Params):
@@ -102,6 +102,7 @@ class BaseSimulation:
 
     def network(self, state_init, reset, K, nbin):
         """returns the simulation of the current over nbins and a list of booleans when a reset happend in the trial"""
+        
         params = self.params
 
         u, v, y, Input = state_init.copy()
@@ -127,6 +128,7 @@ class BaseSimulation:
 
     def trial_update(self, simulation, reset_lst, reset, K, nbin, production_step=False):
         """returns the simulation and reset list extended with the new stage that was computed by the network"""
+        
         # get prev I,v,u,y to continue trial or experiment
         state_init = simulation[-1]
         # next step simulation
@@ -145,6 +147,7 @@ class BaseSimulation:
         return simulation, reset_lst
 
     def production_step(_simulation, _reset_lst, _simulation2, _reset_lst2, _nbin: int, _earlyphase):
+        '''place holder function, prodcution step is handed over by simulation'''
         pass
 
     ######################################################################################################

@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error
 
 
 def remove_timeouts(production, timeout_index, stimulus_lst=None):
+    '''removes all trials from production (and simulation) that were classified as timeout'''
     # remove all np.inf productions
     production = np.delete(np.array(production), timeout_index)
     if stimulus_lst is not None:
@@ -47,6 +48,7 @@ class BehavioralData:
 
 
 class SimulationResult:
+    ''''''
     def __init__(self, params, simulation, reset_lst, production, timeout_index, stimulus_lst):  # TODO seed
         self.params = params
         self.simulation = simulation

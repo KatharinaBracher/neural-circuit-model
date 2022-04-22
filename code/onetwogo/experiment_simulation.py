@@ -5,17 +5,35 @@ import random
 
 
 class ExperimentSimulation(BaseSimulation):
+    """
+    A class that simulates an experiment sampling stimuli randomly from a stimulus range
+
+
+    Attributes
+    ----------
+    K: int
+        memory parameter, weighs how much input
+    stimulus_range: list
+        stimulus range for measurment stage, for each stimulus the parallel simulation is performed
+    """
 
     def __init__(self, params):
         super().__init__(params)
 
     def generate_stimulus_lst(self, stimulus_range):
+        '''takes stimulus range and creates list with random stimuli for consecutive of trials)'''
+
         params = self.params
         stimulus_lst = [random.choice(stimulus_range) for i in range(params.ntrials)]
         return np.array(stimulus_lst)
 
     def simulate(self, stimulus_lst, K):
+        '''function that carries out the different stages of a trial for each stimulus from the stimulus_lst 
+        and returns the SimulationResult
+        (consisting of all parameters, the simulation, a list of production times, the timepoints of reset 
+        and the indices of timeout trials)'''
         # TODO generate random stimuli list of range
+
         params = self.params
 
         state_init = [np.ones(1) * params.uinit,
@@ -58,6 +76,9 @@ class ExperimentSimulation(BaseSimulation):
         return SimulationResult(params, simulation, reset_lst, production_lst, timeout_index, stimulus_lst)
 
     def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
+        '''function that defines the last stage of a trial (production stage)
+        and determines the production time and if the trial was timeout'''
+
         params = self.params
 
         # Determine timeout
