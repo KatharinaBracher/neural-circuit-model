@@ -7,6 +7,7 @@ import numpy as np
 
 
 def execute(d):
+    '''performs simulation and returns behavioral data '''
     stimulus_range, K, th, t, delay = d
     print("executing with", K, th, t, delay, "= K, th, t, delay")
 
@@ -21,6 +22,7 @@ def execute(d):
 
 # create seach space
 def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
+    '''creates search space of relevant hyperparameter'''
     search_space = []
 
     if srange == 'short':
@@ -36,12 +38,32 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
     return search_space
 
 
-def run_parallel(batchsize, srange, K_lst, th_lst, tau, delay_lst, name):
+def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name):
+    '''
+    runs simulation for simulationspace
+    batchsize: int
+        batch on which simulation executing and results are kept in working memory
+    pool: int
+        number of parallel computations
+    srange: str
+        indicating short or long interval
+    K_lst: np.array
+        array of memory parameters
+    th_lst: np.array
+        array of thresholds
+    tau: np.array
+        array of time constants
+    delay_lst: np.array
+        array of delay times between trials
+    name: str
+        name of pickle saved to server
+    '''
+    
     search_space = create_search_space(srange, K_lst, th_lst, tau, delay_lst)
     with open('/home/bracher/results/%s-%s-output.pickle' % (name, time.strftime("%Y%m%d-%H%M%S")), 'ab') as fp:
         for i in range(0, len(search_space), batchsize):
             print(i, i+batchsize, 'of', len(search_space))
-            with Pool(8) as p:
+            with Pool(pool) as p:
                 results = p.map(execute, search_space[i:i + batchsize])
                 for result, K in results:
                     print('writing to disk as', name)
@@ -63,4 +85,4 @@ delay_lst = [700]
 name = 'LONG_KTAU_th07del700'
 # name = 'LONG_K5tau100th07del700'
 
-run_parallel(8, srange, K_lst, th_lst, tau, delay_lst, name)
+run_parallel(8, 8, srange, K_lst, th_lst, tau, delay_lst, name)

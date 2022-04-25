@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 
 
 class SimulationPlotData:
+    """
+    contains relevant data for plotting simulation for both experiment and parallel setting
+    """
     def __init__(self, params, simulation, production, timeout_index, reset_indices):
         self.params = params
         self.simulation = simulation
@@ -12,6 +15,18 @@ class SimulationPlotData:
 
 
 class SimulationPlot:
+    """
+    creates plots of simulation for both experiment and parallel setting
+
+    Attributes
+    ----------
+    trial: int
+        index of example trial for parallel setting
+    stimulus: int
+        stimulus that was used for parallel simulation
+    alpha: float
+        u, v, y, I over time opacity
+    """
 
     def __init__(self, data: SimulationPlotData):
         self.data = data
@@ -23,6 +38,7 @@ class SimulationPlot:
         self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7))
 
     def plot_example_trial(self, stimulus, trial=0):
+        '''plots example trial to highlight one trial over all parallel trials'''
         params = self.data.params
         simulation = self.data.simulation
         production = self.data.production
@@ -43,6 +59,7 @@ class SimulationPlot:
         ax[3].plot(steps, simulation[:, 3, trial], c='b', linewidth=0.9,  alpha=1)
 
     def get_frames(self):
+        '''gets times of all measurement stages and production stages'''
         reset_indices = self.data.reset_indices
 
         m_start = reset_indices[1::3]
@@ -53,6 +70,7 @@ class SimulationPlot:
         return zip(p_start, p_stop, m_start, m_stop)
 
     def plot_measurement_production_frames(self):
+        '''underlays color to all measurment and production stages'''
         _, ax = self.subplots
 
         for p_start, p_stop, m_start, m_stop in self.get_frames():
@@ -61,6 +79,7 @@ class SimulationPlot:
                 ax[a].axvspan(m_start, m_stop, facecolor='b', alpha=0.1)
 
     def plot_trials(self, alpha):
+        '''plots u. v, y, I over time'''
         _, ax = self.subplots
         params = self.data.params
         simulation = self.data.simulation
@@ -93,6 +112,9 @@ class SimulationPlot:
 
 
 class BehavioralPlotData:
+    '''
+    contains relevant data for plotting behavioral data for both experiment and parallel setting 
+    '''
     def __init__(self, behavioral_data):
         self.params = behavioral_data.params
         self.stimulus_range = behavioral_data.stimulus_range
@@ -104,11 +126,15 @@ class BehavioralPlotData:
 
 
 class BehavioralPlot:
+    """
+    creates behavioral plot (stimulus vs. production) for both experiment and parallel setting
+    """
 
     def __init__(self, data: BehavioralPlotData):
         self.data = data
 
     def plot_behavior(self, ax=None):
+        '''creates behavioral plot or returns the same as subplot'''
         data = self.data
         production_means = data.production_means
         stimulus_range = data.stimulus_range
