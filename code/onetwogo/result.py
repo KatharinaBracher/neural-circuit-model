@@ -30,6 +30,22 @@ class BehavioralData:
     """
     contains extracted behavioral data of simulation
     """
+    params: object
+    '''object that contains all parameters'''
+    stimulus_range: list
+    '''list of stimuli used in simulatoin'''
+    production_means: list
+    '''list with means of production times for each stimulus in stimulus range'''
+    production_stds: list
+    '''list with standard deviations of production times for each stimulus in stimulus range'''
+    timeouts: np.array
+    '''proportion of timouts of all trials per stimulus'''
+    slope: float
+    '''slope of stimulus vs. production'''
+    ind_point: float
+    '''indifference point of stimulus vs. production'''
+    mse: float
+    '''Mean Squared Error over all trials of simulation'''
 
     def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope, ind_point, mse):
         self.params = params
@@ -166,7 +182,7 @@ class RangeParallelSimulationResult:
 
     params: object
     """object that contains all parameters"""
-    simulation: list
+    result_list: list
     '''list that contains SimulatioResults objects'''
     stimulus_range: list
     '''range of stimuli that were used for parallel simulation'''
