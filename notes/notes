@@ -195,10 +195,11 @@ details
 
 
 ## Model
-- [ ] **Timeout**:
+- [ ] **Timeout and Delay**:
 	- regimes over/under th, how robust?
-	- *when considered timeout? too short guess, false positive has to be excluded*
+	- when considered timeout? Plot to see of code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
+	- [ ] variable delay period?
 
 - [ ] Noise in Egger Simulation module
     - is there noise on y??
@@ -212,7 +213,6 @@ details
   - introduce weights from u,v to y?
   - adjusting weights between I and v,w $w_{vi}$ and $w_{wi}$ instead of I
 
-  
 - [ ] Analytical solutions: phase plane fixed point influence of parameter
   - [ ] **PLOT** phase plane of u,v
   - mechanistically understanding of parameter to behavior

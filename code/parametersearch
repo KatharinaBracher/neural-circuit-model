@@ -63,5 +63,4 @@ delay_lst = [700]
 name = 'LONG_KTAU_th07del700'
 # name = 'LONG_K5tau100th07del700'
 
-# 2.5 MB per simulation result
 run_parallel(8, srange, K_lst, th_lst, tau, delay_lst, name)

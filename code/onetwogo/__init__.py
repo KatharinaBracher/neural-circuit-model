@@ -92,7 +92,7 @@ class BaseSimulation:
     reset: bool
         1 if u, y are reseted
     K: int
-        memory parameter, weighs how much input
+        memory parameter, weights the update of I
     nbin: int
         number of steps of current duration
     """
@@ -101,8 +101,8 @@ class BaseSimulation:
         self.params = params
 
     def network(self, state_init, reset, K, nbin):
-        """returns the simulation of the current over nbins and a list of booleans when a reset happend in the trial"""
-        
+        """returns the simulation of u, v, y, I over nbins and a list of booleans when a reset happend in the trial"""
+
         params = self.params
 
         u, v, y, Input = state_init.copy()
@@ -127,8 +127,8 @@ class BaseSimulation:
         return simulation, reset_lst
 
     def trial_update(self, simulation, reset_lst, reset, K, nbin, production_step=False):
-        """returns the simulation and reset list extended with the new stage that was computed by the network"""
-        
+        """returns the simulation and list of resets extended with the new stage that was computed by the network"""
+
         # get prev I,v,u,y to continue trial or experiment
         state_init = simulation[-1]
         # next step simulation
@@ -139,15 +139,15 @@ class BaseSimulation:
 
         if production_step:
             return self.production_step(
-                simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase)
+                simulation, reset_lst, simulation2, reset_lst2, earlyphase)
 
         # for all stages exept production
         simulation = np.concatenate((simulation, simulation2))
         reset_lst.extend(reset_lst2)
         return simulation, reset_lst
 
-    def production_step(_simulation, _reset_lst, _simulation2, _reset_lst2, _nbin: int, _earlyphase):
-        '''place holder function, prodcution step is handed over by simulation'''
+    def production_step(_simulation, _reset_lst, _simulation2, _reset_lst2, _earlyphase):
+        '''place holder function, prodcution step is handed over by parallel_simulation or experiment_simulation'''
         pass
 
     ######################################################################################################

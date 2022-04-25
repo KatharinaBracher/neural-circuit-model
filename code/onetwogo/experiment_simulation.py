@@ -6,13 +6,13 @@ import random
 
 class ExperimentSimulation(BaseSimulation):
     """
-    A class that simulates an experiment sampling stimuli randomly from a stimulus range
+    simulates an experiment sampling stimuli randomly from a stimulus range
 
 
     Attributes
     ----------
     K: int
-        memory parameter, weighs how much input
+        memory parameter, weights the update of I
     stimulus_range: list
         stimulus range for measurment stage, for each stimulus the parallel simulation is performed
     """
@@ -28,11 +28,10 @@ class ExperimentSimulation(BaseSimulation):
         return np.array(stimulus_lst)
 
     def simulate(self, stimulus_lst, K):
-        '''function that carries out the different stages of a trial for each stimulus from the stimulus_lst 
-        and returns the SimulationResult
-        (consisting of all parameters, the simulation, a list of production times, the timepoints of reset 
-        and the indices of timeout trials)'''
-        # TODO generate random stimuli list of range
+        '''carries out the different stages of a trial for each stimulus from the stimulus list
+        and returns the SimulationResult:
+        parameter object, the simulation of u, v, y, I, a list of production times, the timepoints
+        of reset and the indices of timeout trials)'''
 
         params = self.params
 
@@ -75,9 +74,9 @@ class ExperimentSimulation(BaseSimulation):
 
         return SimulationResult(params, simulation, reset_lst, production_lst, timeout_index, stimulus_lst)
 
-    def production_step(self, simulation, reset_lst, simulation2, reset_lst2, nbin, earlyphase):
-        '''function that defines the last stage of a trial (production stage)
-        and determines the production time and if the trial was timeout'''
+    def production_step(self, simulation, reset_lst, simulation2, reset_lst2, earlyphase):
+        '''defines the last stage of a trial (production stage)
+        and determines the production time or if the trial was a timeout trial'''
 
         params = self.params
 

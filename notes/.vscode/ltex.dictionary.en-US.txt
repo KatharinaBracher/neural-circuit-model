@@ -1,3 +1,6 @@
+LTP
 upsampling
-upsampling
-upsampling
+bistable
+optimality
+parallelization
+cond
