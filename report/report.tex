@@ -1,8 +1,86 @@
-\documentclass[12pt]{article}
-%\usepackage{lingmacros}
-%\usepackage{tree-dvips}
+\documentclass[9pt]{article}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{lipsum}
+\usepackage{graphicx}
+
+\usepackage[
+	backend=biber,
+    style=authoryear,
+    %sorting=ynt,
+    bibwarn=true,
+    bibencoding=utf8,
+    sortlocale=de_DE,
+    maxbibnames=99,
+    maxcitenames=1]{biblatex}
+    
+\DefineBibliographyStrings{english}{
+   andothers = {{et\,al\adddot}},}
+   
+\addbibresource{thesis.bib}
+
+
+
+
 \begin{document}
 
-\section*{Report}
+\AtBeginEnvironment{figure}{\singlespacing}
+\AtBeginEnvironment{table}{\singlespacing}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Ludwig-Maximilians-Universität München \par}
+	{\scshape\large Department Biologie II Computational Neuroscience \par}
+	\vspace{0.9cm}
+	\includegraphics[width=0.5\textwidth]{../logo/siegel_black.pdf}\par
+	\vspace{1.1cm}
+	{\scshape\LARGE Report \par}
+	\vspace{0.2cm}
+	{\huge\bfseries Computational Simulation of Time Perception: Model Implementation and Description \par}
+	\vspace{1.1cm}
+	{\Large Katharina \textsc{Bracher} \par}
+	{Student ID: 11754625 \par}
+	\vspace{0.6cm}
+	{\Large Supervision: Dr. Kay \textsc{Thurley} \par}
+	{\Large Prof. Dr. Andreas \textsc{Herz} \par}
+\end{titlepage}
+
+
+\normalsize
+\tableofcontents
+
+\section{Introduction}
+speed of neural trajectories
+experimentally found that neural activity in anticipation of a delayed response reaches a fixed threshold with rate inversely proportional to delay period \cite{Wang2018}.
+flexible control of speed 
+can be achieved by a simple model consisting of two units that have reciprocal inhibitory projections and the speed at which the output evolves can be controlled by a shared input
+A potential neural mechanisms for speed control.
+\section{Model Description}
+\subsection{Circuit}
+circuit description
+u, v, y each representing the average activity of a neural population
+parameter: weights, threshold, tau, initial conditions
+noise modeled as independent white noise (stochastic synaptic inputs)
+fixed points, dynamical regime (depending on parameter, initial cond), towards stable FP ramp like behavior in y, rate of y inversely related to input I 
+input - rate
+producing time interval 
+\subsection{Update Mechanism and Experiment simulation}
+Updating I based on feedback to adjust rate in reproduction
+stages: measurement, update and reset, reproduction until threshold 
+update: delta y-th, weighted
+parameter: memory parameter K, reset, initial conditions, 
+threshold 
+timeouts
+\section{Implementation of Model}
+\subsection{Modules}
+Euler Implementation to Solve Differential Equation
+parallel Simulation
+experiment simulation
+update mechanism 
+\subsection{Structure of Code}
+parallel simulations, experiment simulation
+\section{Results and Outlook}
+experiment simulation plot
+behavioral plot
+parameter search, extending units, neural trajectories
 
 \end{document}

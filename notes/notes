@@ -2,7 +2,8 @@
 
 ## Narain et al. (2018): A cerebellar mechanism for learning prior distributions of time intervals
 <details>
-<summary> Model with 3 components, based on Bayesian estimate </summary>
+<summary> Model with 3 components, based on Bayesian estimate 
+</summary>
 anatomical motivated model (GC, PC, CF and DN in cerebellum) of learning prior on circuit level
 
 Bayesian estimator assumes:
@@ -75,7 +76,6 @@ Recurrent neural network structure:
 	+ we can implement the update instantaneous as $\Delta I$
 - after adjusting I the motor production module is outputting $y_p$ (and also reset)
 	- is the motor production module necessary? the prev. module is outputting I in which the interval is already encoded
-
 
 </details>
 
@@ -204,7 +204,7 @@ details
 - [ ] Noise in Egger Simulation module
     - is there noise on y??
     - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
-      - is this only for parallel simulation
+      - is this only for parallel simulation?
     - sigma_sigma: indicates the noise within each trial added for each step for u,v,y (np.random.normal(loc=0, scale=self.sigma_sigma, size=len(self.ustate)))
 
 - [ ] look at egger code implementation of experiment
@@ -228,10 +228,7 @@ details
 
 
 ## Other
-- code structure and classes figure
-- Code documentation parameter, classes and function meta
 - Report Model and Figures
-- spelling add to dictionary not working
 - markdown (latex) extension not working (shortcuts etc)
 
 ## Server
