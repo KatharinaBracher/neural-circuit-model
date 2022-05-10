@@ -4,3 +4,4 @@ bistable
 optimality
 parallelization
 cond
+nonlinearities
