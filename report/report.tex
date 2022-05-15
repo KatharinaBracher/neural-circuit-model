@@ -2,6 +2,7 @@
 \usepackage[onehalfspacing]{setspace}
 \usepackage{lipsum}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \usepackage[
 	backend=biber,
@@ -16,7 +17,7 @@
 \DefineBibliographyStrings{english}{
    andothers = {{et\,al\adddot}},}
    
-\addbibresource{thesis.bib}
+\addbibresource{../../../bib/thesis.bib}
 
 
 
@@ -30,31 +31,74 @@
 	\centering
 	{\scshape\LARGE Ludwig-Maximilians-Universität München \par}
 	{\scshape\large Department Biologie II Computational Neuroscience \par}
-	\vspace{0.9cm}
-	\includegraphics[width=0.5\textwidth]{../logo/siegel_black.pdf}\par
-	\vspace{1.1cm}
+	\vspace{0.5cm}
+	\includegraphics[width=0.7\textwidth]{../logo/GSN-Logo_ab35mmBreite_RGB.jpg}\par
+	\includegraphics[width=0.4\textwidth]{../logo/siegel_black.pdf}\par
+	\vspace{0.7cm}
 	{\scshape\LARGE Report \par}
-	\vspace{0.2cm}
-	{\huge\bfseries Computational Simulation of Time Perception: Model Implementation and Description \par}
+	\vspace{0.05cm}
+	{\huge\bfseries Computational Simulation of Time Perception: Model Description and Implementation \par}
 	\vspace{1.1cm}
 	{\Large Katharina \textsc{Bracher} \par}
 	{Student ID: 11754625 \par}
-	\vspace{0.6cm}
-	{\Large Supervision: Dr. Kay \textsc{Thurley} \par}
+	\vspace{0.4cm}
+	{\large Supervision: Dr. Kay \textsc{Thurley} \par}
 \end{titlepage}
 
 
 \normalsize
 \tableofcontents
 
-\section{Introduction}
-speed of neural trajectories
-experimentally found that neural activity in anticipation of a delayed response reaches a fixed threshold with rate inversely proportional to delay period \cite{Wang2018}.
-flexible control of speed 
-can be achieved by a simple model consisting of two units that have reciprocal inhibitory projections and the speed at which the output evolves can be controlled by a shared input
-A potential neural mechanisms for speed control.
+
+\section{Behavioral Effects in Magnitude Estimation}
+Magnitude estimation is subject to noise that arises from external sources i.e. the statistics of the environment and internal sources i.e. neural representation of the input and the behavior.
+Across sensory modalities, characteristic behavioral effects are identified (\cite{Petzschner2015}).
+The most prominent observation is a regression to the mean of the stimulus range,  i.e. small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
+This effect intensifies for ranges with larger stimuli (\textit{range effect})
+For larger stimuli the standard deviation of estimates increases monotonically (\textit{scalar variability}). 
+Finally, the recent history of stimuli presentations influences the current stimuli estimation (\textit{sequential effect}).
+All effects mentioned above are displayed in Fig. \ref{fig:behavioraleffects}. 
+
+Modality-independence of these effects suggests the existence of a common underlying principle or processing mechanisms, that would explain e.g. a optimal strategy for unreliable judgments due to noise (in stimuli and estimates).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{figures/behavioural_effects_petzschner.pdf}
+	\caption{\textbf{Behavioral Effects} adapted from \cite{Petzschner2015}.}
+\label{fig:behavioraleffects}
+\end{figure}
+
+
 \section{Model Description}
+Neural activity yields characteristic trajectories during time perception and time reproduction (\cite{Meirhaeghe2021}, \cite{Wang2018}, \cite{Henke2021}). 
+Flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Wang2018}). 
+Further, it has been found that neural activity in anticipation of a delayed response reaches a fixed threshold with rate inversely proportional to delay period \cite{Murakami2014}, \cite{Mita2009}).
+\cite{Wang2018} proposed a potential neural mechanism for speed control and based on that \cite{Egger2020} developed a neural circuit model for sensorimotor timing.
+
 \subsection{Circuit}
+Flexible speed control can be achieved by a simple model consisting of three units, u, v, y that represent population activity. Two units, u and v receive symmetric input I and have symmetric mutual inhibitory projections onto each other. The input to u and v is governed by a sigmoidal activation function $\theta(x) = \frac{1}{1+exp(-x)}$ and all three units have a time constant $\tau$. 
+The output unit y receives excitatory input from u and inhibitory input from v and shows ramp-like behavior. 
+Speed at which the output y evolves can be controlled by the shared input to u and v.(\cite{Egger2020})
+
+Depending on the input I, the system shows different dynamics. For low levels of I (0$<$I$<$0.5) the system has three fixed points (2 stable, 1 unstable at u=v) and y ramps up faster the higher the input I. 
+For intermediate values of I (0.5$<$I$<$1) the system still shows three FP of the same sort and y ramps up, however the relation of slope and input level is inverted (y ramps up slower the higher the input I). 
+For high I (1$<$I) the system has one stable fixed point (at u=v) and y ramps down with a slope that is inversely proportional to the input I ()
+In this report, the intermediate input regime is explored (Fig. \ref{fig:circuit}b)
+
+\begin{align} \label{circuit}
+\tau\frac{du}{dt} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u) \\
+\tau\frac{dv}{dt} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v) \\
+\tau\frac{dy}{dt} & = -y + W_{yu}u - W_{yv}v + \eta_y
+\end{align}
+
+\begin{figure}[h]
+	\centering
+	%\includegraphics[width=0.9\textwidth]{figures/defCircuit.svg}
+	\caption{\textbf{Basic Circuit} adapted from \cite{Egger2020}}
+\label{fig:circuit}
+\end{figure}
+
+
 circuit description
 u, v, y each representing the average activity of a neural population
 parameter: weights, threshold, tau, initial conditions
@@ -62,6 +106,7 @@ noise modeled as independent white noise (stochastic synaptic inputs)
 fixed points, dynamical regime (depending on parameter, initial cond), towards stable FP ramp like behavior in y, rate of y inversely related to input I 
 input - rate
 producing time interval 
+
 \subsection{Update Mechanism and Experiment simulation}
 Updating I based on feedback to adjust rate in reproduction
 stages: measurement, update and reset, reproduction until threshold 
@@ -69,14 +114,18 @@ update: delta y-th, weighted
 parameter: memory parameter K, reset, initial conditions, 
 threshold 
 timeouts
+
+
 \section{Implementation of Model}
 \subsection{Modules}
 Euler Implementation to Solve Differential Equation
 parallel Simulation
 experiment simulation
-update mechanism 
+update mechanism
+
 \subsection{Structure of Code}
 parallel simulations, experiment simulation
+
 \section{Results and Outlook}
 experiment simulation plot
 behavioral plot

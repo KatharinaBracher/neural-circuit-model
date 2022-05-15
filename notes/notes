@@ -88,6 +88,7 @@ Recurrent neural network structure:
   - intermediate I, 2 FP, higher I makes the system go slower
   - low I (\<0.5), 2 FP, realtion of I and speed inverted, higher I makes the system go faster
   - high I (\>1), only 1 FP on u=v line, systems moves toward this line, requires a lower bound to be set
+    - Although the circuit successfully matches IPI to the ISI in this regime, it fails to generate parallel neural trajectories in the u−v plane.
 - noise level maximal 25% of input: monotonic increase of standard deviation of reproductions
   - magnitude of bias determined by noise
   - tuned to achieve a level of bias-variance trade-off that is inversely related with the inherent noise and the operative cost function
@@ -266,10 +267,15 @@ details
 	- extend for experiment setting
 - [x] **TOOL** Script for simulating on server: save each simulation result in file 
     - [x] parallelization of simulations with parameter space
+
+
 - [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
 	- [ ] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
+	- [ ] **ADD** MSE variance bias term
+	- [ ] timeouts 10% overall not in one, give nan in slope, mse,...
 	- [ ] **PLOT** combination of 2 parameter and error (slope, ind point) as color 
 	- [ ] **TOOL** **PLOT** function that takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
+
 - [ ] **TOOL**: function to cut u,v,y and sort according to stimulus to feed into PCA (experiment setting, parallel setting)
     - simulation returns: params, simulation, reset_lst, production_lst (with inf), timeout_index, stimulus_lst
     - [ ] create *dict* or *pandas data frame* with trial index, stimulus, production, simulation
@@ -280,19 +286,29 @@ details
 
 
 ## Model
-- [ ] **Timeout and Delay**:
+- [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
+
+- [ ] **Timeout**:
 	- regimes over/under th, how robust?
 	- when considered timeout? Plot to see of code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
-	- [ ] variable delay period?
+
+- [ ] **Parameter**
+	- [ ] delay
+  	- wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I, delay relevant
+  	- variable delay period?
+	- 
+
+- [ ] I zu IPI Kurve, was verändert sie? tau (Polstelle bei 1, Veränderung der Regime)
+  - wo sind welche ranges (mean I for range), wie stark ist das Regime ausgenutzt
+  - wie kann die Dynamik verschoben werden (adaption von u), hoch oder runter für verschiedene ranges, oder in die breite
+  - keine Veränderung von Model! wie in Egger
 
 - [ ] Noise in Egger Simulation module
     - is there noise on y??
     - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
       - is this only for parallel simulation?
     - sigma_sigma: indicates the noise within each trial added for each step for u,v,y (np.random.normal(loc=0, scale=self.sigma_sigma, size=len(self.ustate)))
-
-- [ ] look at egger code implementation of experiment
 
 - [ ] Weights
   - introduce weights from u,v to y?
@@ -327,4 +343,6 @@ details
   - tmux attach
     - python script
 - download results
+
+
 
