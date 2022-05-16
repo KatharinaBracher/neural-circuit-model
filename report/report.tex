@@ -70,7 +70,8 @@ Modality-independence of these effects suggests the existence of a common underl
 
 
 \section{Model Description}
-Neural activity yields characteristic trajectories during time perception and time reproduction (\cite{Meirhaeghe2021}, \cite{Wang2018}, \cite{Henke2021}). 
+During time perception and time reproduction experiments, neural activity displays characteristic trajectories in a low-dimensional space (\cite{Meirhaeghe2021}, \cite{Wang2018}, \cite{Henke2021}). 
+The neural trajectories are consistently influenced by prior beliefs. 
 Flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Wang2018}). 
 Further, it has been found that neural activity in anticipation of a delayed response reaches a fixed threshold with rate inversely proportional to delay period \cite{Murakami2014}, \cite{Mita2009}).
 \cite{Wang2018} proposed a potential neural mechanism for speed control and based on that \cite{Egger2020} developed a neural circuit model for sensorimotor timing.
@@ -88,24 +89,25 @@ The dynamics of u, v, and y are defined as follows:
 	\tau\frac{dy}{dt} & = -y + W_{yu}u - W_{yv}v + \eta_y
 	\end{align}
 
-The speed at which the output y evolves can be controlled by the shared input to u and v (Fig. \ref{fig:circuit}) (\cite{Egger2020}) and determines the interval after which y reaches a fixed threshold $y_0$.
+The speed at which the output y evolves can be controlled by the shared input to u and v (Fig. \ref{fig:circuit})c (\cite{Egger2020}) and determines the interval after which y reaches a fixed threshold $y_0$.
 
 Depending on the input I, parameter and initial conditions, the system shows different dynamics. For low levels of I (0$<$I$<$0.5) the system has three fixed points (2 stable, 1 unstable at u=v) and y ramps up faster the higher the input I. 
-For intermediate values of I (0.5$<$I$<$1) the system still shows three FP of the same sort and y ramps up with a slope that is inversely proportional to the input I (y ramps up slower the higher the input I, see Fig. \ref{fig:circuit}b). 
+For intermediate values of I (0.5$<$I$<$1) the system still shows three FP of the same sort and y ramps up with a slope that is inversely proportional to the input I (y ramps up slower the higher the input I, see schematic in Fig. \ref{fig:circuit}a, b). 
 For high I (1$<$I) the system has one stable fixed point (at u=v) and y ramps down faster for higher I.
-In this report, the intermediate input regime is explored. In this regime, higher an higher input I results in a smaller slope of y, such that the threshold $y_0$ is reached after a longer interval. Thus, input is controlling the speed of the dynamic. 
+In this report, the intermediate input regime is explored. In this regime, higher a higher input I results in a smaller slope of y, such that the threshold $y_0$ is reached after a longer interval. Thus, input is controlling the speed of the dynamic. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics{figures/defCircuit.drawio.pdf}
-	\caption{\textbf{Basic Circuit} adapted from \cite{Egger2020}}
+	\caption{\textbf{Basic Circuit} \textbf{(a)} u and v share a common input I. Dynamics for example input I=0.75 in gray and I=0.65 in black plotted in (b). The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength and project to the output unit y with an excitatory connection from u and an inhibitory connection from v. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. \textbf{(b)} Dynamics of y for intermediate regime with input I=0.75 in gray and I=0.65 black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. \textbf{(c)} Dynamics of u, v, y for inputs from 0.1 to 1.5. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$.}
 \label{fig:circuit}
 \end{figure}
 
 
-Initial conditions of u, v and y have been optimized for in \cite{Egger2020} and are set to \textit{xxx}.
+Initial conditions of u, v and y have been optimized for in \cite{Egger2020} and are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$.
 
 \subsection{Update Mechanism and Experiment simulation}
+For 
 Updating I based on feedback to adjust rate in reproduction
 stages: measurement, update and reset, reproduction until threshold 
 update: delta y-th, weighted

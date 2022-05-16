@@ -288,21 +288,20 @@ details
 ## Model
 - [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
 
-- [ ] **Timeout**:
-	- regimes over/under th, how robust?
-	- when considered timeout? Plot to see of code works 
-	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
-
 - [ ] **Parameter**
 	- [ ] delay
   	- wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I, delay relevant
   	- variable delay period?
-	- 
 
-- [ ] I zu IPI Kurve, was verändert sie? tau (Polstelle bei 1, Veränderung der Regime)
-  - wo sind welche ranges (mean I for range), wie stark ist das Regime ausgenutzt
-  - wie kann die Dynamik verschoben werden (adaption von u), hoch oder runter für verschiedene ranges, oder in die breite
-  - keine Veränderung von Model! wie in Egger
+- [ ] **Regimes**
+- [ ] **PLOT** I vs IPI curve, plot y's
+  - what is influencing it? - parameter tau
+  - where are the stimuli ranges situated (mean I for range), is the regime exploited?
+  - can we shift the regimes? Polstelle at 1,; can we shift it up or down depending on range, expand it to the sides
+- [ ] **Timeout**:
+	- regimes over/under th, how robust?
+	- when considered timeout? Plot to see of code works 
+	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 
 - [ ] Noise in Egger Simulation module
     - is there noise on y??
