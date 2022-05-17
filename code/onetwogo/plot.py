@@ -35,7 +35,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7))
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.4,4)) #20, 7 
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -80,7 +80,7 @@ class SimulationPlot:
 
     def plot_trials(self, alpha):
         '''plots u. v, y, I over time'''
-        _, ax = self.subplots
+        _ , ax = self.subplots
         params = self.data.params
         simulation = self.data.simulation
         reset_indices = self.data.reset_indices
@@ -101,7 +101,7 @@ class SimulationPlot:
         ax[2].hlines(params.th, 0, simulation.shape[0]*params.dt, linestyle='--', color='lightgray')
         ax[2].vlines(reset_indices, np.min(np.array(simulation[:, 2])),
                      np.max(np.array(simulation[:, 2])*1.1), color='grey', alpha=0.5)
-        ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
+        #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
         ax[2].set_title('dy/dt')
 
         ax[3].plot(steps, simulation[:, 3], 'grey', alpha=alpha)
@@ -109,6 +109,16 @@ class SimulationPlot:
                      np.max(np.array(simulation[:, 3])), color='grey', alpha=0.5)
         ax[3].set_title('dI/dt')
         ax[3].set_xlabel('Time (ms)')
+
+        for i in [0,1,2,3]:
+            # Hide the right and top spines
+            ax[i].spines['right'].set_visible(False)
+            ax[i].spines['top'].set_visible(False)
+        
+        plt.tight_layout()
+
+
+        
 
 
 class BehavioralPlotData:
