@@ -135,7 +135,7 @@ class BaseSimulation:
         simulation2, reset_lst2 = self.network(state_init, reset, K, nbin)
 
         # 0.4 of stim duration considered early phase
-        earlyphase = int(0.4*nbin/2)
+        earlyphase = int(0.2*nbin/2)
 
         if production_step:
             return self.production_step(

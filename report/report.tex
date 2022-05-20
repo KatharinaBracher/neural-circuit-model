@@ -58,6 +58,7 @@
 
 \normalsize
 \tableofcontents
+\pagebreak
 
 
 \section{Behavioral Effects in Magnitude Estimation}
@@ -74,7 +75,12 @@ Modality-independence of these effects suggests the existence of a common underl
 \begin{figure}[h]
 	\centering
 	\includegraphics{figures/behavioural_effects_petzschner.pdf}
-	\caption{\textbf{Behavioral Effects} adapted from \cite{Petzschner2015}.}
+	\caption{\textbf{Behavioral Effects} 
+	\textit{Regression effect}: in a range of stimuli large stimuli are underestimated, and small stimuli are overestimated which results in a regression to the mean of the range.
+	\textit{Range effect}: the regression to the mean gets more pronounced for ranges that comprise larger stimuli. 
+	\textit{Scalar variability}: the standard deviation of the reproduced magnitude grows linearly with larger rages. 
+	\textit{sequential effects}: the history presented stimuli (e.g. ascending or descending order) has an influence on the reproduced magnitude. 
+	Adapted from \cite{Petzschner2015}.}
 \label{fig:behavioraleffects}
 \end{figure}
 
@@ -86,12 +92,8 @@ Further, it has been found that neural activity in anticipation of a delayed res
 
 \section{Model Description}
 \subsection{Basic Circuit}
-Flexible speed control can be achieved by a simple model consisting of three units, u, v, y that represent population activity. 
-Two units, u and v receive symmetric input I ($W_{uI}=W_{vI}=6$) and have symmetric mutual inhibitory projections onto each other ($W_{uv}=W_{vu}=6$). 
-The inputs to u and v is governed by a sigmoidal activation function $\theta(x) = \frac{1}{1+exp(-x)}$ and all three units have a time constant $\tau$ = 100. 
-y is the output unit and receives excitatory input from u and inhibitory input from v ($W_{yu}=W_{yv}=1$)which results in ramp-like behavior.
-Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
-The dynamics of u, v, and y are defined as follows:
+Flexible speed control can be achieved by a simple model consisting of three units, $u, v, y$ that represent population activity. 
+The dynamics of $u, v$, and $y$ are defined as follows:
 \begin{equation} \label{circuit}
 	\begin{split}
 	\tau\frac{du}{dt} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u) \\
@@ -99,95 +101,106 @@ The dynamics of u, v, and y are defined as follows:
 	\tau\frac{dy}{dt} & = -y + W_{yu}u - W_{yv}v + \eta_y
 	\end{split}
 \end{equation}
+Two units, $u$ and $v$ receive a tonic symmetric input $I$ ($W_{uI}=W_{vI}=6$) and are mutually inhibiting each other ($W_{uv}=W_{vu}=6$). 
+The inputs to $u$ and $v$ are governed by a sigmoidal activation function $\theta(x) = \frac{1}{1+exp(-x)}$.
+y is the output unit and receives excitatory input from $u$ and inhibitory input from $v$ ($W_{yu}=W_{yv}=1$) which results in ramp-like activity.
+All three units have a time constant $\tau = 100$. 
+Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
+Initial conditions of $u, v$ and $y$ have been optimized for in \cite{Egger2020} and are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$.
 
-The speed at which the output y evolves can be controlled by the input to u and v (Fig. \ref{fig:circuit})c) and determines the interval after which y reaches a fixed threshold $y_0$. 
-Reaching the threshold $y_0$ can be understood as the movement initiation time in time reproduction experiments and adjusting I means producing longer or shorter intervals.
-Depending on the input I, parameter and initial conditions, the system shows different dynamics. For low levels of I (0$<$I$<$0.5) the system has three fixed points (2 stable, 1 unstable at u=v) and y ramps up faster the higher the input I. 
-For intermediate values of I (0.5$<$I$<$1) the system still shows three FP of the same sort and y ramps up with a slope that is inversely proportional to the input I (y ramps up slower the higher the input I, see schematic in Fig. \ref{fig:circuit}a, b). 
-For high I (1$<$I) the system has one stable fixed point (at u=v) and y ramps down faster for higher I.
-In this report, the intermediate input regime is explored. In this regime, higher a higher input I results in a smaller slope of y, such that the threshold $y_0$ is reached after a longer interval. Thus, input is controlling the speed of the dynamic.
-Initial conditions of u, v and y have been optimized for in \cite{Egger2020} and are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$.
+Depending on the input $I$, the system shows different dynamics. For low levels of $I$ (0$<$I$<$0.5) the system has three fixed points (2 stable, 1 unstable at $u=v$) and y ramps up faster the higher the input $I$. 
+For intermediate values of $I$ (0.5$<$I$<$1) the system still shows three FP of the same sort and $y$ ramps up with a slope that is inversely proportional to the input $I$ (y ramps up slower the higher the input $I$, see schematic in Fig. \ref{fig:circuit}a, b). 
+For high $I$ (1$<$I) the system has one stable fixed point (at $u=v$) and $y$ ramps down faster for higher $I$.
+Thus, the speed at which the output $y$ evolves can be controlled by the input $I$ to $u$ and $v$ (Fig. \ref{fig:circuit})b) and determines the time interval after which y reaches a fixed threshold $y_0$. 
+Reaching the threshold $y_0$ can be understood as movement initiation time in interval reproduction experiments and adjusting $I$ means reproducing longer or shorter intervals.
+In this report, the intermediate input regime is explored. In this regime, higher a higher input $I$ results in a smaller slope of $y$, such that the threshold $y_0$ is reached after a longer interval.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics{figures/defCircuit.drawio.pdf}
 	\caption{\textbf{Basic Circuit and Input Regimes} 
-	\textbf{(a)} u and v share a common input I. Dynamics for example input I=0.75 in gray and I=0.65 in black plotted in (b). The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength and project to the output unit y with an excitatory connection from u and an inhibitory connection from v. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. 
-	\textbf{(b)} Dynamics of y for intermediate regime with input I=0.75 in gray and I=0.65 black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
-	\textbf{(c)} Dynamics of u, v, y for inputs from 0.1 to 1.5 are shown. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$. With these initial conditions and values of I$>=$0.5, the relation of steady state activity of y (and slope to reach steady state) is inverse to I (intermediate and high I regime). For I$<$0.5 the steady state (slope) is smaller the smaller I (low I regime).}
+	\textbf{(a)} $u$ and $v$ share a common input $I$. Dynamics for example input $I=0.75$ in gray and $I=0.65$ in black plotted in (b). The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength and project to the output unit $y$ with an excitatory connection from $u$ and an inhibitory connection from $v$. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. 
+	\textbf{(b)} Dynamics of $y$ for intermediate regime with input $I=0.75$ in gray and $I=0.65$ black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
+	\textbf{(c)} Dynamics of $u, v, y$ for inputs from $0.1\leq I \leq 1.5$ are shown. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$. With these initial conditions and values of $I>=0.5$, the relation of steady state activity of $y$ (and slope to reach steady state) is inverse to $I$ (intermediate and high I regime). For $I<0.5$ the steady state (slope) is smaller the smaller $I$ (low $I$ regime).}
 \label{fig:circuit}
 \end{figure}
 
 
-\subsection{Update Mechanism and Experiment Simulation}
-For simulating time reproduction experiments, the relation of the input I with the slope of y in combination with a fixed threshold for y is used.
-By flexible adjusting I based on an error signal, the threshold crossing of y can be delayed or moved to earlier times.
-Similar to classical time reproduction experiments, a simulated trial has two epochs. A measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch. The reproduction ends, when y reaches the fixed threshold $y_0$ from below. 
-The time from the end of the measurement epoch and the threshold-crossing of y yields the reproduced interval that is aimed to equal the stimulus interval that was given during the measurement epoch (Fig. \ref{fig:trialtimeout}a).
-Here, reproducing the interval is done predicatively, by adjusting the slope of the ramp such that the output reaches the threshold after intended time.
+\subsection{Update Mechanism and Experiment Procedure}
 
-The following update mechanism of I is based on the intermediate regime of I, that shows an inverse relation of I to the slope in y (Fig. \ref{fig:circuit}b).
-The error signal is determined at the end of the measurement epoch, by difference of y to the threshold $y_0$.
-If the threshold $y_0$ is not reached during the measurement epoch, the slope has to be adjusted, such that y ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, I is reduced.
-If y crossed the threshold before the measurement epoch ends, so is above $y_0$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, I is increased.
-Adjusting I is done by the difference of $(y-y_0)$, weighted by a memory parameter K right at the end of the measurement epoch. 
-Further, u and v receive a transient input $I_r$ to reset the dynamics (see Eq. \ref{experimentcircuit}) for the subsequent reproduction epoch (Fig. \ref{fig:trialtimeout}a).
+\begin{figure}
+	\centering
+	\includegraphics{figures/epochs.drawio.pdf}
+	\caption{\textbf{Extended Circuit for Experiment Simulation} 
+	\textbf{(a)} The circuits for measurement, reproduction and delay epoch is displayed. All circuits comprise the same basic structure with different additional elements that are unique for the epoch. Initial values of $u, v, y$ and $I$ are fed into the delay circuit for the initial duration. $u$ and $v$ are reset with $I_r$ before values of $u, v, y$ and $I$ are transferred to the measurement circuit. After the duration of the stimulus interval the difference between y and the threshold $y_0$ is used with the memory parameter $K$ to update $I$, that is, after another reset of $u$ and $v$, transferred with the other variables to the reproduction circuit. The reproduction ends when $y$ reaches the threshold $y_0$ from below. Before another stimulus interval, the reset values are fed into the delay circuit again for a fixed duration. The model is able to simulate an arbitrary number of stimulus intervals. Adapted from \cite{Petzschner2015}.
+	\textbf{(b)} Interval reproduction experiment with stimulus interval $t_s$ (blue) and reproduction $t_r$ (red).
+	\textbf{(c)} Schematic of a trial with one stimulus interval. After a delay epoch $u$ and $v$ are reset. The measurement epoch lasts for the duration of the stimulus interval. $y$ should reach the threshold $y_0$ (dashed line) at exactly the time the stimulus interval ends. The threshold was crossed well before the end of the interval and at the end of the measurement epoch, the error in $y_m$ to the threshold $y_0$ is used to update $I$. To reach the threshold at a later time $I$ is increased, which reduced the slope of $y$. After the reset of $u$ and $y$ and the update of $I$ the reproduction ends when $y$ reaches the threshold.}
+\label{fig:epochs}
+\end{figure}
+
+For simulating time reproduction experiments, the relation of the input $I$ with the slope of the ramping activity of $y$ in combination with a fixed threshold $y_0$ is used.
+Measuring and reproducing an interval is done predicatively, by adjusting the slope of the ramp such that the output reaches the threshold after the intended time. In other scenarios, time could be encoded by the level a ramp with a fixed slope reaches. 
+By adding an update mechanism that can flexible adjust $I$, the threshold crossing of $y$ can be delayed or moved to earlier times.
+
+Interval reproduction experiments can be designed with only two epochs. A measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). 
+The basic circuit is modified to perform interval reproduction (see figure \ref{fig:epochs}a for schematic of modified circuit).
+In the model the measurement epoch is fixed, and the reproduction epoch ends, when y reaches the fixed threshold $y_0$ from below. 
+The interval from the end of the measurement epoch and the threshold-crossing of $y$ yields the reproduced time that is aimed to equal the stimulus interval that was presented as measurement epoch (Fig. \ref{fig:epochs}c).
+
+The following update mechanism of $I$ is based on the intermediate regime of $I$, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
+The error signal is determined at the end of the measurement epoch and is composed of the difference of $y$ to the threshold $y_0$.
+If the threshold $y_0$ is not reached during the measurement epoch, the slope has to be adjusted, such that y ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
+If $y$ crossed the threshold before the measurement epoch ends, so is above $y_0$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased.
+Adjusting $I$ is done by the difference of $(y-y_0)$, weighted by a memory parameter $K$ right at the end of the measurement epoch.
+\begin{equation} \label{experimentcircuit}
+	\begin{split}
+	\tau\frac{dI}{dt} & = sK(y-y_0)
+	\end{split}
+\end{equation}
+The update of $I$ is only active for a pulse between the measurement and reproduction epoch ($s=1$) and inactive for all other times ($s=0$).
+Further, $u$ and $v$ are reset by a transient input $I_r$ pulse to reset the dynamics for the subsequent epoch (Fig. \ref{fig:epochs}c).
 \begin{equation} \label{experimentcircuit}
 	\begin{split}
 	\tau\frac{du}{dt} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u - I_r) \\
 	\tau\frac{dv}{dt} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v + I_r) \\
-	\tau\frac{dy}{dt} & = -y + W_{yu}u - W_{yv}v + \eta_y \\
-	\tau\frac{dI}{dt} & = sK(y-y_0)
 	\end{split}
 \end{equation}
-Resetting the dynamics after the reproduction epoch enables the model to simulate an arbitrary number of stimulus intervals. Before each trial (measurement and reproduction epoch) there is a delay period and in the beginning of each trial there is a initial interval that starts with the initial condition and an initial Input $I_0$ (Fig. \ref{fig:epochs}b).
-Trials that do not reach the threshold in a certain time span (twice the stimulus interval) are classified as timeout trials. If the threshold is crossed particularly early, the trial is also classified as timeout trial (crossing before 0.4 of stimulus interval) (Fig. \ref{fig:trialtimeout}b).
-
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics{figures/epochs.drawio.pdf}
-	\caption{\textbf{Extended Circuit for Experiment Simulation} 
-	\textbf{(a)} The circuit for measurement, reproduction and delay epoch is displayed. All circuits comprise the same basic structure with different additional elements that are unique for the epoch. Initial values of u, v, y and I are fed into the delay circuit for the initial duration. u and v are reset with $I_r$ before values of u, v, y and I are transferred to the measurement circuit. After the duration of the stimulus interval the difference between y and $y_0$ is used with the memory parameter K to update I, that is, after another reset of u and v, transferred with the other variables to the reproduction circuit. The reproduction ends when y reaches the threshold $y_0$ from below. Before another stimulus interval, the reset values are fed into the delay circuit again for a fixed duration. The model is able to simulate an arbitrary number of stimulus intervals. Adapted from \cite{Petzschner2015}.
-	\textbf{(b)} }
-\label{fig:epochs}
-\end{figure}
-
-
-
-\section{Implementation of Model}
-bin dt for reset and update
-Definition of timeouts
-Euler Implementation to Solve Differential Equation
-fixed reproduction and after determined the crossing and actual length of reproduction epoch 
+Resetting the dynamics after the reproduction epoch enables the model to simulate an arbitrary number of stimulus intervals. 
+Before a new stimulus presentation in the measurement there is a delay period and in the beginning of a trial there is an initial interval that starts with the initial values of $u, v, y$ and an initial input $I_0$ (Fig. \ref{fig:epochs}c). 
+The additional interval in the beginning of a trial allows the model to get closer to steady-state before the stimulus presentation starts. 
+Reproductions that do not reach the threshold in a certain time span (twice the stimulus interval) are classified as timeout trials. 
+If the threshold is crossed particularly early, the trial is also classified as (early) timeout trial (crossing before 0.2 of stimulus interval).
+To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data an monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
+If noise levels in the model are too high ($\sigma>0.25*I$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}). 
+For an example trial see figure \ref{fig:trial}. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics{figures/trial.drawio.pdf}
-	\caption{\textbf{Timeput and Experiment Simulation} \textbf{(a)} \textbf{(b)} \textbf{(c)} Example trial with 5 stimulus intervals (700, 500, 600, 700, 600 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$) other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The first stimulus interval is reproduced poorly as the system needs more trials to adapt I to a suitable range.}
-\label{fig:trialtimeout}
+	\caption{\textbf{Experiment Simulation} Example trial with 5 stimulus intervals (700, 500, 600, 700, 600 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$) other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_0=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 1040, 650, 530, 620, 570 ms).}
+\label{fig:trial}
 \end{figure}
 
 
-\section{Results and Outlook}
-experiment simulation plot
-behavioral plot
-parameter search: initial conditions across experiment 
-extending units, neural trajectories
+\section{Implementation of the Model}
+All simulations and analysis was performed with Python 3.9.7. 
+For simulating the dynamics Euler's method was used. The step size $\Delta t$ was set to 10 ms.
+The reset mechanism of $u$ and $v$ is switched on for one time step after every epoch and the update mechanism of $I$ is switched on for one time step after the measurement epoch only. 
+Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$
+Definition of timeouts
 
-limitations and explorations regimes 
-%figure behavioral plot
 
 \section{Supplements}
 
-\subsection{Structure of Code}
-parallel simulations, experiment simulation
+\subsection{Code}
+The code consists of a Base Simulation with the Euler implementation of the dynamics of $u, v, y$ and $I$. Each epoch or pulse between epochs is fed into the network in BaseSimulation and results are added to the course of the trial in trial_update
 
 \begin{figure}[h]
-	% \includegraphics{figures/codeStructure.drawio.pdf}
-	\caption{\textbf{Classes} }
+	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{figures/codeStructure.drawio.pdf}}
+	%\caption{\textbf{Code Structure} }
 \label{fig:code}
 \end{figure}
+
+\printbibliography
 
 \end{document}

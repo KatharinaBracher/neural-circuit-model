@@ -304,6 +304,7 @@ details
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 
 - [ ] Noise in Egger Simulation module
+  - [ ] **PLOT** mean std in reproductions with different noise levels simulation
     - is there noise on y??
     - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
       - is this only for parallel simulation?
