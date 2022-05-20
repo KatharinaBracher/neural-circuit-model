@@ -193,8 +193,8 @@ Definition of timeouts
 \section{Supplements}
 
 \subsection{Code}
-The code consists of a Base Simulation with the Euler implementation of the dynamics of $u, v, y$ and $I$. Each epoch or pulse between epochs is fed into the network in BaseSimulation and results are added to the course of the trial in trial_update
-
+The code consists of a Base Simulation with the Euler implementation of the dynamics of $u, v, y$ and $I$. Each epoch or pulse between epochs is fed into the network in BaseSimulation and results are added to the course of the trial in trial_update. 
+Two kinds of experiments are implemented. An interval reproduction experiment, as described in this report is implements in experiment_simulation. Parallel simulations of one run (delay, measurement, reproduction epoch) is implemented in parallel_simulation. Both rely on BaseSimulation.  
 \begin{figure}[h]
 	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{figures/codeStructure.drawio.pdf}}
 	%\caption{\textbf{Code Structure} }

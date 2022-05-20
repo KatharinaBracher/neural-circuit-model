@@ -23,14 +23,13 @@
     "workbench.editor.closeEmptyGroups": false,
     // https://medium.com/@marciobarrios/minimal-user-interface-for-visual-studio-code-2ab849eb6d8e
     "editor.minimap.enabled": false, // removes minimap
-    "editor.renderWhitespace": "none", // removes whitespace chars
-    "editor.renderIndentGuides": false, // removes indent guides
+    "editor.renderWhitespace": "none", // removes indent guides
     "editor.renderLineHighlight": "none", // removes line highlight
     "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
     "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
     "editor.folding": false, // removes the folding feature
     "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
-    "editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
+    "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
     "editor.glyphMargin": false, // removes the space used mainly for debugging indicators
     "explorer.openEditors.visible": 0, // removes the open editors section at the top of the sidebar, you can see the opened files with ⌘ + ⌥ + Tab
     "workbench.activityBar.visible": true, // removes the activity bar (the 4 icons at the left of the screen), so now you will have to open the explorer, git, debugger and extension with shortcuts or through the Command Palette
@@ -94,6 +93,7 @@
     "todohighlight.keywordsPattern": "((\\\\begin\\{todolist\\}((\\s*.*?\\s*?)*?)\\\\end\\{todolist\\})|(\\\\todo\\{((\\s*.*?\\s*?)*?)})|(TODO:))",
     "todohighlight.keywords": ["\\begin{todolist}"],
     "editor.fontSize": 15,
-    "ltex.latex.commands": {}
+    "ltex.latex.commands": {},
+    "editor.guides.indentation": false
   }
 }
