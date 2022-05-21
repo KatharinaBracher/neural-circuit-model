@@ -29,13 +29,12 @@
    
 \addbibresource{../../../bib/thesis.bib}
 
-
+\AtBeginEnvironment{figure}{\singlespacing}
+\AtBeginEnvironment{table}{\singlespacing}
 
 
 \begin{document}
 
-\AtBeginEnvironment{figure}{\singlespacing}
-\AtBeginEnvironment{table}{\singlespacing}
 
 \begin{titlepage}
 	\centering
@@ -72,7 +71,7 @@ All effects mentioned above are displayed in Fig. \ref{fig:behavioraleffects}.
 
 Modality-independence of these effects suggests the existence of a common underlying principle or processing mechanisms, that would explain e.g. a optimal strategy for unreliable judgments due to noise (in stimuli and estimates).
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics{figures/behavioural_effects_petzschner.pdf}
 	\caption{\textbf{Behavioral Effects} 
@@ -81,7 +80,7 @@ Modality-independence of these effects suggests the existence of a common underl
 	\textit{Scalar variability}: the standard deviation of the reproduced magnitude grows linearly with larger rages. 
 	\textit{sequential effects}: the history presented stimuli (e.g. ascending or descending order) has an influence on the reproduced magnitude. 
 	Adapted from \cite{Petzschner2015}.}
-\label{fig:behavioraleffects}
+	\label{fig:behavioraleffects}
 \end{figure}
 
 During time perception and time reproduction experiments, neural activity displays characteristic trajectories in a low-dimensional space (\cite{Meirhaeghe2021}, \cite{Wang2018}, \cite{Henke2021}). 
@@ -115,7 +114,7 @@ Thus, the speed at which the output $y$ evolves can be controlled by the input $
 Reaching the threshold $y_0$ can be understood as movement initiation time in interval reproduction experiments and adjusting $I$ means reproducing longer or shorter intervals.
 In this report, the intermediate input regime is explored. In this regime, higher a higher input $I$ results in a smaller slope of $y$, such that the threshold $y_0$ is reached after a longer interval.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics{figures/defCircuit.drawio.pdf}
 	\caption{\textbf{Basic Circuit and Input Regimes} 
@@ -152,7 +151,7 @@ The error signal is determined at the end of the measurement epoch and is compos
 If the threshold $y_0$ is not reached during the measurement epoch, the slope has to be adjusted, such that y ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
 If $y$ crossed the threshold before the measurement epoch ends, so is above $y_0$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased.
 Adjusting $I$ is done by the difference of $(y-y_0)$, weighted by a memory parameter $K$ right at the end of the measurement epoch.
-\begin{equation} \label{experimentcircuit}
+\begin{equation} \label{Iupdate}
 	\begin{split}
 	\tau\frac{dI}{dt} & = sK(y-y_0)
 	\end{split}
@@ -174,7 +173,7 @@ To simulate variability in the reproductions as it is found in real data, noise 
 If noise levels in the model are too high ($\sigma>0.25*I$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}). 
 For an example trial see figure \ref{fig:trial}. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics{figures/trial.drawio.pdf}
 	\caption{\textbf{Experiment Simulation} Example trial with 5 stimulus intervals (700, 500, 600, 700, 600 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$) other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_0=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 1040, 650, 530, 620, 570 ms).}
@@ -193,13 +192,17 @@ Definition of timeouts
 \section{Supplements}
 
 \subsection{Code}
-The code consists of a Base Simulation with the Euler implementation of the dynamics of $u, v, y$ and $I$. Each epoch or pulse between epochs is fed into the network in BaseSimulation and results are added to the course of the trial in trial_update. 
-Two kinds of experiments are implemented. An interval reproduction experiment, as described in this report is implements in experiment_simulation. Parallel simulations of one run (delay, measurement, reproduction epoch) is implemented in parallel_simulation. Both rely on BaseSimulation.  
-\begin{figure}[h]
-	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{figures/codeStructure.drawio.pdf}}
-	%\caption{\textbf{Code Structure} }
+\begin{figure}[ht]
+	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/codeStructure.drawio.pdf}}
+	\caption{\textbf{Code Structure}}
 \label{fig:code}
 \end{figure}
+
+The code consists of a Base Simulation with the Euler implementation of the dynamics of $u, v, y$ and $I$. Each epoch or pulse between epochs is fed into the network in BaseSimulation and results are added to the course of the trial in trial\_update. 
+Two kinds of experiments are implemented. An interval reproduction experiment, as described in this report is implements in experiment\_simulation. 
+Parallel simulations of one run (delay, measurement, reproduction epoch) is implemented in parallel\_simulation. Both rely on BaseSimulation (for overview of classes see figure \ref{fig:code})
+
+
 
 \printbibliography
 
