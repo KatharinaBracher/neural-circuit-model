@@ -268,17 +268,23 @@ details
 - [x] **TOOL** Script for simulating on server: save each simulation result in file 
     - [x] parallelization of simulations with parameter space
 
+- [ ] Stimulus list 
+  - plot over time (oscillations?)
+  - histogram uniform distribution
+  - window (10-14) each stimulus needs to occur 
+  - 
 
 - [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
 	- [ ] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
-	- [ ] **ADD** MSE variance bias term
-	- [ ] timeouts 10% overall not in one, give nan in slope, mse,...
-	- [ ] **PLOT** combination of 2 parameter and error (slope, ind point) as color 
-	- [ ] **TOOL** **PLOT** function that takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
+	- [x] **ADD** MSE variance bias term
+	- [x] timeouts 10% overall not in one, give nan in slope, mse,...
+	- [x] **PLOT** combination of 2 parameter and error (slope, ind point) as color 
+	- [ ] **PLOT** takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)
 
 - [ ] **TOOL**: function to cut u,v,y and sort according to stimulus to feed into PCA (experiment setting, parallel setting)
     - simulation returns: params, simulation, reset_lst, production_lst (with inf), timeout_index, stimulus_lst
     - [ ] create *dict* or *pandas data frame* with trial index, stimulus, production, simulation
+  
 - [ ] **TOOL**: PCA on u,v,y, across trials (mean, same sampling) and stimuli (parallel)
 	- [ ] adapt for experiment simulation 
 	- [ ] **PLOT** PCA in 3d and 1d
@@ -293,9 +299,10 @@ details
   	- wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I, delay relevant
   	- variable delay period?
 
-- [ ] **Regimes**
-- [ ] **PLOT** I vs IPI curve, plot y's
+- [ ] **Dynamic**
+- [ ] **PLOT** dynamics
   - what is influencing it? - parameter tau
+  - [ ] **PLOT** y's of experiment (*tool* cut experiment)
   - where are the stimuli ranges situated (mean I for range), is the regime exploited?
   - can we shift the regimes? Polstelle at 1,; can we shift it up or down depending on range, expand it to the sides
 - [ ] **Timeout**:
@@ -303,7 +310,7 @@ details
 	- when considered timeout? Plot to see of code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 
-- [ ] Noise in Egger Simulation module
+- [ ] Noise in Egger Simulation module / noise in Experiment
   - [ ] **PLOT** mean std in reproductions with different noise levels simulation
     - is there noise on y??
     - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
@@ -327,9 +334,12 @@ details
 - [ ] $\Delta$ I is only the difference of a threshold and y, can the update of I be learned?
 	- [ ] Can an input I be kept in population weights of u and v? (no constant I input)
 
+- Translation from fixed slope changing threshold to fixed threshold changing slope
+  - same predictions? Mathematics 
+
 
 ## Other
-- Report Model and Figures
+- Report Code Design
 - markdown (latex) extension not working (shortcuts etc)
 
 ## Server

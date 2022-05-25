@@ -2,3 +2,7 @@ LTP
 upsampling
 bistable
 optimality
+sigmoidal
+sensorimotor
+excitatory
+predictively
