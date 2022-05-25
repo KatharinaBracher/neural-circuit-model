@@ -76,13 +76,13 @@ delay_lst = np.arange(400, 1000, 50)
 tau = np.arange(60, 200, 10)
 
 # choose parameter range #############################################################
-srange = 'long'
+srange = 'short'
 # K_lst = [5.0]
-th_lst = [0.7]
+th_lst = [0.8]
 # tau = [100]
 delay_lst = [700]
 
-name = 'LONG_KTAU_th07del700'
-# name = 'LONG_K5tau100th07del700'
+name = 'SHORT_KTAU_th08del700'
+#name = 'LONG_KTAU_th08del700'
 
 run_parallel(8, 8, srange, K_lst, th_lst, tau, delay_lst, name)
