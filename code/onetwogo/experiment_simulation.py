@@ -83,12 +83,13 @@ class ExperimentSimulation(BaseSimulation):
         # Determine timeout
         # timeout if threshold not reached in late phase (late timeout)
         # timoeut if reached in early phase only (early timeout)
-        if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0) and
-                (np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size != 0)):
-            print(np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])
-            print('n=1: late timeout early crossing, n>1: early timeout')
-        elif np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size == 0:
-            print('late timeout no crossing')
+        
+        # if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0) and
+                # (np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size != 0)):
+            # print(np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])
+            # print('n=1: late timeout early crossing, n>1: early timeout')
+        # elif np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size == 0:
+            # print('late timeout no crossing')
 
         if np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0:
             timeout = 1

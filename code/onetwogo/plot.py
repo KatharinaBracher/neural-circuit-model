@@ -35,7 +35,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7)) #20, 7 # 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.6,4)) #20, 7 # 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -90,24 +90,24 @@ class SimulationPlot:
         ax[0].plot(steps, simulation[:, 0], c='grey', alpha=alpha)
         ax[0].vlines(reset_indices, np.min(np.array(simulation[:, 0])),
                      np.max(np.array(simulation[:, 0])), color='grey', alpha=0.5)
-        ax[0].set_title('du/dt')
+        ax[0].set_title('du/dt', fontsize=11)
 
         ax[1].plot(steps, simulation[:, 1], 'grey', alpha=alpha)
         ax[1].vlines(reset_indices, np.min(np.array(simulation[:, 1])),
                      np.max(np.array(simulation[:, 1])), color='grey', alpha=0.5)
-        ax[1].set_title('dv/dt')
+        ax[1].set_title('dv/dt', fontsize=11)
 
         ax[2].plot(steps, simulation[:, 2], 'grey', alpha=alpha)
         ax[2].hlines(params.th, 0, simulation.shape[0]*params.dt, linestyle='--', color='lightgray')
         ax[2].vlines(reset_indices, np.min(np.array(simulation[:, 2])),
                      np.max(np.array(simulation[:, 2])*1.1), color='grey', alpha=0.5)
         #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
-        ax[2].set_title('dy/dt')
+        ax[2].set_title('dy/dt', fontsize=11)
 
         ax[3].plot(steps, simulation[:, 3], 'grey', alpha=alpha)
         ax[3].vlines(reset_indices, np.min(np.array(simulation[:, 3])),
                      np.max(np.array(simulation[:, 3])), color='grey', alpha=0.5)
-        ax[3].set_title('dI/dt')
+        ax[3].set_title('dI/dt', fontsize=11)
         ax[3].set_xlabel('Time (ms)')
 
         for i in [0,1,2,3]:
@@ -149,6 +149,11 @@ class BehavioralPlot:
         production_means = data.production_means
         stimulus_range = data.stimulus_range
         production_stds = data.production_stds
+
+        if data.slope == None:
+            slope = 0
+        else:
+            slope = round(data.slope, 3)
         # print('timeouts:', list(zip(stimulus_range, data.timeouts)))
 
         if ax is None:
@@ -158,7 +163,7 @@ class BehavioralPlot:
                 plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+60, 'to='+str(data.timeouts), size=7)
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                      [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
-            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(round(data.slope)))
+            plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(slope))
             plt.xlabel('Stimulus (ms)')
             plt.ylabel('Production (ms)')
         else:
@@ -169,5 +174,5 @@ class BehavioralPlot:
             if np.any(data.timeouts):
                 ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
-                    str(round(data.slope, 3)))
+                    str(slope))
             return subplot
