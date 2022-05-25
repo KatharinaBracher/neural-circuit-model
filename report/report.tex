@@ -133,15 +133,6 @@ In this report, the intermediate input regime is explored: higher inputs result 
 
 
 \subsection{Update Mechanism and Experiment Procedure}
-\begin{figure}
-	\centering
-	\includegraphics{figures/epochs.drawio.pdf}
-	\caption{\textbf{Extended Circuit for Experiment Simulation} 
-	\textbf{(a)} The circuits for measurement, reproduction and delay epoch are displayed. All circuits comprise the same basic structure with different additional elements that are unique for the epoch. Initial values of $u, v, y$ and $I$ are fed into the delay circuit for the duration of the initial interval. $u$ and $v$ are reset with a transient input $I_r$ before end values of $u, v, y$ and $I$ are transferred to the measurement circuit as new initial conditions. After the duration of the stimulus interval the difference between $y$ and the threshold $y_{\text{th}}$ is used with the memory parameter $K$ to update $I$ together with another reset of $u$ and $v$. The values are transferred with all other variables to the reproduction circuit. The reproduction epoch ends when $y$ reaches the threshold $y_{\text{th}}$ from below. Before the presentation of another stimulus interval, there is again a delay period with no update of $I$. The reset mechanism enables the model to simulate an arbitrary number of stimulus intervals. Adapted from \cite{Egger2020}.
-	\textbf{(b)} Interval reproduction experiment with stimulus interval $t_s$ (blue) and reproduction $t_r$ (red).
-	\textbf{(c)} Schematic of a trial with one stimulus interval. After a delay epoch $u$ and $v$ are reset. The measurement epoch lasts for the duration of the stimulus interval $t_s$. $y$ should reach the threshold $y_{\text{th}}$ (dashed line) at exactly the time the stimulus interval ends. The threshold was crossed well before the end of the interval and at the end of the measurement epoch, the error in $y_m$ to the threshold $y_{\text{th}}$ is used to update $I$. To reach the threshold at a later time, $I$ is increased, which reduces the slope of $y$ in the reproduction epoch. After the reset of $u$ and $y$ and the update of $I$ the reproduction ends when $y$ reaches the threshold. The time after the reset and update until the threshold crossing denotes the reproduced interval $t_r$.}
-\label{fig:epochs}
-\end{figure}
 Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). 
 The basic circuit described above is modified to perform interval reproduction (see Figure \ref{fig:epochs}a for schematic of modified circuit).
 The relation of input $I$ with the slope of the ramping activity of $y$ is used in combination with a fixed threshold $y_{\text{th}}$.
@@ -150,6 +141,16 @@ This way, measuring and reproducing an interval is done predictively, by adjusti
 %In other scenarios, time could be encoded by the level a ramp reaches with a fixed slope.
 In the model the measurement epoch is fixed to the stimulus interval $t_s$, and the reproduction epoch ends, when $y$ reaches the fixed threshold $y_{\text{th}}$ from below. 
 The time from the end of the measurement epoch until the threshold-crossing of $y$ yields the reproduced time interval $t_r$ that is aimed to equal the stimulus interval $t_s$ (Fig. \ref{fig:epochs}c).
+
+\begin{figure}
+	\centering
+	\includegraphics{figures/epochs.drawio.pdf}
+	\caption{\textbf{Extended Circuit for Experiment Simulation} 
+	\textbf{(a)} The circuits for measurement, reproduction and delay epoch are displayed. All circuits comprise the same basic structure with different additional elements that are unique for the epoch. Initial values of $u, v, y$ and $I$ are fed into the delay circuit for the duration of the initial interval. $u$ and $v$ are reset with a transient input $I_r$ before end values of $u, v, y$ and $I$ are transferred to the measurement circuit as new initial conditions. After the duration of the stimulus interval the difference between $y$ and the threshold $y_{\text{th}}$ is used with the memory parameter $K$ to update $I$ together with another reset of $u$ and $v$. The values are transferred with all other variables to the reproduction circuit. The reproduction epoch ends when $y$ reaches the threshold $y_{\text{th}}$ from below. Before the presentation of another stimulus interval, there is again a delay period with no update of $I$. The reset mechanism enables the model to simulate an arbitrary number of stimulus intervals. Adapted from \cite{Egger2020}.
+	\textbf{(b)} Interval reproduction experiment with stimulus interval $t_s$ (blue) and reproduction $t_r$ (red).
+	\textbf{(c)} Schematic of one trial. After a delay epoch $u$ and $v$ are reset. The measurement epoch lasts for the duration of the stimulus interval $t_s$. $y$ should reach the threshold $y_{\text{th}}$ (dashed line) at exactly the time the stimulus interval ends. The threshold was crossed well before the end of the interval and at the end of the measurement epoch, the error in $y_m$ to the threshold $y_{\text{th}}$ is used to update $I$. To reach the threshold at a later time, $I$ is increased, which reduces the slope of $y$ in the reproduction epoch. After the reset of $u$ and $y$ and the update of $I$ the reproduction ends when $y$ reaches the threshold. The time after the reset and update until the threshold crossing denotes the reproduced interval $t_r$.}
+\label{fig:epochs}
+\end{figure}
 
 The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
 The error signal is determined at the end of the measurement epoch and is composed of the difference of $y$ to the threshold $y_{\text{th}}$.
@@ -170,23 +171,24 @@ Further, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamics
 	\end{split}
 \end{equation}
 Resetting the dynamics after the reproduction epoch enables the model to simulate an arbitrary number of stimulus intervals. 
-Before a new stimulus presentation there is a delay period: In the beginning of an experiment trial with a sequence of stimuli there is an initial interval with the initial values of $u, v, y$ and an initial input $I_0$ (Fig. \ref{fig:epochs}c). 
-This additional interval in the beginning of the trial allows the model to get closer to steady-state before the stimulus presentation starts. 
+Before a new stimulus presentation there is a delay period: In the beginning of an experiment with a sequence of stimuli there is an initial interval with the initial values of $u, v, y$ and an initial input $I_0$ (Fig. \ref{fig:epochs}c). 
+This additional interval in the beginning of the experiment allows the model to get closer to steady-state before the stimulus presentation starts. 
 Reproductions that do not reach the threshold in a certain time span (twice the stimulus interval) are classified as timeout trials. 
 If the threshold is crossed particularly early, the trial is also classified as (early) timeout trial (crossing before 0.2 of stimulus interval).
 
 To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data an monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
 If noise levels in the model are too high ($\sigma>0.25*I$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}). 
-For an example trial with a sequence of stimuli see Figure \ref{fig:trial}. 
+For an example experiment with a sequence of five trials see Figure \ref{fig:experiment}. 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/trial.drawio.pdf}
 	\caption{\textbf{Experiment Simulation} Example trial with a sequence of five stimulus intervals (600, 700, 400, 500, 700 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$, other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 820, 780, 490, 450, 570 ms).}
-\label{fig:trial}
+\label{fig:experiment}
 \end{figure}
 
 
+\section{Supplements}
 \section{Implementation of the Model}
 All simulations and analysis were performed with Python 3.9.7. 
 For simulating the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ set to 10 ms.
@@ -194,18 +196,24 @@ The reset mechanism of $u$ and $v$ is switched on for one time step after every 
 Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
 %Definition of timeouts
 
+\subsection{Code Design}
+All parameters are set and described in the \texttt{Params} class and can be modified individually or by reading a parameter dictionary when calling the class.
+To initiate a simulation, the parameter object is handed to one of the implemented experiment classes (\texttt{ExperimentSimulation}, \texttt{ParallelSimulation}). 
+An interval reproduction experiment, as described in this report is implemented in \texttt{experiment\_simulation.py}. 
+Parallel simulations of one trial (one delay, measurement and reproduction epoch) is implemented in \texttt{parallel\_simulation.py}.
+Both contain a \texttt{simulate} function that returns a \texttt{SimulationResult} object (containing the parameters, the simulation time course, a list of reset time points, a list pf production times, a list of indices of timeout trials and the stimulus list).
+For simulation both access the base simulation class (\texttt{BaseSimulation}) with the implementation of the basic circuit.
+For each epoch (or one step for update/reset pulse) time steps and initial conditions (or previous ending values) are fed into the \texttt{network} in \texttt{BaseSimulation}. Depending on the epoch the reset and update mechanism is tuned on or off (reset, K). 
+After each epoch or pulse, simulation results are joint to the course of the experiment in \texttt{trial\_update}.
+On the \texttt{SimulationResult} object different analyses are performed in \texttt{result.py} and can be visualized with functions implemented in \texttt{plot.py}. 
+For an overview of code structure see Figure \ref{fig:code}) and for usage see simulations.ipynb at GitHub https://github.com/KatharinaBracher/MScThesis. 
 
-\section{Supplements}
-\subsection{Code}
 \begin{figure}[ht]
 	\vspace*{-2cm}
 	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/codeStructure.drawio.pdf}}
-	\caption{\textbf{Code Structure}}
+	\caption{\textbf{Code Design}}
 \label{fig:code}
 \end{figure}
-The code consists of a base simulation with the Euler implementation for the dynamics of $u, v, y$ and $I$. Time steps of each epoch (or one time step for update/reset pulse between epochs) is fed into the network in \texttt{BaseSimulation} and results are joint to the course of the trial in \texttt{trial\_update}. 
-Two kinds of experiments are implemented. An interval reproduction experiment, as described in this report is implements in \texttt{experiment\_simulation}. 
-Parallel simulations of one run (delay, measurement, reproduction epoch) is implemented in \texttt{parallel\_simulation}. Both rely on \texttt{BaseSimulation} (for an overview of code structure see Figure \ref{fig:code})
 
 
 
