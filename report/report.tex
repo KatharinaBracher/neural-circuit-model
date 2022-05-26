@@ -201,7 +201,7 @@ The code is designed in a modular way, such that multiple types of experimental 
 The implementation of the basic circuit can be reused for all epochs.
 Different experiments can have different result types, all of which can be found in \texttt{result.py}. All analysis of the results is performed in the same file. Depending on the analysis (e.g. behavioral) results, different plots are implemented in \texttt{plot.py}. 
 
-All parameters are set and described in \texttt{Params} and can be modified individually or by reading a parameter dictionary. -params as central config
+All parameters are set and described in \texttt{Params} and can be modified individually or by reading a parameter dictionary. % -params as central config
 To initiate a simulation, the parameter object is handed to one of the implemented experiments. 
 An interval reproduction experiment, as described in this report is implemented in \texttt{experiment\_simulation.py}. 
 Parallel simulations of one trial (one delay, measurement and reproduction epoch) is implemented in \texttt{parallel\_simulation.py}.
@@ -217,13 +217,13 @@ All simulations and analysis were performed with Python 3.9.7.
 % server
 
 \begin{figure}[ht]
-	\vspace*{-2cm}
+	\vspace*{-2.5cm}
 	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/codeStructure.drawio.pdf}}
-	\caption{\textbf{Design}}
+	\caption{\textbf{Design} The base simulation and different procedures (experiment, parallel) are all implemented in separate files. All results and analysis are collected in \texttt{result.py}, all plot for different result types are collected in \texttt{plot.py}}
 \label{fig:code}
 \end{figure}
 
-
+\clearpage
 
 \printbibliography
 
