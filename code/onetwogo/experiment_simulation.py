@@ -27,6 +27,22 @@ class ExperimentSimulation(BaseSimulation):
         stimulus_lst = [random.choice(stimulus_range) for i in range(params.ntrials)]
         return np.array(stimulus_lst)
 
+    def find_stimulus_lst(self, stimulus_range, window, condition, name='test', save=False):
+
+        while True:
+            stimulus_lst = self.generate_stimulus_lst(stimulus_range)
+            _, count = np.unique(stimulus_lst, return_counts=True)
+            
+            # uniform distribution: no less than mean-5
+            if all(count >= self.params.ntrials/len(stimulus_range)-5):
+                occur = []
+                for i in range(len(stimulus_lst)-window+1):
+                    occur.append(set(stimulus_range).issubset(stimulus_lst[i:i+window+1]))
+                # occurance in window
+                if sum(occur)/len(occur) >= condition:
+                    if save: np.savetxt(name+'.txt', stimulus_lst, fmt='%d')
+                    return stimulus_lst
+
     def simulate(self, stimulus_lst, K):
         '''carries out the different stages of a trial for each stimulus from the stimulus list
         and returns the SimulationResult:
@@ -83,7 +99,7 @@ class ExperimentSimulation(BaseSimulation):
         # Determine timeout
         # timeout if threshold not reached in late phase (late timeout)
         # timoeut if reached in early phase only (early timeout)
-        
+
         # if ((np.where(np.diff(np.sign(np.squeeze(simulation2[earlyphase:, 2])-params.th)))[0].size == 0) and
                 # (np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0].size != 0)):
             # print(np.where(np.diff(np.sign(np.squeeze(simulation2[:, 2])-params.th)))[0])

@@ -8,13 +8,16 @@ import numpy as np
 
 def execute(d):
     '''performs simulation and returns behavioral data '''
-    stimulus_range, K, th, t, delay = d
+
+    stimulus_lst, K, th, t, delay = d # stimulus_range
     print("executing with", K, th, t, delay, "= K, th, t, delay")
 
     params = Params(ntrials=500, delay=delay, tau=t, th=th)
     expsim = ExperimentSimulation(params)
-    stimulus_lst = expsim.generate_stimulus_lst(stimulus_range)
-    # retunn BehavioralData def save to disk
+    # stimulus_lst = expsim.generate_stimulus_lst(stimulus_lst)
+    stimulus_lst = expsim.find_stimulus_lst(stimulus_lst, 20, 0.9)
+
+    # return BehavioralData def save to disk
     sim_result = expsim.simulate(stimulus_lst, K)  # TODO seed
     result = sim_result.create_behavioral_data()
     return (result, K)
@@ -26,15 +29,17 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
     search_space = []
 
     if srange == 'short':
-        stimulus_range = [400, 450, 500, 550, 600, 650, 700]
+        stimulus = [400, 450, 500, 550, 600, 650, 700]
+        # stimulus = np.loadtxt('stimlst_short_400_700_7_a.txt', dtype=int)
     if srange == 'long':
-        stimulus_range = [700, 750, 800, 850, 900, 950, 1000]
+        stimulus = [700, 750, 800, 850, 900, 950, 1000]
+        # stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
     for K in K_lst:
         for th in th_lst:
             for t in tau:
                 for delay in delay_lst:
-                    search_space.append((stimulus_range, K, th, t, delay))
+                    search_space.append((stimulus, K, th, t, delay))
     return search_space
 
 
@@ -77,12 +82,16 @@ tau = np.arange(60, 200, 10)
 
 # choose parameter range #############################################################
 srange = 'short'
-# K_lst = [5.0]
+K_lst = [8.0]*250
 th_lst = [0.8]
-# tau = [100]
+tau = [100]
 delay_lst = [700]
 
-name = 'SHORT_KTAU_th08del700'
-#name = 'LONG_KTAU_th08del700'
+name = 'SHORT_K8_TAU100_TH08_DEL700'
+# name = 'SHORT_KTAU_th08_del700'
+# name = 'LONG_KTAU_th08_del700'
 
-run_parallel(8, 8, srange, K_lst, th_lst, tau, delay_lst, name)
+pool = 12
+batchsize = pool
+
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name)
