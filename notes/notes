@@ -267,8 +267,7 @@ details
 	- extend for experiment setting
 - [x] **TOOL** Script for simulating on server: save each simulation result in file 
     - [x] parallelization of simulations with parameter space
-
-- [ ] Stimulus list 
+- [x] Stimulus list 
   - plot over time (oscillations?)
   - histogram uniform distribution
   - window (10-14) each stimulus needs to occur 
@@ -276,7 +275,7 @@ details
 
 - [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
 	- [ ] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
-	- [x] **ADD** MSE variance bias term
+	- [x] **ADD** MSE as variance bias term
 	- [x] timeouts 10% overall not in one, give nan in slope, mse,...
 	- [x] **PLOT** combination of 2 parameter and error (slope, ind point) as color 
 	- [ ] **PLOT** takes 2 beh data and computes $\Delta$s (2 ranges: parameter influence on slope and indiff point $\Delta$)

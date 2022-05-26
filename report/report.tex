@@ -189,29 +189,37 @@ For an example experiment with a sequence of five trials see Figure \ref{fig:exp
 
 
 \section{Supplements}
-\section{Implementation of the Model}
-All simulations and analysis were performed with Python 3.9.7. 
+\subsection{Methods}
+\subsection*{Circuit}
 For simulating the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ set to 10 ms.
 The reset mechanism of $u$ and $v$ is switched on for one time step after every epoch and the update mechanism of $I$ is switched on for one time step after the measurement epoch only.
 Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
 %Definition of timeouts
 
-\subsection{Code Design}
-All parameters are set and described in the \texttt{Params} class and can be modified individually or by reading a parameter dictionary when calling the class.
-To initiate a simulation, the parameter object is handed to one of the implemented experiment classes (\texttt{ExperimentSimulation}, \texttt{ParallelSimulation}). 
+\subsection{Design}
+The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality, are accessing the same basic circuit, that is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.
+The implementation of the basic circuit can be reused for all epochs.
+Different experiments can have different result types, all of which can be found in \texttt{result.py}. All analysis of the results is performed in the same file. Depending on the analysis (e.g. behavioral) results, different plots are implemented in \texttt{plot.py}. 
+
+All parameters are set and described in \texttt{Params} and can be modified individually or by reading a parameter dictionary. -params as central config
+To initiate a simulation, the parameter object is handed to one of the implemented experiments. 
 An interval reproduction experiment, as described in this report is implemented in \texttt{experiment\_simulation.py}. 
 Parallel simulations of one trial (one delay, measurement and reproduction epoch) is implemented in \texttt{parallel\_simulation.py}.
-Both contain a \texttt{simulate} function that returns a \texttt{SimulationResult} object (containing the parameters, the simulation time course, a list of reset time points, a list pf production times, a list of indices of timeout trials and the stimulus list).
+Both contain a \texttt{simulate} function that returns a \texttt{SimulationResult} object (with the parameter object, the simulation time course, a list of reset time points, a list pf production times, a list of indices of timeout trials and the stimulus list).
 For simulation both access the base simulation class (\texttt{BaseSimulation}) with the implementation of the basic circuit.
-For each epoch (or one step for update/reset pulse) time steps and initial conditions (or previous ending values) are fed into the \texttt{network} in \texttt{BaseSimulation}. Depending on the epoch the reset and update mechanism is tuned on or off (reset, K). 
+In epoch (or update/reset step) time steps and initial conditions (or previous ending values) are fed into the \texttt{network} in \texttt{BaseSimulation}. Depending on the epoch the reset and update mechanism are tuned on or off. 
 After each epoch or pulse, simulation results are joint to the course of the experiment in \texttt{trial\_update}.
-On the \texttt{SimulationResult} object different analyses are performed in \texttt{result.py} and can be visualized with functions implemented in \texttt{plot.py}. 
 For an overview of code structure see Figure \ref{fig:code}) and for usage see simulations.ipynb at GitHub https://github.com/KatharinaBracher/MScThesis. 
+
+\subsection{Implementation}
+All simulations and analysis were performed with Python 3.9.7. 
+
+% server
 
 \begin{figure}[ht]
 	\vspace*{-2cm}
 	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/codeStructure.drawio.pdf}}
-	\caption{\textbf{Code Design}}
+	\caption{\textbf{Design}}
 \label{fig:code}
 \end{figure}
 
