@@ -3,6 +3,7 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{hyperref}
 
 \usepackage{etoolbox}
 \usepackage[onehalfspacing]{setspace}
@@ -197,27 +198,31 @@ Noise is independently sampled for every time step from a Gaussian distribution 
 %Definition of timeouts
 
 \subsection{Design}
-The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality, are accessing the same basic circuit, that is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.
+The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality are accessing the same basic circuit, which is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.
 The implementation of the basic circuit can be reused for all epochs.
-Different experiments can have different result types, all of which can be found in \texttt{result.py}. All analysis of the results is performed in the same file. Depending on the analysis (e.g. behavioral) results, different plots are implemented in \texttt{plot.py}. 
+Different experiments can have different result types, all of which can be found in \texttt{result.py}. After each experiment, the results are gathered and stored together, consisting of the parameter set, the simulation time course, a list of reset time points, a list of production times, a list of indices of timeout trials and the stimulus list.
+Analysis of the results is performed in the same file. Depending on the analysis (e.g. behavioral), different plots are implemented in \texttt{plot.py} to visualize the results. 
 
-All parameters are set and described in \texttt{Params} and can be modified individually or by reading a parameter dictionary. % -params as central config
-To initiate a simulation, the parameter object is handed to one of the implemented experiments. 
+All parameters are set and described in \texttt{Params} and can be modified individually or by reading a parameter dictionary. The parameters configure the circuit. 
+To initiate a simulation, the parameter set is handed to one of the implemented experiments. 
 An interval reproduction experiment, as described in this report is implemented in \texttt{experiment\_simulation.py}. 
 Parallel simulations of one trial (one delay, measurement and reproduction epoch) is implemented in \texttt{parallel\_simulation.py}.
-Both contain a \texttt{simulate} function that returns a \texttt{SimulationResult} object (with the parameter object, the simulation time course, a list of reset time points, a list pf production times, a list of indices of timeout trials and the stimulus list).
-For simulation both access the base simulation class (\texttt{BaseSimulation}) with the implementation of the basic circuit.
-In epoch (or update/reset step) time steps and initial conditions (or previous ending values) are fed into the \texttt{network} in \texttt{BaseSimulation}. Depending on the epoch the reset and update mechanism are tuned on or off. 
-After each epoch or pulse, simulation results are joint to the course of the experiment in \texttt{trial\_update}.
-For an overview of code structure see Figure \ref{fig:code}) and for usage see simulations.ipynb at GitHub https://github.com/KatharinaBracher/MScThesis. 
+Both \texttt{experiment\_simulation.py} and \texttt{parallel\_simulation.py} contain a simulate function that accesses the base simulation (\texttt{BaseSimulation}) with the implementation of the basic circuit.
+For each epoch or update/reset step, the simulate function feeds the according time steps and initial conditions into the network in \texttt{BaseSimulation}. Depending on the epoch, the reset and update mechanism are tuned on or off. 
+After each epoch or pulse, the results of the network are joint to the time course of the experiment in trial\_update. The simulate function returns a \texttt{SimulationResult} or \texttt{RangeParallelSimulationResult} object.
+
+For an overview of the code structure see Figure \ref{fig:code} and for its usage see simulations.ipynb at \href{https://github.com/KatharinaBracher/MScThesis}{github.com/KatharinaBracher/MScThesis}. 
 
 \subsection{Implementation}
 All simulations and analysis were performed with Python 3.9.7. 
+The following libraries were used: matplotlib (3.5.1), NumPy (1.22.3), SciPy (1.8.0), scikit-learn (1.0.2). 
+An experiment simulation can not be parallelized, since each step depends on the previous one.
+% For the parameter search multiple experiment simulations were parallelized 
 
 % server
 
 \begin{figure}[ht]
-	\vspace*{-2.5cm}
+	\vspace*{-2cm}
 	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/codeStructure.drawio.pdf}}
 	\caption{\textbf{Design} The base simulation and different procedures (experiment, parallel) are all implemented in separate files. All results and analysis are collected in \texttt{result.py}, all plot for different result types are collected in \texttt{plot.py}}
 \label{fig:code}
