@@ -35,7 +35,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.6,4)) #20, 7 # 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7)) #20, 7 # 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -86,6 +86,8 @@ class SimulationPlot:
         reset_indices = self.data.reset_indices
         timeout_index = self.data.timeout_index
         steps = self.steps
+
+        print('Timeouts', len(timeout_index))
 
         ax[0].plot(steps, simulation[:, 0], c='grey', alpha=alpha)
         ax[0].vlines(reset_indices, np.min(np.array(simulation[:, 0])),
