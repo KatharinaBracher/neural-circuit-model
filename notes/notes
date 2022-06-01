@@ -270,8 +270,7 @@ details
 - [x] Stimulus list 
   - plot over time (oscillations?)
   - histogram uniform distribution
-  - window (10-14) each stimulus needs to occur 
-  - 
+  - window (10-14) each stimulus needs to occur
 
 - [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
 	- [ ] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
@@ -296,20 +295,25 @@ details
 - [ ] **Parameter**
 	- [ ] delay
   	- wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I, delay relevant
+  	- error over time
   	- variable delay period?
+	- [ ] for fixed tau find K for range efect
+  	- for which K MSE is minimized
+  	- other error? BIAS2
 
 - [ ] **Dynamic**
 - [ ] **PLOT** dynamics
   - what is influencing it? - parameter tau
-  - [ ] **PLOT** y's of experiment (*tool* cut experiment)
+  - [x] **PLOT** y's of experiment
   - where are the stimuli ranges situated (mean I for range), is the regime exploited?
   - can we shift the regimes? Polstelle at 1,; can we shift it up or down depending on range, expand it to the sides
 - [ ] **Timeout**:
-	- regimes over/under th, how robust?
+	- regimes over/under th, how robust? check extremes
 	- when considered timeout? Plot to see of code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 
-- [ ] Noise in Egger Simulation module / noise in Experiment
+- [ ] Noise in behavior
+  - [ ] in Egger Simulation module / noise in Experiment
   - [ ] **PLOT** mean std in reproductions with different noise levels simulation
     - is there noise on y??
     - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
@@ -336,9 +340,13 @@ details
 - Translation from fixed slope changing threshold to fixed threshold changing slope
   - same predictions? Mathematics 
 
+## Comments
+- we need K to achieve the range effect (slopes)
+- K is consistent with Bayes, higher weight update for short range, lower weight update for long range
+- 
+
 
 ## Other
-- Report Code Design
 - markdown (latex) extension not working (shortcuts etc)
 
 ## Server
