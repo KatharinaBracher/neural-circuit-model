@@ -1,13 +1,13 @@
 # from tkinter import W
 from typing import List
-from .plot import BehavioralPlot, BehavioralPlotData, SimulationPlot, SimulationPlotData
+from .plot import BehavioralPlot, BehavioralPlotData, SimulationPlot, SimulationPlotData, SortedPlot, SortedPlotData
 import numpy as np
 from scipy.stats import linregress
 import pickle
 from sklearn.metrics import mean_squared_error
 
 
-def remove_timeouts(production, timeout_index, stimulus_lst=None):
+def remove_timeouts_(production, timeout_index, stimulus_lst=None):
     '''removes all trials from production (and simulation) that were classified as timeouts'''
     # remove all np.inf productions
     production = np.delete(np.array(production), timeout_index)
@@ -16,6 +16,10 @@ def remove_timeouts(production, timeout_index, stimulus_lst=None):
         return production, stimulus_lst
     return production
 
+def remove_timeouts(timeout_index, lst):
+    '''removes all trials from production (and simulation) that were classified as timeouts'''
+    # remove all np.inf productions
+    return np.delete(np.array(lst), timeout_index)
 
 def production_statistics(production, params):
     '''computes the mean and standard deviation of production times'''
@@ -83,6 +87,13 @@ class BehavioralData:
                       'slope': self.slope, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse})
         pickle.dump(result, fp)
 
+class SortedData:
+    def __init__(self, params, measurement_sorted, production_sorted, I_sorted, stimulus_range):
+        self.params = params
+        self.stimulus_range = stimulus_range
+        self.measurement_sorted = measurement_sorted
+        self.production_sorted = production_sorted
+        self.I_sorted = I_sorted
 
 class SimulationResult:
     '''
@@ -112,7 +123,7 @@ class SimulationResult:
 
     def create_simulation_plot_data(self):
         '''returns relevant data for plotting the simulation time course'''
-        reset_indices = (np.where(np.array(self.reset_lst) == 1)[0]-1)*self.params.dt
+        reset_indices = self.get_reset_indices()*self.params.dt
         return SimulationPlotData(
             self.params,
             self.simulation.copy(),
@@ -128,14 +139,21 @@ class SimulationResult:
     def number_of_timeouts(self):
         '''retunrs number of timeouts'''
         return len(self.timeout_index)
+    
+    def get_reset_indices(self):
+        return np.where(np.array(self.reset_lst) == 1)[0]-1
+
+    def get_stimulus_range(self):
+        return np.unique(self.stimulus_lst)
 
     def create_behavioral_data(self) -> BehavioralData:
         '''computes behvaioral data based on simulation results and retunrs BehaviorlData object'''
 
-        stimulus_range = np.unique(self.stimulus_lst)
+        stimulus_range = self.get_stimulus_range()
         stim_lst_unsuccess = np.array(self.stimulus_lst)[self.timeout_index]
 
-        production, stim_lst_success = remove_timeouts(self.production, self.timeout_index, self.stimulus_lst)
+        production = remove_timeouts(self.timeout_index, self.production)
+        stim_lst_success = remove_timeouts(self.timeout_index,self.stimulus_lst)
 
         ntimeouts, nstimuli, production_means, production_stds = [], [], [], []
 
@@ -184,6 +202,46 @@ class SimulationResult:
         '''returns BehavioralPlot object'''
         return BehavioralPlot(self.create_behavioral_data())
 
+    def get_frames(self, start): #reuse in plot
+        '''gets times of all measurement stages and production stages'''
+        reset_indices = self.get_reset_indices()
+
+        m_start = reset_indices[1::3]
+        m_stop = reset_indices[2::3]
+
+        p_start = reset_indices[2::3]
+        p_stop = reset_indices[3::3]
+        return zip(p_start[start:], p_stop[start:], m_start[start:], m_stop[start:])  # for all remove here
+
+        # TODO remove timeouts in m_start, etc and in stimulus_lst (successfull) for PCA
+
+    def create_sorted_data(self, start=0):
+
+        measurement_lst, production_lst, production_I = [], [], []
+        for p_start, p_stop, m_start, m_stop in self.get_frames(start):
+            measurement_lst.append(self.simulation[:,2][m_start:m_stop])
+            production_lst.append(self.simulation[:,2][p_start:p_stop])
+            production_I.append(self.simulation[:,3][p_start:p_stop])
+
+        stimulus_range = self.get_stimulus_range()
+
+        measurement_sorted, production_sorted, I_sorted = [], [], []
+        for stim in stimulus_range:
+            measurement_sorted.append(np.array(measurement_lst, dtype=object)[np.where(self.stimulus_lst[start:]==stim)[0]])  # for all remove here
+            production_sorted.append(np.array(production_lst, dtype=object)[np.where(self.stimulus_lst[start:]==stim)[0]])  # for all remove here
+            I_sorted.append(np.array(production_I, dtype=object)[np.where(self.stimulus_lst[start:]==stim)[0]])  # for all remove here
+        
+        return SortedData(self.params, measurement_sorted, production_sorted, I_sorted, stimulus_range)
+
+    def crate_sorted_plot_data(self):
+        '''returns SortedPlotData object'''
+        return SortedPlotData(self.create_sorted_data())
+
+    def create_sorted_plot(self):
+        '''returns SortedPlot object'''
+        return SortedPlot(self.create_sorted_data())
+
+
 
 class RangeParallelSimulationResult:
     '''
@@ -205,7 +263,7 @@ class RangeParallelSimulationResult:
     def create_behavioral_plot_data(self) -> BehavioralPlotData:
         '''computes behavioral data based on simulation results and retunrs BehaviorlPlotData object'''
 
-        productions = [remove_timeouts(result.production, result.timeout_index) for result in self.result_list]
+        productions = [remove_timeouts(result.timeout_index, result.production) for result in self.result_list]
 
         production_means = [production_statistics(production, self.params)[0] for production in productions]
         production_stds = [production_statistics(production, self.params)[1] for production in productions]

@@ -2,6 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+colors_short = [(0.6196078431372549, 0.00392156862745098, 0.25882352941176473, 1.0),
+ (0.7972318339100346, 0.20092272202998845, 0.3008073817762399, 1.0),
+ (0.9139561707035756, 0.36239907727797, 0.27935409457900806, 1.0),
+ (0.9748558246828143, 0.5574009996155325, 0.32272202998846594, 1.0),
+ (0.9934640522875817, 0.7477124183006535, 0.4352941176470587, 1.0),
+ (0.9966935793925413, 0.8975009611687812, 0.5770857362552863, 1.0),
+ (1.0, 0.9803921568627451, 0.5529411764705883, 1.0)]
+
+colors_long = [(1.0, 0.9803921568627451, 0.5529411764705883, 1.0),
+ (0.9173394848135333, 0.9669357939254134, 0.6200692041522493, 1.0),
+ (0.7477124183006538, 0.8980392156862746, 0.6274509803921569, 1.0),
+ (0.5273356401384084, 0.8106113033448674, 0.6452133794694349, 1.0),
+ (0.3280276816608997, 0.6805074971164936, 0.6802768166089965, 1.0),
+ (0.2265282583621684, 0.4938869665513264, 0.7224913494809688, 1.0),
+ (0.3686274509803922, 0.30980392156862746, 0.6352941176470588, 1.0)]
+
 class SimulationPlotData:
     """
     contains relevant data for plotting simulation for both experiment and parallel setting
@@ -178,3 +194,57 @@ class BehavioralPlot:
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
                     str(slope))
             return subplot
+
+
+class SortedPlotData:
+    def __init__(self, params, measurement_sorted, production_sorted, I_sorted, stimulus_range):
+        self.params = params
+        self.stimulus_range = stimulus_range
+        self.measurement_sorted = measurement_sorted
+        self.production_sorted = production_sorted
+        self.I_sorted = I_sorted
+
+
+class SortedPlot:
+    def __init__(self, data: SortedPlotData):
+        self.data = data
+
+    def plot_sorted(self):
+
+        data = self.data
+        params = self.data.params
+        stimulus_range_len = len(data.stimulus_range)
+
+        xticks=[0, 25, 50, 75, 100, 125]
+        xticklabels=[0, 250, 500, 750, 1000, 1250]
+        colors = colors_short
+
+        # for long range
+        if data.stimulus_range[0]>400:
+            xticks=[0, 50, 100, 150, 200]
+            xticklabels=[0, 500, 1000, 1500, 2000]
+            colors = colors_long
+
+
+        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(20,7))
+        ax.flatten()[0].set_ylabel('y measurement')
+        ax.flatten()[stimulus_range_len].set_ylabel('y reproduction')
+        ax.flatten()[stimulus_range_len*2].set_ylabel('I reproduction')
+        plt.setp(ax, xticks=xticks, xticklabels=xticklabels)
+
+        for j, (c, stim, lst) in enumerate(zip(colors, data.stimulus_range,  data.measurement_sorted)):
+            ax.flatten()[j].set_title(str(stim))
+            for i in lst:
+                ax.flatten()[j].plot(i, alpha=0.3, color=c)
+
+        for j, (c, lst) in enumerate(zip(colors, data.production_sorted)):
+            for i in lst:
+                ax.flatten()[j+7].plot(i, alpha=0.3, color=c)
+            # ax.flatten()[j+7].hlines(params.th, 0, 75, linestyle='--', color='lightgray')
+            ax.flatten()[j+7].axhline(y=params.th, color='lightgray', linestyle='--')
+
+            
+        for j, (c, lst) in enumerate(zip(colors, data.I_sorted)):
+            for i in lst:
+                ax.flatten()[j+14].plot(i, alpha=0.3, color=c)
+            ax.flatten()[j+14].set_xlabel('time [ms]')
