@@ -4,7 +4,6 @@ from multiprocessing import Pool
 # import pickle
 import time
 import numpy as np
-import random
 
 def execute(d):
     '''performs simulation and returns behavioral data '''
@@ -12,8 +11,8 @@ def execute(d):
     stimulus_lst, K, th, t, delay, seed = d # stimulus_range
     print("executing with", K, th, t, delay, "= K, th, t, delay")
 
-
-    random.seed(seed)
+    print(seed)
+    np.random.seed(seed)
     params = Params(ntrials=500, delay=delay, tau=t, th=th, sigma=sigma)
     expsim = ExperimentSimulation(params)
     # stimulus_lst = expsim.generate_stimulus_lst(stimulus_lst)
@@ -88,7 +87,7 @@ sigma = 0.01
 
 # choose parameter range #############################################################
 srange = 'short'
-K_lst = [8.0]*250
+K_lst = [8.0]*20
 th_lst = [0.8]
 tau = [100]
 delay_lst = [700]
