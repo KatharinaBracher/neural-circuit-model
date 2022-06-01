@@ -4,14 +4,16 @@ from multiprocessing import Pool
 # import pickle
 import time
 import numpy as np
-
+import random
 
 def execute(d):
     '''performs simulation and returns behavioral data '''
 
-    stimulus_lst, K, th, t, delay = d # stimulus_range
+    stimulus_lst, K, th, t, delay, seed = d # stimulus_range
     print("executing with", K, th, t, delay, "= K, th, t, delay")
 
+
+    random.seed(seed)
     params = Params(ntrials=500, delay=delay, tau=t, th=th, sigma=sigma)
     expsim = ExperimentSimulation(params)
     # stimulus_lst = expsim.generate_stimulus_lst(stimulus_lst)
@@ -26,7 +28,7 @@ def execute(d):
 # create seach space
 def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
     '''creates search space of relevant hyperparameter'''
-    
+
     search_space = []
 
     if srange == 'short':
@@ -36,11 +38,13 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
         # stimulus = [700, 750, 800, 850, 900, 950, 1000]
         stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
+    seed = 0
     for K in K_lst:
         for th in th_lst:
             for t in tau:
                 for delay in delay_lst:
-                    search_space.append((stimulus, K, th, t, delay))
+                    search_space.append((stimulus, K, th, t, delay, seed))
+                    seed+=1
     return search_space
 
 
@@ -83,17 +87,17 @@ tau = np.arange(60, 200, 10)
 sigma = 0.01
 
 # choose parameter range #############################################################
-srange = 'long'
+srange = 'short'
 K_lst = [8.0]*250
 th_lst = [0.8]
 tau = [100]
 delay_lst = [700]
 
-name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
+name = 'SHORT_SAME_SEED_K8_TAU100_TH08_DEL700'
 # name = 'SHORT_KTAU_th08_del700'
 # name = 'LONG_KTAU_th08_del700'
 
-pool = 8
+pool = 12
 batchsize = pool
 
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name)
