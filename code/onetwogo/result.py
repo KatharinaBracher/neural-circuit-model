@@ -82,12 +82,22 @@ class BehavioralData:
         tau = self.params.tau
         th = self.params.th
         delay = self.params.delay
+        sigma = self.params.sigma
 
-        result = dict({'range': srange, 'K': K, 'tau': tau, 'threshold': th, 'delay': delay,
-                      'slope': self.slope, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse})
+        result = dict({'range': srange, 'K': K, 'tau': tau, 'threshold': th, 'delay': delay, 'sigma': sigma,
+                      'slope': self.slope, 'production_stds': self.production_stds, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse})
         pickle.dump(result, fp)
 
 class SortedData:
+    """
+    contains cut and sorted data of simulation (y and I)
+    """
+    params: object
+    '''object that contains all parameters'''
+    stimulus_range: list
+    '''list of stimuli used in simulation'''
+
+
     def __init__(self, params, measurement_sorted, production_sorted, I_sorted, stimulus_range):
         self.params = params
         self.stimulus_range = stimulus_range

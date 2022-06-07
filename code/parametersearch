@@ -37,7 +37,7 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
         # stimulus = [700, 750, 800, 850, 900, 950, 1000]
         stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
-    seed = 0
+    seed = 2022
     for K in K_lst:
         for th in th_lst:
             for t in tau:
@@ -78,7 +78,7 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name):
                     print('writing to disk as', name)
                     result.write_to_disk(fp, srange, K)
 
-K_lst = np.arange(0.5, 10.5, 0.5)
+K_lst = np.arange(1, 22, 1)  # np.arange(0.5, 10.5, 0.5)
 th_lst = np.arange(0.6, 0.75, 0.01)
 delay_lst = np.arange(400, 1000, 50)
 tau = np.arange(60, 200, 10)
@@ -86,17 +86,17 @@ tau = np.arange(60, 200, 10)
 sigma = 0.01
 
 # choose parameter range #############################################################
-srange = 'short'
-K_lst = [8.0]*20
-th_lst = [0.8]
-tau = [100]
+srange = 'long'
+# K_lst = [8.0]*250
+th_lst = [0.9]
+# tau = [100]
 delay_lst = [700]
 
-name = 'SHORT_SAME_SEED_K8_TAU100_TH08_DEL700'
-# name = 'SHORT_KTAU_th08_del700'
+#name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
+name = 'LONG_K1-21TAU_th09_del700'
 # name = 'LONG_KTAU_th08_del700'
 
-pool = 12
+pool = 20
 batchsize = pool
 
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name)
