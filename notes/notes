@@ -300,6 +300,7 @@ details
 	- [ ] for fixed tau find K for range effect
   	- for which K MSE is minimized
   	- other error? BIAS2, VAR,...?
+	- { ] what influence has the *seed* on the optimal K?
 
 - **Dynamic**
 - [ ] **PLOT** dynamics
@@ -307,19 +308,19 @@ details
   - [x] **PLOT** y's of experiment
   - where are the stimuli ranges situated (mean I for range), is the regime exploited?
   - can we shift the regimes? Polstelle at 1,; can we shift it up or down depending on range, expand it to the sides
-- [ ] **Timeout**:
+- [x] **Timeout**:
 	- regimes over/under th, how robust? check extremes
-	- when considered timeout? Plot to see of code works 
+	- when considered timeout? Plot to see if code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 
 - **Noise**
   - [ ] in Egger Simulation module / noise in Experiment
-  - [ ] **PLOT** mean std in reproductions with different noise levels simulation
-    - is there noise on y??
-    - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
-      - is this only for parallel simulation?
-    - sigma_sigma: indicates the noise within each trial added for each step for u,v,y (np.random.normal(loc=0, scale=self.sigma_sigma, size=len(self.ustate)))
-  - [ ] CV std_i/mean_i should be constant over stimuli
+      - is there noise on y??
+      - sigma_mu: indicates fluctuation in the mean between trials added for each trial on u,v,y (self.ext = np.random.normal(0, self.sigma_mu, ntrials)
+        - is this only for parallel simulation?
+      - sigma_sigma: indicates the noise within each trial added for each step for u,v,y (np.random.normal(loc=0, scale=self.sigma_sigma, size=len(self.ustate)))
+  - [x] **PLOT** mean std in reproductions with different noise levels simulation
+  - [x] CV std_i/mean_i should be constant over stimuli
     - mean over all stimuli should be 0.1/0.2, cut at 0.4 
     - **PLOT** sigma vs mean CV); if changing repeat 10 times
 
