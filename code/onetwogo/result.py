@@ -68,7 +68,7 @@ class BehavioralData:
         self.mse = mse
         # TODO add seed
 
-    def write_to_disk(self, fp, srange, K):
+    def write_to_disk(self, fp, srange, K, seed):
         '''writes behavioral data into a dictionary and into pickle file
 
         fp: .pickle file
@@ -85,7 +85,8 @@ class BehavioralData:
         sigma = self.params.sigma
 
         result = dict({'range': srange, 'K': K, 'tau': tau, 'threshold': th, 'delay': delay, 'sigma': sigma,
-                      'slope': self.slope, 'production_stds': self.production_stds, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse})
+                      'slope': self.slope, 'production_stds': self.production_stds, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse,
+                      'seed': seed})
         pickle.dump(result, fp)
 
 class SortedData:

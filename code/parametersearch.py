@@ -21,11 +21,11 @@ def execute(d):
     # return BehavioralData def save to disk
     sim_result = expsim.simulate(stimulus_lst, K)  # TODO seed
     result = sim_result.create_behavioral_data()
-    return (result, K)
+    return (result, K, seed)
 
 
 # create seach space
-def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
+def create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst):
     '''creates search space of relevant hyperparameter'''
 
     search_space = []
@@ -37,17 +37,17 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst):
         # stimulus = [700, 750, 800, 850, 900, 950, 1000]
         stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
-    seed = 0
     for K in K_lst:
-        for th in th_lst:
-            for t in tau:
-                for delay in delay_lst:
-                    search_space.append((stimulus, K, th, t, delay, seed))
+        for seed in seed_lst:
+            for th in th_lst:
+                for t in tau:
+                    for delay in delay_lst:
+                        search_space.append((stimulus, K, th, t, delay, seed))
                     # seed+=1
     return search_space
 
 
-def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name):
+def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name):
     '''
     runs simulation for simulationspace
     batchsize: int
@@ -68,15 +68,15 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name):
         name of pickle saved to server
     '''
     
-    search_space = create_search_space(srange, K_lst, th_lst, tau, delay_lst)
+    search_space = create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst)
     with open('/home/bracher/results/%s-%s-output.pickle' % (name, time.strftime("%Y%m%d-%H%M%S")), 'ab') as fp:
         for i in range(0, len(search_space), batchsize):
             print(i, i+batchsize, 'of', len(search_space))
             with Pool(pool) as p:
                 results = p.map(execute, search_space[i:i + batchsize])
-                for result, K in results:
+                for result, K, seed in results:
                     print('writing to disk as', name)
-                    result.write_to_disk(fp, srange, K)
+                    result.write_to_disk(fp, srange, K, seed)
 
 K_lst = np.arange(1, 15.5, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
 th_lst = np.arange(0.6, 0.75, 0.01)
@@ -88,15 +88,17 @@ sigma = 0.02
 # choose parameter range #############################################################
 srange = 'short'
 # K_lst = [8.0]*250
-th_lst = [0.75]
-# tau = [100]
+th_lst = [0.7]
+tau = [110]
 delay_lst = [700]
+seed_lst = [0, 1, 2, 3, 4, 5, 6, 7]
+# seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-name = 'SHORT_K4-15TAU_th075_del700_sig02_fix_seed'
+name = 'SHORT_K1-15TAU_th07_del700_sig02_fix_seed'
 # name = 'LONG_KTAU_th08_del700'
 
 pool = 20
 batchsize = pool
 
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, name)
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)

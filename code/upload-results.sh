@@ -1,1 +1,1 @@
-rsync -rlptzv -e "ssh -p 1024" --progress --delete --exclude=.git ~/Documents/Studium/Master_NEURO/thesis/results/. bracher@tunnel.bio.lmu.de:~/results/
+rsync -rlptzv -e "ssh -p 1006" --progress --delete --exclude=.git ~/Documents/Studium/Master_NEURO/thesis/results/. bracher@tunnel.bio.lmu.de:~/results/
