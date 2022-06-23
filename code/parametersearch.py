@@ -86,7 +86,7 @@ tau = np.arange(90, 120, 5)  # np.arange(60, 200, 10)
 sigma = 0.02
 
 # choose parameter range #############################################################
-srange = 'short'
+srange = 'long'
 # K_lst = [8.0]*250
 th_lst = [0.7]
 tau = [110]
@@ -95,7 +95,7 @@ seed_lst = [0, 1, 2, 3, 4, 5, 6, 7]
 # seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-name = 'SHORT_K1-15TAU_th07_del700_sig02_fix_seed'
+name = 'LONG_K1-15_TAU110_th07_del700_sig02_seedlst'
 # name = 'LONG_KTAU_th08_del700'
 
 pool = 20

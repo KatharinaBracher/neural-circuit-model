@@ -1,2 +1,29 @@
 ## A simple circuit model for scaling effects in timing
 
+### purpose and importance of the research
+Timing ranks among the most fundamental computations of the brain. 
+Evidence suggests the brain encodes time through controlling the speed of neural state evolution (Meirhaeghe et al. 2021, Wang et al. 2018)
+
+### previous research, limitations
+
+### methods
+
+### results, findings
+
+### implications
+
+
+
+
+
+
+
+Meirhaeghe, Nicolas, Hansem Sohn, and Mehrdad Jazayeri (2021). “A precise
+and adaptive neural mechanism for predictive temporal processing in the
+frontal cortex”. Neuron 109.18, 2995–3011.e5. issn: 10974199. doi: 10.1016/
+j.neuron.2021.08.025.
+
+Wang, Jing, Devika Narain, Eghbal A. Hosseini, and Mehrdad Jazayeri (2018).
+“Flexible timing by temporal scaling of cortical responses”. Nature Neuro-
+science 21.1, pp. 102–112. issn: 15461726. doi: 10 . 1038 / s41593 - 017 -
+0028-6.
