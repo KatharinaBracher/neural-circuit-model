@@ -104,6 +104,11 @@ class BaseSimulation:
         """returns the simulation of u, v, y, I over nbins and a list of booleans when a reset happend in the trial"""
 
         params = self.params
+        
+        #IF_reset = params.IF
+        #high_regime=True
+        #if high_regime:
+            #IF_reset = -params.IF
 
         u, v, y, Input = state_init.copy()
         ntrials = u.shape[0]
@@ -151,7 +156,7 @@ class BaseSimulation:
         pass
 
     ######################################################################################################
-    # TODO PCA in class
+    '''# TODO PCA in class
     def meas_prod_times(self, simu, prod, stimulus, sample):
         meas_start = int(self.first_duration/self.dt+1)
         meas_stop = int(self.first_duration/self.dt+1+stimulus/self.dt)  # without flashes
@@ -263,4 +268,4 @@ class BaseSimulation:
                 ax.plot(PPCA_lst[i][:, 2], c=c, alpha=0.5, marker='.')
         plt.tight_layout()
 
-        return MPCA_lst, PPCA_lst
+        return MPCA_lst, PPCA_lst'''
