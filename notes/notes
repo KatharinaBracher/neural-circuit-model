@@ -234,13 +234,34 @@ Introduction of two neuron model for general mechanism for translating input to 
 > single-neuron nonlinearities provides a reservoir of slopes that an input can exploit to control networks energy gradients \
 > adjustments of speed were governed by the interaction of input with these nonlinearities
 
+</details>
 
+### Egger, Jazayeri et al.: Internal models of sensorimotor integration regulate cortical dynamics
 
+<details>
+<summary> 3 epoch experiment (2 presentations of same stimulus). They show sequential update of estimate during 2 epochs (simulated motor plan during 2nd presentation), whereas in first presentation no representation of stimulus is found (set to prior)
+</summary>
 
+Internal model hypothesis: 2 populations, one that supplies constant speed command according to prior or measurement; other population that integrates this seed command and produces ramping activity to threshold
 
+Single cell: mixed responses, 
+- representation of stimulus interval in second and third epoch but not persistent, no invariant representation of stim. inerv.
+- scaling: degree of scaling strongest in 3rd epoch (shown via polynomial fit); responses were temporally stretched according to stimulus interval
+Population response:
+- Internal model hypothesis: 
+  - simulation of interval (first presentation with speed command set to prior)
+  - after each flash, error in simulation is used to update speed command
+  - feedback is used to update estimate sequentially; bias gets smaller for second presentation
+- DMFC population activity is governed by speed-dependent predictive dynamics
+  - refelcts simulated motor plan in all epochs
+- DMFC population activity reflects an interval-dependent speed command
+  - representation of internal estimate of stim. interv. through distance of trajectories
+  - speed command may originate in thalamus (tonic thalamic input)
 </details>
 
 **Thoughts**: 
+
+
 
 -------------------------------------------------------------------------------
 ### Template
@@ -324,12 +345,19 @@ details
     - mean over all stimuli should be 0.1/0.2, cut at 0.4 
     - **PLOT** sigma vs mean CV); if changing repeat 10 times
 
-- Weights
+- **High-I Regime**
+  - [ ] Implement high I regime, lower threshold
+  - explore effects
+
+
+- **Weights**
+  - [ ] are weights robust? (change together higher or lower)
   - introduce weights from u,v to y?
-  - adjusting weights between I and v,w $w_{vi}$ and $w_{wi}$ instead of I
+  - adjusting weights between I and v,w $w_{vi}$ and $w_{wi}$ instead of I?
+  - learnable? learn update
 
 - Analytical solutions: phase plane fixed point influence of parameter
-  - [ ] **PLOT** phase plane of u,v
+  - [x] **PLOT** phase plane of u,v
   - mechanistically understanding of parameter to behavior
   - optimizing for K, how does K change when changing stimulus range/var?
 
@@ -344,6 +372,9 @@ details
 
 - Translation from fixed slope changing threshold to fixed threshold changing slope
   - same predictions? Mathematics 
+
+
+
 
 ## Comments
 - we need K to achieve the range effect (slopes)

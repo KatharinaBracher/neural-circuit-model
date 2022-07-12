@@ -1,22 +1,27 @@
-## A simple circuit model for scaling effects in timing
+## Circuit model for scaling effects in timing
 
-### purpose and importance of the research
-Timing ranks among the most fundamental computations of the brain. 
-Evidence suggests the brain encodes time through controlling the speed of neural state evolution (Meirhaeghe et al. 2021, Wang et al. 2018)
+[comment]: <>  (purpose and importance of the research)
+Magnitude estimation shows characteristic effects that likely result from an optimal strategy to minimize errors of judgments. 
+Even though timing ranks among the most fundamental computations of the brain, the mechanism is not well understood. 
 
-### previous research, limitations
+[comment]: <>  (previous research, limitations)
+Evidence suggests the brain encodes time through scaling neural activity (Meirhaeghe et al. 2021).
+Wang et al. 2018 argues that controlling the speed is realized by controlling the input of a dynamical system and proposed a neural circuit to model sensorimotor timing.
 
-### methods
+[comment]: <>  (methods)
+The circuit receives a tonic context-dependent input that is updated based on an error signal before the interval reproduction. 
+We used the model to simulate realistic time reproduction experiments.
 
-### results, findings
+[comment]: <>  (results, findings)
+The model shows parameter ranges that result in typical effects of magnitude estimation and that are in accordance with error minimization across two stimulus ranges. 
 
-### implications
-
-
-
+[comment]: <>  (implications)
 
 
 
+
+
+## Sources
 
 Meirhaeghe, Nicolas, Hansem Sohn, and Mehrdad Jazayeri (2021). “A precise
 and adaptive neural mechanism for predictive temporal processing in the
@@ -27,3 +32,11 @@ Wang, Jing, Devika Narain, Eghbal A. Hosseini, and Mehrdad Jazayeri (2018).
 “Flexible timing by temporal scaling of cortical responses”. Nature Neuro-
 science 21.1, pp. 102–112. issn: 15461726. doi: 10 . 1038 / s41593 - 017 -
 0028-6.
+
+## Comments
+- error minimization
+- crcuit suggested, in accornadce with error minimization
+- minimization across stimuli ranges
+- - predictively updated
+- Coordination of behavior in temporal accordance with external stimuli requires flexible control of neural dynamics.
+- Evidence suggests the brain encodes time through controlling the speed of neural state evolution.
