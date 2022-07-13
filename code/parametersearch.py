@@ -13,7 +13,7 @@ def execute(d):
 
     print(seed)
     np.random.seed(seed)
-    params = Params(ntrials=500, delay=delay, tau=t, th=th, sigma=sigma)
+    params = Params(ntrials=500, Iinit=Iinit, delay=delay, tau=t, th=th, sigma=sigma, IF=reset)
     expsim = ExperimentSimulation(params)
     # stimulus_lst = expsim.generate_stimulus_lst(stimulus_lst)
     # stimulus_lst = expsim.find_stimulus_lst(stimulus_lst, 20, 0.9)
@@ -69,7 +69,7 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
     '''
     
     search_space = create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst)
-    with open('/home/bracher/results/%s-%s-output.pickle' % (name, time.strftime("%Y%m%d-%H%M%S")), 'ab') as fp:
+    with open('/home/bracher/results/highI/%s-%s-output.pickle' % (name, time.strftime("%Y%m%d-%H%M%S")), 'ab') as fp:
         for i in range(0, len(search_space), batchsize):
             print(i, i+batchsize, 'of', len(search_space))
             with Pool(pool) as p:
@@ -78,24 +78,35 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
                     print('writing to disk as', name)
                     result.write_to_disk(fp, srange, K, seed)
 
+# intermediate I
+'''sigma = 0.02
+reset=50
+Iinit=0.8
+
 K_lst = np.arange(1, 15.5, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
 th_lst = np.arange(0.6, 0.75, 0.01)
 delay_lst = np.arange(400, 1000, 50)
-tau = np.arange(90, 120, 5)  # np.arange(60, 200, 10)
+tau = np.arange(90, 120, 5)  # np.arange(60, 200, 10)'''
 
-sigma = 0.02
+# high I
+sigma = 0.01 #0.02
+reset=-500
+Iinit=1.02
+
+K_lst = np.arange(1, 22, 1)
+tau = np.arange(60, 200, 10)
 
 # choose parameter range #############################################################
 srange = 'long'
 # K_lst = [8.0]*250
-th_lst = [0.7]
-tau = [110]
+th_lst = [0.05]
+#tau = [110]
 delay_lst = [700]
-seed_lst = [0, 1, 2, 3, 4, 5, 6, 7]
-# seed_lst = [0]
+# seed_lst = [0, 1, 2, 3, 4, 5, 6, 7]
+seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-name = 'LONG_K1-15_TAU110_th07_del700_sig02_seedlst'
+name = 'H_LONG_K1-22_TAU_th005_del700_sig01'
 # name = 'LONG_KTAU_th08_del700'
 
 pool = 20
