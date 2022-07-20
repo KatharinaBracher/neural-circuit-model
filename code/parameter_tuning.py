@@ -90,12 +90,15 @@ def plot_mse(short, long, K_lst, tau, full=True):
     if full:
         error_short = get_mse(short, K_lst, tau)
         error_long = get_mse(long, K_lst, tau)
-    if full=='bias':
+    if full=='bias2':
         error_short = to_matrix(short, len(K_lst), len(tau), 'bias2')
         error_long = to_matrix(long, len(K_lst), len(tau), 'bias2')
     if full=='var':
         error_short = to_matrix(short, len(K_lst), len(tau), 'var')
         error_long = to_matrix(long, len(K_lst), len(tau), 'var')
+    if full=='bias':
+        error_short = to_matrix(short, len(K_lst), len(tau), 'bias')
+        error_long = to_matrix(long, len(K_lst), len(tau), 'bias')
     create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gray', n_colors=50, norm = 'log')
     plt.show()
     

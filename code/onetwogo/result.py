@@ -50,12 +50,14 @@ class BehavioralData:
     '''indifference point of stimulus vs. production'''
     bias2: float
     '''mean squared bias over stimulus range '''
+    bias: float
+    '''mean bias over stimulus range '''
     var: float
     '''mean variance over stimulus range'''
     mse: float
     '''Mean Squared Error over all trials of simulation'''
 
-    def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope, ind_point, bias2, var, mse):
+    def __init__(self, params, stimulus_range, production_means, production_stds, timeouts, slope, ind_point, bias2, bias, var, mse):
         self.params = params
         self.stimulus_range = stimulus_range
         self.production_means = production_means
@@ -64,6 +66,7 @@ class BehavioralData:
         self.slope = slope
         self.ind_point = ind_point
         self.bias2 = bias2
+        self.bias = bias
         self.var = var
         self.mse = mse
         # TODO add seed
@@ -85,7 +88,7 @@ class BehavioralData:
         sigma = self.params.sigma
 
         result = dict({'range': srange, 'K': K, 'tau': tau, 'threshold': th, 'delay': delay, 'sigma': sigma,
-                      'slope': self.slope, 'production_stds': self.production_stds, 'ind_point': self.ind_point, 'bias2': self.bias2, 'var': self.var, 'MSE': self.mse,
+                      'slope': self.slope, 'production_stds': self.production_stds, 'ind_point': self.ind_point, 'bias2': self.bias2, 'bias': self.bias, 'var': self.var, 'MSE': self.mse,
                       'seed': seed})
         pickle.dump(result, fp)
 
@@ -177,9 +180,9 @@ class SimulationResult:
                 production_means.append(None)
                 production_stds.append(None)
             timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
-            slope, ind_point, bias2, var, mse = None, None, None, None, None
+            slope, ind_point, bias2, bias, var, mse = None, None, None, None, None, None
             return BehavioralData(self.params, stimulus_range, production_means, production_stds,
-                                  timeouts, slope, ind_point, bias2, var, mse)
+                                  timeouts, slope, ind_point, bias2, bias, var, mse)
 
         for stim in stimulus_range:
             nstimuli.append(np.count_nonzero(self.stimulus_lst == stim))
@@ -191,7 +194,7 @@ class SimulationResult:
 
         timeouts = np.round(np.array(ntimeouts)/np.array(nstimuli), 2)
         if np.any(timeouts>0.1):
-            slope, ind_point, bias2, var, mse = None, None, None, None, None
+            slope, ind_point, bias2, bias, var, mse = None, None, None, None, None, None
         else:
             regression_line = linregress(stimulus_range, production_means)
             slope = regression_line[0]
@@ -199,11 +202,12 @@ class SimulationResult:
             # TODO return mean squared error over all trials
             # production, stimulus_lst (timeouts removed)
             bias2 = np.sum(np.square(np.array(production_means)-np.array(stimulus_range)))/len(stimulus_range)
+            bias = np.sum(np.array(production_means)-np.array(stimulus_range))/len(stimulus_range)
             var = np.sum(np.square(production_stds))/len(stimulus_range)
             mse = mean_squared_error(stim_lst_success, production)
             # TODO return seed
         return BehavioralData(self.params, stimulus_range, production_means, production_stds,
-                              timeouts, slope, ind_point, bias2, var, mse)
+                              timeouts, slope, ind_point, bias2, bias, var, mse)
 
     def crate_behavioral_plot_data(self):
         '''returns BehavioralPlotData object'''
@@ -287,10 +291,11 @@ class RangeParallelSimulationResult:
         ind_point = regression_line[1]/(1-regression_line[0])
 
         bias2 = np.sum(np.square(np.array(production_means)-np.array(self.stimulus_range)))/len(self.stimulus_range)
+        bias = np.sum(np.array(production_means)-np.array(self.stimulus_range))/len(self.stimulus_range)
         var = np.sum(np.square(production_stds))/len(self.stimulus_range)
         mse = None
         return BehavioralPlotData(BehavioralData(self.params, self.stimulus_range, production_means, production_stds,
-                                  timeouts, slope, ind_point, bias2, var, mse))
+                                  timeouts, slope, ind_point, bias2, bias, var, mse))
 
     def create_behavioral_plot(self) -> BehavioralPlot:
         '''returns BehavioralPlot object'''

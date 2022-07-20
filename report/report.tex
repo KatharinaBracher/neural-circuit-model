@@ -132,6 +132,8 @@ In this report, the intermediate input regime is explored: higher inputs result 
 \label{fig:circuit}
 \end{figure}
 
+\subsection{Input Regimes}
+
 
 \subsection{Update Mechanism and Experiment Procedure}
 Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). 
@@ -188,7 +190,8 @@ For an example experiment with a sequence of five trials see Figure \ref{fig:exp
 \label{fig:experiment}
 \end{figure}
 
-\cite{Egger2019}
+
+\subsection{Optimal Update Parameter}
 
 
 \section{Supplements}
@@ -198,6 +201,7 @@ For simulating the dynamics of $u, v, y$ and $I$ Euler's method was used with a 
 The reset mechanism of $u$ and $v$ is switched on for one time step after every epoch and the update mechanism of $I$ is switched on for one time step after the measurement epoch only.
 Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
 %Definition of timeouts
+\subsection*{Optimality MSE}
 
 \subsection{Design}
 The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality are accessing the same basic circuit, which is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.

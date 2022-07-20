@@ -1,42 +1,36 @@
-## Circuit model for scaling effects in timing
+## Optimal time interval reproduction in a neural circuit model
+Katharina M Bracher and Kay Thurley
 
-[comment]: <>  (purpose and importance of the research)
-Magnitude estimation shows characteristic effects that likely result from an optimal strategy to minimize errors of judgments. 
-Even though timing ranks among the most fundamental computations of the brain, the mechanism is not well understood. 
-
-[comment]: <>  (previous research, limitations)
-Evidence suggests the brain encodes time through scaling neural activity (Meirhaeghe et al. 2021).
-Wang et al. 2018 argues that controlling the speed is realized by controlling the input of a dynamical system and proposed a neural circuit to model sensorimotor timing.
-
-[comment]: <>  (methods)
-The circuit receives a tonic context-dependent input that is updated based on an error signal before the interval reproduction. 
-We used the model to simulate realistic time reproduction experiments.
-
-[comment]: <>  (results, findings)
-The model shows parameter ranges that result in typical effects of magnitude estimation and that are in accordance with error minimization across two stimulus ranges. 
-
-[comment]: <>  (implications)
+Faculty of Biology, Ludwig-Maximilians-Universität München, Germany
+Graduate School of Systemic Neurosciences, Ludwig-Maximilians-Universität München Munich, Germany
+Bernstein Center for Computational Neuroscience Munich, Germany
 
 
+ 
+Humans and other animals combine current sensory information and expectations based on prior knowledge to drive behaviors. 
+Such interaction between immediate and prior experience is likely used to minimize errors and is therefore often described with Bayesian models. 
+The neural implementation, however, remains open.
+
+Here we investigate a neural circuit model that has been proposed recently to explain various timing behaviors, including the reproduction of time intervals (Egger et al. 2020). 
+Time reproduction is one of the behavioral methods to investigate error minimization and related optimal behavioral strategies. 
+In such experiments, behavioral responses are characterized by specific biases such as the central tendency or regression effect, i.e. the overestimation of small time intervals and the underestimation of large ones.
+
+The model comprises two mutually inhibitory units that receive a shared, tonic input. A third unit functions as a readout unit. 
+The input to the circuit controls at which speed the readout unit increases its activity and therefore scales its responses such that a threshold is reached at different times. 
+Scaling of neural activity has been described experimentally in connection with timing behavior (Wang et al. 2018, Egger et al. 2019, Meirhaeghe et al. 2021). 
+During the presentation of the stimulus interval, the circuit predicts the to-be-reproduced duration. 
+From the mismatch between this prediction and the actual stimulus duration, an error signal is derived, according to which the input and consequently the speed is adjusted for the subsequent reproduction.
+
+We used the circuit to simulate interval reproduction experiments and explored the conditions for robust time estimates that are consistent with characteristic behavioral effects, e.g., more pronounced central tendency for stimulus ranges with longer durations (range effect). 
+A crucial parameter is the weight with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
+Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
 
 
+### Scources
+Egger, Seth W., Nhat M. Le, and Mehrdad Jazayeri (2020). “A neural circuit model for human sensorimotor timing”. Nature Communications 11.1, pp. 1–14. issn: 20411723. doi: 10.1038/s41467-020-16999-8.
 
-## Sources
+Egger, Seth W., Evan D. Remington, Chia Jung Chang, and Mehrdad Jazayeri (2019). “Internal models of sensorimotor integration regulate cortical dynamics”. Nature Neuroscience 22.11, pp. 1871–1882. issn: 15461726. doi:10.1038/s41593-019-0500-6.
 
-Meirhaeghe, Nicolas, Hansem Sohn, and Mehrdad Jazayeri (2021). “A precise
-and adaptive neural mechanism for predictive temporal processing in the
-frontal cortex”. Neuron 109.18, 2995–3011.e5. issn: 10974199. doi: 10.1016/
-j.neuron.2021.08.025.
+Meirhaeghe, Nicolas, Hansem Sohn, and Mehrdad Jazayeri (2021). “A precise and adaptive neural mechanism for predictive temporal processing in the frontal cortex”. Neuron 109.18, 2995–3011.e5. issn: 10974199. doi: 10.1016/j.neuron.2021.08.025.
 
-Wang, Jing, Devika Narain, Eghbal A. Hosseini, and Mehrdad Jazayeri (2018).
-“Flexible timing by temporal scaling of cortical responses”. Nature Neuro-
-science 21.1, pp. 102–112. issn: 15461726. doi: 10 . 1038 / s41593 - 017 -
-0028-6.
-
-## Comments
-- error minimization
-- crcuit suggested, in accornadce with error minimization
-- minimization across stimuli ranges
-- - predictively updated
-- Coordination of behavior in temporal accordance with external stimuli requires flexible control of neural dynamics.
-- Evidence suggests the brain encodes time through controlling the speed of neural state evolution.
+Wang, Jing, Devika Narain, Eghbal A. Hosseini, and Mehrdad Jazayeri (2018). “Flexible timing by temporal scaling of cortical responses”. Nature Neuroscience 21.1, pp. 102–112. issn: 15461726. doi: 10 . 1038 / s41593 - 017 -0028-6.

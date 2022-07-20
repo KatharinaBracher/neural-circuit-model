@@ -293,7 +293,7 @@ details
   - histogram uniform distribution
   - window (10-14) each stimulus needs to occur
 
-- [ ] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
+- [x] Parameter: impact of parameter K, $\sigma$, $\tau$, delay, threshold on behavior; find regimes
 	- [x] quantify with slope and indifferent point (normalized with middle of range) and mean squared error over all trials (stimulus_lst and production list without timeouts)
 	- [x] **ADD** MSE as variance bias term
 	- [x] timeouts 10% overall not in one, give nan in slope, mse,...
@@ -312,19 +312,20 @@ details
 
 ## Model
 - [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
+- [ ] Reset impulse, or reset to value? level of reset influences reproduction
 
 - **Parameter**
   - [x] wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I,
     - error over time: 2-3 trials to catch I
 	- [ ] delay relevant? just adding noise?
   	- variable delay period?
-	- [ ] for fixed tau find K for range effect
+	- [x] for fixed tau find K for range effect
   	- for which K MSE is minimized
   	- other error? BIAS2, VAR,...?
-	- { ] what influence has the *seed* on the optimal K?
+	- [ ] what influence has the *seed* on the optimal K? compute, plot systematically
 
 - **Dynamic**
-- [ ] **PLOT** dynamics
+- [x] **PLOT** dynamics
   - what is influencing it? - parameter tau
   - [x] **PLOT** y's of experiment
   - where are the stimuli ranges situated (mean I for range), is the regime exploited?
@@ -333,6 +334,14 @@ details
 	- regimes over/under th, how robust? check extremes
 	- when considered timeout? Plot to see if code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
+- **High-I Regime**
+  - [ ] Implement high I regime, with lower threshold
+  - [ ] what parameters have to change?
+    - reset impulse (!) negativ and *10
+    - initial value I over 1
+    - threshold 0.1-0.2
+  - explore effects
+    - I, speed effect is reversed (higher I, higher speed)
 
 - **Noise**
   - [ ] in Egger Simulation module / noise in Experiment
@@ -344,11 +353,6 @@ details
   - [x] CV std_i/mean_i should be constant over stimuli
     - mean over all stimuli should be 0.1/0.2, cut at 0.4 
     - **PLOT** sigma vs mean CV); if changing repeat 10 times
-
-- **High-I Regime**
-  - [ ] Implement high I regime, lower threshold
-  - explore effects
-
 
 - **Weights**
   - [ ] are weights robust? (change together higher or lower)
@@ -379,15 +383,16 @@ details
 ## Comments
 - we need K to achieve the range effect (slopes)
 - K is consistent with Bayes, higher weight update for short range, lower weight update for long range
-- 
+- the reset impulse has an influence on estimate (activity level where it stats to ramp changes)
 
 
 ## Other
 - clean code
 - document code
-- update code design
 - write down methods in report
 - markdown (latex) extension not working (shortcuts etc)
+- double function clean
+- highI functinoality
 
 ## Server
 1024
