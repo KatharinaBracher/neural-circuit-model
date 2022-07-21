@@ -87,6 +87,7 @@ def plot_slope(short, long, K_lst, tau, n_colors=20):
 
     
 def plot_mse(short, long, K_lst, tau, full=True):
+    plot = True
     if full:
         error_short = get_mse(short, K_lst, tau)
         error_long = get_mse(long, K_lst, tau)
@@ -99,8 +100,13 @@ def plot_mse(short, long, K_lst, tau, full=True):
     if full=='bias':
         error_short = to_matrix(short, len(K_lst), len(tau), 'bias')
         error_long = to_matrix(long, len(K_lst), len(tau), 'bias')
-    create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gray', n_colors=50, norm = 'log')
-    plt.show()
+        divnorm=matplotlib.colors.TwoSlopeNorm(vcenter=0)
+        create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'coolwarm', n_colors=50, norm=divnorm)
+        plt.show()
+        plot=False
+    if plot:
+        create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gray', n_colors=50, norm = 'log')
+        plt.show()
     
 
 
