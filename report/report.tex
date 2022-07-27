@@ -132,9 +132,6 @@ In this report, the intermediate input regime is explored: higher inputs result 
 \label{fig:circuit}
 \end{figure}
 
-\subsection{Input Regimes}
-
-
 \subsection{Update Mechanism and Experiment Procedure}
 Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). 
 The basic circuit described above is modified to perform interval reproduction (see Figure \ref{fig:epochs}a for schematic of modified circuit).
@@ -190,9 +187,16 @@ For an example experiment with a sequence of five trials see Figure \ref{fig:exp
 \label{fig:experiment}
 \end{figure}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \subsection{Optimal Update Parameter}
+A crucial parameter is the weight with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
+Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
+% For what K is the MSE (Supp) minimal? testing for differnt time constants
+% Effect larger K for smaller range, smaller K for larger range (putting less weight on the update)
+% results in range effect, but general underestimation for large range (probably due to high variance pushes K down)
+% optimizing for bias only, K is not consistent anymore, no range effect
 
+%Figure: Optimization, MSE long short, bias, behavior for one tau, CV
 
 \section{Supplements}
 \subsection{Methods}
@@ -200,8 +204,38 @@ For an example experiment with a sequence of five trials see Figure \ref{fig:exp
 For simulating the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ set to 10 ms.
 The reset mechanism of $u$ and $v$ is switched on for one time step after every epoch and the update mechanism of $I$ is switched on for one time step after the measurement epoch only.
 Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Experiment Simulation}
+% Stimulus List criterions
+% seeds
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Optimality by Minimizing MSE}
+To minimize the error of interval reproductions across the experiment, we defined the bias as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimuli intervals in $S$. We minimized the $\text{MSE} = \text{bias}^2+\text{var}$.
+\begin{equation} \label{MSE}
+	\begin{split}
+	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
+	 \text{bias}^2 & = \frac{1}{S} \sum \limits_{i=1}^{S}(\bar{t_{r_i}} - t_{s_i})^2 \;,\\
+	 \text{var} & = \frac{1}{S} \sum \limits_{i=1}^{S}(\sigma_i^2) \;.\\
+	\end{split}
+\end{equation}
+
 %Definition of timeouts
-\subsection*{Optimality MSE}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Intermediate and High Input Regime}
+% two fixed points
+In the intermediate input regime higher $I$ result in a shallower slope of $y$.
+% one fixed point, high activity
+% relation I and slope in circuit
+% reset inpulse opposite, and 10 times higher
+% initial I over 1
+% threshold over 0 -0.2
+% higher I results in steeper slope
+
+% Figure: phase plane, different inputs, realtion I and slope, behavior u, v, y, I, 
+% Figure y, I in experiment for both regimes 
+
 
 \subsection{Design}
 The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality are accessing the same basic circuit, which is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.

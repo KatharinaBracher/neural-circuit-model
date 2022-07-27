@@ -313,6 +313,9 @@ details
 ## Model
 - [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
 - [ ] Reset impulse, or reset to value? level of reset influences reproduction
+- [ ] Relation of I and slope of y is nonlinear
+  - this is probably determining the optimal K: for longer intervals the change in slope is bigger for same I comapred to smaller intervals, so K is smaller for lager intervals
+  - can we predict K for longer intervals from K for smaller intervals with this relation?
 
 - **Parameter**
   - [x] wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I,
@@ -323,6 +326,8 @@ details
   	- for which K MSE is minimized
   	- other error? BIAS2, VAR,...?
 	- [ ] what influence has the *seed* on the optimal K? compute, plot systematically
+	- why general overestimation
+  	- [ ] use full bias 
 
 - **Dynamic**
 - [x] **PLOT** dynamics
@@ -335,8 +340,8 @@ details
 	- when considered timeout? Plot to see if code works 
 	- [x] If timeout: keep trial in exp with all updates, production is inf (or none)
 - **High-I Regime**
-  - [ ] Implement high I regime, with lower threshold
-  - [ ] what parameters have to change?
+  - [x] Implement high I regime, with lower threshold
+  - [x] what parameters have to change?
     - reset impulse (!) negativ and *10
     - initial value I over 1
     - threshold 0.1-0.2

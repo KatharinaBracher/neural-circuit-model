@@ -102,17 +102,17 @@ tau = np.arange(60, 200, 10)'''
 # choose parameter range #############################################################
 srange = 'short'
 # K_lst = [8.0]*250
-th_lst = [0.7]
-#tau = [110]
+th_lst = [0.75]
+tau = [105]
 delay_lst = [700]
-# seed_lst = [0, 1, 2, 3, 4, 5, 6, 7]
-seed_lst = [0]
+seed_lst = np.arange(0, 21, 1)
+#seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
 #name = 'H_LONG_K1-22_TAU_th005_del700_sig01'
-name = 'SHORT_K2-18TAU_th07_del700_sig02_fix_seed'
+name = 'SHORT_K2-18TAU105_th075_del700_sig02_seed'
 
-pool = 20
+pool = 24
 batchsize = pool
 
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
