@@ -79,38 +79,38 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
                     result.write_to_disk(fp, srange, K, seed)
 
 # intermediate I
-regime = 'intermediateI'
+'''regime = 'intermediateI'
 sigma = 0.02
 reset=50
 Iinit=0.8
 
 K_lst = np.arange(1, 18, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
-th_lst = np.arange(0.6, 0.75, 0.01)
+th_lst = np.arange(0.6, 0.7, 0.75)
 delay_lst = np.arange(400, 1000, 50)
-tau = np.arange(60, 150, 10)  # np.arange(60, 200, 10)
+tau = np.arange(60, 190, 10)  # np.arange(60, 200, 10)'''
 
 # high I
-'''
-regime = highI
-sigma = 0.01 #0.02
+regime = 'highI'
+sigma = 0.02 #0.02
 reset=-500
 Iinit=1.02
 
-K_lst = np.arange(1, 22, 1)
-tau = np.arange(60, 200, 10)'''
+K_lst = np.arange(1, 18, 0.5)
+th_lst = np.arange(0.05, 0.1, 0.2)
+tau = np.arange(20, 150, 10)
 
 # choose parameter range #############################################################
-srange = 'short'
+srange = 'long'
 # K_lst = [8.0]*250
-th_lst = [0.75]
-tau = [105]
+th_lst = [0.2]
+# tau = [105]
 delay_lst = [700]
-seed_lst = np.arange(0, 21, 1)
-#seed_lst = [0]
+# seed_lst = np.arange(0, 21, 1)
+seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-#name = 'H_LONG_K1-22_TAU_th005_del700_sig01'
-name = 'SHORT_K2-18TAU105_th075_del700_sig02_seed'
+name = 'LONG_K1-18_TAU_th02_del700_sig02_fixed_seed'
+# name = 'SHORT_K1-18TAU_th075_del700_sig02_fixed_seed'
 
 pool = 24
 batchsize = pool

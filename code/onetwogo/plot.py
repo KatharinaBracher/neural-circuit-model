@@ -51,7 +51,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(20, 7)) #20, 7 # 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.4,4)) #20, 7 # 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -176,19 +176,19 @@ class BehavioralPlot:
 
         if ax is None:
             if np.any(data.production_means):
-                plt.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
+                plt.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k', capsize=1, markersize=4)
             if np.any(data.timeouts):
                 plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+60, 'to='+str(data.timeouts), size=7)
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
-                     [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
+                     [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(slope))
             plt.xlabel('Stimulus (ms)')
             plt.ylabel('Production (ms)')
         else:
             subplot = ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
-                              [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--')
+                              [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             if np.any(data.production_means):
-                ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k')
+                ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k', capsize=1, markersize=4)
             if np.any(data.timeouts):
                 ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +

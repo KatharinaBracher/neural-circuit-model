@@ -106,16 +106,18 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
         
     else:
-        cbar_ax = fig.add_axes([.91, .25, .01, .5]) #x, y, breite, höhe
-        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm,  annot_kws={'fontdict': {'size': 100}})
+        cbar_ax = fig.add_axes([.91, .25, .03, .6]) #x, y, breite, höhe
+        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm)
        
 
-    for ind, label in enumerate(h1.get_yticklabels()):
-        if ind % 5 == 0:  # every 5th label is kept
+    '''for ind, label in enumerate(h1.get_yticklabels()):
+        if ind % 9 == 0:  # every 9th label is kept
             label.set_visible(True)
         else:
-            label.set_visible(False)
+            label.set_visible(False)'''
+    ax[0].locator_params(axis='y', nbins=4)
+    ax[0].locator_params(axis='x', nbins=4)
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
@@ -159,14 +161,17 @@ def plot_mse(short, long, K_lst, tau, full=True):
     if full=='bias':
         error_short = to_matrix(short, len(K_lst), len(tau), 'bias')
         error_long = to_matrix(long, len(K_lst), len(tau), 'bias')
-        divnorm=mpl.colors.TwoSlopeNorm(vcenter=0)
+        minmin = np.min([np.nanmin(error_short), np.nanmin(error_long)])
+        maxmax = np.max([np.nanmax(error_short), np.nanmax(error_long)])
+        compromise=minmin
+        divnorm=mpl.colors.TwoSlopeNorm(vcenter=0, vmin=compromise, vmax=-compromise)
         # specify plot style
         figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'coolwarm', n_colors=50, norm=divnorm)
         plt.show()
         plot=False
     if plot:
         # specify plot style
-        figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gray', n_colors=50, norm = 'log')
+        figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gist_heat', n_colors=50, norm = 'log')
         plt.show()
     
 
@@ -175,7 +180,7 @@ def plot_mse_total(short, long, K_lst, tau):
     short_ktau_mse = to_matrix(short, len(K_lst), len(tau), 'MSE')
     long_ktau_mse = to_matrix(long, len(K_lst), len(tau), 'MSE')
     # specify plot style
-    figure_create_parameter_plot(short_ktau_mse, long_ktau_mse, (short_ktau_mse+long_ktau_mse)/2, 'K', K_lst, 'tau', tau, 'gray', n_colors=50)
+    figure_create_parameter_plot(short_ktau_mse, long_ktau_mse, (short_ktau_mse+long_ktau_mse)/2, 'K', K_lst, 'tau', tau, 'gist_heat', n_colors=50)
     plt.show()
     
 
