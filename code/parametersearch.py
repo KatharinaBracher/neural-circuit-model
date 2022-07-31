@@ -91,7 +91,7 @@ tau = np.arange(60, 190, 10)  # np.arange(60, 200, 10)'''
 
 # high I
 regime = 'highI'
-sigma = 0.02 #0.02
+sigma = 0.02
 reset=-500
 Iinit=1.02
 
@@ -102,15 +102,15 @@ tau = np.arange(20, 150, 10)
 # choose parameter range #############################################################
 srange = 'long'
 # K_lst = [8.0]*250
-th_lst = [0.2]
-# tau = [105]
+th_lst = [0.1]
+tau = [60]
 delay_lst = [700]
-# seed_lst = np.arange(0, 21, 1)
-seed_lst = [0]
+seed_lst = np.arange(0, 21, 1)
+#seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-name = 'LONG_K1-18_TAU_th02_del700_sig02_fixed_seed'
-# name = 'SHORT_K1-18TAU_th075_del700_sig02_fixed_seed'
+name = 'LONG_K1-18_TAU60_th07_del700_sig02_seed'
+#name = 'SHORT_K1-18TAU_th005_del700_sig02_fixed_seed_test'
 
 pool = 24
 batchsize = pool

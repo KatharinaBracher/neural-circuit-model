@@ -51,7 +51,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.4,4)) #20, 7 # 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(4.5,4)) #20, 7 #FIT: 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -105,26 +105,29 @@ class SimulationPlot:
 
         print('Timeouts', len(timeout_index))
 
-        ax[0].plot(steps, simulation[:, 0], c='grey', alpha=alpha)
-        ax[0].vlines(reset_indices, np.min(np.array(simulation[:, 0])),
-                     np.max(np.array(simulation[:, 0])), color='grey', alpha=0.5)
+        start=146
+        start_=1
+
+        ax[0].plot(steps[start:], simulation[start:, 0], c='grey', alpha=alpha)
+        ax[0].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 0])),
+                     np.max(np.array(simulation[start:, 0])), color='grey', alpha=0.5)
         ax[0].set_title('du/dt', fontsize=11)
 
-        ax[1].plot(steps, simulation[:, 1], 'grey', alpha=alpha)
-        ax[1].vlines(reset_indices, np.min(np.array(simulation[:, 1])),
-                     np.max(np.array(simulation[:, 1])), color='grey', alpha=0.5)
+        ax[1].plot(steps[start:], simulation[start:, 1], 'grey', alpha=alpha)
+        ax[1].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 1])),
+                     np.max(np.array(simulation[start:, 1])), color='grey', alpha=0.5)
         ax[1].set_title('dv/dt', fontsize=11)
 
-        ax[2].plot(steps, simulation[:, 2], 'grey', alpha=alpha)
-        ax[2].hlines(params.th, 0, simulation.shape[0]*params.dt, linestyle='--', color='lightgray')
-        ax[2].vlines(reset_indices, np.min(np.array(simulation[:, 2])),
-                     np.max(np.array(simulation[:, 2])*1.1), color='grey', alpha=0.5)
+        ax[2].plot(steps[start:], simulation[start:, 2], 'grey', alpha=alpha)
+        ax[2].hlines(params.th, start*params.dt, simulation.shape[0]*params.dt, linestyle='--', color='lightgray')
+        ax[2].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 2])),
+                     np.max(np.array(simulation[start:, 2])*1.1), color='grey', alpha=0.5)
         #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
         ax[2].set_title('dy/dt', fontsize=11)
 
-        ax[3].plot(steps, simulation[:, 3], 'grey', alpha=alpha)
-        ax[3].vlines(reset_indices, np.min(np.array(simulation[:, 3])),
-                     np.max(np.array(simulation[:, 3])), color='grey', alpha=0.5)
+        ax[3].plot(steps[start:], simulation[start:, 3], 'grey', alpha=alpha)
+        ax[3].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 3])),
+                     np.max(np.array(simulation[start:, 3])), color='grey', alpha=0.5)
         ax[3].set_title('dI/dt', fontsize=11)
         ax[3].set_xlabel('Time (ms)')
 
@@ -171,8 +174,12 @@ class BehavioralPlot:
         if data.slope == None:
             slope = 0
         else:
-            slope = round(data.slope, 3)
-        # print('timeouts:', list(zip(stimulus_range, data.timeouts)))
+            slope = round(data.slope, 2)
+        print('timeouts:', list(zip(stimulus_range, data.timeouts)))
+
+        color = 'grey'
+        if 400 in data.stimulus_range:
+            color='black'
 
         if ax is None:
             if np.any(data.production_means):
@@ -188,9 +195,9 @@ class BehavioralPlot:
             subplot = ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                               [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             if np.any(data.production_means):
-                ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k', capsize=1, markersize=4)
-            if np.any(data.timeouts):
-                ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
+                ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', capsize=1, markersize=4, color=color)
+            #if np.any(data.timeouts):
+                #ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
                     str(slope))
             return subplot
@@ -226,14 +233,14 @@ class SortedPlot:
             colors = colors_long
 
 
-        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(20,7))
-        ax.flatten()[0].set_ylabel('y measurement')
-        ax.flatten()[stimulus_range_len].set_ylabel('y reproduction')
-        ax.flatten()[stimulus_range_len*2].set_ylabel('I reproduction')
+        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=( 6.4,3.5))  # 20,7
+        ax.flatten()[0].set_ylabel('y measur.', fontsize=11)
+        ax.flatten()[stimulus_range_len].set_ylabel('y reprod.', fontsize=11)
+        ax.flatten()[stimulus_range_len*2].set_ylabel('I reprod.', fontsize=11)
         plt.setp(ax, xticks=xticks, xticklabels=xticklabels)
 
         for j, (c, stim, lst) in enumerate(zip(colors, data.stimulus_range,  data.measurement_sorted)):
-            ax.flatten()[j].set_title(str(stim))
+            ax.flatten()[j].set_title(str(stim), fontsize=11)
             for i in lst:
                 ax.flatten()[j].plot(i, alpha=0.3, color=c)
 
@@ -247,4 +254,8 @@ class SortedPlot:
         for j, (c, lst) in enumerate(zip(colors, data.I_sorted)):
             for i in lst:
                 ax.flatten()[j+14].plot(i, alpha=0.3, color=c)
-            ax.flatten()[j+14].set_xlabel('time [ms]')
+            ax.flatten()[17].set_xlabel('time [ms]')
+
+        for i in range(21):
+            ax.flatten()[i].locator_params(axis='y', nbins=2)
+            ax.flatten()[i].locator_params(axis='x', nbins=2)

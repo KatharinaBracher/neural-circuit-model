@@ -6,27 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import linregress
 import pickle
 from matplotlib import rc
-
-#rc('text', usetex=True)
-#font = {'family' : 'helvetica',
-#        'weight' : 'bold',
-#        'size'   : 11}
-#mpl.rc('font', **font)
-##sns.set_style("white", {'font.family':'sans-serif', 
-#               'font.sans-serif':['helvetica'], 'weight':'bold',
-#               'size': 11})
-#sns.axes_style("white", {'font.family':['sans-serif'], 
-#               'font.sans-serif':['helvetica'], 
-#               'weight':'bold',
-#               'size': 11})
-#sns.set(style={'font.family':'sans-serif', 
-#               'font.sans-serif':['helvetica'], 
-#               'weight':'bold',
-#               'size': 11, 
-#               'figure.facecolor': 'white'})
-#
-#sns.set_theme(style="white", rc={'font.family':['sans-serif'], 
-#               'font.sans-serif':['helvetica'],'font.serif':['helvetica']})
+import pandas as pd
 
 
 stimulus_range_s = [400, 450, 500, 550, 600, 650, 700]
@@ -91,6 +71,8 @@ def create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, 
     
     plt.show()
     
+    
+    
 def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, n_colors=20, norm=False):
     cmap = sns.color_palette(cmap, n_colors=n_colors)
     minmin = np.min([np.nanmin(short), np.nanmin(long), np.nanmin(shortlong)])
@@ -107,15 +89,12 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
         
     else:
         cbar_ax = fig.add_axes([.91, .25, .03, .6]) #x, y, breite, höhe
-        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
-        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm)
-       
+        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, 
+                         ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
+        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, 
+                         ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm)
+        #annot=mask,  fmt=".0", annot_kws={"size": 13})
 
-    '''for ind, label in enumerate(h1.get_yticklabels()):
-        if ind % 9 == 0:  # every 9th label is kept
-            label.set_visible(True)
-        else:
-            label.set_visible(False)'''
     ax[0].locator_params(axis='y', nbins=4)
     ax[0].locator_params(axis='x', nbins=4)
     
@@ -126,7 +105,31 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     h2.set_xlabel(p2)
     h2.set_title('long')
     
-    plt.show()
+    
+
+def slope_behavior(short, long, p1, p1_lst, p2, p2_lst, cmap, mask_s, mask_l, n_colors=20, norm=False):
+    cmap = sns.color_palette(cmap, n_colors=n_colors)
+    minmin = np.min([np.nanmin(short), np.nanmin(long)])
+    maxmax = np.max([np.nanmax(short), np.nanmax(long)])
+    print(minmin, maxmax)
+    
+    fig, ax = plt.subplots(1,2, figsize=(10,4), sharex=True, sharey=True)
+    
+    cbar_ax = fig.add_axes([.91, .25, .03, .6]) #x, y, breite, höhe
+    h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm,
+        annot=mask_s,  fmt='.2', annot_kws={"size": 7})
+    h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm,
+        annot=mask_l,  fmt='.2', annot_kws={"size": 7})
+
+    ax[0].locator_params(axis='y', nbins=4)
+    ax[0].locator_params(axis='x', nbins=4)
+    
+    h1.set_xlabel(p2)
+    h1.set_ylabel(p1)
+    h1.set_title('short')
+
+    h2.set_xlabel(p2)
+    h2.set_title('long')
     
     
     
@@ -142,11 +145,71 @@ def plot_slope(short, long, K_lst, tau, n_colors=20):
     long_ktau_slope = to_matrix(long, len(K_lst), len(tau), 'slope')
     divnorm=mpl.colors.TwoSlopeNorm(vcenter=0, vmin=-1.2, vmax=1.2)
     # specify plot style
-    figure_create_parameter_plot(short_ktau_slope, long_ktau_slope, short_ktau_slope-long_ktau_slope, 'K', K_lst, 'tau', tau, 'coolwarm', n_colors=n_colors, norm=divnorm)
-    plt.show()
+    name = 'tau'
+    ############
+    #name='initialization'
+    #tau = []
+    ############
+    figure_create_parameter_plot(short_ktau_slope, long_ktau_slope, short_ktau_slope-long_ktau_slope, 'K', K_lst, name, tau, 'coolwarm', n_colors=n_colors, norm=divnorm)
+    
+    
+def plot_slope_behavior(short, long, K_lst, tau, n_colors=20):
+    short_ktau_slope = to_matrix(short, len(K_lst), len(tau), 'slope')
+    long_ktau_slope = to_matrix(long, len(K_lst), len(tau), 'slope')
+    divnorm=mpl.colors.TwoSlopeNorm(vcenter=0, vmin=-1.2, vmax=1.2)
+    # specify plot style
+    np_mask_s = np.where(((short_ktau_slope>0.77)&(short_ktau_slope<0.88)), short_ktau_slope, np.NaN)
+    np_mask_l = np.where(((long_ktau_slope>0.67)&(long_ktau_slope<0.78)), long_ktau_slope, np.NaN)
+    mask_s = pd.DataFrame(np_mask_s)
+    mask_l = pd.DataFrame(np_mask_l)
+    mask_s = mask_s.replace(np.nan, '')
+    mask_l = mask_l.replace(np.nan, '')
+    slope_behavior(short_ktau_slope, long_ktau_slope, 'K', K_lst, 'tau', tau, 'coolwarm', mask_s, mask_l, n_colors=n_colors, norm=divnorm)
+
+def parameter_behavioural_plausible(short, long, K_lst, tau):
+    short_ktau_slope = to_matrix(short, len(K_lst), len(tau), 'slope')
+    long_ktau_slope = to_matrix(long, len(K_lst), len(tau), 'slope')
+    combi = []
+    for k in K_lst:
+        for t in tau:
+            s = str(k)+','+str(t)
+            combi.append(s)
+    print('short')
+    mask = list(np.where(((short_ktau_slope.flatten()>=0.77) & (short_ktau_slope.flatten()<=0.88)))[0])
+    print(np.array(combi)[mask])
+    print('long')
+    mask = list(np.where(((long_ktau_slope.flatten()>=0.67) & (long_ktau_slope.flatten()<=0.78)))[0])
+    print(np.array(combi)[mask])
+    
+    
+def plot_mse_sep(short_, long_, K_lst, seed):
+    short = get_mse(short_, K_lst, seed)
+    long = get_mse(long_, K_lst, seed)
+    
+    cmap = sns.color_palette('gist_heat_r', n_colors=50)
+    #minmin = np.min([np.nanmin(short), np.nanmin(long), np.nanmin(shortlong)])
+    #maxmax = np.max([np.nanmax(short), np.nanmax(long), np.nanmax(shortlong)])
+    
+    fig, ax = plt.subplots(1,2, figsize=(5,2), sharex=True, sharey=True)
+    #if norm == 'log':
+        #norm = mpl.colors.LogNorm(vmin=minmin, vmax=maxmax)
+
+    h1 = sns.heatmap(short, xticklabels=False, yticklabels=K_lst, 
+                     ax=ax[0], cmap = cmap)
+    h2 = sns.heatmap(long, xticklabels=False, yticklabels=K_lst, 
+                     ax=ax[1], cmap = cmap)
+
+    ax[0].locator_params(axis='y', nbins=4)
+    ax[0].locator_params(axis='x', nbins=4)
+    
+    h1.set_xlabel('initialization')
+    h1.set_ylabel('K')
+    h1.set_title('short')
+
+    h2.set_xlabel('initialization')
+    h2.set_title('long')
     
 
-    
 def plot_mse(short, long, K_lst, tau, full=True):
     plot = True
     if full:
@@ -167,12 +230,10 @@ def plot_mse(short, long, K_lst, tau, full=True):
         divnorm=mpl.colors.TwoSlopeNorm(vcenter=0, vmin=compromise, vmax=-compromise)
         # specify plot style
         figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'coolwarm', n_colors=50, norm=divnorm)
-        plt.show()
         plot=False
     if plot:
         # specify plot style
-        figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gist_heat', n_colors=50, norm = 'log')
-        plt.show()
+        figure_create_parameter_plot(error_short, error_long, (error_short+error_long)/2, 'K', K_lst, 'tau', tau, 'gist_heat_r', n_colors=50, norm = 'log')
     
 
 
@@ -180,8 +241,7 @@ def plot_mse_total(short, long, K_lst, tau):
     short_ktau_mse = to_matrix(short, len(K_lst), len(tau), 'MSE')
     long_ktau_mse = to_matrix(long, len(K_lst), len(tau), 'MSE')
     # specify plot style
-    figure_create_parameter_plot(short_ktau_mse, long_ktau_mse, (short_ktau_mse+long_ktau_mse)/2, 'K', K_lst, 'tau', tau, 'gist_heat', n_colors=50)
-    plt.show()
+    figure_create_parameter_plot(short_ktau_mse, long_ktau_mse, (short_ktau_mse+long_ktau_mse)/2, 'K', K_lst, 'tau', tau, 'gist_heat_r', n_colors=50)
     
 
     
@@ -193,7 +253,6 @@ def plot_ind_point(short, long, K_lst, tau):
     long_ktau_indp_delta =  long_ktau_indp - stimulus_range_l[int(len(stimulus_range_l)/2)]
     # specify plot style
     figure_create_parameter_plot(short_ktau_indp_delta, long_ktau_indp_delta, (short_ktau_indp_delta-long_ktau_indp_delta)/2, 'K', K_lst, 'tau', tau, 'coolwarm', n_colors=20, norm=divnorm)
-    plt.show()
     
     
     
