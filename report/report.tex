@@ -49,6 +49,7 @@
 	\vspace{0.7cm}
 	{\scshape\LARGE Report \par}
 	\vspace{0.05cm}
+	\vspace{0.05cm}
 	{\huge\bfseries Computational Simulation of Time Perception: Model Description and Implementation \par}
 	\vspace{1.5cm}
 	{\Large Katharina \textsc{Bracher} \par}
@@ -124,7 +125,7 @@ In this report, the intermediate input regime is explored: higher inputs result 
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics{figures/defCircuit.drawio.pdf}
+	\includegraphics{figures/defCircuit.pdf}
 	\caption{\textbf{Basic Circuit and Input Regimes} 
 	\textbf{(a)} $u$ and $v$ share a common input $I$. The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength. Both project to the output unit $y$ with an excitatory connection from $u$ and an inhibitory connection from $v$. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. 
 	\textbf{(b)} Dynamics of $y$ for intermediate regime with input $I=0.75$ in gray and $I=0.65$ black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
@@ -144,7 +145,7 @@ The time from the end of the measurement epoch until the threshold-crossing of $
 
 \begin{figure}
 	\centering
-	\includegraphics{figures/epochs.drawio.pdf}
+	\includegraphics{figures/epochs.pdf}
 	\caption{\textbf{Extended Circuit for Experiment Simulation} 
 	\textbf{(a)} The circuits for measurement, reproduction and delay epoch are displayed. All circuits comprise the same basic structure with different additional elements that are unique for the epoch. Initial values of $u, v, y$ and $I$ are fed into the delay circuit for the duration of the initial interval. $u$ and $v$ are reset with a transient input $I_r$ before end values of $u, v, y$ and $I$ are transferred to the measurement circuit as new initial conditions. After the duration of the stimulus interval the difference between $y$ and the threshold $y_{\text{th}}$ is used with the memory parameter $K$ to update $I$ together with another reset of $u$ and $v$. The values are transferred with all other variables to the reproduction circuit. The reproduction epoch ends when $y$ reaches the threshold $y_{\text{th}}$ from below. Before the presentation of another stimulus interval, there is again a delay period with no update of $I$. The reset mechanism enables the model to simulate an arbitrary number of stimulus intervals. Adapted from \cite{Egger2020}.
 	\textbf{(b)} Interval reproduction experiment with stimulus interval $t_s$ (blue) and reproduction $t_r$ (red).
@@ -180,9 +181,11 @@ To simulate variability in the reproductions as it is found in real data, noise 
 If noise levels in the model are too high ($\sigma>0.25*I$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}). 
 For an example experiment with a sequence of five trials see Figure \ref{fig:experiment}. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% smaller experiment example; add I over exp evtl y for 3 stim extrema
 \begin{figure}[ht]
 	\centering
-	\includegraphics{figures/trial.drawio.pdf}
+	\includegraphics{figures/trial.pdf}
 	\caption{\textbf{Experiment Simulation} Example trial with a sequence of five stimulus intervals (600, 700, 400, 500, 700 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$, other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 820, 780, 490, 450, 570 ms).}
 \label{fig:experiment}
 \end{figure}
@@ -196,7 +199,8 @@ Adjusting this weight in accordance with error minimization, leads to putting mo
 % results in range effect, but general underestimation for large range (probably due to high variance pushes K down)
 % optimizing for bias only, K is not consistent anymore, no range effect
 
-%Figure: Optimization, MSE long short, bias, behavior for one tau, CV
+%Figure: Optimization, MSE long short, bias, behavior for one tau
+% also for high I regime? -> supp
 
 \section{Supplements}
 \subsection{Methods}
@@ -208,11 +212,12 @@ Noise is independently sampled for every time step from a Gaussian distribution 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Experiment Simulation}
 % Stimulus List criterions
-% seeds
+% Figure seeds, CV
+% Figure y, I in experiment for both regimes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Optimality by Minimizing MSE}
-To minimize the error of interval reproductions across the experiment, we defined the bias as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimuli intervals in $S$. We minimized the $\text{MSE} = \text{bias}^2+\text{var}$.
+We minimized the error in the interval reproductions across the experiment, we defined the $\text{MSE} = \text{bias}^2+\text{var}$, with the bias specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimuli intervals in $S$.
 \begin{equation} \label{MSE}
 	\begin{split}
 	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
@@ -233,8 +238,7 @@ In the intermediate input regime higher $I$ result in a shallower slope of $y$.
 % threshold over 0 -0.2
 % higher I results in steeper slope
 
-% Figure: phase plane, different inputs, realtion I and slope, behavior u, v, y, I, 
-% Figure y, I in experiment for both regimes 
+% Figure: phase plane, different inputs, realtion I and slope, bsp behavior u, v, y, I
 
 
 \subsection{Design}

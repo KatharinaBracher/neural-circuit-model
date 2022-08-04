@@ -390,6 +390,19 @@ details
 - K is consistent with Bayes, higher weight update for short range, lower weight update for long range
 - the reset impulse has an influence on estimate (activity level where it stats to ramp changes)
 
+Optimizing behaviour
+- **MSE** opt. K
+  - too shallow slope, needs to be larger to be plausible slope respecially for short range
+- **Slope** Data opt. K
+  - larger K especially for long range compared to MSE opt. K
+  - but if we look at global minimum MSE K fits better to MSE (in intermedaite)
+  - to avoide general underestimation in large range -> need higher K (similar to short range), much higher tau and higher thresold to achieve overestmation
+- **BIAS2** opt K higher, similar between s and l
+  - too steep slopes, K needs to be smaller
+  - not optimizing for bias2 only
+- **VAR** is pulling K to smaller values -> but flat curve?
+- **BIAS**: 0 bias difficult to achive for long range, need much larger K
+
 
 ## Other
 - clean code

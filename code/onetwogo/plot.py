@@ -51,7 +51,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(4.5,4)) #20, 7 #FIT: 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(4.4,3.5)) #20, 7 #FIT: 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -77,22 +77,23 @@ class SimulationPlot:
     def get_frames(self):
         '''gets times of all measurement stages and production stages'''
         reset_indices = self.data.reset_indices
-
+        start=1
         m_start = reset_indices[1::3]
         m_stop = reset_indices[2::3]
 
         p_start = reset_indices[2::3]
         p_stop = reset_indices[3::3]
-        return zip(p_start, p_stop, m_start, m_stop)
+        return zip(p_start[start:], p_stop[start:], m_start[start:], m_stop[start:])
 
     def plot_measurement_production_frames(self):
         '''underlays color to all measurment and production stages'''
         _, ax = self.subplots
-
+        params = self.data.params
+        start=146+61+115+70
         for p_start, p_stop, m_start, m_stop in self.get_frames():
             for a in [0, 1, 2, 3]:
-                ax[a].axvspan(p_start, p_stop, facecolor='r', alpha=0.1)
-                ax[a].axvspan(m_start, m_stop, facecolor='b', alpha=0.1)
+                ax[a].axvspan(p_start-start*params.dt, p_stop-start*params.dt, facecolor='indianred', alpha=0.2)
+                ax[a].axvspan(m_start-start*params.dt, m_stop-start*params.dt, facecolor='steelblue', alpha=0.2)
 
     def plot_trials(self, alpha):
         '''plots u. v, y, I over time'''
@@ -105,36 +106,41 @@ class SimulationPlot:
 
         print('Timeouts', len(timeout_index))
 
-        start=146
-        start_=1
+        start=146+61+115+70
+        start_=4
 
-        ax[0].plot(steps[start:], simulation[start:, 0], c='grey', alpha=alpha)
-        ax[0].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 0])),
+        ax[0].plot(steps[:-start], simulation[start:, 0], c='grey', alpha=alpha)
+        ax[0].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 0])),
                      np.max(np.array(simulation[start:, 0])), color='grey', alpha=0.5)
-        ax[0].set_title('du/dt', fontsize=11)
+        ax[0].set_title('Experiment', fontsize=11)
+        ax[0].set_ylabel('u')
 
-        ax[1].plot(steps[start:], simulation[start:, 1], 'grey', alpha=alpha)
-        ax[1].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 1])),
+        ax[1].plot(steps[:-start], simulation[start:, 1], 'grey', alpha=alpha)
+        ax[1].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 1])),
                      np.max(np.array(simulation[start:, 1])), color='grey', alpha=0.5)
-        ax[1].set_title('dv/dt', fontsize=11)
+        #ax[1].set_title('dv/dt', fontsize=11)
+        ax[0].set_ylabel('v')
 
-        ax[2].plot(steps[start:], simulation[start:, 2], 'grey', alpha=alpha)
-        ax[2].hlines(params.th, start*params.dt, simulation.shape[0]*params.dt, linestyle='--', color='lightgray')
-        ax[2].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 2])),
+        ax[2].plot(steps[:-start], simulation[start:, 2], 'grey', alpha=alpha)
+        ax[2].hlines(params.th, 0, (simulation.shape[0]-start)*params.dt, linestyle='--', color='lightgray')
+        ax[2].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 2])),
                      np.max(np.array(simulation[start:, 2])*1.1), color='grey', alpha=0.5)
         #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
-        ax[2].set_title('dy/dt', fontsize=11)
+        #ax[2].set_title('dy/dt', fontsize=11)
+        ax[2].set_ylabel('y')
 
-        ax[3].plot(steps[start:], simulation[start:, 3], 'grey', alpha=alpha)
-        ax[3].vlines(reset_indices[start_:], np.min(np.array(simulation[start:, 3])),
+        ax[3].plot(steps[:-start], simulation[start:, 3], 'grey', alpha=alpha)
+        ax[3].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 3])),
                      np.max(np.array(simulation[start:, 3])), color='grey', alpha=0.5)
-        ax[3].set_title('dI/dt', fontsize=11)
-        ax[3].set_xlabel('Time (ms)')
+        # ax[3].set_title('dI/dt', fontsize=11)
+        ax[3].set_ylabel('I')
+        ax[3].set_xlabel('time [ms]')
 
         for i in [0,1,2,3]:
             # Hide the right and top spines
             ax[i].spines['right'].set_visible(False)
             ax[i].spines['top'].set_visible(False)
+            # ax[i].set_xticklabels(np.arrange(0, len(steps)-start))
         
         plt.tight_layout()
 
@@ -189,8 +195,8 @@ class BehavioralPlot:
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                      [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(slope))
-            plt.xlabel('Stimulus (ms)')
-            plt.ylabel('Production (ms)')
+            plt.xlabel('stimulus [ms]')
+            plt.ylabel('production [ms]')
         else:
             subplot = ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                               [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
@@ -233,7 +239,7 @@ class SortedPlot:
             colors = colors_long
 
 
-        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=( 6.4,3.5))  # 20,7
+        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(7.2,3.5))  # 20,7
         ax.flatten()[0].set_ylabel('y measur.', fontsize=11)
         ax.flatten()[stimulus_range_len].set_ylabel('y reprod.', fontsize=11)
         ax.flatten()[stimulus_range_len*2].set_ylabel('I reprod.', fontsize=11)
@@ -242,20 +248,71 @@ class SortedPlot:
         for j, (c, stim, lst) in enumerate(zip(colors, data.stimulus_range,  data.measurement_sorted)):
             ax.flatten()[j].set_title(str(stim), fontsize=11)
             for i in lst:
-                ax.flatten()[j].plot(i, alpha=0.3, color=c)
+                ax.flatten()[j].plot(i, alpha=0.3, color=c, lw=0.6)
 
         for j, (c, lst) in enumerate(zip(colors, data.production_sorted)):
             for i in lst:
-                ax.flatten()[j+7].plot(i, alpha=0.3, color=c)
+                ax.flatten()[j+7].plot(i, alpha=0.3, color=c, lw=0.6)
             # ax.flatten()[j+7].hlines(params.th, 0, 75, linestyle='--', color='lightgray')
             ax.flatten()[j+7].axhline(y=params.th, color='lightgray', linestyle='--')
 
             
         for j, (c, lst) in enumerate(zip(colors, data.I_sorted)):
             for i in lst:
-                ax.flatten()[j+14].plot(i, alpha=0.3, color=c)
+                ax.flatten()[j+14].plot(i, alpha=0.3, color=c, lw=0.6)
             ax.flatten()[17].set_xlabel('time [ms]')
 
         for i in range(21):
             ax.flatten()[i].locator_params(axis='y', nbins=2)
             ax.flatten()[i].locator_params(axis='x', nbins=2)
+            ax.flatten()[i].spines['right'].set_visible(False)
+            ax.flatten()[i].spines['top'].set_visible(False)
+
+
+    def plot_sorted_3(self):
+
+        data = self.data
+        params = self.data.params
+        stimulus_range = [400,550,700]
+        production_sorted = np.array(data.production_sorted, dtype=object)[[0,3,6]]
+        measurement_sorted = np.array(data.measurement_sorted, dtype=object)[[0,3,6]]
+        I_sorted = np.array(data.I_sorted,dtype=object)[[0,3,6]]
+        xticks=[0, 25, 50, 75, 100, 125]
+        xticklabels=[0, 250, 500, 750, 1000, 1250]
+        colors = colors_short
+
+        # for long range
+        if data.stimulus_range[0]>400:
+            xticks=[0, 50, 100, 150, 200]
+            xticklabels=[0, 500, 1000, 1500, 2000]
+            colors = colors_long
+
+
+        _, ax = plt.subplots(3,3, sharex=True, sharey='row', figsize=(2,3.3))  # 20,7
+        ax.flatten()[0].set_ylabel('y measur.', fontsize=11)
+        ax.flatten()[3].set_ylabel('y reprod.', fontsize=11)
+        ax.flatten()[3*2].set_ylabel('I reprod.', fontsize=11)
+        plt.setp(ax, xticks=xticks, xticklabels=xticklabels)
+
+        for j, (stim, lst) in enumerate(zip(stimulus_range, measurement_sorted)):
+            ax.flatten()[j].set_title(str(stim), fontsize=11)
+            for i in lst:
+                ax.flatten()[j].plot(i, alpha=0.3, color='steelblue', lw=0.6)
+
+        for j, lst in enumerate(production_sorted):
+            for i in lst:
+                ax.flatten()[j+3].plot(i, alpha=0.3, color='indianred', lw=0.6)
+            # ax.flatten()[j+7].hlines(params.th, 0, 75, linestyle='--', color='lightgray')
+            ax.flatten()[j+3].axhline(y=params.th, color='lightgray', linestyle='--')
+
+            
+        for j, lst in enumerate(I_sorted):
+            for i in lst:
+                ax.flatten()[j+6].plot(i, alpha=0.3, color='k', lw=0.6)
+            ax.flatten()[7].set_xlabel('time [ms]')
+
+        for i in range(9):
+            ax.flatten()[i].locator_params(axis='y', nbins=2)
+            ax.flatten()[i].locator_params(axis='x', nbins=2)
+            ax.flatten()[i].spines['right'].set_visible(False)
+            ax.flatten()[i].spines['top'].set_visible(False)

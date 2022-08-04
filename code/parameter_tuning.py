@@ -61,13 +61,13 @@ def create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, 
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
-    h1.set_title('short')
+    h1.set_title('short', fontsize=11)
 
     h2.set_xlabel(p2)
-    h2.set_title('long')
+    h2.set_title('long', fontsize=11)
 
     h3.set_xlabel(p2)
-    h3.set_title('short~long')
+    h3.set_title('short~long', fontsize=11)
     
     plt.show()
     
@@ -79,7 +79,7 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     maxmax = np.max([np.nanmax(short), np.nanmax(long), np.nanmax(shortlong)])
     print(minmin, maxmax)
     
-    fig, ax = plt.subplots(1,2, figsize=(5,2), sharex=True, sharey=True)
+    fig, ax = plt.subplots(1,2, figsize=(4,1.6), sharex=True, sharey=True)
     if norm == 'log':
         norm = mpl.colors.LogNorm(vmin=minmin, vmax=maxmax)
         
@@ -88,7 +88,7 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
         
     else:
-        cbar_ax = fig.add_axes([.91, .25, .03, .6]) #x, y, breite, höhe
+        cbar_ax = fig.add_axes([.91, 0.2, .02, .6]) #x, y, breite, höhe
         h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, 
                          ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, 
@@ -100,10 +100,10 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
-    h1.set_title('short')
+    h1.set_title('short', fontsize=11)
 
     h2.set_xlabel(p2)
-    h2.set_title('long')
+    h2.set_title('long', fontsize=11)
     
     
 
@@ -113,23 +113,23 @@ def slope_behavior(short, long, p1, p1_lst, p2, p2_lst, cmap, mask_s, mask_l, n_
     maxmax = np.max([np.nanmax(short), np.nanmax(long)])
     print(minmin, maxmax)
     
-    fig, ax = plt.subplots(1,2, figsize=(10,4), sharex=True, sharey=True)
+    fig, ax = plt.subplots(1,2, figsize=(4,1.6), sharex=True, sharey=True)
     
-    cbar_ax = fig.add_axes([.91, .25, .03, .6]) #x, y, breite, höhe
+    cbar_ax = fig.add_axes([.91, 0.2, .02, .6]) #x, y, breite, höhe
     h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm,
-        annot=mask_s,  fmt='.2', annot_kws={"size": 7})
+        annot=mask_s,  fmt='.2', annot_kws={"size": 5})
     h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm,
-        annot=mask_l,  fmt='.2', annot_kws={"size": 7})
+        annot=mask_l,  fmt='.2', annot_kws={"size": 4})
 
     ax[0].locator_params(axis='y', nbins=4)
     ax[0].locator_params(axis='x', nbins=4)
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
-    h1.set_title('short')
+    h1.set_title('short', fontsize=11)
 
     h2.set_xlabel(p2)
-    h2.set_title('long')
+    h2.set_title('long', fontsize=11)
     
     
     
@@ -190,24 +190,23 @@ def plot_mse_sep(short_, long_, K_lst, seed):
     #minmin = np.min([np.nanmin(short), np.nanmin(long), np.nanmin(shortlong)])
     #maxmax = np.max([np.nanmax(short), np.nanmax(long), np.nanmax(shortlong)])
     
-    fig, ax = plt.subplots(1,2, figsize=(5,2), sharex=True, sharey=True)
+    fig, ax = plt.subplots(1,2, figsize=(4,1.6), sharex=True, sharey=True)
+    cbar_ax = fig.add_axes([.91, 0.2, .02, .6])
     #if norm == 'log':
         #norm = mpl.colors.LogNorm(vmin=minmin, vmax=maxmax)
 
-    h1 = sns.heatmap(short, xticklabels=False, yticklabels=K_lst, 
-                     ax=ax[0], cmap = cmap)
-    h2 = sns.heatmap(long, xticklabels=False, yticklabels=K_lst, 
-                     ax=ax[1], cmap = cmap)
+    h1 = sns.heatmap(short, xticklabels=False, yticklabels=K_lst, ax=ax[0], cmap = cmap, cbar=False)
+    h2 = sns.heatmap(long, xticklabels=False, yticklabels=K_lst, ax=ax[1], cmap = cmap, cbar_ax=cbar_ax)
 
     ax[0].locator_params(axis='y', nbins=4)
     ax[0].locator_params(axis='x', nbins=4)
     
     h1.set_xlabel('initialization')
     h1.set_ylabel('K')
-    h1.set_title('short')
+    h1.set_title('short', fontsize=11)
 
     h2.set_xlabel('initialization')
-    h2.set_title('long')
+    h2.set_title('long', fontsize=11)
     
 
 def plot_mse(short, long, K_lst, tau, full=True):
