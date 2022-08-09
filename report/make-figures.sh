@@ -5,4 +5,5 @@
 #drawio -x -f pdf -o figures/interIparams.pdf figures/interIparams.drawio.svg
 #drawio -x -f pdf -o figures/codeStructure.pdf figures/codeStructure.drawio.svg
 
-drawio -x -f pdf -o poster/poster.pdf poster/poster.drawio.svg
+#drawio -x -f pdf -o poster/poster.pdf poster/poster.drawio.svg
+drawio -x -f pdf -o poster/epochs.pdf poster/epochs.drawio.svg

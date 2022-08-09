@@ -113,13 +113,13 @@ class SimulationPlot:
         ax[0].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 0])),
                      np.max(np.array(simulation[start:, 0])), color='grey', alpha=0.5)
         ax[0].set_title('Experiment', fontsize=11)
-        ax[0].set_ylabel('u')
+        ax[0].set_ylabel(r'$u$')
 
         ax[1].plot(steps[:-start], simulation[start:, 1], 'grey', alpha=alpha)
         ax[1].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 1])),
                      np.max(np.array(simulation[start:, 1])), color='grey', alpha=0.5)
         #ax[1].set_title('dv/dt', fontsize=11)
-        ax[0].set_ylabel('v')
+        ax[0].set_ylabel(r'$v$')
 
         ax[2].plot(steps[:-start], simulation[start:, 2], 'grey', alpha=alpha)
         ax[2].hlines(params.th, 0, (simulation.shape[0]-start)*params.dt, linestyle='--', color='lightgray')
@@ -127,13 +127,13 @@ class SimulationPlot:
                      np.max(np.array(simulation[start:, 2])*1.1), color='grey', alpha=0.5)
         #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
         #ax[2].set_title('dy/dt', fontsize=11)
-        ax[2].set_ylabel('y')
+        ax[2].set_ylabel(r'$y$')
 
         ax[3].plot(steps[:-start], simulation[start:, 3], 'grey', alpha=alpha)
         ax[3].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 3])),
                      np.max(np.array(simulation[start:, 3])), color='grey', alpha=0.5)
         # ax[3].set_title('dI/dt', fontsize=11)
-        ax[3].set_ylabel('I')
+        ax[3].set_ylabel(r'$I$')
         ax[3].set_xlabel('time [ms]')
 
         for i in [0,1,2,3]:
@@ -196,7 +196,7 @@ class BehavioralPlot:
                      [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+100, 'slope='+str(slope))
             plt.xlabel('stimulus [ms]')
-            plt.ylabel('production [ms]')
+            plt.ylabel('reproduction [ms]')
         else:
             subplot = ax.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
                               [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
@@ -240,9 +240,9 @@ class SortedPlot:
 
 
         _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(7.2,3.5))  # 20,7
-        ax.flatten()[0].set_ylabel('y measur.', fontsize=11)
-        ax.flatten()[stimulus_range_len].set_ylabel('y reprod.', fontsize=11)
-        ax.flatten()[stimulus_range_len*2].set_ylabel('I reprod.', fontsize=11)
+        ax.flatten()[0].set_ylabel(r'$y$'+' measur.', fontsize=11)
+        ax.flatten()[stimulus_range_len].set_ylabel(r'$y$'+' reprod.', fontsize=11)
+        ax.flatten()[stimulus_range_len*2].set_ylabel(r'$I$'+' reprod.', fontsize=11)
         plt.setp(ax, xticks=xticks, xticklabels=xticklabels)
 
         for j, (c, stim, lst) in enumerate(zip(colors, data.stimulus_range,  data.measurement_sorted)):
@@ -289,9 +289,9 @@ class SortedPlot:
 
 
         _, ax = plt.subplots(3,3, sharex=True, sharey='row', figsize=(2,3.3))  # 20,7
-        ax.flatten()[0].set_ylabel('y measur.', fontsize=11)
-        ax.flatten()[3].set_ylabel('y reprod.', fontsize=11)
-        ax.flatten()[3*2].set_ylabel('I reprod.', fontsize=11)
+        ax.flatten()[0].set_ylabel(r'$y$'+' measur.', fontsize=11)
+        ax.flatten()[3].set_ylabel(r'$y$'+' reprod.', fontsize=11)
+        ax.flatten()[3*2].set_ylabel(r'$I$'+' reprod.', fontsize=11)
         plt.setp(ax, xticks=xticks, xticklabels=xticklabels)
 
         for j, (stim, lst) in enumerate(zip(stimulus_range, measurement_sorted)):

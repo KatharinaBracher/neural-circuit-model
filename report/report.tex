@@ -104,9 +104,9 @@ Flexible speed control can be achieved by a simple model consisting of three uni
 The dynamics of $u, v$, and $y$ are defined as follows:
 \begin{equation} \label{circuit}
 	\begin{split}
-	\tau\frac{du}{dt} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u) \;, \\
-	\tau\frac{dv}{dt} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v) \;, \\
-	\tau\frac{dy}{dt} & = -y + W_{yu}u - W_{yv}v + \eta_y \;.
+	\tau\frac{\text{d}u}{\text{d}t} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u) \;, \\
+	\tau\frac{\text{d}v}{\text{d}t} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v) \;, \\
+	\tau\frac{\text{d}y}{\text{d}t} & = -y + W_{yu}u - W_{yv}v + \eta_y \;.
 	\end{split}
 \end{equation}
 Two units, $u$ and $v$, receive a tonic symmetric input $I$ ($W_{uI}=W_{vI}=6$) and are mutually inhibiting each other ($W_{uv}=W_{vu}=6$). 
@@ -160,15 +160,15 @@ If $y$ crossed the threshold before the measurement epoch ends, so is above $y_{
 $I$ is adjusted according to the error $(y-y_{\text{th}})$, weighted by a memory parameter $K$ right at the end of the measurement epoch
 \begin{equation} \label{Iupdate}
 	\begin{split}
-	\tau\frac{dI}{dt} & = sK(y-y_{\text{th}}) \;.
+	\tau\frac{\text{d}I}{\text{d}t} & = sK(y-y_{\text{th}}) \;.
 	\end{split}
 \end{equation}
 The update of $I$ is only active for a pulse between the measurement and reproduction epoch ($s=1$) and inactive for all other times ($s=0$).
 Further, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamics for the subsequent epoch (Fig. \ref{fig:epochs}c)
 \begin{equation} \label{experimentcircuit}
 	\begin{split}
-	\tau\frac{du}{dt} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u - I_r) \;,\\
-	\tau\frac{dv}{dt} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v + I_r) \;.\\
+	\tau\frac{\text{d}u}{\text{d}t} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u - I_r) \;,\\
+	\tau\frac{\text{d}v}{\text{d}t} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v + I_r) \;.\\
 	\end{split}
 \end{equation}
 Resetting the dynamics after the reproduction epoch enables the model to simulate an arbitrary number of stimulus intervals. 
