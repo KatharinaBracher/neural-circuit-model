@@ -185,7 +185,8 @@ For an example experiment with a sequence of five trials see Figure \ref{fig:exp
 In the full simulation 500 stimuli, randomly chosen from a stimulus range, were presented. 
 The stimulus range consisted of seven uniformly distributed stimuli from short and long stimulus range 400-700 ms for the short range and 700-1000 ms for long range. The ranges both contained a 700 ms stimulus interval.
 %suppl. Fig
-This results in a distribution of reproduced time intervals for each stimulus (Fig. \ref{fig:parameter}b) and a distribution of inputs that drive the reproduction (Fig. \ref{fig:experiment}b).
+This results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the reproduction (Fig. \ref{fig:experiment}b).
+Taking the mean over the distribution of reproduction times for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:parameter}c). 
 
 \begin{figure}[ht]
 	\centering
@@ -197,29 +198,30 @@ This results in a distribution of reproduced time intervals for each stimulus (F
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\subsection{Update Weight in Accordance with Error Minimization}
-We asked, whether the observed behavioral effects in real data (Fig. \ref{fig:behavioraleffects}) can be reproduced by the experiment simulation with the circuit model.
+\subsection{Memory Parameter in Accordance with Error Minimization}
+A crucial parameter is the memory parameter $K$, the weight with which the input is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
+We asked whether the observed behavioral effects in real data (Fig. \ref{fig:behavioraleffects}) can be reproduced by the experiment simulation with the circuit model, adjusting $K$. 
+Biological plausible slopes lie around 0.83 for the short and 0.73 for the long range (\cite{Thurley2018}, \cite{Jazayeri2010}). Choosing certain values for $K$, model produced plausible slopes for various time constants (Fig. \ref{fig:parameter}a).
+Choosing suitable parameters for both ranges, there is a regression to the mean with plausible slopes for both the short and the long range, where K has to be set to a smaller value for the long range, putting less weight on the update compared to the short range.
 
-A crucial parameter is the weight $K$, with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
-Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
-% For what K is the MSE (Supp) minimal? testing for differnt time constants
-% Effect larger K for smaller range, smaller K for larger range (putting less weight on the update)
+To find optimal $K$ we minimized the mean squared error, defined as the sum of the squared bias and variance of the mean reproductions (Supplements Eq. \ref{MSE}).
+For larger time constants $\tau$ the optimal $K$ increased as well. For all time constants optimal $K$ was smaller for the long range compared to the short range, as already found for $K$ that result in plausible slopes (Fig. \ref{fig:parameter}b). 
+In the behavior, the regression to the mean and the range effect, with a stronger regression for the long range is clearly visible (Fig. \ref{fig:parameter}c). 
+Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
+Yet, the slope for the small ranges lies below the slopes found in data. 
+Furthermore, a general underestimation for the large range is observed.
 % results in range effect, but general underestimation for large range (probably due to high variance pushes K down)
 % optimizing for bias only, K is not consistent anymore, no range effect
-
-%Figure: Optimization, MSE long short, bias, behavior for one tau
-% also for high I regime? -> supp
-
-\subsection{Reproducing Behavioral Effects}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/interIparams.pdf}
-	\caption{\textbf{Parameter Optimization and Behavioral Effects} 
-	\textbf{(a)} 
-	\textbf{(b)}
-	\textbf{(c)}
-	\textbf{(d)}}
+	\caption{\textbf{Behavioral Effects and Parameter Optimization} 
+	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$, and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope for each experiment stimulation, which describes the behavioral results. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behavioral plausible slopes are encircled.
+	\textbf{(b)} Optimization of the weight given to the update, $K$, for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimuli range. The minimal error for each $\tau$ is encircled. 
+	\textbf{(c)} Mean reproductions for simulation with 500 trials and optimized $K$ for a time constant $\tau = 140$. For the simulation with short stimulus range (black) optimal $K$ was 14, with the long stimulus range (grey) optimal $K$ was 10.5. If the mean lies on the identity line, reproductions corresponds to the stimulus time interval.  
+	\textbf{(d)} Standard deviation of reproductions for each stimulus for the short ad long range from the simulation in (c).
+	}
 \label{fig:parameter}
 \end{figure}
 
@@ -235,6 +237,27 @@ Noise is independently sampled for every time step from a Gaussian distribution 
 % Stimulus List criterions
 % Figure seeds, CV
 % Figure y, I in experiment for both regimes
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/supp_interI.pdf}
+	\caption{%\textbf{xx} 
+	\textbf{(a)} For experiment simulation two stimuli ranges were used. The short range contained stimuli from 400 to 700 ms, the long range contained stimuli from 700 to 1000 ms.
+	\textbf{(b)} Standard deviation of reproductions for each stimulus in an experiment simulation with 500 trials and $\tau=100$. $K$ was set to 8.5 and 6 for the short and long range respectively. 
+	\textbf{(c)} Same as (b) but standard deviation of reproductions normalized by stimulus duration.
+	}
+\label{sup:rangeCV}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/supp_experiment.pdf}
+	\caption{\textbf{Simulation with optimal $K$}
+	\textbf{(a)} For an experiment simulation with 500 trials, a time constant $\tau$ of 140 and optimal $K=14$, the activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
+	\textbf{(b)} Same as (a) with stimuli chosen from the long range and $K$ set to 10.5. 
+	}
+\label{sup:experiment}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Optimality by Minimizing MSE}

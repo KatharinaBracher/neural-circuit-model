@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+# from mpltools import special
 
 
 colors_short = [(0.6196078431372549, 0.00392156862745098, 0.25882352941176473, 1.0),
@@ -190,6 +191,7 @@ class BehavioralPlot:
         if ax is None:
             if np.any(data.production_means):
                 plt.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', c='k', capsize=1, markersize=4)
+                # special.errorfill(stimulus_range, production_means, production_stds, ax = ax)  # label='sin', label_fill='sin error'
             if np.any(data.timeouts):
                 plt.text(np.min(stimulus_range)-100, np.max(stimulus_range)+60, 'to='+str(data.timeouts), size=7)
             plt.plot([stimulus_range[0]-100, stimulus_range[-1]+100],
@@ -202,6 +204,7 @@ class BehavioralPlot:
                               [stimulus_range[0]-100, stimulus_range[-1]+100], c='grey', linestyle='--', lw=0.6)
             if np.any(data.production_means):
                 ax.errorbar(stimulus_range, production_means, yerr=production_stds, fmt='-o', capsize=1, markersize=4, color=color)
+                # special.errorfill(stimulus_range, production_means, production_stds, ax = ax)
             #if np.any(data.timeouts):
                 #ax.text(np.min(stimulus_range)-100, np.max(stimulus_range), 'to='+str(data.timeouts), size=7)
             ax.text(np.min(stimulus_range)-100, np.max(stimulus_range)+50, 'slope=' +
