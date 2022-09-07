@@ -52,7 +52,7 @@
 	\vspace{0.05cm}
 	{\huge\bfseries Computational Simulation of Time Perception: Model Description and Implementation \par}
 	\vspace{1.5cm}
-	{\Large Katharina \textsc{Bracher} \par}
+	{\Large Katharina \textsc{M Bracher} \par}
 	%{Student ID: 11754625 \par}
 	\vspace{0.4cm}
 	{\large Supervision: Dr. Kay \textsc{Thurley} \par}
@@ -88,7 +88,7 @@ Modality-independence of these effects suggests the existence of a common underl
 	\textit{Range effect}: the regression to the mean gets more pronounced for ranges that comprise larger stimuli. 
 	\textit{Scalar variability}: the standard deviation of the reproduced magnitude grows linearly with larger rages. 
 	\textit{Sequential effects}: the history presented stimuli (e.g. ascending or descending order) has an influence on the reproduced magnitude. 
-	Figure from \cite{Petzschner2015}.}
+	Adapted from \cite{Petzschner2015}.}
 	\label{fig:behavioraleffects}
 \end{figure}
 
@@ -117,19 +117,21 @@ Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_
 Initial conditions of $u, v$ and $y$ have been optimized for in \cite{Egger2020} and are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$ (Fig. \ref{fig:circuit}a)
 
 Depending on the input $I$, the system shows different dynamics. For low levels of $I$ (0$<$I$<$0.5) the system has three fixed points (two stable, one unstable at $u=v$) and $y$ ramps up faster the higher input $I$. 
-For intermediate values of $I$ (0.5$<$I$<$1) the system still shows three fixed points of the same sort as in the low input regime but $y$ ramps up with a slope that is inversely proportional to the input $I$ ($y$ ramps up slower the higher input $I$, see Fig. \ref{fig:circuit}b). 
+For intermediate values of $I$ (0.5$<$I$<$1) the system still shows three fixed points of the same sort as in the low input regime (Fig. \ref{fig:circuit}b)but $y$ ramps up with a slope that is inversely proportional to the input $I$ ($y$ ramps up slower the higher input $I$, see Fig. \ref{fig:circuit}c). 
 For high $I$ (1$<$I) the system has one stable fixed point (at $u=v$) and $y$ ramps down faster for higher $I$.
-Thus, the speed at which the output $y$ evolves can be controlled by the input $I$ (Fig. \ref{fig:circuit}b) and determines the time interval after which $y$ reaches a fixed threshold $y_{\text{th}}$. 
+Thus, the speed at which the output $y$ evolves can be controlled by the input $I$ (Fig. \ref{fig:circuit}d) and determines the time interval after which $y$ reaches a fixed threshold $y_{\text{th}}$. 
 In interval reproduction experiments, reaching a threshold $y_{\text{th}}$ can be understood as movement initiation time which can be controlled for by adjusting $I$.
 In this report, the intermediate input regime is explored: higher inputs result in a shallower slope of $y$, such that the threshold $y_{\text{th}}$ is reached after a longer time interval.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% nullclines
 \begin{figure}[ht]
 	\centering
-	\includegraphics{figures/defCircuit.pdf}
+	\includegraphics{figures/defCircuit_nullcl.pdf}
 	\caption{\textbf{Basic Circuit and Input Regimes} 
 	\textbf{(a)} $u$ and $v$ share a common input $I$. The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength. Both project to the output unit $y$ with an excitatory connection from $u$ and an inhibitory connection from $v$. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. 
-	\textbf{(b)} Dynamics of $y$ for intermediate regime with input $I=0.75$ in gray and $I=0.65$ black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
-	\textbf{(c)} Dynamics of $u, v, y$ for inputs from $0.1\leq I \leq 1.5$ are shown. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$. With these initial conditions and values of $I>=0.5$, the relation of steady state activity of $y$ (and slope to reach the steady state) is inverse to $I$ (intermediate and high $I$ regime). For values $I<=1$ the activity of $y$ ramps down (yellow corresponds to $I=1$). For $I<0.5$ the steady state (slope) is smaller the smaller $I$ (low $I$ regime, dark blue).}
+	\textbf{(b)} The control of the speed in $y$ can be analyzed in the phase plane of $u$ and $v$. The $u$ (dashed) and $v$ nullcline (solid) is shifted when the input is increased from $I=0.65$ (black) to $I=0.75$ (gray). In the intermediate regime the systems shows two stable and one unstable fixed point. The red cross indicated the initial conditions for the dynamics in (c). Depending on $I$, with the same initial conditions, the system evolves faster or slower to the stable fixed point. 
+	\textbf{(c)} Dynamics of $y$ for intermediate regime with input $I=0.75$ in gray and $I=0.65$ black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
+	\textbf{(d)} Dynamics of $u, v, y$ for inputs from $0.1\leq I \leq 1.5$ are shown. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$. With these initial conditions and values of $I>=0.5$, the relation of steady state activity of $y$ (and slope to reach the steady state) is inverse to $I$ (intermediate and high $I$ regime). For values $I<=1$ the activity of $y$ ramps down (yellow corresponds to $I=1$). For $I<0.5$ the steady state (slope) is smaller the smaller $I$ (low $I$ regime, dark blue).}
 \label{fig:circuit}
 \end{figure}
 
@@ -179,20 +181,26 @@ If the threshold is crossed particularly early, the trial is also classified as 
 
 To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data an monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
 If noise levels in the model are too high ($\sigma>0.25*I$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}). 
-For an example experiment with a sequence of five trials see Figure \ref{fig:experiment}. 
+For an example experiment with a sequence of five trials see Figure \ref{fig:experiment}a. 
+In the full simulation 500 stimuli, randomly chosen from a stimulus range, were presented. 
+The stimulus range consisted of seven uniformly distributed stimuli from short and long stimulus range 400-700 ms for the short range and 700-1000 ms for long range. The ranges both contained a 700 ms stimulus interval.
+%suppl. Fig
+This results in a distribution of reproduced time intervals for each stimulus (Fig. \ref{fig:parameter}b) and a distribution of inputs that drive the reproduction (Fig. \ref{fig:experiment}b).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% smaller experiment example; add I over exp evtl y for 3 stim extrema
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/trial.pdf}
-	\caption{\textbf{Experiment Simulation} Example trial with a sequence of five stimulus intervals (600, 700, 400, 500, 700 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$, other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 820, 780, 490, 450, 570 ms).}
+	\caption{\textbf{Experiment Simulation} 
+	\textbf{(a)} Example trial with a sequence of five stimulus intervals (600, 600, 500, 700, 600, 400 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$, other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 1140, 820, 690, 660, 650, 570 ms).
+	\textbf{(b)} The measurement (upper) and reproduction (middle) epoch and input for reproduction (lower) are shown over the course of the full experiment with the short stimulus range. The experiment consisted of 500 trials with randomly chosen stimuli from a stimulus range consisting of seven stimuli from 400 to 700 ms. All trials are sorted according to the stimulus and displayed together. Shown are trials for stimuli of 400, 550 and 700 ms.}
 \label{fig:experiment}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\subsection{Optimal Update Parameter}
-A crucial parameter is the weight with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
+\subsection{Update Weight in Accordance with Error Minimization}
+We asked, whether the observed behavioral effects in real data (Fig. \ref{fig:behavioraleffects}) can be reproduced by the experiment simulation with the circuit model.
+
+A crucial parameter is the weight $K$, with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
 Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
 % For what K is the MSE (Supp) minimal? testing for differnt time constants
 % Effect larger K for smaller range, smaller K for larger range (putting less weight on the update)
@@ -201,6 +209,19 @@ Adjusting this weight in accordance with error minimization, leads to putting mo
 
 %Figure: Optimization, MSE long short, bias, behavior for one tau
 % also for high I regime? -> supp
+
+\subsection{Reproducing Behavioral Effects}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/interIparams.pdf}
+	\caption{\textbf{Parameter Optimization and Behavioral Effects} 
+	\textbf{(a)} 
+	\textbf{(b)}
+	\textbf{(c)}
+	\textbf{(d)}}
+\label{fig:parameter}
+\end{figure}
 
 \section{Supplements}
 \subsection{Methods}
