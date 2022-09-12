@@ -61,10 +61,10 @@ def create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, 
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
-    h1.set_title('short', fontsize=11)
+    h1.set_title('short range', fontsize=11)
 
     h2.set_xlabel(p2)
-    h2.set_title('long', fontsize=11)
+    h2.set_title('long range', fontsize=11)
 
     h3.set_xlabel(p2)
     h3.set_title('short~long', fontsize=11)
@@ -101,11 +101,11 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     h1.set_xlabel(r'$\tau$')
     #h1.set_xlabel(p2)
     h1.set_ylabel(r'$K$', fontsize=11)
-    h1.set_title('short', fontsize=11)
+    h1.set_title('short range', fontsize=11)
 
     h2.set_xlabel(r'$\tau$')
     #h2.set_xlabel(p2)
-    h2.set_title('long', fontsize=11)
+    h2.set_title('long range', fontsize=11)
     
     
 
@@ -128,10 +128,10 @@ def slope_behavior(short, long, p1, p1_lst, p2, p2_lst, cmap, mask_s, mask_l, n_
     
     h1.set_xlabel(r'$\tau$')
     h1.set_ylabel(r'$K$')
-    h1.set_title('short', fontsize=11)
+    h1.set_title('short range', fontsize=11)
 
     h2.set_xlabel(r'$\tau$')
-    h2.set_title('long', fontsize=11)
+    h2.set_title('long range', fontsize=11)
     
     
     
@@ -205,10 +205,10 @@ def plot_mse_sep(short_, long_, K_lst, seed):
     
     h1.set_xlabel('initialization')
     h1.set_ylabel(r'$K$')
-    h1.set_title('short', fontsize=11)
+    h1.set_title('short range', fontsize=11)
 
     h2.set_xlabel('initialization')
-    h2.set_title('long', fontsize=11)
+    h2.set_title('long range', fontsize=11)
     
 
 def plot_mse(short, long, K_lst, tau, full=True):

@@ -90,7 +90,7 @@ class SimulationPlot:
         '''underlays color to all measurment and production stages'''
         _, ax = self.subplots
         params = self.data.params
-        start=146+61+115+70
+        start=146+61+56+70
         for p_start, p_stop, m_start, m_stop in self.get_frames():
             for a in [0, 1, 2, 3]:
                 ax[a].axvspan(p_start-start*params.dt, p_stop-start*params.dt, facecolor='indianred', alpha=0.2)
@@ -107,7 +107,7 @@ class SimulationPlot:
 
         print('Timeouts', len(timeout_index))
 
-        start=146+61+115+70
+        start=146+61+57+70
         start_=4
 
         ax[0].plot(steps[:-start], simulation[start:, 0], c='grey', alpha=alpha)
@@ -120,7 +120,7 @@ class SimulationPlot:
         ax[1].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 1])),
                      np.max(np.array(simulation[start:, 1])), color='grey', alpha=0.5)
         #ax[1].set_title('dv/dt', fontsize=11)
-        ax[0].set_ylabel(r'$v$')
+        ax[1].set_ylabel(r'$v$')
 
         ax[2].plot(steps[:-start], simulation[start:, 2], 'grey', alpha=alpha)
         ax[2].hlines(params.th, 0, (simulation.shape[0]-start)*params.dt, linestyle='--', color='lightgray')
