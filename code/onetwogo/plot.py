@@ -52,7 +52,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(4.4,3.5)) #20, 7 #FIT: 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(3.8,3.2)) #4.4,3.5 20, 7 #FIT: 6.4,4
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''

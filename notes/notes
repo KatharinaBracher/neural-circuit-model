@@ -401,7 +401,7 @@ Optimizing behaviour
   - too steep slopes, K needs to be smaller
   - not optimizing for bias2 only
 - **VAR** is pulling K to smaller values -> but flat curve?
-- **BIAS**: 0 bias difficult to achive for long range, need much larger K
+- **BIAS**: 0 bias difficult to achive for long range, need much larger 
 
 
 ## Other
@@ -423,6 +423,21 @@ Optimizing behaviour
   - tmux attach
     - python script
 - download results
+
+
+## Pitch
+- We experience time, but there is a key difference to the other senses: we don't have a specialized sensory organ to sense time. 
+- So how does the brain compute time? What are the neural mechanisms is unknown.
+- Here I am modeling time reproduction experiments. The model is a simple circuit model by the Jazayeri lab. It is based on the phenomenon of scaling, observed both at single cell and population activity level.
+- In experiment simulations with this model we try to reproduce typical behavioral effects that are found in time reproduction experiments. 
+
+Scaling in MFC
+- Medial frontal cortex (MFC): Scaling subspace: correspond to the evolution of activity with desired speed
+- Nonscaling subspace: reflect input that sets the speed 
+- scaling may originate within MFC or other cortical circuits projecting to MFC
+- Input is adjusting the system’s effective time constant in a flexible input-dependent manner
+
+
 
 
 
