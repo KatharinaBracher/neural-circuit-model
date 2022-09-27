@@ -84,7 +84,7 @@ sigma = 0.02
 reset=50
 Iinit=0.8
 
-K_lst = np.arange(20, 30, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
+K_lst = np.arange(1, 22, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
 th_lst = np.arange(0.6, 0.7, 0.75)
 delay_lst = np.arange(400, 1000, 50)
 tau = np.arange(100, 230, 10)  # np.arange(60, 200, 10)
@@ -100,17 +100,17 @@ th_lst = np.arange(0.05, 0.1, 0.2)
 tau = np.arange(20, 150, 10)'''
 
 # choose parameter range #############################################################
-srange = 'short'
+srange = 'long'
 # K_lst = [8.0]*250
 th_lst = [0.7]
-tau = [190, 200]
+tau = [130]
 delay_lst = [700]
-# seed_lst = np.arange(0, 21, 1)
-seed_lst = [0]
+seed_lst = np.arange(0, 21, 1)
+# seed_lst = [0]
 
 #name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-# name = 'LONG_K1-18_TAU60_th07_del700_sig02_seed'
-name = 'SHORT_K20-30_tau200_th07_del700_sig02_fixed_seed'
+name = 'LONG_K1-22_TAU130_th07_del700_sig02_seed'
+# name = 'SHORT_K20-30_tau200_th07_del700_sig02_fixed_seed'
 
 pool = 24
 batchsize = pool

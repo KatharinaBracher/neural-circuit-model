@@ -129,7 +129,7 @@ In this report, the intermediate input regime is explored: higher inputs result 
 	\includegraphics{figures/defCircuit_nullcl.pdf}
 	\caption{\textbf{Basic Circuit and Input Regimes} 
 	\textbf{(a)} $u$ and $v$ share a common input $I$. The input is governed by weights $W_{uI}$ and $W_{vI}$. The two units have reciprocal inhibitory connections with weights $W_{uv}$ and $W_{vu}$ that determine the inhibitory strength. Both project to the output unit $y$ with an excitatory connection from $u$ and an inhibitory connection from $v$. Excitatory and inhibitory connections are shown by filled and open arrows, respectively. 
-	\textbf{(b)} The control of the speed in $y$ can be analyzed in the phase plane of $u$ and $v$. The $u$ (dashed) and $v$ nullcline (solid) is shifted when the input is increased from $I=0.65$ (black) to $I=0.75$ (gray). In the intermediate regime the systems shows two stable and one unstable fixed point. The red cross indicated the initial conditions for the dynamics in (c). Depending on $I$, with the same initial conditions, the system evolves faster or slower to the stable fixed point. 
+	\textbf{(b)} The control of the speed in $y$ can be analyzed in the phase plane of $u$ and $v$. The $u$ (dashed) and $v$ nullcline (solid) is shifted when the input is increased from $I=0.65$ (black) to $I=0.75$ (gray). In the intermediate regime the systems shows two stable and one unstable fixed point. The red cross indicates the initial conditions for the dynamics in (c). Depending on $I$, with the same initial conditions, the system evolves faster or slower to the stable fixed point. 
 	\textbf{(c)} Dynamics of $y$ for intermediate regime with input $I=0.75$ in gray and $I=0.65$ black. There is an inverse relation of input strength and slope. With higher input, the threshold at 0.7 (dashed line) is reached after a longer time interval. 
 	\textbf{(d)} Dynamics of $u, v, y$ for inputs from $0.1\leq I \leq 1.5$ are shown. Initial conditions are set to $u_0=0.7 , v_0=0.2 , y_0=0.5$. With these initial conditions and values of $I>=0.5$, the relation of steady state activity of $y$ (and slope to reach the steady state) is inverse to $I$ (intermediate and high $I$ regime). For values $I<=1$ the activity of $y$ ramps down (yellow corresponds to $I=1$). For $I<0.5$ the steady state (slope) is smaller the smaller $I$ (low $I$ regime, dark blue).}
 \label{fig:circuit}
@@ -157,7 +157,7 @@ The time from the end of the measurement epoch until the threshold-crossing of $
 
 The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
 The error signal is determined at the end of the measurement epoch and is composed of the difference of $y$ to the threshold $y_{\text{th}}$.
-If the threshold $y_{\text{th}}$ is not reached during the measurement epoch, the slope has to be adjusted, such that y ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
+If the threshold $y_{\text{th}}$ is not reached during the measurement epoch, the slope has to be adjusted, such that $y$ ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
 If $y$ crossed the threshold before the measurement epoch ends, so is above $y_{\text{th}}$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased (Fig. \ref{fig:epochs}c).
 $I$ is adjusted according to the error $(y-y_{\text{th}})$, weighted by a memory parameter $K$ right at the end of the measurement epoch
 \begin{equation} \label{Iupdate}
@@ -179,21 +179,25 @@ This additional interval in the beginning of the experiment allows the model to 
 Reproductions that do not reach the threshold in a certain time span  or too early are classified as timeout trial.
 %sup
 
-To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data an monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
+To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
 If noise levels in the model are too high ($\sigma>0.2$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}).
-For all simulations $\sigma$ was set to 0.02 (Supplementary Fig. \ref{sup:rangeCV}b, c).
-For an example experiment with a sequence of five trials see Figure \ref{fig:experiment}a. 
-In the full simulation 500 stimuli, randomly chosen from a stimulus range, were presented. 
-The stimulus range consisted of seven uniformly distributed stimuli from short and long stimulus range 400-700 ms for the short range and 700-1000 ms for long range. The ranges both contained a 700 ms stimulus interval (Supplementary Fig. \ref{sup:rangeCV}a).
-This results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the reproduction (Fig. \ref{fig:experiment}b).
-Taking the mean over the distribution of reproduction times for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:parameter}c). 
+For all simulations $\sigma$ was set to 0.02 (Supplementary Fig. \ref{sup:CV}b, c).
+In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
+In the full simulation, 500 stimuli randomly chosen from a stimulus distribution were presented. The uniform distribution of time intervals is denoted as stimulus range. 
+The stimulus range consisted of seven stimuli ranging from 400-700 ms (\ref{fig:experiment}b).
+
+The experiment simulation results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the the activity of $y$ in the reproduction (Fig. \ref{fig:experiment}c).
+Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:experiment}d). 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/trial.pdf}
 	\caption{\textbf{Experiment Simulation} 
-	\textbf{(a)} Example trial with a sequence of five stimulus intervals (600, 600, 500, 700, 600, 400 ms). Initial values are set to $u_0=0.7 , v_0=0.2 , y_0=0.5. I_0=0.8$, other parameters are $\sigma=0.01$, the initial duration of 750 ms and a 700 ms delay period before new stimuli. The dynamics of $u, v, y $ and $I$ are displayed over time. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). The first stimulus interval is reproduced poorly as the system needs more trials to adapt the initial $I_0$ to a suitable range (reproduced times 1140, 820, 690, 660, 650, 570 ms).
-	\textbf{(b)} The measurement (upper) and reproduction (middle) epoch and input for reproduction (lower) are shown over the course of the full experiment with the short stimulus range. The experiment consisted of 500 trials with randomly chosen stimuli from a stimulus range consisting of seven stimuli from 400 to 700 ms. All trials are sorted according to the stimulus and displayed together. Shown are trials for stimuli of 400, 550 and 700 ms.}
+	\textbf{(a)} The dynamics of $u, v, y $ and $I$ are displayed over time for five consecutive example trials (650, 500, 600, 700, 450 ms) of an experiment simulation with 500 trials. Stimulus presentation and reproduction epochs are highlighted in blue and red, respectively. Before new stimuli presentations, there is a 700 ms delay period (white). Initial values for the experiment simulation are set to $u_0=0.7 , v_0=0.2 , y_0=0.5, I_0=0.8$. The added noise is set to $\sigma=0.02$ and the memory parameter to $K=5$. The threshold is set to $y_{\text{th}}=0.7$ (dashed line). Reproduced times are 690, 540, 550, 650, 490 ms.
+	\textbf{(b)} For the experiment simulation time intervals were randomly drawn from a discrete, uniform stimulus distribution. The range of time intervals contained stimuli from 400 to 700 ms with steps of 50 ms.
+	\textbf{(c)} The measurement (upper) and reproduction (middle) epoch of $y$ and input for reproduction (lower) are shown for the full experiment sorted according to stimulus interval. Shown are trials for stimuli of 400, 550 and 700 ms (depicted above).
+	\textbf{(d)} Mean reproduction and standard deviation (black) across trials for each stimulus interval of the experiment stimulation shown (c). If the mean lies on the identity line (dashed line), mean reproduction time corresponds to the stimulus interval. Red dots show the reproductions of the example trials shown in (a). 
+	}
 \label{fig:experiment}
 \end{figure}
 
@@ -208,10 +212,13 @@ Choosing certain values for $K$, the model produced plausible slopes for various
 
 \subsection{Optimization of $K$}
 Can behavioral effects also be achieved by adjusting $K$ in accordance with error minimization?
-To find optimal values for $K$ the minimized the mean squared error was used, defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq. \ref{MSE}).
+To find optimal values for $K$ mean squared error was minimized, defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq. \ref{MSE}).
+For evaluating effects in behavior, two stimulus ranges were used in simulations, denoted as short and long range with stimuli ranging from 400-700 ms and 700-1000 ms, respectively. Both ranges contained a 700 ms stimulus interval.
+%
 For larger time constants $\tau$ the optimal $K$ increased. For all time constants optimal values of $K$ were smaller for the long range compared to the short range, as already found for values of $K$ that result in plausible slopes.
-The corresponding time constant $\tau$ for the overall minimum of the MSE differed between the two stimulus ranges. For the short stimulus range, $\tau = 120 ms, K= 11$ yielded the overall minimum, for the long range the parameter pair was $\tau = 200 ms, K= 20$(Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b). 
-For the experiment simulation we chose a common $\tau$ for the short and long range of 140 ms. Corresponding optimal values for $K$ were 14 for the short and 10.5 for the long range. 
+The corresponding time constant $\tau$ for the overall minimum of the MSE differed between the two stimulus ranges. For the short stimulus range, $\tau = 120 ms, K = 11$ yielded the overall minimum, for the long range the parameter pair was $\tau = 200 ms, K = 20$(Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b). 
+%motivate
+For the experiment simulation we chose a common $\tau$ for the short and long range of 130 ms. Corresponding optimal values for $K$ were 13 for the short and 10 for the long range.
 Behavioral results show a regression to the mean with a stronger regression for the long range (range effect) (Fig. \ref{fig:parameter}c). For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:experiment}).
 Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
 Yet, the slope for the small ranges lies below the slopes found in data. 
@@ -224,10 +231,11 @@ When optimizing for the squared bias or variance only, no range effect is observ
 	\centering
 	\includegraphics{figures/interIparams.pdf}
 	\caption{\textbf{Behavioral Effects and Parameter Optimization} 
-	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$, and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope for each experiment stimulation, which describes the behavioral results. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behavioral plausible slopes are encircled. Empty spaces show simulations, that exceeded the number of timeout trials and where thus excluded from analysis.
-	\textbf{(b)} Optimization of the weight given to the update, $K$, for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimuli range. The minimal error for each $\tau$ is encircled in black. The minimal error across all $\tau$ is encircled in blue. 
-	\textbf{(c)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (grey) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 140 ms$. For the simulation with short stimulus range optimal $K$ was 14, with the long stimulus range optimal $K$ was 10.5. If the mean lies on the identity line, reproductions corresponds to the stimulus time interval.  
-	\textbf{(d)} Standard deviation of reproductions for each stimulus for the short ad long range from the simulation in (c).
+	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$ and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope of the linear fit between stimuli and reproductions. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behaviorally plausible slopes are encircled in blue and lie around 0.83 for the short and 0.73 for the long range. Empty spaces show simulations, that exceeded the number of timeout trials and where thus excluded from analysis.
+	\textbf{(b)} Optimization of the weight given to the update, $K$, for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimulus range. The minimal error for each $\tau$ is encircled in black and minimal error across all $\tau$ is additionally crossed. Parameter combinations that result in behavioral plausible slopes (a) are shaded in blue.
+	\textbf{(c)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (grey) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 130$ ms. For the simulation with short stimulus range optimal $K$ was 13, with the long stimulus range optimal $K$ was 10. 
+		Insert: For experiment simulations two stimuli ranges were used. The short range contained stimuli from 400 to 700 ms, the long range contained stimuli from 700 to 1000 ms.
+	\textbf{(d)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (c).
 	}
 \label{fig:parameter}
 \end{figure}
@@ -235,6 +243,7 @@ When optimizing for the squared bias or variance only, no range effect is observ
 
 
 \pagebreak
+
 \setcounter{section}{0}
 \addcontentsline{toc}{section}{Supplements}
 \section*{Supplements}
@@ -253,47 +262,48 @@ Noise is independently sampled for every time step from a Gaussian distribution 
 \subsection*{Timeouts}
 Reproductions that do not reach the threshold in a certain time span (twice the stimulus interval) are classified as timeout trials. 
 If the threshold is crossed particularly early, the trial is also classified as (early) timeout trial (crossing before 0.2 of stimulus interval).
-Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis. If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
-This only happened for unfavorable parameter regimes.
+Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis.
+If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
+For different parameter combinations, the number of timeouts were exceeded (a combination of too small $\tau$ and too high $K$).
 
 
 \subsection*{Experiment Simulation}
 In all simulations in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly.  
 For experiment simulations with 500 trials, the increase of the standard deviation of reproductions plateaus with noise levels $\sigma > 0.1$. This was tested with parameters set to $\tau=100$, $K_\text{short}=8.5$ and $K_\text{long}=6$.
-The standard deviation of reproductions grows monotonically for increasing stimulus intervals for tested noise levels (Supplementary Fig. \ref{sup:rangeCV}b).
+The standard deviation of reproductions grows monotonically for increasing stimulus intervals for tested noise levels (Supplementary Fig. \ref{sup:CV}b).
 Further, the coefficient of variation (CV) was used to quantify the degree of variation. It is defined as $\text{CV}=\frac{\sigma_\text{reproduction}}{\mu}$ for each stimulus, where $\mu$ corresponds to the stimulus interval and $\sigma_\text{reproduction}$ to the standard deviation of the corresponding reproductions. 
-To achieve variations close to real data, reproductions should have a CV of 0.2 to 0.4 that is constant over all stimulus intervals (Supplementary Fig. \ref{sup:rangeCV}c).
+To achieve variations close to real data, reproductions should have a CV of 0.2 to 0.4 that is constant over all stimulus intervals (Supplementary Fig. \ref{sup:CV}c).
 For all simulations the noise level $\sigma$ was set to 0.02, where the mean CV for the short range was 0.1 and for the long range 0.15 with the parameters from above.
 
 In all experiment simulations, a series of 500 trials was presented to the model.
-Stimuli were randomly chosen from the short (400-700 ms) or the long (700-1000 ms) stimulus range (Supplementary Fig. \ref{sup:rangeCV}a).
+Stimuli were randomly chosen from the short (400-700 ms) or the long (700-1000 ms) stimulus range (Supplementary Fig. \ref{sup:CV}a).
 The stimulus series had a uniform distribution of stimuli, a repetition of all seven stimuli in every 20 trial windows and no remarkable oscillation.
 To allow for optimization of $K$ the same stimulus series was used. Added noise was initialized equally to extract changes in results only based on parameter changes.
 Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations with $\tau=140$ and $\sigma=0.02$ the mean optimal $K$ and standard deviation for the short range were $K = 14.45$, std = 0.49 and for the long range $K = 9.91$, std = 0.77. 
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics{figures/supp_interI.pdf}
+	\includegraphics{figures/supp_CV.pdf}
 	\caption{%\textbf{xx} 
-	\textbf{(a)} For experiment simulation two stimuli ranges were used. The short range contained stimuli from 400 to 700 ms, the long range contained stimuli from 700 to 1000 ms.
+	\textbf{(a)} The short and the long stimulus range comprised time intervals from 400 to 700 ms and 700 to 1000 ms, respectively.
 	\textbf{(b)} Standard deviation of reproductions for each stimulus in an experiment simulation with 500 trials and $\tau=100$. $K$ was set to 8.5 and 6 for the short and long range respectively. 
-	\textbf{(c)} Same as (b) but standard deviation of reproductions normalized by stimulus duration.
+	\textbf{(c)} Same as (a) but standard deviation of reproductions normalized by stimulus duration (CV).
 	}
-\label{sup:rangeCV}
+\label{sup:CV}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/supp_experiment.pdf}
 	\caption{\textbf{Experiment simulation with optimized $K$}
-	\textbf{(a)} For an experiment simulation with 500 trials, a time constant $\tau$ of 140 and optimal $K=14$, the activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
-	\textbf{(b)} Same as (a) with stimuli chosen from the long range and $K$ set to 10.5. 
+	\textbf{(a)} For an experiment simulation with 500 trials, a time constant $\tau$ of 130 and optimal $K = 13$, the activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
+	\textbf{(b)} Same as (a) with stimuli chosen from the long range and $K = 10$. 
 	}
 \label{sup:experiment}
 \end{figure}
 
 \subsection*{Optimality by Minimizing MSE}
-We minimized the error in the interval reproductions across the experiment, we defined the $\text{MSE} = \text{bias}^2+\text{var}$, with the bias specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimuli intervals in $S$.
+We minimized the error in the interval reproductions across the experiment, we defined the $\text{MSE} = \text{bias}^2+\text{var}$, with the bias specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
 \begin{equation} \label{MSE}
 	\begin{split}
 	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
@@ -316,9 +326,9 @@ For all optimized values, be it on the squared bias, the variance or combined in
 	\caption{%\textbf{Optimization based on Variance, BIAS\textsuperscript{2} and BIAS}
 	\textbf{(a)} Behavioral results for a simulation with 500 trials, $\sigma = 0.02$ and optimized time constant $\tau$ for the short range ($\tau = 120$). For simulations with both short and long range, the optimal time constant for the short range was used. Optimal $K$ for $\tau = 120$ was 11 for the short, 7 for the long range.
 	\textbf{(b)} Same as (b) with optimized $\tau$ for the long range ($\tau = 200$). Optimal $K$ for this time constant was 25 for the short range and 20 for the long range. 
-	\textbf{(c)}  Simulations with 500 trials for each pair of memory parameter $K$, and $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the variance of reproductions in the behavioral results.
-	\textbf{(d)} Same as (c), color scale represents the squared bias of reproductions.
-	\textbf{(e)} Same as (d), color scale represents the bias of reproductions. Values larger than 0 correspond to an overestimation, values smaller than 0 to an underestimation of the stimulus interval.
+	\textbf{(c)}  Simulations with 500 trials for each pair of memory parameter $K$, and $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the variance of reproductions in the behavioral results. Minimal variance for each $\tau$ is encircled.
+	\textbf{(d)} Same as (c), color scale represents the squared bias of reproductions. Minimal squared bias for each $\tau$ is encircled.
+	\textbf{(e)} Same as (d), color scale represents the bias of reproductions. Values larger than 0 correspond to an overestimation, values smaller than 0 to an underestimation of the stimulus interval. Bias closest to 0 for each $\tau$ is encircled.
 	}
 \label{sup:othererror}
 \end{figure}
@@ -338,24 +348,27 @@ In the intermediate input regime higher $I$ result in a shallower slope of $y$.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics{figures/supp_interIregime.pdf}
-	\caption{\textbf{xxx}
-	\textbf{(a)}
-	\textbf{(b)}
-	\textbf{(c)} 
-	\textbf{(d)} 
+	\includegraphics{figures/supp_regimes.pdf}
+	\caption{
+	\textbf{(a)} Evolution of $u, v$ and $y$ over time for different inputs from 0.5 to 0.95 in the intermediate input regime. Activity in $y$ shows a ramping-up activity. The activity of $y$ evolves to different steady states depending on the input. 
+	\textbf{(b)} Gradient of $y$ over time for different inputs in the intermediate regime. Lower input results in higher gradient, where the gradient is maximal for the input 0.5.
+	\textbf{(c)} Same as (a) for the high input regime with inputs from 1.01 to 1.5. Activity in $y$ shows a ramping-down activity, converging to 0 independent of input.
+	\textbf{(d)} Same as (b) for high input regime. Higher input results in higher absolute gradient. 
 	}
-\label{sup:interI}
+\label{sup:regimes}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/supp_highI.pdf}
-	\caption{\textbf{xxx}
-	\textbf{(a)}
-	\textbf{(b)}
-	\textbf{(c)} 
-	\textbf{(d)} 
+	\caption{
+	\textbf{(a)} Evaluation of noise for the high input regime of the model. Standard deviation (upper) and CV (lower) of reproductions for each stimulus in an experiment simulation with 500 trials and $\tau = 70$. K was set to 6 and 4 for the short and long range, respectively.
+	\textbf{(b)} Activity of $u, v, y$ and $I$ for five example stimulus intervals of 650, 500, 600, 700, 450 ms. Stimulus presentation and reproduction epochs are highlighted in blue and red, respectively. The delay period between trials is shown in white. Initial values are set to $u_0=0.8 , v_0=0.6 , y_0=0.1, I_0=1.04$.
+	\textbf{(c)} Simulations with 500 trials for each pair of memory parameter $K$ and time constant $\tau$ at noise level $\sigma$ = 0.02. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope of the linear fit between stimuli and reproductions. Behaviorally plausible slopes are encircled in blue and lie around 0.83 for the short and 0.73 for the long range. Empty spaces show simulations, that exceeded the number of timeout trials and where thus excluded from analysis.
+	\textbf{(d)} Optimization of the memory parameter $K$ in the high input regime for different time constants $\tau$ at noise level $\sigma$ = 0.02. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimulus range. The minimal error for each $\tau$ is encircled in black and minimal error across all $\tau$ is additionally crossed. Parameter combinations that result in behavioral plausible slopes (d) are shaded in blue. 
+	\textbf{(e)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (grey) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 60$ ms. For the simulation with short
+ stimulus range optimal $K$ was 4, with the long stimulus range optimal $K$ was 2.5.
+	\textbf{(f)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (e).
 	}
 \label{sup:highI}
 \end{figure}
@@ -363,11 +376,9 @@ In the intermediate input regime higher $I$ result in a shallower slope of $y$.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/supp_experiment_high.pdf}
-	\caption{\textbf{xxx}
-	\textbf{(a)}
-	\textbf{(b)}
-	\textbf{(c)} 
-	\textbf{(d)} 
+	\caption{
+	\textbf{(a)} For an experiment simulation with 500 trials in the high input regime. Parameters are set to optimized values with time constant $\tau = 60$ and $K = 4$. The activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
+	\textbf{(b)} Same as (a) with stimuli chosen from the long range and $K = 2.5$.
 	}
 \label{sup:experiment_high}
 \end{figure}
@@ -375,11 +386,13 @@ In the intermediate input regime higher $I$ result in a shallower slope of $y$.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/supp_comparison.pdf}
-	\caption{\textbf{xxx}
+	\caption{
 	\textbf{(a)}
 	\textbf{(b)}
 	\textbf{(c)} 
 	\textbf{(d)} 
+	\textbf{(e)} 
+	\textbf{(f)} 
 	}
 \label{sup:comparison}
 \end{figure}

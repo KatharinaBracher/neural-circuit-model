@@ -312,7 +312,7 @@ details
 
 ## Model
 - [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
-- [ ] Reset impulse, or reset to value? level of reset influences reproduction
+- [x] Reset impulse, or reset to value? level of reset influences reproduction
 - [ ] Relation of I and slope of y is nonlinear
   - this is probably determining the optimal K: for longer intervals the change in slope is bigger for same I comapred to smaller intervals, so K is smaller for lager intervals
   - can we predict K for longer intervals from K for smaller intervals with this relation?
@@ -381,6 +381,11 @@ details
 
 - Translation from fixed slope changing threshold to fixed threshold changing slope
   - same predictions? Mathematics 
+
+- **E(stim)/var(stim)**
+  - how does optimal K change for different E/var
+  - [ ] try simulation (for tau 140, opt K), for different ranges (broader, middle, bigger, all), Randphänomene, predictions? higher var -> steeper, higher E -> shallower
+  - [ ] plot E/var vs. K or slope
 
 
 
