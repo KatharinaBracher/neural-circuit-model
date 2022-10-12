@@ -19,6 +19,14 @@ colors_long = [(1.0, 0.9803921568627451, 0.5529411764705883, 1.0),
  (0.2265282583621684, 0.4938869665513264, 0.7224913494809688, 1.0),
  (0.3686274509803922, 0.30980392156862746, 0.6352941176470588, 1.0)]
 
+colors_mid = [(0.9748558246828143, 0.5574009996155325, 0.32272202998846594, 1.0),
+ (0.9934640522875817, 0.7477124183006535, 0.4352941176470587, 1.0),
+ (0.9966935793925413, 0.8975009611687812, 0.5770857362552863, 1.0),
+ (1.0, 0.9803921568627451, 0.5529411764705883, 1.0),
+ (0.9173394848135333, 0.9669357939254134, 0.6200692041522493, 1.0),
+ (0.7477124183006538, 0.8980392156862746, 0.6274509803921569, 1.0),
+ (0.5273356401384084, 0.8106113033448674, 0.6452133794694349, 1.0)]
+
 class SimulationPlotData:
     """
     contains relevant data for plotting simulation for both experiment and parallel setting
@@ -239,8 +247,13 @@ class SortedPlot:
             xticklabels=[0, 500, 1000, 1500, 2000]
             colors = colors_long
 
+        if data.stimulus_range[0]==550:
+            xticks=[0, 50, 100, 150, 200]
+            xticklabels=[0, 500, 1000, 1500, 2000]
+            colors = colors_mid
 
-        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(7.2,3.5))  # 20,7
+
+        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(20,7))  # text: 7.2,3.5
         ax.flatten()[0].set_ylabel(r'$y$'+' measur.', fontsize=11)
         ax.flatten()[stimulus_range_len].set_ylabel(r'$y$'+' reprod.', fontsize=11)
         ax.flatten()[stimulus_range_len*2].set_ylabel(r'$I$'+' reprod.', fontsize=11)
@@ -283,10 +296,16 @@ class SortedPlot:
         colors = colors_short
 
         # for long range
-        if data.stimulus_range[0]>400:
+        if data.stimulus_range[-1]==1000:
             xticks=[0, 50, 100, 150, 200]
             xticklabels=[0, 500, 1000, 1500, 2000]
             colors = colors_long
+
+        #for mid range
+        if data.stimulus_range[0]==550:
+            xticks=[0, 50, 100, 150, 200]
+            xticklabels=[0, 500, 1000, 1500, 2000]
+            colors = colors_mid
 
 
         _, ax = plt.subplots(3,3, sharex=True, sharey='row', figsize=(2,2))  # 20,7

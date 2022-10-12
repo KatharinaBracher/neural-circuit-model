@@ -37,6 +37,20 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst):
         # stimulus = [700, 750, 800, 850, 900, 950, 1000]
         stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
+    if srange == 'mid':
+        stimulus = np.loadtxt('stimlst_mid_550_850.txt', dtype=int)
+    if srange == 'all':
+        stimulus = np.loadtxt('stimlst_all_400_1000.txt', dtype=int)
+    if srange == 'few_short':
+        stimulus = np.loadtxt('stimlst_few_short_400_700.txt', dtype=int)
+    if srange == 'few_all':
+        stimulus = np.loadtxt('stimlst_few_all_400_1000.txt', dtype=int)
+    if srange == 'extralong':
+        stimulus = np.loadtxt('stimlst_extralong_900_1200.txt', dtype=int)
+    if srange == 'few_short2':
+        stimulus = np.loadtxt('stimlst_few_short_400_700_2.txt', dtype=int)
+    
+
     for K in K_lst:
         for seed in seed_lst:
             for th in th_lst:
@@ -79,15 +93,15 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
                     result.write_to_disk(fp, srange, K, seed)
 
 # intermediate I
-regime = 'intermediateI'
+regime = 'underestimation'
 sigma = 0.02
 reset=50
 Iinit=0.8
 
-K_lst = np.arange(1, 22, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
+K_lst = np.arange(1, 30, 1)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
 th_lst = np.arange(0.6, 0.7, 0.75)
 delay_lst = np.arange(400, 1000, 50)
-tau = np.arange(100, 230, 10)  # np.arange(60, 200, 10)
+tau = np.arange(60, 180, 10)  # np.arange(60, 200, 10)
 
 # high I
 '''regime = 'highI'
@@ -99,18 +113,29 @@ K_lst = np.arange(1, 18, 0.5)
 th_lst = np.arange(0.05, 0.1, 0.2)
 tau = np.arange(20, 150, 10)'''
 
+'''# range
+regime = 'range'
+sigma = 0.02
+reset=50
+Iinit=0.8
+
+K_lst = np.arange(1, 22, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
+tau = np.arange(100, 230, 10)  # np.arange(60, 200, 10)
+'''
+
 # choose parameter range #############################################################
-srange = 'long'
+srange = 'short'
 # K_lst = [8.0]*250
 th_lst = [0.7]
-tau = [130]
-delay_lst = [700]
-seed_lst = np.arange(0, 21, 1)
-# seed_lst = [0]
+# tau = [130]
+delay_lst = [850]
+# seed_lst = np.arange(0, 21, 1)
+seed_lst = [0]
 
-#name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-name = 'LONG_K1-22_TAU130_th07_del700_sig02_seed'
-# name = 'SHORT_K20-30_tau200_th07_del700_sig02_fixed_seed'
+# name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
+# name = 'LONG_K1-22_TAU130_th07_del700_sig02_seed'
+name = 'SHORT_K1-30_th7_fixed_seed_delaylong'
+# name = 'inter_short_few_2_07'
 
 pool = 24
 batchsize = pool

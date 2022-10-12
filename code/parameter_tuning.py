@@ -15,6 +15,15 @@ stimulus_range_l = [700, 750, 800, 850, 900, 950, 1000]
 stimulus_lst_short = np.loadtxt('stimlst_short_400_700_7_a.txt', dtype=int)
 stimulus_lst_long = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
 
+title1 = 'short range'
+title2 = 'long range'
+'''title1 = 'mid range'
+title2 = 'all range'
+title1 = 'few short range'
+title2 = 'few all range'
+title1 = 'long range'
+title2 = 'extra long range'''
+
 def load_data(short_path, long_path):
     short_data = []
     long_data = []
@@ -61,10 +70,10 @@ def create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, 
     
     h1.set_xlabel(p2)
     h1.set_ylabel(p1)
-    h1.set_title('short range', fontsize=11)
+    h1.set_title(title1, fontsize=11)
 
     h2.set_xlabel(p2)
-    h2.set_title('long range', fontsize=11)
+    h2.set_title(title2, fontsize=11)
 
     h3.set_xlabel(p2)
     h3.set_title('short~long', fontsize=11)
@@ -101,11 +110,11 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     h1.set_xlabel(r'$\tau$')
     #h1.set_xlabel(p2)
     h1.set_ylabel(r'$K$', fontsize=11)
-    h1.set_title('short range', fontsize=11)
+    h1.set_title(title1, fontsize=11)
 
     h2.set_xlabel(r'$\tau$')
     #h2.set_xlabel(p2)
-    h2.set_title('long range', fontsize=11)
+    h2.set_title(title2, fontsize=11)
     
     
 
@@ -128,10 +137,10 @@ def slope_behavior(short, long, p1, p1_lst, p2, p2_lst, cmap, mask_s, mask_l, n_
     
     h1.set_xlabel(r'$\tau$')
     h1.set_ylabel(r'$K$')
-    h1.set_title('short range', fontsize=11)
+    h1.set_title(title1, fontsize=11)
 
     h2.set_xlabel(r'$\tau$')
-    h2.set_title('long range', fontsize=11)
+    h2.set_title(title2, fontsize=11)
     
     
     
@@ -176,10 +185,10 @@ def parameter_behavioural_plausible(short, long, K_lst, tau):
         for t in tau:
             s = str(k)+','+str(t)
             combi.append(s)
-    print('short')
+    print(title1)
     mask = list(np.where(((short_ktau_slope.flatten()>=0.77) & (short_ktau_slope.flatten()<=0.88)))[0])
     print(np.array(combi)[mask])
-    print('long')
+    print(title2)
     mask = list(np.where(((long_ktau_slope.flatten()>=0.67) & (long_ktau_slope.flatten()<=0.78)))[0])
     print(np.array(combi)[mask])
     
@@ -205,10 +214,10 @@ def plot_mse_sep(short_, long_, K_lst, seed):
     
     h1.set_xlabel('initialization')
     h1.set_ylabel(r'$K$')
-    h1.set_title('short range', fontsize=11)
+    h1.set_title(title1, fontsize=11)
 
     h2.set_xlabel('initialization')
-    h2.set_title('long range', fontsize=11)
+    h2.set_title(title2, fontsize=11)
     
 
 def plot_mse(short, long, K_lst, tau, full=True):
@@ -272,6 +281,12 @@ def get_opt_K(data, K_lst, tau, mse=False, var=False, bias=False, bias2=False):
     print(tau[opt_overall[1][0]], K_lst[opt_overall[0][0]])
     
     return list(zip(tau, K_lst[opt]))
+
+def get_mean_seed(data, K_lst, seed, getlist=False):
+    if getlist:
+        return list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1]
+    else:
+        return np.mean(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1]), np.std(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1])
 
 
 
