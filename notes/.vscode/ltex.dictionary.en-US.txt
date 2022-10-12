@@ -5,3 +5,15 @@ optimality
 parallelization
 cond
 nonlinearities
+parallelized
+.py
+py
+Params
+nullcline
+nullclines
+MSE
+Eq
+uv
+vu
+yv
+yu

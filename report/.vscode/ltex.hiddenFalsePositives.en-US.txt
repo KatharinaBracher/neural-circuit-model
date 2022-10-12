@@ -1,0 +1,17 @@
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Dynamics of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q for intermediate regime with input \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in gray and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q black.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QLudwig-Maximilians-Universität München Faculty of Biology, Computational Neuroscience Report Computational Simulation of Time Perception: Model Description and Implementation Katharina M Bracher Supervision: Dr. Kay Thurley\\E$"}
+{"rule":"EN_SIMPLE_REPLACE","sentence":"^\\QLudwig-Maximilians-Universität München Faculty of Biology, Computational Neuroscience Report Computational Simulation of Time Perception: Model Description and Implementation Katharina M Bracher Supervision: Dr. Kay Thurley\\E$"}
+{"rule":"ET_AL","sentence":"^\\Qenglish andothers = et al,\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Qenglish andothers = et al,\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qenglish andothers = et al,\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Schematic of one trial.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) The measurement (upper) and reproduction (middle) epoch of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and input for reproduction (lower) are shown for the full experiment sorted according to stimulus interval.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QTo find optimal values for \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q mean squared error was minimized, defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Same as (a) but standard deviation of reproductions normalized by stimulus duration (CV).\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QOptimality by Minimizing MSE.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Simulations with 500 trials for each pair of memory parameter \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q at noise level \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Same as (a) for the high input regime with inputs from 1.01 to 1.5.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Simulations with 500 trials for each pair of memory parameter \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and time constant \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q at noise level \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q = 0.02.\\E$"}
+{"rule":"COPYRIGHT","sentence":"^\\Q(c) Mean input during the reproduction epoch for each stimulus of the short (black) and long (gray) range for the experiment simulation in the intermediate input regime with optimized parameters from Fig.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe simulate function returns a SimulationResult or RangeParallelSimulationResult object.\\E$"}

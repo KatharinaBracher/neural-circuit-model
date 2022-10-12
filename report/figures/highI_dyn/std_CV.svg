@@ -8,9 +8,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="212.06644pt"
+   width="206.85048pt"
    height="185.43629pt"
-   viewBox="0 0 212.06644 185.43629"
+   viewBox="0 0 206.85048 185.43629"
    version="1.1"
    id="svg675"
    sodipodi:docname="std_CV.svg"
@@ -24,14 +24,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1018"
+     inkscape:window-width="2560"
+     inkscape:window-height="1378"
      id="namedview677"
      showgrid="false"
-     inkscape:zoom="2.0123411"
-     inkscape:cx="70.690204"
-     inkscape:cy="94.418672"
-     inkscape:window-x="0"
+     inkscape:zoom="2.8458801"
+     inkscape:cx="60.188804"
+     inkscape:cy="78.879157"
+     inkscape:window-x="1920"
      inkscape:window-y="34"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg675" />
@@ -920,14 +920,14 @@
     </clipPath>
   </defs>
   <path
-     d="M 0,115.06815 H 212.06644 V 0 H 0 Z"
-     style="fill:#ffffff;stroke-width:0.94586158;stroke-linecap:butt;stroke-linejoin:round"
+     d="M 0,115.06815 H 206.53213 V 5.5343163 H 0 Z"
+     style="fill:#ffffff;stroke-width:0.91071397;stroke-linecap:butt;stroke-linejoin:round"
      id="path8"
      inkscape:connector-curvature="0" />
   <g
      id="patch_2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 44.379643,76.168 H 112.86146 V 21.808 H 44.379643 Z"
        style="fill:#ffffff;stroke-linecap:butt;stroke-linejoin:round"
@@ -937,7 +937,7 @@
   <g
      id="line2d_1"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <defs
        id="defs15">
       <path
@@ -962,7 +962,7 @@
   <g
      id="line2d_2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <g
        id="g38"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -979,7 +979,7 @@
   <g
      id="line2d_3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <defs
        id="defs93">
       <path
@@ -1004,7 +1004,7 @@
   <g
      id="text_4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-8.1902062)">
+     transform="translate(-10.034978)">
     <!-- $\mathdefault{0}$ -->
     <g
        style="fill:#262626;stroke-linecap:butt;stroke-linejoin:round"
@@ -1020,7 +1020,7 @@
   <g
      id="line2d_4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <g
        id="g108"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -1037,7 +1037,7 @@
   <g
      id="text_5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-8.1902062)">
+     transform="translate(-10.034978)">
     <!-- $\mathdefault{200}$ -->
     <g
        style="fill:#262626;stroke-linecap:butt;stroke-linejoin:round"
@@ -1076,7 +1076,7 @@
   <g
      style="stroke-linecap:butt;stroke-linejoin:round"
      id="text_6"
-     transform="translate(-6.6902062)">
+     transform="translate(-8.5349782)">
     <!-- $\sigma_{\mathrm{reproduction}}$ -->
     <g
        id="g160"
@@ -1243,7 +1243,7 @@
   <g
      id="line2d_5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,73.318326 57.868486,73.103103 68.244519,72.083385 78.620552,71.676121 88.996585,71.386132 99.372618,70.671224 109.74865,68.935563"
        clip-path="url(#pa474dff581)"
@@ -1254,7 +1254,7 @@
   <g
      id="line2d_6"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,70.797821 57.868486,70.421228 68.244519,69.330634 78.620552,68.08937 88.996585,67.292142 99.372618,65.433329 109.74865,63.462513"
        clip-path="url(#pa474dff581)"
@@ -1265,7 +1265,7 @@
   <g
      id="line2d_7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="m 47.492453,69.240076 10.376033,-0.94351 10.376033,-1.064823 10.376033,-1.348088 10.376033,-1.239861 10.376033,-2.246678 10.376032,-2.950335"
        clip-path="url(#pa474dff581)"
@@ -1276,7 +1276,7 @@
   <g
      id="line2d_8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="m 47.492453,67.830613 10.376033,-1.43222 10.376033,-1.216279 10.376033,-1.955826 10.376033,-1.582819 10.376033,-2.924651 10.376032,-4.017362"
        clip-path="url(#pa474dff581)"
@@ -1287,7 +1287,7 @@
   <g
      id="line2d_9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,66.146152 57.868486,65.20948 68.244519,62.772219 78.620552,61.1066 88.996585,58.963621 99.372618,53.811148 109.74865,52.877374"
        clip-path="url(#pa474dff581)"
@@ -1298,7 +1298,7 @@
   <g
      id="line2d_10"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,64.798267 57.868486,62.522869 68.244519,61.28716 78.620552,59.095597 88.996585,56.214854 99.372618,52.94951 109.74865,47.608166"
        clip-path="url(#pa474dff581)"
@@ -1309,7 +1309,7 @@
   <g
      id="line2d_11"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,63.623502 57.868486,61.261891 68.244519,57.80184 78.620552,56.08974 88.996585,54.479925 99.372618,48.811804 109.74865,45.647555"
        clip-path="url(#pa474dff581)"
@@ -1320,7 +1320,7 @@
   <g
      id="line2d_12"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,61.156193 57.868486,60.350652 68.244519,57.130593 78.620552,54.472481 88.996585,52.073334 99.372618,47.784219 109.74865,42.59918"
        clip-path="url(#pa474dff581)"
@@ -1331,7 +1331,7 @@
   <g
      id="line2d_13"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,58.967725 57.868486,56.905189 68.244519,54.437875 78.620552,51.209947 88.996585,48.229854 99.372618,41.978266 109.74865,40.282228"
        clip-path="url(#pa474dff581)"
@@ -1342,7 +1342,7 @@
   <g
      id="line2d_14"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,57.980834 57.868486,55.430552 68.244519,51.999776 78.620552,49.195922 88.996585,44.731328 99.372618,41.763722 109.74865,40.025455"
        clip-path="url(#pa474dff581)"
@@ -1353,7 +1353,7 @@
   <g
      id="line2d_15"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="m 47.492453,54.77829 10.376033,-1.673625 10.376033,-3.1727 10.376033,-2.496961 10.376033,-3.387108 10.376033,-5.621354 10.376032,-2.621324"
        clip-path="url(#pa474dff581)"
@@ -1364,7 +1364,7 @@
   <g
      id="line2d_16"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,54.572584 57.868486,51.916588 68.244519,50.52511 78.620552,46.962422 88.996585,42.97977 99.372618,38.856631 109.74865,39.122511"
        clip-path="url(#pa474dff581)"
@@ -1375,7 +1375,7 @@
   <g
      id="line2d_17"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,52.846098 57.868486,49.958024 68.244519,48.135888 78.620552,45.23595 88.996585,43.525618 99.372618,39.260781 109.74865,34.421226"
        clip-path="url(#pa474dff581)"
@@ -1386,7 +1386,7 @@
   <g
      id="line2d_18"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,52.114812 57.868486,49.001597 68.244519,48.934712 78.620552,43.09108 88.996585,41.404443 99.372618,38.837859 109.74865,36.49663"
        clip-path="url(#pa474dff581)"
@@ -1397,7 +1397,7 @@
   <g
      id="line2d_19"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="m 47.492453,52.200565 10.376033,-4.402989 10.376033,0.235811 10.376033,-1.775179 10.376033,0.545828 10.376033,-3.056667 10.376032,-1.589005"
        clip-path="url(#pa474dff581)"
@@ -1408,7 +1408,7 @@
   <g
      id="line2d_20"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 47.492453,52.163744 57.868486,51.75002 68.244519,50.330152 78.620552,49.117164 88.996585,46.7165 99.372618,46.4848 109.74865,42.559866"
        clip-path="url(#pa474dff581)"
@@ -1419,7 +1419,7 @@
   <g
      id="line2d_21"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="m 47.492453,52.882637 10.376033,0.947735 10.376033,-2.77728 10.376033,-1.386502 10.376033,-1.591847 10.376033,0.04788 10.376032,0.681338"
        clip-path="url(#pa474dff581)"
@@ -1430,7 +1430,7 @@
   <g
      id="patch_3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 44.379643,76.168 V 21.808"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -1440,7 +1440,7 @@
   <g
      id="patch_4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <path
        d="M 44.379643,76.168 H 112.86146"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -1450,7 +1450,7 @@
   <g
      id="text_7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-11.534978)">
     <!-- short range -->
     <g
        style="fill:#262626;stroke-linecap:butt;stroke-linejoin:round"
@@ -1564,7 +1564,7 @@
   <g
      id="patch_5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 126.55782,76.168 h 68.48182 v -54.36 h -68.48182 z"
        style="fill:#ffffff;stroke-linecap:butt;stroke-linejoin:round"
@@ -1574,7 +1574,7 @@
   <g
      id="line2d_22"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <g
        id="g255"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -1591,7 +1591,7 @@
   <g
      id="line2d_23"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <g
        id="g273"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -1608,7 +1608,7 @@
   <g
      id="matplotlib.axis_4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <g
        id="ytick_3"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -1653,7 +1653,7 @@
   <g
      id="line2d_26"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,73.171769 10.37604,0.340898 10.37603,0.1252 10.37603,0.05922 10.37604,-1.037881 10.37603,0.843616 10.37603,-0.519298"
        clip-path="url(#p1e8e8d0684)"
@@ -1664,7 +1664,7 @@
   <g
      id="line2d_27"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,68.685076 10.37604,-0.918298 10.37603,-0.534268 10.37603,-1.273573 10.37604,-0.44087 10.37603,-0.74939 10.37603,-2.211034"
        clip-path="url(#p1e8e8d0684)"
@@ -1675,7 +1675,7 @@
   <g
      id="line2d_28"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,65.361124 10.37604,-0.652107 10.37603,-1.190744 10.37603,-1.413498 10.37604,-1.89211 10.37603,-0.593125 10.37603,-2.121437"
        clip-path="url(#p1e8e8d0684)"
@@ -1686,7 +1686,7 @@
   <g
      id="line2d_29"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,62.724036 10.37604,-1.415031 10.37603,-0.630149 10.37603,-1.854833 10.37604,-1.647101 10.37603,-2.035642 10.37603,-1.956699"
        clip-path="url(#p1e8e8d0684)"
@@ -1697,7 +1697,7 @@
   <g
      id="line2d_30"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,60.362008 10.37604,-1.770583 10.37603,-0.728533 10.37603,-1.850902 10.37604,-3.413914 10.37603,-1.383915 10.37603,-2.758144"
        clip-path="url(#p1e8e8d0684)"
@@ -1708,7 +1708,7 @@
   <g
      id="line2d_31"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="M 129.67063,58.624876 140.04667,56.0581 150.4227,53.394655 160.79873,52.46935 171.17477,50.273152 181.5508,46.57783 191.92683,43.838683"
        clip-path="url(#p1e8e8d0684)"
@@ -1719,7 +1719,7 @@
   <g
      id="line2d_32"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,55.766117 10.37604,-3.288801 10.37603,-0.698837 10.37603,-1.637355 10.37604,-4.137255 10.37603,-4.905576 10.37603,-3.324533"
        clip-path="url(#p1e8e8d0684)"
@@ -1730,7 +1730,7 @@
   <g
      id="line2d_33"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,52.941501 10.37604,-0.555124 10.37603,-3.143404 10.37603,-3.830712 10.37604,-0.316987 10.37603,-6.310813 10.37603,-1.901601"
        clip-path="url(#p1e8e8d0684)"
@@ -1741,7 +1741,7 @@
   <g
      id="line2d_34"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,49.701233 10.37604,-2.839449 10.37603,-2.880418 10.37603,-2.654984 10.37604,-3.268424 10.37603,-2.266389 10.37603,-3.137559"
        clip-path="url(#p1e8e8d0684)"
@@ -1752,7 +1752,7 @@
   <g
      id="line2d_35"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,45.613941 10.37604,-3.220659 10.37603,-1.020146 10.37603,-2.847206 10.37604,-4.302308 10.37603,-3.928556 10.37603,-1.105141"
        clip-path="url(#p1e8e8d0684)"
@@ -1763,7 +1763,7 @@
   <g
      id="line2d_36"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,43.52421 10.37604,-1.925758 10.37603,-4.778766 10.37603,-1.748186 10.37604,-2.511779 10.37603,-2.711943 10.37603,-3.608898"
        clip-path="url(#p1e8e8d0684)"
@@ -1774,7 +1774,7 @@
   <g
      id="line2d_37"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,41.688986 10.37604,0.229183 10.37603,-3.577255 10.37603,-1.88739 10.37604,-5.559255 10.37603,-5.397346 10.37603,-1.218014"
        clip-path="url(#p1e8e8d0684)"
@@ -1785,7 +1785,7 @@
   <g
      id="line2d_38"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,42.544941 10.37604,-5.65757 10.37603,-0.465097 10.37603,-0.853996 10.37604,-4.782443 10.37603,-5.520915 10.37603,-0.586259"
        clip-path="url(#p1e8e8d0684)"
@@ -1796,7 +1796,7 @@
   <g
      id="line2d_39"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,39.112894 10.37604,-3.038247 10.37603,2.764728 10.37603,-5.481625 10.37604,-3.297228 10.37603,-4.555075 10.37603,-1.078891"
        clip-path="url(#p1e8e8d0684)"
@@ -1807,7 +1807,7 @@
   <g
      id="line2d_40"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,41.013886 10.37604,-1.050396 10.37603,-6.425661 10.37603,0.333812 10.37604,-1.604626 10.37603,-1.070949 10.37603,-4.779502"
        clip-path="url(#p1e8e8d0684)"
@@ -1818,7 +1818,7 @@
   <g
      id="line2d_41"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,44.758973 10.37604,-5.501223 10.37603,2.305095 10.37603,0.228765 10.37604,-2.388082 10.37603,-0.227458 10.37603,-8.35283"
        clip-path="url(#p1e8e8d0684)"
@@ -1829,7 +1829,7 @@
   <g
      id="line2d_42"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 129.67063,42.891451 10.37604,-0.800657 10.37603,1.815872 10.37603,-4.031403 10.37604,0.677631 10.37603,1.728525 10.37603,-5.68121"
        clip-path="url(#p1e8e8d0684)"
@@ -1840,7 +1840,7 @@
   <g
      id="patch_6"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="M 126.55782,76.168 V 21.808"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -1850,7 +1850,7 @@
   <g
      id="patch_7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <path
        d="m 126.55782,76.168 h 68.48182"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -1860,7 +1860,7 @@
   <g
      id="text_11"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-9.6902062)">
+     transform="translate(-16.034978)">
     <!-- long range -->
     <g
        style="fill:#262626;stroke-linecap:butt;stroke-linejoin:round"
@@ -1973,7 +1973,7 @@
   <g
      style="stroke-linecap:butt;stroke-linejoin:round"
      id="patch_1-6"
-     transform="matrix(0.89356053,0,0,0.81677719,1.9630618,84.497631)">
+     transform="matrix(0.88120374,0,0,0.81677719,0.1182898,84.497631)">
     <path
        inkscape:connector-curvature="0"
        d="M 0,115.06815 H 234.60203 V 0 H 0 Z"
@@ -1983,7 +1983,7 @@
   <g
      id="patch_2-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1493"
        style="fill:#ffffff;stroke-linecap:butt;stroke-linejoin:round"
@@ -1993,7 +1993,7 @@
   <g
      id="matplotlib.axis_1-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <g
        id="xtick_1-5"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -2313,7 +2313,7 @@
   <g
      id="line2d_3-0"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <defs
        id="defs1575">
       <path
@@ -2338,7 +2338,7 @@
   <g
      id="text_4-2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-5.4725412,77.568145)">
+     transform="translate(-7.3173132,77.568145)">
     <!-- $\mathdefault{0.0}$ -->
     <g
        id="g1591"
@@ -2385,7 +2385,7 @@
   <g
      id="line2d_4-7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <g
        id="g1597"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -2402,7 +2402,7 @@
   <g
      id="text_5-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-5.4725412,77.568145)">
+     transform="translate(-7.3173132,77.568145)">
     <!-- $\mathdefault{0.2}$ -->
     <g
        id="g1609"
@@ -2449,7 +2449,7 @@
   <g
      style="stroke-linecap:butt;stroke-linejoin:round"
      id="text_6-2"
-     transform="translate(-3.9725412,77.568145)">
+     transform="translate(-5.8173132,77.568145)">
     <!-- $\mathrm{CV}$ -->
     <g
        style="fill:#262626;stroke-linecap:butt;stroke-linejoin:round"
@@ -2493,7 +2493,7 @@
   <g
      id="line2d_5-2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1625"
        style="fill:none;stroke:#c9ddf0;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2504,7 +2504,7 @@
   <g
      id="line2d_6-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1628"
        style="fill:none;stroke:#bad6eb;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2515,7 +2515,7 @@
   <g
      id="line2d_7-9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1631"
        style="fill:none;stroke:#abd0e6;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2526,7 +2526,7 @@
   <g
      id="line2d_8-7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1634"
        style="fill:none;stroke:#9cc9e1;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2537,7 +2537,7 @@
   <g
      id="line2d_9-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1637"
        style="fill:none;stroke:#89bedc;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2548,7 +2548,7 @@
   <g
      id="line2d_10-6"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1640"
        style="fill:none;stroke:#75b4d8;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2559,7 +2559,7 @@
   <g
      id="line2d_11-1"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1643"
        style="fill:none;stroke:#63a8d3;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2570,7 +2570,7 @@
   <g
      id="line2d_12-2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1646"
        style="fill:none;stroke:#539ecd;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2581,7 +2581,7 @@
   <g
      id="line2d_13-9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1649"
        style="fill:none;stroke:#4493c7;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2592,7 +2592,7 @@
   <g
      id="line2d_14-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1652"
        style="fill:none;stroke:#3787c0;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2603,7 +2603,7 @@
   <g
      id="line2d_15-1"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1655"
        style="fill:none;stroke:#2b7bba;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2614,7 +2614,7 @@
   <g
      id="line2d_16-9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1658"
        style="fill:none;stroke:#1e6db2;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2625,7 +2625,7 @@
   <g
      id="line2d_17-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1661"
        style="fill:none;stroke:#1561a9;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2636,7 +2636,7 @@
   <g
      id="line2d_18-7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1664"
        style="fill:none;stroke:#0b559f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2647,7 +2647,7 @@
   <g
      id="line2d_19-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1667"
        style="fill:none;stroke:#084990;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2658,7 +2658,7 @@
   <g
      id="line2d_20-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1670"
        style="fill:none;stroke:#083c7d;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2669,7 +2669,7 @@
   <g
      id="line2d_21-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1673"
        style="fill:none;stroke:#08306b;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -2680,7 +2680,7 @@
   <g
      id="patch_3-0"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1676"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -2690,7 +2690,7 @@
   <g
      id="patch_4-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-8.8173132,77.568145)">
     <path
        id="path1679"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -2700,7 +2700,7 @@
   <g
      id="patch_5-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1715"
        style="fill:#ffffff;stroke-linecap:butt;stroke-linejoin:round"
@@ -2710,7 +2710,7 @@
   <g
      id="matplotlib.axis_3-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <g
        id="xtick_3-4"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -2974,7 +2974,7 @@
   <g
      id="matplotlib.axis_4-5"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <g
        id="ytick_3-2"
        style="stroke-linecap:butt;stroke-linejoin:round">
@@ -3019,7 +3019,7 @@
   <g
      id="line2d_26-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1797"
        style="fill:none;stroke:#c9ddf0;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3030,7 +3030,7 @@
   <g
      id="line2d_27-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1800"
        style="fill:none;stroke:#bad6eb;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3041,7 +3041,7 @@
   <g
      id="line2d_28-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1803"
        style="fill:none;stroke:#abd0e6;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3052,7 +3052,7 @@
   <g
      id="line2d_29-0"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1806"
        style="fill:none;stroke:#9cc9e1;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3063,7 +3063,7 @@
   <g
      id="line2d_30-7"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1809"
        style="fill:none;stroke:#89bedc;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3074,7 +3074,7 @@
   <g
      id="line2d_31-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1812"
        style="fill:none;stroke:#75b4d8;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3085,7 +3085,7 @@
   <g
      id="line2d_32-6"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1815"
        style="fill:none;stroke:#63a8d3;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3096,7 +3096,7 @@
   <g
      id="line2d_33-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1818"
        style="fill:none;stroke:#539ecd;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3107,7 +3107,7 @@
   <g
      id="line2d_34-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1821"
        style="fill:none;stroke:#4493c7;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3118,7 +3118,7 @@
   <g
      id="line2d_35-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1824"
        style="fill:none;stroke:#3787c0;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3129,7 +3129,7 @@
   <g
      id="line2d_36-3"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1827"
        style="fill:none;stroke:#2b7bba;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3140,7 +3140,7 @@
   <g
      id="line2d_37-1"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1830"
        style="fill:none;stroke:#1e6db2;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3151,7 +3151,7 @@
   <g
      id="line2d_38-4"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1833"
        style="fill:none;stroke:#1561a9;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3162,7 +3162,7 @@
   <g
      id="line2d_39-9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1836"
        style="fill:none;stroke:#0b559f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3173,7 +3173,7 @@
   <g
      id="line2d_40-2"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1839"
        style="fill:none;stroke:#084990;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3184,7 +3184,7 @@
   <g
      id="line2d_41-0"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1842"
        style="fill:none;stroke:#083c7d;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3195,7 +3195,7 @@
   <g
      id="line2d_42-6"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1845"
        style="fill:none;stroke:#08306b;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
@@ -3206,7 +3206,7 @@
   <g
      id="patch_6-8"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1848"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -3216,7 +3216,7 @@
   <g
      id="patch_7-9"
      style="stroke-linecap:butt;stroke-linejoin:round"
-     transform="translate(-6.9725412,77.568145)">
+     transform="translate(-13.317313,77.568145)">
     <path
        id="path1851"
        style="fill:none;stroke:#262626;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:miter"
@@ -3226,19 +3226,19 @@
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
-     x="226.43011"
+     x="224.58534"
      y="67.235847"
      id="text6972"><tspan
        sodipodi:role="line"
        id="tspan6970"
        style="stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
-       x="226.43011"
+       x="224.58534"
        y="81.392097" /></text>
   <flowRoot
      xml:space="preserve"
      id="flowRoot8103"
      style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round"
-     transform="matrix(0.75,0,0,0.75,-10.754878,5e-6)"><flowRegion
+     transform="matrix(0.75,0,0,0.75,-12.59965,5e-6)"><flowRegion
        id="flowRegion8105"
        style="stroke-linecap:butt;stroke-linejoin:round"><rect
          id="rect8107"
@@ -3250,7 +3250,7 @@
        id="flowPara8109"
        style="stroke-linecap:butt;stroke-linejoin:round" /></flowRoot>  <g
      id="g3675"
-     transform="translate(340.43806,145.74276)"
+     transform="translate(334.09329,172.74276)"
      style="stroke-linecap:butt;stroke-linejoin:round">
     <g
        transform="translate(-363.04131,-119.87125)"

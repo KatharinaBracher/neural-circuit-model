@@ -12,3 +12,14 @@ ParallelSimulation
 SimulationResult
 BaseSimulation
 trialupdate
+nullcline
+Eq
+MSE
+nullclines
+nullclines
+ipynb
+matplotlib
+simuli
+simuli
+simulus
+simulus

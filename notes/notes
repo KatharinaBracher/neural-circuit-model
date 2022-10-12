@@ -165,8 +165,8 @@ Effects result from an optimal strategy when noisy estimates are made about stim
   - Measurement ends with stimulus, integration differential equation yields measurement: $m_T$ -> incorporated into the threshold of reproduction
   - Measurement: drift-diffusion process that lasts a fixed time -> Gaussian distribution of level reached
   - Reproduction: drift-diffusion process with fixed threshold -> Inverse Gaussian distribution of times that it takes to reach threshold
-- Threshold: depends on previous thresold (weighted by $1-a$) and measurement $m_T$ (weighted by $a$)
-  -  memory weight a has an immediate impact on the relation between stimulus and response
+- Threshold: depends on previous threshold (weighted by $1-a$) and measurement $m_T$ (weighted by $a$)
+  - memory weight a has an immediate impact on the relation between stimulus and response
   - history of thresholds from previous trials, serving as an internal reference
 - Formula for average reproduction $\bar{r}_T$ and its Bias and expected value yields full characterization of the model linking the stimuli $T$ to their reproduced values $\bar{r}_T$
 - Error: $MSE_r = [(r_T-T)^2]$
@@ -180,7 +180,7 @@ Effects result from an optimal strategy when noisy estimates are made about stim
 - changing stimulus range predicts a different optimal $a$ - can be tested
 - Predictions of the model
   - Reproduced magnitudes should depend on the stimulus distribution (Stimulus distributions with the same mean but larger variances should result in less regression)
-  - Regression to the mean should depend on the discrimination abilities of the individual (internal noise $\sigma_m$)
+  - Regression to the mean should depend on the discrimination abilities of the individual (internal $\sigma_m$)
   - Seldom stimuli with a low probability of occurrence and with a magnitude way below or way above the stimulus distribution, should not influence the internal reference
   - For strong regression the convergence dynamics of the reference should be much slower then for subjects showing weak regression
 </details>
@@ -384,7 +384,11 @@ details
 
 - **E(stim)/var(stim)**
   - how does optimal K change for different E/var
-  - [ ] try simulation (for tau 140, opt K), for different ranges (broader, middle, bigger, all), Randphänomene, predictions? higher var -> steeper, higher E -> shallower
+  - [ ] try simulation (for tau 140, opt K), for different ranges (broader, middle, bigger, all), Randphänomene, predictions?
+    - all: higher var (all 13) -> steeper  [400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000]
+    - short_few: fewer in range (3/7) -> steeper  [400, 550, 700]
+    - all_few: [400, 500, 600, 700, 800, 900, 1000]
+    - mid: higher E (E=700) -> [550, 600, 650, 700, 750, 800, 850]
   - [ ] plot E/var vs. K or slope
 
 
