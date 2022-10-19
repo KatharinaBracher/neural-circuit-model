@@ -69,11 +69,14 @@ class ExperimentSimulation(BaseSimulation):
             # reset after behavior
             simulation, reset_lst = self.trial_update(
                 simulation, reset_lst, reset=1, K=0, nbin=1)
-            simulation, reset_lst = self.trial_update(
-                simulation, reset_lst, reset=0, K=K, nbin=nbindelay)
+            if nbindelay>0:
+                # delay
+                simulation, reset_lst = self.trial_update(
+                    simulation, reset_lst, reset=0, K=K, nbin=nbindelay)
+                # reset after delay
+                simulation, reset_lst = self.trial_update(
+                    simulation, reset_lst, reset=1, K=0, nbin=1)
             # measurement
-            simulation, reset_lst = self.trial_update(
-                simulation, reset_lst, reset=1, K=0, nbin=1)
             simulation, reset_lst = self.trial_update(
                 simulation, reset_lst, reset=0, K=K, nbin=nbin)
             # update I

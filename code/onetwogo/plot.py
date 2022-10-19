@@ -60,7 +60,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(3.2,2.9)) #4.4,3.5 20, 7 #FIT: 6.4,4
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.4,4)) #4.4,3.5 20, 7 #FIT: 6.4,4, small: 3.2,2.9
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -85,24 +85,31 @@ class SimulationPlot:
 
     def get_frames(self):
         '''gets times of all measurement stages and production stages'''
+        params = self.data.params
         reset_indices = self.data.reset_indices
-        start=7
-        m_start = reset_indices[1::3]
-        m_stop = reset_indices[2::3]
+        # no delay
+        start_frame = 0
+        reg = 2
+        # delay
+        if params.delay > 0:
+            start_frame = 1
+            reg = 3
+        
+        m_start = reset_indices[start_frame::reg]
+        m_stop = reset_indices[start_frame+1::reg]
 
-        p_start = reset_indices[2::3]
-        p_stop = reset_indices[3::3]
-        return zip(p_start[start:], p_stop[start:], m_start[start:], m_stop[start:])
+        p_start = reset_indices[start_frame+1::reg]
+        p_stop = reset_indices[start_frame+2::reg]
+        return zip(p_start[:], p_stop[:], m_start[:], m_stop[:])
 
     def plot_measurement_production_frames(self):
         '''underlays color to all measurment and production stages'''
         _, ax = self.subplots
-        params = self.data.params
-        start=146 +51+70 +56+70 +71+70 + 71+70 +66+70 +71+70 +66+70 +56+45+63+70+60+55+68+7
+  
         for p_start, p_stop, m_start, m_stop in self.get_frames():
             for a in [0, 1, 2, 3]:
-                ax[a].axvspan(p_start-start*params.dt, p_stop-start*params.dt, facecolor='indianred', alpha=0.2)
-                ax[a].axvspan(m_start-start*params.dt, m_stop-start*params.dt, facecolor='steelblue', alpha=0.2)
+                ax[a].axvspan(p_start, p_stop, facecolor='indianred', alpha=0.2)
+                ax[a].axvspan(m_start, m_stop, facecolor='steelblue', alpha=0.2)
 
     def plot_trials(self, alpha):
         '''plots u. v, y, I over time'''
@@ -115,31 +122,28 @@ class SimulationPlot:
 
         print('Timeouts', len(timeout_index))
 
-        start=146 +51+70 +56+70 +71+70 + 71+70 +66+70 +71+70 +66+70 + 56+45+63+70+60+55+68+7
-        start_= 22
-
-        ax[0].plot(steps[:-start], simulation[start:, 0], c='grey', alpha=alpha)
-        ax[0].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 0])),
-                     np.max(np.array(simulation[start:, 0])), color='grey', alpha=0.5)
+        ax[0].plot(steps[:], simulation[:, 0], c='grey', alpha=alpha)
+        ax[0].vlines(reset_indices[:], np.min(np.array(simulation[:, 0])), #-start*params.dt
+                     np.max(np.array(simulation[:, 0])), color='grey', alpha=0.5)
         ax[0].set_ylabel(r'$u$')
 
-        ax[1].plot(steps[:-start], simulation[start:, 1], 'grey', alpha=alpha)
-        ax[1].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 1])),
-                     np.max(np.array(simulation[start:, 1])), color='grey', alpha=0.5)
+        ax[1].plot(steps[:], simulation[:, 1], 'grey', alpha=alpha)
+        ax[1].vlines(reset_indices[:], np.min(np.array(simulation[:, 1])), #-start*params.dt
+                     np.max(np.array(simulation[:, 1])), color='grey', alpha=0.5)
         #ax[1].set_title('dv/dt', fontsize=11)
         ax[1].set_ylabel(r'$v$')
 
-        ax[2].plot(steps[:-start], simulation[start:, 2], 'grey', alpha=alpha)
-        ax[2].hlines(params.th, 0, (simulation.shape[0]-start)*params.dt, linestyle='--', color='lightgray')
-        ax[2].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 2])),
-                     np.max(np.array(simulation[start:, 2])+0.01), color='grey', alpha=0.5)
+        ax[2].plot(steps[:], simulation[:, 2], 'grey', alpha=alpha)
+        ax[2].hlines(params.th, 0, (simulation.shape[0])*params.dt, linestyle='--', color='lightgray')
+        ax[2].vlines(reset_indices[:], np.min(np.array(simulation[:, 2])),
+                     np.max(np.array(simulation[:, 2])+0.01), color='grey', alpha=0.5)
         #ax[2].text(-steps[-1]/25, 0.7, 'timeouts:'+str(len(timeout_index)))
         #ax[2].set_title('dy/dt', fontsize=11)
         ax[2].set_ylabel(r'$y$')
 
-        ax[3].plot(steps[:-start], simulation[start:, 3], 'grey', alpha=alpha)
-        ax[3].vlines(reset_indices[start_:]-start*params.dt, np.min(np.array(simulation[start:, 3])),
-                     np.max(np.array(simulation[start:, 3])), color='grey', alpha=0.5)
+        ax[3].plot(steps[:], simulation[:, 3], 'grey', alpha=alpha)
+        ax[3].vlines(reset_indices[:], np.min(np.array(simulation[:, 3])),
+                     np.max(np.array(simulation[:, 3])), color='grey', alpha=0.5)
         # ax[3].set_title('dI/dt', fontsize=11)
         ax[3].set_ylabel(r'$I$')
         ax[3].set_xlabel('time [ms]')
@@ -178,7 +182,7 @@ class BehavioralPlot:
     def __init__(self, data: BehavioralPlotData):
         self.data = data
 
-    def plot_behavior(self, ax=None):
+    def plot_behavior(self, ax=None, setcolor=None):
         '''creates behavioral plot or returns the same as subplot'''
         data = self.data
         production_means = data.production_means
@@ -191,9 +195,11 @@ class BehavioralPlot:
             slope = round(data.slope, 2)
         print('timeouts:', list(zip(stimulus_range, data.timeouts)))
 
-        color = 'grey'
-        if 400 in data.stimulus_range:
-            color='black'
+        color=setcolor
+        if not setcolor:
+            color = 'grey'
+            if 400 in data.stimulus_range:
+                color='black'
 
         if ax is None:
             if np.any(data.production_means):

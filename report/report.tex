@@ -52,7 +52,7 @@
 	{\scshape\LARGE Master's Thesis \par}
 	\vspace{0.05cm}
 	\vspace{0.05cm}
-	{\huge\bfseries Computational Simulation of Time Perception: Model Description and Implementation \par}
+	{\huge\bfseries Computational Simulation of Time Perception \par}
 	\vspace{1.5cm}
 	{\Large Katharina \textsc{M Bracher} \par}
 	%{Student ID: 11754625 \par}
@@ -216,7 +216,7 @@ The threshold was set to 0.7, but smaller and larger thresholds were tested as w
  
 \subsection{Behaviorally Plausible Slopes}
 Biological plausible slopes in behavioral results lie around 0.83 for the short and 0.73 for the long range (\cite{Thurley2018}, \cite{Jazayeri2010}). 
-In wide parameter regimes, the reproductions show a regression to the mean.
+In wide parameter regimes, the reproductions show a regression to the mean. For fixed $\tau$, the slope increased with increasing $K$, since more weight is put on the current update, in other words relying less on the prior. 
 Choosing suitable values for $K$, the model also produced plausible slopes for various time constants (Fig. \ref{fig:parameter}a), where $K$ has to be adjusted according to the stimulus range and time constant. 
 $K$ is set to smaller values for the long range, putting less weight on the update compared to the short range, to produce plausible slopes.
 
@@ -248,43 +248,6 @@ When optimizing for the squared bias or variance only, no range effect is observ
 	\textbf{(d)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (c).
 	}
 \label{fig:parameter}
-\end{figure}
-
-\subsection{Optimality with Different Stimulus Ranges}
-Besides the mean, also the variance of a stimulus distribution influence the reproduction of stimuli by subjects. Together they reflect the external variability of stimuli and can be summarized by the ratio of mean and variance of the stimulus range: $\frac{\text{E}}{\text{var}}$.
-Regression to the mean should also depend on the discrimination abilities of the individual (internal noise), which is reflected by $\sigma$ in the model.
-When internal noise is fixed, the external noise can be modified independently. Since optimized $K$ reflects the weight on the prior experience, the effect of external noise on the update parameter can be investigated.
-If the mean of the stimulus range is increased, external variability is increased and as a result more weight should be put on the prior ($K$ decreased) - described by the range effect. 
-Increasing the variance of the stimulus range, ???.
-
-If a range spans a wider range of stimuli, discrimination of distant stimuli is easier. Less weight can be put on the prior and on the current update instead ($K$ increased). 
-%todo: citation 
-
-Both the short and the long range comprised seven stimuli that span 300 ms and the mean at 550 and 850 ms, respectively. Two ranges with the same variance and span but with shifted means at 700 ms (mid range) and 1050 ms (LONG range) were used for simulations. $K$ should therefor decrease with increasing mean of a range. 
-Additionally, ranges with a mean equal to one of the ranges mentioned above, but higher variance were used for simulation.
-Including all stimuli from both the short and the long range, the all range has the same mean as the mid range but a wider span (600 ms) and higher variance.
-The few-short and few-all range span the short and the all range, respectively, but with an under sampled number of stimuli and thus in each case a higher variance. 
-%For both cases the weight $K$ should decrease with higher variance. 
-
-Optimal $K$ for the mid range (10.43) was as expected lower compared to the short range (12.88) but higher compared to the long range (8.57). Across the short, mid and long range optimal $K$ has a linear relation.
-For the LONG range (3.12), optimal $K$ was smaller than for the long range, lower than the linear relation for short, mid and long would suggest.
-Decreasing $K$ for increasing mean of ranges is captured by the model beyond the short and the long range.  
-Higher variance reflected by decreasing $K$ for the same span of stimuli, is only apparent for the few-short range (12.55) that has a lower optimal $K$ than the short range. 
-There is no significant difference between the all and few-all range. 
-
-Optimal $K$ for the all range (11.45) is higher compared to the mid range, even though variance is increased. However, the span for the all range is increased by 300 ms, which in real behavior is reflected by better performance. 
-%is better performance (better discrimination) reflected by putting less weight on the prior?
-%todo:significance
-%todo:vorhersage Formel
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics{figures/ranges_new.pdf}
-	\caption{\textbf{Optimal update parameter $K$ for different ranges.} 
-	\textbf{(a)} Parameter simulations were performed with simulus ranges that differed in mean and or variance to the short and long range. The mid-range has its mean at the overlap of the short and long range. The LONG-range has its mean above the long range. Both the mid- and LONG-range have the same number of stimuli as the long and short range (7). To change the variance a range with more stimuli (13) that spans the short and long range was included (all range). Both the short and the all-range were for the few-short and few-all range under sampled.
-	\textbf{(b)} Optimal $K$ for a time constant of 130 ms for all ranges in (a) was determined. Simulations were performed 20 times with different seed initialization. $K$ is plotted against the ratio of the mean and the variance of the corresponding stimulus range. Colors correspond to the legend in (a). 
-	}
-\label{fig:new_ranges}
 \end{figure}
 
 \section{Comparison of Intermediate and High Input Regime}
@@ -336,10 +299,10 @@ For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:ex
 	\centering
 	\includegraphics{figures/highI.pdf}
 	\caption{\textbf{Experiment Simulation in the High Input Regime.} 
-	\textbf{(a)} Activity of $u, v, y$ and $I$ for five example stimulus intervals of 650, 500, 600, 700, 450 ms. Stimulus presentation and reproduction epochs are highlighted in blue and red, respectively. The delay period between trials is shown in white. Initial values are set to $u_0=0.8 , v_0=0.6 , y_0=0.1, I_0=1.04$.
+	\textbf{(a)} Activity of $u, v, y$ and $I$ for five example stimulus intervals of 650, 500, 600, 700, 450 ms. Stimulus presentation and reproduction epochs are highlighted in blue and red, respectively. The delay period between trials is shown in white. Initial values are set to $u_0=0.8 , v_0=0.6 , y_0=0.1, I_0=1.04$ and the threshold $y_{\text{th}}$ is set to 0.1. 
 	\textbf{(b)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 60$ ms. For the simulation with short
 	stimulus range optimal $K$ was 4, with the long stimulus range optimal $K$ was 2.5.
-	\textbf{(f)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (b).
+	\textbf{(c)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (b).
 	}
 \label{highI}
 \end{figure}
@@ -351,11 +314,77 @@ For each stimulus the mean input $I$ during the experiment simulation shows an a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{General Underestimation}
+%motivate why interesting
 In all experiment simulations discussed above a general underestimation in the long stimulus range is apparent (Fig. \ref{fig:parameter}c, Supplementary Fig. \ref{sup:othererror}a, b).
 Also in the high input regime a general underestimation with optimal parameters emerges (Supplementary Fig. \ref{sup:highI}e).
 
+%delay, mean of stim distr
+Problem with experiment simulation design or model.
+Change model by learning I in delay.
+%no delay
+Discarding the delay in the experiment design solves the problem that arises form the length of the delay interval. 
+This does not necessarily mean, that the experimental design. When simulating experiments that include a delay period between trial or even between measurement and reproduction, it can be assumed, that information is hold in the system until the next epoch starts. 
+It has been shown in neural networks, that information about time can be hold in state space over a delay period (\cite{Bi2020}).
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/delay.pdf}
+	\caption{\textbf{xx} 
+	\textbf{(a)} 
+	\textbf{(b)} 
+	}
+\label{fig:delay}
+\end{figure}
+
+\section{Influence of External Variability on Behavior}
+Regression to the mean depends on the discrimination abilities of the individual subject. This is reflected by internal noise $\sigma$ in the model.
+Additionally, variability of the environment influences the behavior, which is captured  by the statistics of stimuli over the course of an experiment. 
+The statistics if stimuli can be summarized by the ratio of the mean and variance of the stimulus range: $\frac{\text{E}}{\text{var}}$.
+When internal noise is fixed, the external variability can be modified independently. 
+Since optimized $K$ reflects inversely the weight on the prior, the effect of external variability on the update parameter can be investigated by modifying the mean or the variance of stimuli. 
+
+With larger interval times, internal estimates get noisier and regression of reproductions gets stronger (range effect). 
+Increasing the mean interval of stimuli, increases the external variability ratio and as a result more weight should be put on the prior ($K$ decreases).
+Besides the mean, also the variance of a stimulus distribution influence the reproduction of intervals. 
+With larger variance, differences of time intervals is more apparent and discrimination becomes easier. Thus, regression of reproductions gets weaker.
+The external variability ratio gets smaller with increasing variance, and the prior can be neglected more. This results in putting more weight on the update ($K$ increases) instead of the prior.
+Larger variance can be achieved by reducing the sampling frequency in a range or by expanding the span of a range, accommodating more distance time intervals. 
+%todo: citation 
+
+So far the short and the long range have been used in simulations. Both comprised seven stimuli that spanned 300 ms and had their mean at 550 and 850 ms, respectively. 
+Additional ranges that differ in mean, span and sampling were created to test the behavioral predictions of the model based on the external variability of stimuli.  
+Two ranges with same variance and span but with shifted means at 700 ms (mid range) and 1050 ms (extra-long range) were used for simulations. Based on the external variability ratio, $K$ should decrease with increasing mean of a range. 
+Additionally, ranges with a mean equal to one of the ranges mentioned above, but higher variance were examined.
+Including all stimuli from both the short and the long range, the all range has its mean equal to the mid range but a wider span (600 ms) and thus higher variance.
+The short-few and all-few range span the short and the all range, respectively, but with an under sampled number of stimuli and thus in each case higher variance. 
+For all cases the weight $K$ should increase since variance is increased. %????????????
+(Fig. \ref{fig:new_ranges}a)
+
+\subsection{Optimality Predicts Regression Effect and Range Effect across Ranges.}
+As expected, optimal $K$ for the mid range (16.71) was  lower compared to the short range (21.33) but higher compared to the long range (13.10) due to the shifted mean. 
+For the extra-long range (8.71), optimal $K$ was smaller than for the long range.
+Across the four ranges optimal $K$ has an almost linear relationship with shifting mean.
+Decreasing $K$ for increasing mean of ranges is captured by the model beyond the short and the long range.
+Corresponding slopes in the behavioral analysis all show slopes below zero. Thus, optimal $K$ is predicting the regression effect across multiple ranges. 
+There is no significant difference in the slope of behavior in the short and the mid range, but otherwise significant decrease in the slope with increasing mean. The model predicts range effect for large enough changes in the mean (Fig. \ref{fig:new_ranges}b).
+
+Changes in variance are not captured by the model in neither $K$ nor the slope.
+Higher variance in the ranges with fewer stimuli shows no significant difference to their counterparts with higher stimuli sampling.
+Also, the all range with a larger span of stimuli has no significantly larger $K$ compared to the mid range. 
+(Kolmogorov–Smirnov test, n=20, with Bonferroni correction for multiple testing) %???????
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/ranges_new.pdf}
+	\caption{\textbf{Optimal update parameter $K$ for different ranges.} 
+	\textbf{(a)} Parameter simulations were performed with simulus ranges that differed in mean and or variance to the short and long range. The mid range has its mean at the overlap of the short and long range. The extra-long range has its mean above the long range. Both the mid and extra-long range have the same number of stimuli as the long and short range (7). To change the variance a range with more stimuli (13) that spans the short and long range was included (all range). Both the short and the all range were for the short-few and all-few range under sampled.
+	\textbf{(b)} Optimal $K$ for a time constant of 165 ms for all ranges in (a) was determined. Simulations were performed 20 times with different seed initialization. $K$ is plotted against the ratio of the mean and the variance of the corresponding stimulus range. Colors correspond to the legend in (a). 
+	}
+\label{fig:new_ranges}
+\end{figure}
 \section{Discussion}
+
 
 \pagebreak
 
@@ -464,7 +493,7 @@ For all optimized values, be it on the squared bias, the variance or combined in
 	\centering
 	\includegraphics{figures/supp_experiment_high.pdf}
 	\caption{\textbf{Experiment dynamics in the high input regime.} 
-	\textbf{(a)} For an experiment simulation with 500 trials in the high input regime. Parameters are set to optimized values with time constant $\tau = 60$ and $K = 4$. The activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
+	\textbf{(a)} For an experiment simulation with 500 trials in the high input regime. The threshold is set to $y_{\text{th}}=0.1$ and $\sigma=0.02$. Parameters are set to optimized values with time constant $\tau = 60$ and $K = 4$. The activity was sorted according to epoch and stimulus interval. Stimuli were chosen from the short range. Upper row show the behavior of $y$ in the measurement epoch, middle row shows the behavior of $y$ in the reproduction epoch. The lower row shows the input level to the circuit during the reproduction epoch. 
 	\textbf{(b)} Same as (a) with stimuli chosen from the long range and $K = 2.5$.
 	}
 \label{sup:experiment_high}
@@ -482,6 +511,17 @@ For all optimized values, be it on the squared bias, the variance or combined in
 	\textbf{(f)} 
 	}
 \label{sup:comparison}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics{figures/supp_delay.pdf}
+	\caption{\textbf{(xx)}
+	\textbf{(a)} 
+	\textbf{(b)}
+	\textbf{(c)} 
+	}
+\label{sup:delay}
 \end{figure}
 
 \pagebreak

@@ -150,7 +150,6 @@ def get_mse(data, K_lst, tau):
     return bias2+var
 
 
-
 def plot_slope(short, long, K_lst, tau, n_colors=20):
     short_ktau_slope = to_matrix(short, len(K_lst), len(tau), 'slope')
     long_ktau_slope = to_matrix(long, len(K_lst), len(tau), 'slope')
@@ -276,6 +275,7 @@ def get_opt_K(data, K_lst, tau, mse=False, var=False, bias=False, bias2=False):
     if mse: 
         data_ = get_mse(data, K_lst, tau)
     data_ = np.nan_to_num(data_, nan=np.inf)
+    # data_[data_ == 0] = np.inf #none
     opt = np.nanargmin(data_, axis=0)
     opt_overall = np.where(data_==np.nanmin(data_))
     print(tau[opt_overall[1][0]], K_lst[opt_overall[0][0]])
@@ -287,7 +287,18 @@ def get_mean_seed(data, K_lst, seed, getlist=False):
         return list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1]
     else:
         return np.mean(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1]), np.std(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1])
-
+    
+def get_mean_slope(data, K_lst, seed):
+    data_ = get_mse(data, K_lst, seed)
+    data_ = np.nan_to_num(data_, nan=np.inf)
+    data_[data_ == 0] = np.inf #none
+    opt = np.nanargmin(data_, axis=0)
+    slope = to_matrix(data, len(K_lst), len(seed), 'slope')
+    opt_slope = []
+    for i,j in zip(range(21), opt):
+        opt_slope.append(slope.T[i][j])
+    print(np.mean(opt_slope))
+    return opt_slope
 
 
 def create_search_space(srange, K_lst, th_lst, tau, delay_lst):

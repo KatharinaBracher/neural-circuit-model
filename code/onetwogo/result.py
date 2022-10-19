@@ -220,12 +220,20 @@ class SimulationResult:
     def get_frames(self, start): #reuse in plot
         '''gets times of all measurement stages and production stages'''
         reset_indices = self.get_reset_indices()
+        params = self.params
+        # no delay
+        start_frame = 0
+        reg = 2
+        # delay
+        if params.delay > 0:
+            start_frame = 1
+            reg = 3
+        
+        m_start = reset_indices[start_frame::reg]
+        m_stop = reset_indices[start_frame+1::reg]
 
-        m_start = reset_indices[1::3]
-        m_stop = reset_indices[2::3]
-
-        p_start = reset_indices[2::3]
-        p_stop = reset_indices[3::3]
+        p_start = reset_indices[start_frame+1::reg]
+        p_stop = reset_indices[start_frame+2::reg]
         return zip(p_start[start:], p_stop[start:], m_start[start:], m_stop[start:])  # for all remove here
 
         # TODO remove timeouts in m_start, etc and in stimulus_lst (successfull) for PCA

@@ -93,25 +93,18 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
                     result.write_to_disk(fp, srange, K, seed)
 
 # intermediate I
-regime = 'underestimation'
+regime = 'range/delay0best'
 sigma = 0.02
 reset=50
 Iinit=0.8
 
-K_lst = np.arange(1, 30, 1)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
-th_lst = np.arange(0.6, 0.7, 0.75)
-delay_lst = np.arange(400, 1000, 50)
-tau = np.arange(60, 180, 10)  # np.arange(60, 200, 10)
-
-# high I
-'''regime = 'highI'
+'''# high I
+regime = 'underestimation/delayhigh'
 sigma = 0.02
 reset=-500
 Iinit=1.02
 
-K_lst = np.arange(1, 18, 0.5)
-th_lst = np.arange(0.05, 0.1, 0.2)
-tau = np.arange(20, 150, 10)'''
+tau = np.arange(20, 200, 10)'''
 
 '''# range
 regime = 'range'
@@ -119,25 +112,51 @@ sigma = 0.02
 reset=50
 Iinit=0.8
 
-K_lst = np.arange(1, 22, 0.5)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
-tau = np.arange(100, 230, 10)  # np.arange(60, 200, 10)
 '''
 
-# choose parameter range #############################################################
-srange = 'short'
-# K_lst = [8.0]*250
-th_lst = [0.7]
-# tau = [130]
-delay_lst = [850]
-# seed_lst = np.arange(0, 21, 1)
-seed_lst = [0]
-
-# name = 'LONG_SAME_K8_TAU100_TH08_DEL700'
-# name = 'LONG_K1-22_TAU130_th07_del700_sig02_seed'
-name = 'SHORT_K1-30_th7_fixed_seed_delaylong'
-# name = 'inter_short_few_2_07'
+###############################
 
 pool = 24
 batchsize = pool
 
+th_lst = [0.7]
+# seed_lst = [0]
+seed_lst = np.arange(0, 21, 1)
+K_lst = np.arange(1, 35, 1)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
+# tau = np.arange(90, 250, 10)  # np.arange(60, 200, 10)
+delay_lst = [0]
+
+tau = [170]
+srange='mid'
+name = 'MID_170_th7_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [150]
+srange='all'
+name = 'all_150_th7_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [120]
+srange='few_short2'
+name = 'fewshort_120_th1_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [160]
+srange='few_all'
+name = 'fewall_160_th7_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [230]
+srange='extralong'
+name = 'extralong_230_th7_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [130]
+srange='short'
+name = 'short_130_th7_seed_delay0'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+
+tau = [200]
+srange='long'
+name = 'long_200_th7_seed_delay0'
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
