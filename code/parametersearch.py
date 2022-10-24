@@ -32,10 +32,10 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst):
 
     if srange == 'short':
         # stimulus = [400, 450, 500, 550, 600, 650, 700]
-        stimulus = np.loadtxt('stimlst_short_400_700_7_a.txt', dtype=int)
+        stimulus = np.loadtxt('stimlst_short_400_700_7_b.txt', dtype=int)
     if srange == 'long':
         # stimulus = [700, 750, 800, 850, 900, 950, 1000]
-        stimulus = np.loadtxt('stimlst_long_700_1000_7_a.txt', dtype=int)
+        stimulus = np.loadtxt('stimlst_long_700_1000_7_b.txt', dtype=int)
 
     if srange == 'mid':
         stimulus = np.loadtxt('stimlst_mid_550_850.txt', dtype=int)
@@ -49,6 +49,8 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst):
         stimulus = np.loadtxt('stimlst_extralong_900_1200.txt', dtype=int)
     if srange == 'few_short2':
         stimulus = np.loadtxt('stimlst_few_short_400_700_2.txt', dtype=int)
+    if srange == 'extralong2':
+        stimulus = np.loadtxt('stimlst_extralong_1400_1700.txt', dtype=int)
     
 
     for K in K_lst:
@@ -93,19 +95,19 @@ def run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_ls
                     result.write_to_disk(fp, srange, K, seed)
 
 # intermediate I
-regime = 'range/delay0best'
+regime = 'range/delay0'
 sigma = 0.02
-reset=50
-Iinit=0.8
+reset = 50
+Iinit = 0.8
 
-'''# high I
-regime = 'underestimation/delayhigh'
+# high I
+'''regime = 'underestimation/delayhigh'
 sigma = 0.02
 reset=-500
 Iinit=1.02
 
-tau = np.arange(20, 200, 10)'''
-
+tau = np.arange(20, 200, 10)
+'''
 '''# range
 regime = 'range'
 sigma = 0.02
@@ -119,44 +121,18 @@ Iinit=0.8
 pool = 24
 batchsize = pool
 
-th_lst = [0.7]
-# seed_lst = [0]
-seed_lst = np.arange(0, 21, 1)
+
+seed_lst = [0]
+# seed_lst = np.arange(0, 21, 1)
 K_lst = np.arange(1, 35, 1)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
-# tau = np.arange(90, 250, 10)  # np.arange(60, 200, 10)
+tau = np.arange(200, 400, 10)  # np.arange(60, 200, 10)
 delay_lst = [0]
 
-tau = [170]
-srange='mid'
-name = 'MID_170_th7_seed_delay0'
+th_lst = [0.7]
+srange='extralong2'
+name = 'EXTRALONG2_th07_delay0'
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
 
-tau = [150]
-srange='all'
-name = 'all_150_th7_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
-
-tau = [120]
-srange='few_short2'
-name = 'fewshort_120_th1_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
-
-tau = [160]
-srange='few_all'
-name = 'fewall_160_th7_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
-
-tau = [230]
-srange='extralong'
-name = 'extralong_230_th7_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
-
-tau = [130]
-srange='short'
-name = 'short_130_th7_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
-
-tau = [200]
-srange='long'
-name = 'long_200_th7_seed_delay0'
-run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
+'''srange='long'
+name = 'LONG_delay0_B'
+run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)'''

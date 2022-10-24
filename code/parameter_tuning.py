@@ -99,9 +99,9 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
     else:
         cbar_ax = fig.add_axes([.91, 0.2, .02, .6]) #x, y, breite, höhe
         h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, 
-                         ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
+                         ax=ax[0], cmap = cmap, cbar=False)
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, 
-                         ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm)
+                         ax=ax[1], cmap = cmap, cbar_ax= cbar_ax)
         #annot=mask,  fmt=".0", annot_kws={"size": 13})
 
     ax[0].locator_params(axis='y', nbins=4)
@@ -275,7 +275,7 @@ def get_opt_K(data, K_lst, tau, mse=False, var=False, bias=False, bias2=False):
     if mse: 
         data_ = get_mse(data, K_lst, tau)
     data_ = np.nan_to_num(data_, nan=np.inf)
-    # data_[data_ == 0] = np.inf #none
+    data_[data_ == 0] = np.inf #none
     opt = np.nanargmin(data_, axis=0)
     opt_overall = np.where(data_==np.nanmin(data_))
     print(tau[opt_overall[1][0]], K_lst[opt_overall[0][0]])

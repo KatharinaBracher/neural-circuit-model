@@ -446,9 +446,22 @@ Scaling in MFC
 - scaling may originate within MFC or other cortical circuits projecting to MFC
 - Input is adjusting the system’s effective time constant in a flexible input-dependent manner
 
+## Intro
+- Magnitude estimation
+- model für magnitude estimation
+- Scaling and error update Egger and co
+- Model in Egger, how it is used
+- Model is used for decision making
+- research question: can the model be applied to more realistic experiment simulations? How much of the effects in real behavior does it capture?
+- andere effecte ranges
 
 ## Discussion
 - Thurley 2016: Trial-by-trial update rules have been used by others to explain aspects of magnitude estimation (Hellström, 2003; Dyjas et al., 2012; Bausenhart et al., 2014) and are also at the core of the Bayesian model by Petzschner and Glasauer (2011), where such updating is used to adjust prior knowledge about the stimulus distribution. 
+- optimization 
+- Bayesian model? statistisches model
+- mechanismus uaf populations ebene, raten basiert
+- generell modelierung von Zeitrepro
+- entschiedung und Zeit zusammenhang (model basierent auf desition making)
 
 
 
