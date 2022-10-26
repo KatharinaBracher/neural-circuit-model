@@ -462,6 +462,13 @@ Scaling in MFC
 - mechanismus uaf populations ebene, raten basiert
 - generell modelierung von Zeitrepro
 - entschiedung und Zeit zusammenhang (model basierent auf desition making)
+- remapping (=Anpassung des dynamischen Regimes for current experiment, rescaling x axis) var: vorhersage des models ist var keinen Einfluss, in Daten zwei Möglichkeiten -> porpose experiment change var further, switch? when switch? to take further information into account
+  model needs additional mechanism to adjust regime to picture the data possibilities
+- model in one regime -> range effect, breaks down, needs remapping of axis to higher (ms to s)
+  this is also in the Data: range effect ms vs s, Anpassungsmechanismus
+- Vorhersage des Models: so ist das Verhalten
+  Data: manche machen var so manche so
+  -> model anpassen damit es abbildet, in daten auch Anpassungsmechanismus (gegeben dass model beschreibt was Gehrin macht)
 
 
 

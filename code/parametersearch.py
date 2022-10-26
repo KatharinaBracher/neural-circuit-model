@@ -51,6 +51,8 @@ def create_search_space(srange, K_lst, th_lst, tau, delay_lst, seed_lst):
         stimulus = np.loadtxt('stimlst_few_short_400_700_2.txt', dtype=int)
     if srange == 'extralong2':
         stimulus = np.loadtxt('stimlst_extralong_1400_1700.txt', dtype=int)
+    if srange == 'extrashort':
+        stimulus = np.loadtxt('stimlst_extrashort_100_400.txt', dtype=int)
     
 
     for K in K_lst:
@@ -125,12 +127,12 @@ batchsize = pool
 seed_lst = [0]
 # seed_lst = np.arange(0, 21, 1)
 K_lst = np.arange(1, 35, 1)  # np.arange(1, 22, 1) np.arange(0.5, 10.5, 0.5)
-tau = np.arange(200, 400, 10)  # np.arange(60, 200, 10)
+tau = np.arange(30, 180, 10)  # np.arange(60, 200, 10)
 delay_lst = [0]
 
-th_lst = [0.7]
-srange='extralong2'
-name = 'EXTRALONG2_th07_delay0'
+th_lst = [0.5]
+srange='extrashort'
+name = 'extrashort_th07_delay0'
 run_parallel(batchsize, pool, srange, K_lst, th_lst, tau, delay_lst, seed_lst, name)
 
 '''srange='long'
