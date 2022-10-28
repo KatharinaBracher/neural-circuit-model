@@ -334,7 +334,6 @@ In the intermediate regime, the difference between maximal and minimal $I$ is la
 \label{fig:comparison}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{General Underestimation}
 %motivate why interesting
 For a regression to the mean the indifference point of a linear regression between stimuli and reproductions should correspond to the mean of the stimulus range (550~ms for the short and 850~ms for the long range).
@@ -365,33 +364,32 @@ eradicates general underestimation (Supplementary Fig. \ref{sup:delay}a, b).
 In the high input regime, adapting the delay period does not resolve the general underestimation. Thus, only the intermediate input regime is used in the following analysis.
 
 \subsection{Adjusted Experiment Simulation}
-%todo: shared tau
-%todo: inhibitorische population schiebt rate 
+The previous analysis showed, that there are two main problems that caused distorted stimulus reproductions. 
+First, a common time constant between experiments with different ranges skews the reproductions.
+Second, is a hyperparameter of the experimental design affecting the reproductions. The delay period between trials should not influence reproductions.
+
+Since the time constant in the model can be interpreted as a rate time constant, it is justifiable to adapt it between experiment with different stimulus ranges. 
+This would correspond to a firing rate adjustment in the population to an experimental setting.
+In a biological system, an inhibitory population could scale the rate time constant according to the stimulus statistics.
+Unless otherwise specified, error-minimizing $\tau*$ are used for each stimulus range individually in following simulations. 
 %todo: K not comparable across ranges (not smaller for long range etc)
-The previous analysis showed, that there are two main problems that caused distorted reproductions. 
-First, a compromised, shared time constant between experiments with different ranges skews the reproductions.
-Since the time constant in the model can be interpreted as a rate time constant, it is justifiable to change it between experiment. 
-This would correspond to an adjusted rate in the population to an experiment setting.
-Second, it is the application of the model in the described experimental setting. The delay period between trials is a hyperparameter of the experiment design that should not influence reproductions.
-Thus, the model needs to be adjusted to take into account the experimental design. 
+
+Furthermore, the model needs to be adjusted to take into account the impact of the delay period on the reproductions. 
 % delay=mean of range
-Setting the time of the delay epoch to the mean of the range that is used in the experiment simulation doesn't make sense from a design point of view. It should be possible to choose the delay time between trials arbitrarily and independent of the stimulus range. 
+Setting the delay time to the mean of the stimulus range used in the simulation doesn't make sense from a design perspective. It should be possible to choose the delay period between trials arbitrarily and independently of the stimulus range. 
 % long delay + separate tau
-Similarly, the delay period can be set to a time that is sufficiently long, such that the system evolves to a steady state. With the addition of optimized $\tau$ for stimulus ranges independently, distorted reproductions can be avoided. Again. this would mean no independent choice of the delay period.
+Similarly, the delay period could be chosen long enough to allow the system to evolve to a steady state. However, this would mean that the delay time cannot be chosen independently.
 % no delay
-Another possibility that solves the problem arising from the length of the delay epoch, is discarding the delay in the experiment design (Fig. \ref{fig:delay}b).
-This solves the problem, because the reproduction period always ends when the threshold is met, thus the subsequent reset and measurement period begin at the same values in $y$.  
-This does not necessarily mean, that the experimental design is restricted. When simulating experiments that include a delay period between trial or even between measurement and reproduction, it can be assumed, that information is hold in the system until the next epoch starts. 
-It has been shown in neural networks, that information about time can be hold in state space over a delay period (\cite{Bi2020}).
-This can be combined with independent, optimal $\tau$ for each range as discussed above (Fig. \ref{fig:delay}c).
-Simulations in section \ref{externalvar} are performed without delay period between trials.
+Another way to solve the problem of the delay epoch, is to neglect the delay in the simulation of the experiment (Fig. \ref{fig:delay}b).
+The reproduction period always ends when the threshold $y_\text{th}$ is met. If the measurement period of the subsequent trial follows directly after it, it always starts at the same value of $y$. 
+This does not necessarily mean, that the experimental design is limited. When simulating experiments that include a delay period between trials or even between measurement and reproduction epoch, it can be assumed that information is stored in the system until the beginning of the next epoch. 
+In neural networks, it has been shown that the timing information in the state space can be held over a delay time (\cite{Bi2020}).
+Neglecting the delay epoch in combination with independent $\tau*$ for each range leads to characteristic effect and biologically plausible slopes (Fig. \ref{fig:delay}c).
+Simulations in the following sections are performed without delay period between trials.
 % reset on fixed value
 % learn I for delay
-Solutions that incorporate a delay period in the simulation itself would need model adjustments,
-Either the reset is changed from an impulse to a fixed reset value or the input $I$ during the delay epoch is not adopted from the previous trial but updated separately based on an error in order to always reach the threshold. 
-%%%%%%%%%%%%%%%%%%
-Shifting the threshold to higher or lower values of $y$ does not resolve under- or overestimation. However, the threshold has to be set in an appropriate scope to avoid exceeding timeouts. 
-%Todo: what about the extremes? when does the model stop working
+Solutions that incorporate a delay period into the simulation itself would require model adjustments.
+Either the reset is changed from an impulse to a fixed reset value, or the input is updated separately during the delay epoch based on an error to always reach the threshold. 
 
 \begin{figure}[ht]
 	\centering
@@ -406,82 +404,61 @@ Shifting the threshold to higher or lower values of $y$ does not resolve under- 
 
 
 \section{Influence of External Variability on Behavior} \label{externalvar}
-Regression to the mean depends on the discrimination abilities of the individual subject. This is reflected by internal noise $\sigma$ in the model.
-Additionally, variability of the environment influences the behavior, which is captured  by the statistics of stimuli over the course of an experiment. 
+Regression to the mean depends on the discrimination abilities of the individual subject. In the model, this is reflected by internal noise $\sigma$.
+In addition, variability of the environment affects the behavior, which is captured by the statistics of stimuli over the course of an experiment. 
 When internal noise is fixed, the external variability can be modified independently. 
 The effect of external variability on the update parameter can be investigated by modifying the mean or the variance of stimuli. 
 
 \subsection{Effects of Stimulus Statistics in Real Behavior}
-With larger interval times, internal estimates get noisier and regression of reproductions gets stronger. This is well described by the \textit{range effect} across species (\cite{Cicchini2012}, \cite{Henke2021}, \cite{Henke2022}, \cite{Sohn2019}). 
-Increasing the mean time interval of stimuli, results in stronger regression, since more weight is put on the prior. 
-Besides the mean, also the variance of a stimulus distribution influence the reproduction of intervals.
-Larger variance can be achieved by reducing the sampling frequency in a range or by expanding the width of a range, accommodating more distance time intervals. 
-The effect of variance of stimuli on the behavior is not well investigated.
-There are three possible effects on behavior. 
-Reproductions could get better, hence regression gets weaker. This would mean putting more weight on the update instead of the prior. 
+With larger time intervals, internal estimates get noisier and regression of reproductions gets stronger. This is well described by the \textit{range effect} across species (\cite{Cicchini2012}, \cite{Henke2021}, \cite{Henke2022}, \cite{Sohn2019}). 
+Besides the mean, also the variance of stimuli could influence the reproduction.
+Larger variance can be achieved by reducing the sampling frequency of the stimulus range or by expanding the width of the range, accommodating more distance time intervals. 
+The effect of changing the variance of stimuli on the behavior has not been well studied.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+There are three different effects that greater variance could have on behavior. 
+Reproductions could improve, leading to a weaker regression. This would mean that subjects rely less on the prior. 
 Intuitively, larger variance means that differences of time intervals get more apparent and discrimination becomes easier (e.g. stimuli are further apart or extremes are more distinct). 
-This scenario is predicted by model that used noisy integrators linked by an adaptive reference in \cite{Thurley2016}.
-On the other hand, a change in variance with fixed mean could have no effect on the behavior. Then only the mean would have an effect on the reproduction performance.
-This seems to be the case in \cite{Petzschner2012}, where performance of the range with larger variance doesn't get better. 
-%todo: check figure real data slope 
-In Fig. \ref{fig:underestimation} c, both possibilities mentioned above occur on single subject basis. The mean of all subjects shows no difference in the slope of reproductions when variance is increased. There are, however, three subjects that show a linear increase in performance with decreasing ratio of the mean and variance of the stimulus range. 
-Finally, reproductions could get worse with larger variance. This has been demonstrated in sound intensity by \cite{Teghtsoonian78}.
-Most studies that include experimental data with stimuli ranges that differ in variance did not investigate the effect on regression. 
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics{figures/underestimation.pdf}
-	\caption{\textbf{Effects of stimuli statistics in behavior of gerbils and humans.}
-	\textbf{(a)} Representative behavioral results of time reproduction of a gebril. Stimuli were several seconds long. Four experiments were conducted with different ranges: short (red), mid (orange), long (light blue) and all (blue). Large markers display the mean of trials. Small dots show reproductions of single trials for the experiment with the all range.
-	\textbf{(b)} Same as (a) for a human. Ranges differed slightly between experiments with gerbils and humans. 
-	\textbf{(c)} Slope of the linear regression between stimuli and reproductions for seven gebrils plotted against the ratio of the mean and variance of the stimulus ranges. Vertical black markers indicate the median of slopes and gray violin plots illustrate the distribution over all animals. Slopes for different stimulus ranges of one animal are connected by lines. 
-	\textbf{(d)} Same as (c) for six humans. 
-	Figure courtesy of Kay Thurley and Josephine Henke.
-	}
-\label{fig:underestimation}
-\end{figure}
-
+This scenario is predicted by a model that uses noisy integrators linked by an adaptive reference in \cite{Thurley2016}.
+On the other hand, a change in variance might have no effect on behavior, if the mean is fixed. According to this, only the mean value would have an influence on the reproduction performance.
+This seems to be the case in \cite{Petzschner2012}, since performance of the range with larger variance doesn't get better. 
+Finally, reproductions be worse with greater variance. This was demonstrated in the case of sound intensity estimations by \cite{Teghtsoonian78}.
+In most studies that included experimental data with varying variance of stimuli, the effects on regression were not examined. 
 
 \subsection{Optimality Predicts Regression Effect and Range Effect}
-So far the short and the long range have been used in simulations. Both comprised seven stimuli that spanned 300 ms and had their mean at 550 and 850 ms, respectively. 
-Additional ranges that differ in mean, width and sampling were created to test the behavioral predictions of the model based on the external variability of stimuli.  
-Two ranges with same variance and width but with shifted means at 700 ms (mid range) and 1050 ms (extra-long range) were used for simulations. Based on the external variability ratio, $K$ should decrease with increasing mean of a range. 
-Additionally, ranges with a mean equal to one of the ranges mentioned above, but higher variance were examined.
-Including all stimuli from both the short and the long range, the all range has its mean equal to the mid range but a larger width (600 ms) and thus higher variance.
-The short-few and all-few range span the short and the all range, respectively, but with an under sampled number of stimuli and thus in each case higher variance
-(Fig. \ref{fig:new_ranges}a).
+Additional ranges differing in mean, width and sampling frequency were used to test the model's behavior based on the external variability of stimuli.
+The short and the long range include seven stimuli spanning 300 ms, with mean values of 550 and 850~ms, respectively. 
+Two ranges had the same variance and width, but shifted mean values at 700~ms (mid range) and 1050~ms (extra-long range). With increasing mean, the range effect predicts a flatter slope. 
+In addition, ranges were examined whose mean was equal to one of the ranges above, but which had a higher variance.
+Including all stimuli from the short and the long range, the all range has the same mean as the mid range, but a larger width (600 ms) and therefore higher variance.
+The short-few and all-few range encompasses the short and the all range, respectively, but with smaller number of stimuli, the variance increases in both cases 
+(Fig. \ref{fig:new_ranges}a, Supplementary Fig. \ref{sup:ranges}c).
+%%%%%%%%%%%%%%%%%%%%%%%%
+Optimal $\tau*$ for stimulus ranges are as follows: short~130~ms, mid~170~ms, long~200~ms, extra-long~230~ms, all~150~ms and~short-few~120~ms.
+For all ranges, the slope of the linear regression between stimuli and reproductions is below one. Thus, simulations with error-minimizing parameters predict the regression effect across several ranges. 
+The slopes decrease significantly as the mean of the stimulus range increases, except for the short and mid range (Fig. \ref{fig:new_ranges}b).
+Thus, the model predicts the range effect only for sufficiently large changes in the mean. 
+(Kolmogorov–Smirnov two-sample test, p$<$0.01, n=21 for each distribution, Bonferroni correction for multiple testing).
+Across the four ranges short, mid, long and extralong, the slope has a linear relationship with the mean value of the range (Pearson correlation r=-0.95, $p<0.05$).
 
-Experiment simulations were performed with a threshold of $y_{\text{th}}$ = 0.7 and $\sigma$ = 0.02. The time constant $\tau$  was set to 165 ms for all stimulus ranges, which corresponds to the mean of the optimal $\tau*$ of the short (130 ms) and long (200 ms) range. 
-Optimal $\tau*$ for other ranges were the following: mid 170 ms, extra-long 230 ms, all 150 ms and short-few 120 ms. 
-As expected, optimal $K$ for the mid range (16.71) was lower compared to the short range (21.33) but higher compared to the long range (13.10) due to the shifted mean 
-(Kolmogorov–Smirnov two-sample test, n=20 for each distribution, p$<$0.01, Bonferroni correction for multiple testing, this also applies for all following comparisons if not denoted as not significant).
-For the extra-long range (8.71), optimal $K$ was smaller than for the long range.
-Across the four ranges optimal $K$ has an almost linear relationship with shifting mean.
-Decreasing $K$ for increasing mean of ranges is captured by the model beyond the short and the long range (Fig. \ref{fig:new_ranges}b).
-Corresponding slopes in the behavioral analysis all show slopes below zero. Thus, optimal $K$ is predicting the regression effect across multiple ranges (Fig. \ref{fig:new_ranges}d). 
-There is no significant difference in the slope of behavior in the short and the mid range, but otherwise significant decrease in the slope with increasing mean. The model therefore only predicts the range effect for large enough changes in the mean. 
-The optimal time constant $\tau*$ of the mid range (170 ms) is closest to the shared time constant of 165 ms for all simulations
-(Kolmogorov–Smirnov two-sample test, n=21 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).
-But even when the constraint on the time constant is relaxed and allowed to change between experiment simulations, the slope of behavioral results of simulations, which were performed with optimal $K$ and optimal $\tau*$, show no significant difference between the short and the mid range(Fig. \ref{fig:new_ranges}e)
+When the experiment was simulated with a common $\tau$ of 165~ms between ranges, $K*$ is significantly lower for the mid range (16.71) compared to the short range (21.33), but slopes show no significant difference (Supplementary Fig. \ref{sup:ranges}a, b).
+Decreasing $K*$ for increasing mean of ranges is captured by the model beyond the short and the long range.
+(Kolmogorov–Smirnov two-sample test, n=20 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).
+
+\subsection{Optimality does not Predict Influence of Variance on Behavior}
+How does the slope change when the mean of stimuli remains constant, but variance is increased?
+The statistics of stimuli can be summarized by the ratio of the mean and variance of the stimulus range: $\frac{\text{E(t)}}{\text{var(t)}}$.
+Higher variance in ranges with lower stimulus sampling (short-few, all-few) shows no significant difference from their counterparts with normal stimulus sampling (short, all).
+Furthermore, a larger width of stimuli does not result in a significant larger or smaller slope (all range vs mid range).
+Therefore, increasing variance is not affecting the reproduction of stimuli in the model.
 (Kolmogorov–Smirnov two-sample test, n=21 for each distribution, Bonferroni correction for multiple testing).
-
-\subsection{Optimality Predicts No Influence of Variance on Behavior}
-%todo: ratio
-The statistics if stimuli can be summarized by the ratio of the mean and variance of the stimulus range: $\frac{\text{E(t)}}{\text{var(t)}}$.
-How does optimal $K$ and the slope change when the mean is fixed, but variance is increased?
-The increased variance has no influence on neither $K$ nor the slope (Fig. \ref{fig:new_ranges}b, c; Fig. \ref{fig:new_ranges}d, e).
-Higher variance in the ranges with fewer stimuli (short-few, all-few) shows no significant difference to their counterparts with higher stimulus sampling (short, all).
-Also, a larger width of stimuli (all range) results in no significantly larger or smaller $K$ compared to a range with smaller width (mid range) 
-(Kolmogorov–Smirnov two-sample test, n=21 for each distribution, Bonferroni correction for multiple testing).
-
-The model predicts, that only the mean has an effect on the regression in reproduction performance. This is supported by data in \cite{Petzschner2012}, however more studies that investigate this particular phenomenon have to be performed to validate this prediction. 
-The circuit model is making opposing predictions to the noisy integrator model by \cite{Thurley2016}.
+Considering only the mean, there is a significant correlation with the slope (Pearson correlation r=-0.96, $p<0.001$), but not with the ratio of mean and variance (Pearson correlation r=-0.65, $p=0.12$) (Fig. \ref{fig:new_ranges}b, c).
+In the simulation with a common $\tau$ there is no significant difference in $K*$ when the variance is changed (Supplementary Fig. \ref{sup:ranges}a, b).
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/ranges_new2.pdf}
 	\caption{\textbf{Behavioral slopes with varying stimulus statistics.} 
-	\textbf{(a)} Parameter simulations were performed with simulus ranges that differed in mean and or variance to the short and long range. The mid range has its mean at the overlap of the short and long range. The extra-long range has its mean above the long range. Both the mid and extra-long range have the same number of stimuli as the long and short range (7). To change the variance a range with more stimuli (13) that spans the short and long range was included (all range). Both the short and the all range were for the short-few and all-few range under sampled.
+	\textbf{(a)} Parameter simulations were performed with stimulus ranges that differed in mean and variance to the short and long range. The mid range has its mean at the overlap of the short and long range. The extra-long range has its mean above the long range. Both the mid and extra-long range have the same number of stimuli as the long and short range (7). To change the variance a range with more stimuli (13) that spans the short and long range was included (all range). Both the short and the all range were for the short-few and all-few range under sampled.
 	\textbf{(b)} Slopes of behavioral results plotted against the mean of the range that was used. Simulations were performed with optimized $\tau$ individually for each range as follows: short 130 ms, mid 170 ms, long 200 ms, extra-long 230 ms, all 150 ms, short-few 120 ms and all-few 150 ms. $K$ was optimized according to each time constant to minimize errors. The error bars indicate standard deviation in the slope for different initialization. Colors correspond to legend in (a).
 	\textbf{(c)} Same as (b) but slopes plotted against the ratio of the mean and the variance of each range. 
 	}
@@ -489,18 +466,56 @@ The circuit model is making opposing predictions to the noisy integrator model b
 \end{figure}
 
 \subsection{Comparison of Behavioral Output of Model to Real Data}
+The circuit model predicts, that only the mean has an effect on the regression of reproductions, making opposing predictions to the noisy integrator model by \cite{Thurley2016}.
+In the following section, we compare the model predictions with behavioral data from time reproduction experiments with gerbils and humans. Stimuli were several seconds long and came from either a short, mid, long or all range.
+
+For higher variance, the root MSE is always increased compared to the range with same mean but smaller variance (Supplementary Fig. \ref{sup:underestimation}b).
+The deviation of slopes between subjects with increased variance is considerable larger in gebrils. 
+However, for individual subjects both a consistent and increased performance is observed. 
+There are three gebrils that show a linear increase in performance with decreasing ratio of the mean and variance of the stimulus range (Fig. \ref{fig:underestimation}b). The remaining four gerbils show no effect of variance, but only of mean, on reproductions (Supplementary Fig. \ref{sup:underestimation}a).
+Person correlation shows a significant linear relation of the slope with the mean (r=-0.62, $p<0.001$) and ratio of mean and variance (r=-0.61, $p<0.001$) in gerbils.
+Correlations with the slope and the external variability ratio excluding the range with changed variance (all range) are higher (r=-0.75, $p<0.001$).
+In humans, slopes are more heterogeneous and there is no significant correlations.
+%Excluding the range with changed variance (all range) there is a significant correlation of slope with the mean or external variability ratio (r=-0.75, $p<0.001$) 
+The circuit model shows no significant correlation of the slope and the external variability ratio when ranges with changed variance are included, but only with the mean (r=-0.96, $p<0.001$).
+%%%%%%%%%%%%%%%%%%%%%%%%%% comparison
 %todo relate model to data var no influence, not for all subjects
+Since one half of gerbils did not take into account changes in variance, but the other half did, the model displays only one possible behavior. 
+%EVAR all:    g r=-0.61, $p<0.001$, h r=-0.05, $p=0.802$, m r=-0.64 $p=0.12$
+%E all:       g r=-0.62, $p<0.001$, h r=-0.08, $p=0.718$, m r=-0.96, $p<0.001$
+%EVAR(E) sml: g r=-0.75, $p<0.001$, h r=-0.4, ???       , m r=-0.95, $p<0.05$
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics{figures/underestimation.pdf}
+	\caption{\textbf{Effects of stimuli statistics on behavior of gerbils and humans.}
+	\textbf{(a)} Representative behavioral results of time reproduction of a gerbil (left) and a human (right). Stimuli were several seconds long. Four experiments were conducted with different ranges: short (red), mid (orange), long (light blue) and all (blue). Large markers display the mean of trials. Small dots show reproductions of single trials for the experiment with the all range.
+	Ranges differed slightly between experiments with gerbils and humans. 
+	\textbf{(b)} Slope of the linear regression between stimuli and reproductions for seven gerbils (left) and six humans (right) plotted against the ratio of the mean and variance of the stimulus ranges. Vertical black markers indicate the median of slopes and gray violin plots illustrate the distribution over all animals. Slopes for different stimulus ranges of one animal are connected by lines. 
+	Figure courtesy of Kay Thurley and Josephine Henke.
+	}
+\label{fig:underestimation}
+\end{figure}
 
-%todo: underestimation extra long: grenzen des Models, remapping zwischen ms und s, einem festen
-% usage of model in second segment - needs remapping 
-Within the discussed regime, the model displayed behavior close to real behavior including regression and range effect. However, pushing the stimulus ranges to more extreme values causes the behavior to break down, by overly large numbers of timeouts or slopes in the behavior that are below 0.25 and thus outside observed real behavior. 
-[\textit{Discussion}] This means, when using the model in experiments with even shorter or longer time intervals, the regime of the model has to be adjusted. 
-A sort of adjustment also happens in real behavior. This becomes apparent when comparing the regression between experiments conducted in different time domains, e.g. milliseconds vs. seconds. There is no much stronger regression in the second range compared to the millisecond range. Qualitatively the regression and range effect look the same for different stimulus ranges in both time domains (\cite{Jazayeri2010}, \cite{Henke2021}). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%todo: underestimation extra long: grenzen des Models, breaks down
+%todo reason for range effect
+%Todo: what about the extremes? when does the model stop working
+The model is situated in a dynamic regime, that displays time reproductions close to real behavior.
+Error-minimizing parameters predict the regression and range effect.
+However, pushing the stimulus ranges to more extreme values causes the behavior to break down, by overly large numbers of timeouts or slopes in the behavior that are outside observed behavior. 
+Decreasing slopes for larger stimulus ranges occur because they approach the limit of the dynamic regime. 
+The regime of the model has to be adapted to the external statistics. 
+millisecond to seconds, adaptation due to same effects observed. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
+% remapping zwischen ms und s, einem festen
+Shifting the threshold to higher or lower values of $y$ does not resolve under- or overestimation. However, the threshold has to be set in an appropriate scope to avoid exceeding timeouts. 
+% usage of model in second segment - needs remapping 
 
+This means, when using the model in experiments with even shorter or longer time intervals, the regime of the model has to be adjusted. 
+A sort of adjustment also happens in real behavior. This becomes apparent when comparing the regression between experiments conducted in different time domains, e.g. milliseconds vs. seconds. There is no much stronger regression in the second range compared to the millisecond range. Qualitatively the regression and range effect look the same for different stimulus ranges in both time domains (\cite{Jazayeri2010}, \cite{Henke2021}). 
 
 \pagebreak
 
@@ -640,6 +655,17 @@ For all optimized values, be it on the squared bias, the variance or combined in
 	\textbf{(c)} Overview of all ranges used for simulations with their mean, variance and the ratio of both, that is used to characterize the ranges.
 	}
 \label{sup:ranges}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics{figures/supp_underestimationE.pdf}
+	\caption{\textbf{Effects of stimuli statistics on behavior of gerbils and humans.}
+	\textbf{(a)} Slope of the linear regression between stimuli and reproductions for seven gerbils (left) and six humans (right) plotted against the mean of the stimulus ranges. Vertical black markers indicate the median of slopes and gray violin plots illustrate the distribution over all animals. Slopes for different stimulus ranges of one animal are connected by lines. Note that ranges short (red), mid (orange), long (light blue) and all (blue) differed slightly between experiments with gerbils and humans.
+	\textbf{(b)} xxx
+	Figure courtesy of Kay Thurley and Josephine Henke.
+	}
+\label{sup:underestimation}
 \end{figure}
 
 \pagebreak
