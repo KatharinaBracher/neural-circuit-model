@@ -288,11 +288,13 @@ def get_mean_seed(data, K_lst, seed, getlist=False):
     else:
         return np.mean(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1]), np.std(list(zip(*get_opt_K(data, K_lst, seed, mse=True)))[1])
     
-def get_mean_slope(data, K_lst, seed):
+def get_mean_slope(data, K_lst, seed, mse=False):
     data_ = get_mse(data, K_lst, seed)
     data_ = np.nan_to_num(data_, nan=np.inf)
     data_[data_ == 0] = np.inf #none
     opt = np.nanargmin(data_, axis=0)
+    if mse:
+        return np.nanmin(data_, axis=0)
     slope = to_matrix(data, len(K_lst), len(seed), 'slope')
     opt_slope = []
     for i,j in zip(range(21), opt):

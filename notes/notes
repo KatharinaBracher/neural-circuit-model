@@ -190,7 +190,7 @@ Effects result from an optimal strategy when noisy estimates are made about stim
 - Optimality and biological relevance
 
 
-### Wang, Jazayeri et al.: Flexible timing by temporal scaling of cortical responses
+## Wang, Jazayeri et al.: Flexible timing by temporal scaling of cortical responses
 <details>
 <summary>
 
@@ -236,7 +236,7 @@ Introduction of two neuron model for general mechanism for translating input to 
 
 </details>
 
-### Egger, Jazayeri et al.: Internal models of sensorimotor integration regulate cortical dynamics
+## Egger, Jazayeri et al.: Internal models of sensorimotor integration regulate cortical dynamics
 
 <details>
 <summary> 3 epoch experiment (2 presentations of same stimulus). They show sequential update of estimate during 2 epochs (simulated motor plan during 2nd presentation), whereas in first presentation no representation of stimulus is found (set to prior)
@@ -313,14 +313,14 @@ details
 ## Model
 - [ ] look at egger code implementation of experiment (2 / 3 Neuron Model)
 - [x] Reset impulse, or reset to value? level of reset influences reproduction
-- [ ] Relation of I and slope of y is nonlinear
+- [x] Relation of I and slope of y is nonlinear
   - this is probably determining the optimal K: for longer intervals the change in slope is bigger for same I comapred to smaller intervals, so K is smaller for lager intervals
   - can we predict K for longer intervals from K for smaller intervals with this relation?
 
 - **Parameter**
   - [x] wann pendelt sich I ein am Anfang (im Fehler) ein - daten?, initial I,
     - error over time: 2-3 trials to catch I
-	- [ ] delay relevant? just adding noise?
+	- [x] delay relevant? just adding noise?
   	- variable delay period?
 	- [x] for fixed tau find K for range effect
   	- for which K MSE is minimized

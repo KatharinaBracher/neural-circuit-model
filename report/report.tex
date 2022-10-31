@@ -24,6 +24,7 @@
     %sorting=ynt,
     bibwarn=true,
     bibencoding=utf8,
+	uniquename=false,
     sortlocale=de_DE,
     maxbibnames=99,
     maxcitenames=2]{biblatex}
@@ -64,6 +65,7 @@
 
 \normalsize
 \tableofcontents
+
 %\the\textwidth 
 %\makeatletter\f@size
 % 345 pt = 4.79167 in -> figures 4.75 in 
@@ -72,16 +74,30 @@
 \pagebreak
 
 
-\section{Behavioral Effects in Magnitude Estimation}
-Magnitude estimation is subject to noise that arises from external sources i.e. the statistics of the environment and internal sources i.e. neural representation of the input and the behavior.
-Across sensory modalities, characteristic behavioral effects are identified (\cite{Petzschner2015}).
-The most prominent observation is a regression to the mean of the stimulus range,  i.e. small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
+\section{Introduction}
+%---> behavior, predictive coding/updates, noise
+Animals are able to produce complex and flexible behaviors that often rely on the interplay of motor and sensory systems.
+%internal models in motor control
+To guide behavior, animals are thought deploy predictive internal signaling, allowing the animal to contemplate sensory consequences. 
+In this sense the CNS uses intrinsic neural representations of motor actions and both control and prediction to achieve desired or expected sensory consequences \cite{Straka2018}.
+If there is a mismatch in predicted and actual sensory feedback, the internal model is updated by an error signal. 
+
+Externally-derived inputs, however, are subject to noise that arises from the variability of the environment. An additional source of noise is neural representation of the input.
+Thus, sensory inputs need to be constantly processed and combined with prior expectations.
+Magnitude estimation involves establishing a relationship between external events and their perception by e.g. evaluating or reproducing a stimulus. Therefore, magnitude estimation is useful to explore sensory processing. 
+A variety of experimental studies have found characteristic behavioral effects on magnitude estimation across sensory modalities (\cite{Petzschner2015}).
+
+\subsection{Behavioral Effects in Magnitude Estimation}
+%---> magnitude estimation, optimization, bayes
+The most prominent observation in stimulus reproduction is a regression to the mean of stimuli, i.e. small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
 This effect intensifies for ranges with larger stimuli (\textit{range effect}).
 For larger stimuli the standard deviation of estimates increases monotonically (\textit{scalar variability}). 
 Finally, the recent history of stimuli presentations influences the current stimuli estimation (\textit{sequential effects}).
 All effects mentioned above are displayed in Fig. \ref{fig:behavioraleffects}. 
-
-Modality-independence of these effects suggests the existence of a common underlying principle or processing mechanisms, that would explain e.g. an optimal strategy for unreliable judgments due to noise (in stimuli and estimates).
+Modality-independence of these effects suggests the existence of a common underlying principle or processing mechanisms, that would explain e.g. an optimal strategy for unreliable judgments due to noise.
+Minimizing errors in judgment can be achieved by integrating prior experience with immediate sensory input and is therefore often described with Bayesian models.
+In Bayesian models sensory information is represented by a likelihood function is combined with prior experience (prior distribution) that together result in biased estimates (posterior distribution).
+%Interaction between immediate and prior experience is likely used to minimize errors and is therefore often described with Bayesian models.
 
 \begin{figure}[ht]
 	\centering
@@ -95,15 +111,45 @@ Modality-independence of these effects suggests the existence of a common underl
 	\label{fig:behavioraleffects}
 \end{figure}
 
-During time perception and time reproduction experiments, neural activity displays characteristic trajectories in a low-dimensional space (\cite{Wang2018}, \cite{Henke2021}, \cite{Meirhaeghe2021}). 
-The neural trajectories are consistently influenced by prior beliefs. 
-Flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Wang2018}). 
+
+\subsection{working title: Neural Correlates of Timing}
+%---> timing, time reproduction experiments, methods to measure time
+Timing, as an example of magnitude estimation, is a critical ability for anticipating and coordinating interactions with the environment. 
+Experiments in which subjects have to measure and reproduce time intervals, can be used to study how the brain integrates information from the past with current sensory input in order to achieve correct timing.
+Time reproduction is usually accomplished by one or more measurement periods in which the temporal stimulus is presented, and a reproduction period that is terminated by movement initiation from the subject.
+Time between two events can be measured in an absolute or predictive manner. In the case of absolute timing, time can be continuously estimated from an output that results from integration of ticks from a central clock  The rate at which activity increases does not depend on the time interval. In contrast, in predictive timing a fixed state is reached at the end of the time interval, by adjusting the rate of increase according to the anticipated time. 
+
+%---> nerual implementation, brain ares, scaling, trajectories, speed command, motor simulationk error signal
+To measure and produce time intervals, flexible control of neural mechanisms is required. 
+A brain area that has been associated with timing behavior is the medial prefrontal cortex (MFC) (\cite{Wang2018}, \cite{Emmons2017}, \cite{Genovesio2006}, \cite{Lewis2004}, \cite{Shima2000}).
+Single cell activity shows heterogeneous response profiles, but often temporally scaled according to produced time intervals (\cite{Henke2021}, \cite{Sohn2019}, \cite{Wang2018}).
+Scaling is a phenomenon that consistent at the population level. Population activity can be displayed in a low-dimensional state space, where the activity by all neurons is represented over time by a so-called neural trajectory.
+Activity at the level of neural populations displays characteristic trajectories in the state space (\cite{Henke2021}, \cite{Meirhaeghe2021}, \cite{Sohn2019}, \cite{Wang2018}). 
+
+%%%%%%%%%%%%%%%
+For time interval reproduction, neural trajectories have been shown to evolve to a fixed state. The speed of the neural trajectory is inversely proportional to the time interval.
+The neural trajectories are consistently influenced by prior beliefs.
+It has been shown, that flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Wang2018}). 
+%to minimize prediction error, where the prediction errors signal mismatches between predicted input and the input actually received
+%feedback used to update estimates. 
+%Work in multiple modalities has provided support for a hypothesis that neural activity can be understood at the level of neural populations and viewed as neural trajectories of a dynamical system
+%scaling
 Further, it has been found that neural activity in anticipation of a delayed response reaches a fixed threshold with a rate inversely proportional to delay period (\cite{Murakami2014}, \cite{Mita2009}).
+%error signal, update
+
+%---> Curcuit model, decition making, elements
+%model used only for... in secific task
+%Here, we aimed to answer this question using a dynamical systems approach. 
 \cite{Wang2018} proposed a potential neural mechanism for speed control. Based on that mechanism \cite{Egger2020} developed an extended circuit model for sensorimotor timing.
 
+%---> research questions
+%can the model be applied to experiment simulations? it was only fitted to data separatly. can the model be applied to more realistic experiment simulations?
+%does the model in experiment simulations exhibit typical effects of magnitude estimation? How much of the effects in real behavior does it capture?
+%are there other predictions the model does? variance; andere effecte ranges
+
 \section{Model Description}
-\subsection{Basic Circuit}
 Flexible speed control can be achieved by a simple model consisting of three units, $u, v, y$ that represent population activity. 
+\subsection{Basic Circuit}
 The dynamics of $u, v$, and $y$ are defined as follows:
 \begin{equation} \label{circuit}
 	\begin{split}
@@ -158,7 +204,8 @@ The time from the end of the measurement epoch until the threshold-crossing of $
 \label{fig:epochs}
 \end{figure}
 
-The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
+\noindent
+ The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
 The error signal is determined at the end of the measurement epoch and is composed of the difference of $y$ to the threshold $y_{\text{th}}$.
 If the threshold $y_{\text{th}}$ is not reached during the measurement epoch, the slope has to be adjusted, such that $y$ ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
 If $y$ crossed the threshold before the measurement epoch ends, so is above $y_{\text{th}}$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased (Fig. \ref{fig:epochs}c).
@@ -237,7 +284,7 @@ Behavioral results with error-minimizing parameters show a regression to the mea
 Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
 The model produces behavior that shows the regression and the range effect.
 Yet, the slope for the small range lies below the biological plausible slopes found in data. 
-The standard variation of reproductions increases linearly (scalar variability), the mean coefficient of variation (CV) for the short range is 0.09, for the long range 0.11 (Fig. \ref{fig:parameter}d).
+The standard variation of reproductions increases linearly (scalar variability), the mean coefficient of variation (CV) for the short range is 0.09, for the long range 0.11 (Fig. \ref{fig:parameter}c).
 No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance instead of the MSE. The relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d).  
 %supp
 
@@ -247,20 +294,23 @@ No range effect can be observed when minimizing the error in reproductions based
 	\caption{\textbf{Behavioral effects and parameter optimization.} 
 	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$ and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope of the linear fit between stimuli and reproductions. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behaviorally plausible slopes are encircled in blue and lie around 0.83 for the short and 0.73 for the long range. Empty space corresponds to simulations, that exceeded the number of timeout trials and were thus excluded from analysis.
 	\textbf{(b)} Optimization of the weight given to the update $K$ for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimulus range. The minimal error for each $\tau$ is encircled in black and minimal error across all $\tau$ is additionally crossed. Parameter combinations that result in behaviorally plausible slopes (a) are shaded in blue.
-	\textbf{(c)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 130$ ms. For the simulation with short stimulus range $K*$ was 13, with the long stimulus range optimal $K*$ was 10. 
+	\textbf{(c)} Top: Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 130$ ms. For the simulation with short stimulus range $K*$ was 13, with the long stimulus range optimal $K*$ was 10. 
 		The slope is the result of a linear regression between stimuli and reproductions.
 		Inset: For experiment simulations two stimuli ranges were used. The short range contained stimuli from 400 to 700 ms, the long range contained stimuli from 700 to 1000 ms.
-	\textbf{(d)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (c).
+		Bottom: Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (c).
 	}
 \label{fig:parameter}
 \end{figure}
 
 \section{Comparison of Intermediate and High Input Regime}
-There are elementary differences between the intermediate and high input regimes in terms of fixed points and dynamics. Nevertheless, simulations of time reproduction experiments are possible in both regimes. In the following, simulations in the high input regime are performed and compared with those in the intermediate input regime. 
+There are differences between the intermediate and high input regimes in terms of fixed points and dynamics.
+Nevertheless, simulations of time reproduction experiments are possible in both regimes. 
+In the following, simulations in the high input regime are performed and compared with those in the intermediate input regime.
 
 \subsection{Comparison of Dynamics}
 While in the intermediate input regime three fixed points emerge in the phase plane (two stable and one unstable), in the high input regime the fixed points merge to a single one. 
-The single fixed point is located at comparatively high activity of $u$ and $v$ (Fig. \ref{fig:regmies}b, d). 
+The single fixed point is located at comparatively high activity of $u$ and $v$ 
+(Fig. \ref{regimes}b, d).
 This affects the dynamics of $u$ and $v$ such that $y$ ramps up in instead of down as observed in the intermediate regime. 
 Increasing $I$ results in steeper activity of $y$ in the high input regime. This is reversed compared to the intermediate input regime, where an increased $I$ leads to flatter slopes in $Y$ (Fig. \ref{regimes}a, c). 
 
@@ -282,7 +332,7 @@ Increasing $I$ results in steeper activity of $y$ in the high input regime. This
 To simulate time reproduction experiments in the high input regime, the following changes must be made. 
 The threshold was set to a value lower than 0 (e.g. 0.1) and initial $I$ was increased to a value above 1 ($I_0 = 1.02$). The reset impulse after each epoch had to be stronger by a factor of 10 and with opposite sign to bring the activity in $y$ back to a higher level.
 
-\begin{equation} \label{highI}
+\begin{equation} \label{EqhighI}
 	\begin{split}
 	\tau\frac{\text{d}u}{\text{d}t} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u + 10*I_r) \;,\\
 	\tau\frac{\text{d}v}{\text{d}t} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v - 10*I_r) \;.\\
@@ -298,8 +348,8 @@ An example of the experiment dynamics for four consecutive simuli is displayed i
 Just as for the intermediate input regime, optimized parameter $K$ and $\tau$ were found that minimize the MSE of reproductions. 
 Again, the model is able to produce biologically plausible slopes for most time constants. 
 Across all $\tau$ larger 40~ms, optimal $K$ is smaller for the long range compared to the short range.
-The MSE is minimal for $\tau* = 60$~ms for both the short and the long range, with $K* = 4$ and $K* = 2.5$  for the short and the long range, respectively. Optimal $\tau*$ and $K*$ result in a biologically plausible slope only for the long range (slope of 0.68). For the short range the slope is too flat (slope of 0.74) (Fig. \ref{highI}b).
-Behavioral results of experiment simulation with error-minimizing parameters show a regression to the mean. In contrast to the intermediate input regime, standard deviations of the reproductions do not grow linearly in the long range (Fig. \ref{highI}c).
+The MSE is minimal for $\tau* = 60$~ms for both the short and the long range, with $K* = 4$ and $K* = 2.5$  for the short and the long range, respectively. Optimal $\tau*$ and $K*$ result in a biologically plausible slope only for the long range (slope of 0.68). For the short range the slope is too flat (slope of 0.74).
+Behavioral results of experiment simulation with error-minimizing parameters show a regression to the mean. In contrast to the intermediate input regime, standard deviations of the reproductions do not grow linearly in the long range (Fig. \ref{highI}b).
 For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:experiment_high}.
 
 \begin{figure}[ht]
@@ -307,9 +357,9 @@ For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:ex
 	\includegraphics{figures/highI.pdf}
 	\caption{\textbf{Experiment Simulation in the High Input Regime.} 
 	\textbf{(a)} Activity of $u, v, y$ and $I$ for five example stimulus intervals of 650, 500, 600, 700, 450 ms. Stimulus presentation and reproduction epochs are highlighted in blue and red, respectively. The delay period between trials is shown in white. Initial values are set to $u_0=0.8 , v_0=0.6 , y_0=0.1, I_0=1.04$ and the threshold $y_{\text{th}}$ is set to 0.1. 
-	\textbf{(b)} Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized to minimize errors in reproductions for a time constant of $\tau = 60$ ms. For the simulation with short stimulus range optimal $K$ was 4, with the long stimulus range optimal $K$ was 2.5.
+	\textbf{(b)} Top: Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized to minimize errors in reproductions for a time constant of $\tau = 60$ ms. For the simulation with short stimulus range optimal $K$ was 4, with the long stimulus range optimal $K$ was 2.5.
 		The slope is the result of a linear regression between stimuli and reproductions.
-	\textbf{(c)} Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (b).
+		Bottom: Standard deviation of reproductions for each stimulus for the short and long range from the simulation in (b).
 	}
 \label{highI}
 \end{figure}
@@ -367,13 +417,10 @@ In the high input regime, adapting the delay period does not resolve the general
 The previous analysis showed, that there are two main problems that caused distorted stimulus reproductions. 
 First, a common time constant between experiments with different ranges skews the reproductions.
 Second, is a hyperparameter of the experimental design affecting the reproductions. The delay period between trials should not influence reproductions.
-
 Since the time constant in the model can be interpreted as a rate time constant, it is justifiable to adapt it between experiment with different stimulus ranges. 
 This would correspond to a firing rate adjustment in the population to an experimental setting.
 In a biological system, an inhibitory population could scale the rate time constant according to the stimulus statistics.
-Unless otherwise specified, error-minimizing $\tau*$ are used for each stimulus range individually in following simulations. 
 %todo: K not comparable across ranges (not smaller for long range etc)
-
 Furthermore, the model needs to be adjusted to take into account the impact of the delay period on the reproductions. 
 % delay=mean of range
 Setting the delay time to the mean of the stimulus range used in the simulation doesn't make sense from a design perspective. It should be possible to choose the delay period between trials arbitrarily and independently of the stimulus range. 
@@ -385,16 +432,17 @@ The reproduction period always ends when the threshold $y_\text{th}$ is met. If 
 This does not necessarily mean, that the experimental design is limited. When simulating experiments that include a delay period between trials or even between measurement and reproduction epoch, it can be assumed that information is stored in the system until the beginning of the next epoch. 
 In neural networks, it has been shown that the timing information in the state space can be held over a delay time (\cite{Bi2020}).
 Neglecting the delay epoch in combination with independent $\tau*$ for each range leads to characteristic effect and biologically plausible slopes (Fig. \ref{fig:delay}c).
-Simulations in the following sections are performed without delay period between trials.
 % reset on fixed value
 % learn I for delay
 Solutions that incorporate a delay period into the simulation itself would require model adjustments.
 Either the reset is changed from an impulse to a fixed reset value, or the input is updated separately during the delay epoch based on an error to always reach the threshold. 
 
+Unless otherwise specified, error-minimizing $\tau*$ and a delay of 0~ms are used for each stimulus range in following simulations. The regime of $I$ remains similar to previous simulations with delay and common $\tau$. There is an overlap in $I$ and $K$ is no longer comparable due to separate $\tau$ between different ranges (Fig. \ref{fig:new_ranges}b).
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/delay.pdf}
-	\caption{\textbf{Behavioral results with matched or no delay.} 
+	\caption{\textbf{Behavioral results with altered delay.} 
 	\textbf{(a)} Behavioral results of an experiment simulation with the previously utilized delay of 700 ms. The stimulus range that was used to sample stimuli from has a mean equal to the delay of 700 ms. The time constant and update parameter were both optimized based on the MSE ($\tau$ = 170 ms, $K$ = 17.5). Other parameters like threshold and initial values were not changed. 
 	\textbf{(b)} The delay period was set to 0 ms in simulations with the short and long range (black and gray, respectively). The time constant was set to 165 ms, which corresponds to the mean of the optimal $\tau$ for the short (130 ms) and long (200 ms) range. For $\tau$ = 165 ms, the update parameter $K$ was optimized (short range $K$ = 21, long range $K$ = 13). Note different axes of figures in (a) and (b).
 	\textbf{(c)} Same as (b) but with independent, optimal time constant. For the short range $\tau*$ = 130, $K$ = 14 and for the long range $\tau*$ = 200, $K$ = 20.
@@ -425,7 +473,7 @@ Finally, reproductions be worse with greater variance. This was demonstrated in 
 In most studies that included experimental data with varying variance of stimuli, the effects on regression were not examined. 
 
 \subsection{Optimality Predicts Regression Effect and Range Effect}
-Additional ranges differing in mean, width and sampling frequency were used to test the model's behavior based on the external variability of stimuli.
+To test the behavior of the model with respect to the external variability of stimuli, additional ranges were used, differing in mean, width and sampling frequency.
 The short and the long range include seven stimuli spanning 300 ms, with mean values of 550 and 850~ms, respectively. 
 Two ranges had the same variance and width, but shifted mean values at 700~ms (mid range) and 1050~ms (extra-long range). With increasing mean, the range effect predicts a flatter slope. 
 In addition, ranges were examined whose mean was equal to one of the ranges above, but which had a higher variance.
@@ -433,54 +481,75 @@ Including all stimuli from the short and the long range, the all range has the s
 The short-few and all-few range encompasses the short and the all range, respectively, but with smaller number of stimuli, the variance increases in both cases 
 (Fig. \ref{fig:new_ranges}a, Supplementary Fig. \ref{sup:ranges}c).
 %%%%%%%%%%%%%%%%%%%%%%%%
-Optimal $\tau*$ for stimulus ranges are as follows: short~130~ms, mid~170~ms, long~200~ms, extra-long~230~ms, all~150~ms and~short-few~120~ms.
+%Optimal $\tau*$ for stimulus ranges are as follows: short~130~ms, mid~170~ms, long~200~ms, extra-long~230~ms, all~150~ms, ~short-few~120~ms and all-few~160~ms.
 For all ranges, the slope of the linear regression between stimuli and reproductions is below one. Thus, simulations with error-minimizing parameters predict the regression effect across several ranges. 
-The slopes decrease significantly as the mean of the stimulus range increases, except for the short and mid range (Fig. \ref{fig:new_ranges}b).
+The slopes decrease significantly as the mean of the stimulus range increases, except for the short and mid range (Fig. \ref{fig:new_ranges}c).
 Thus, the model predicts the range effect only for sufficiently large changes in the mean. 
 (Kolmogorov–Smirnov two-sample test, p$<$0.01, n=21 for each distribution, Bonferroni correction for multiple testing).
-Across the four ranges short, mid, long and extralong, the slope has a linear relationship with the mean value of the range (Pearson correlation r=-0.95, $p<0.05$).
+Across ranges that only change their mean value (short, mid, long and extralong), the slope has a linear correlation with the mean value of the range (Pearson correlation r=-0.95, $p<0.05$).
 
 When the experiment was simulated with a common $\tau$ of 165~ms between ranges, $K*$ is significantly lower for the mid range (16.71) compared to the short range (21.33), but slopes show no significant difference (Supplementary Fig. \ref{sup:ranges}a, b).
 Decreasing $K*$ for increasing mean of ranges is captured by the model beyond the short and the long range.
-(Kolmogorov–Smirnov two-sample test, n=20 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).
+(Kolmogorov–Smirnov two-sample test, n=20 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).\\
 
-\subsection{Optimality does not Predict Influence of Variance on Behavior}
+%%%%%%%%%%%%%%%%%%%%%%%%%Grenzen des Models%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%underestimation extra long: grenzen des Models, breaks down
+%reason for range effect
+\noindent What causes the range effect in the circuit model?
+The model is situated in a dynamic regime, that displays time reproductions close to real behavior.
+Error-minimizing parameters predict the regression and range effect across multiple stimulus ranges.
+Decreasing slopes for larger stimulus ranges occur because they approach the limit of the dynamic regime (Fig. \ref{fig:new_ranges}b).
+When the stimulus ranges are pushed to more extreme values, the behavior of the model breaks down. Reasons for a breakdown of the behavior are a too large number of timeouts in the case too short time intervals. If time intervals are too, the variance in reproductions increases sharply and $K$ is pushed to lower values, resulting in slopes that are outside the observed behavior. 
+This means that the regime of the model has to be adapted to major changes in the external statistics. 
+
+\subsection{Optimality Predicts no Effect of Variance on Behavior}
 How does the slope change when the mean of stimuli remains constant, but variance is increased?
 The statistics of stimuli can be summarized by the ratio of the mean and variance of the stimulus range: $\frac{\text{E(t)}}{\text{var(t)}}$.
 Higher variance in ranges with lower stimulus sampling (short-few, all-few) shows no significant difference from their counterparts with normal stimulus sampling (short, all).
 Furthermore, a larger width of stimuli does not result in a significant larger or smaller slope (all range vs mid range).
 Therefore, increasing variance is not affecting the reproduction of stimuli in the model.
 (Kolmogorov–Smirnov two-sample test, n=21 for each distribution, Bonferroni correction for multiple testing).
-Considering only the mean, there is a significant correlation with the slope (Pearson correlation r=-0.96, $p<0.001$), but not with the ratio of mean and variance (Pearson correlation r=-0.65, $p=0.12$) (Fig. \ref{fig:new_ranges}b, c).
+Considering only the mean, there is a significant correlation with the slope (Pearson correlation r=-0.96, $p<0.001$), but not with the external variability ratio (Pearson correlation r=-0.65, $p=0.12$) (Fig. \ref{fig:new_ranges}c).
 In the simulation with a common $\tau$ there is no significant difference in $K*$ when the variance is changed (Supplementary Fig. \ref{sup:ranges}a, b).
+However, increasing the variance of a range leads to a significant increase in MSE in all cases (Fig. \ref{fig:new_ranges}d).  
+(Kolmogorov–Smirnov two-sample test, n=21 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/ranges_new2.pdf}
 	\caption{\textbf{Behavioral slopes with varying stimulus statistics.} 
 	\textbf{(a)} Parameter simulations were performed with stimulus ranges that differed in mean and variance to the short and long range. The mid range has its mean at the overlap of the short and long range. The extra-long range has its mean above the long range. Both the mid and extra-long range have the same number of stimuli as the long and short range (7). To change the variance a range with more stimuli (13) that spans the short and long range was included (all range). Both the short and the all range were for the short-few and all-few range under sampled.
-	\textbf{(b)} Slopes of behavioral results plotted against the mean of the range that was used. Simulations were performed with optimized $\tau$ individually for each range as follows: short 130 ms, mid 170 ms, long 200 ms, extra-long 230 ms, all 150 ms, short-few 120 ms and all-few 150 ms. $K$ was optimized according to each time constant to minimize errors. The error bars indicate standard deviation in the slope for different initialization. Colors correspond to legend in (a).
-	\textbf{(c)} Same as (b) but slopes plotted against the ratio of the mean and the variance of each range. 
+	\textbf{(b)} Simulations were performed with optimized $\tau*$ (and corresponding  $K*$): short 130 ms (14), mid 170 ms (17), long 200 ms (20), extra-long 230 ms (18), all 150 ms (14). Mean input $I$ for each stimulus was calculated for stimulation with different ranges. Colors correspond to legend in (a). 
+	%short-few 120 ms (12) and all-few 160 ms (15)
+	\textbf{(c)} Left: Slopes of behavioral results plotted against the mean of the range that was used. The error bars indicate standard deviation in the slope for different initialization. Colors correspond to legend in (a).
+	Right: Slopes plotted against the ratio of the mean and the variance of each range. 
+	\textbf{(d)} The MSE for simulations with error-minimizing parameters, plotted against the ratio of mean and variance of the range.
 	}
 \label{fig:new_ranges}
 \end{figure}
 
 \subsection{Comparison of Behavioral Output of Model to Real Data}
-The circuit model predicts, that only the mean has an effect on the regression of reproductions, making opposing predictions to the noisy integrator model by \cite{Thurley2016}.
-In the following section, we compare the model predictions with behavioral data from time reproduction experiments with gerbils and humans. Stimuli were several seconds long and came from either a short, mid, long or all range.
+The circuit model predicts that a change in variance affects the MSE of the reproductions.
+It also predicts, that only the mean and not the variance has an effect on the regression of reproductions, which is in contrasnt to the noisy integrator model proposed by \cite{Thurley2016}.
+In the following section, we compare predictions of the model with behavioral data from time reproduction experiments with gerbils and humans. The stimuli in these experiments were several seconds long and came from either a short, mid, long or all range (data by Henke and Thurley).
 
-For higher variance, the root MSE is always increased compared to the range with same mean but smaller variance (Supplementary Fig. \ref{sup:underestimation}b).
-The deviation of slopes between subjects with increased variance is considerable larger in gebrils. 
-However, for individual subjects both a consistent and increased performance is observed. 
-There are three gebrils that show a linear increase in performance with decreasing ratio of the mean and variance of the stimulus range (Fig. \ref{fig:underestimation}b). The remaining four gerbils show no effect of variance, but only of mean, on reproductions (Supplementary Fig. \ref{sup:underestimation}a).
-Person correlation shows a significant linear relation of the slope with the mean (r=-0.62, $p<0.001$) and ratio of mean and variance (r=-0.61, $p<0.001$) in gerbils.
-Correlations with the slope and the external variability ratio excluding the range with changed variance (all range) are higher (r=-0.75, $p<0.001$).
-In humans, slopes are more heterogeneous and there is no significant correlations.
-%Excluding the range with changed variance (all range) there is a significant correlation of slope with the mean or external variability ratio (r=-0.75, $p<0.001$) 
-The circuit model shows no significant correlation of the slope and the external variability ratio when ranges with changed variance are included, but only with the mean (r=-0.96, $p<0.001$).
+Behavior in gebrils exhibits a regression effect for all ranges and a range effect for ranges with increasing mean. 
+The variation in slopes between gebrils is considerably larger when the variance is increased.
+At the individual level, both consistent and increasing performance with increasing variance is observed. 
+There are three gebrils that show a linear increase in performance with decreasing ratio of the mean and variance of the stimulus range (Fig. \ref{fig:underestimation}b). The remaining four gerbils however, show no effect of variance on reproductions (Supplementary Fig. \ref{sup:underestimation}a).
+On average Person correlation shows a significant linear relation of the slope with the mean (r=-0.62, $p<0.001$) and ratio of mean and variance (r=-0.61, $p<0.001$) in gerbils.
+This correlation gets stronger when the all range is excluded (r=-0.75, $p<0.001$).
+In humans, behavior is heterogeneous, and there is no range effect on average, but there is in some individuals (Fig. \ref{fig:underestimation}). There is no significant correlations of the slope with the mean or external variability ratio.
+The root MSE increases as the variance increases across all subjects (Supplementary Fig. \ref{sup:underestimation}b).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% comparison
-%todo relate model to data var no influence, not for all subjects
-Since one half of gerbils did not take into account changes in variance, but the other half did, the model displays only one possible behavior. 
+The circuit model predicted no effect of variance on the regression, but on the error in reproductions. 
+Gebrils show a discrepancy in performance when variance is increased. 
+The model captures only one possible behavior, namely not taking into account a change in variance. 
+There is no significant correlation of the slope with the external variability ratio in the model, when in gerbils there is.
+However, the model predicts correctly increasing error in reproductions with higher variance (Fig. \ref{fig:new_ranges}b).
+
+
 %EVAR all:    g r=-0.61, $p<0.001$, h r=-0.05, $p=0.802$, m r=-0.64 $p=0.12$
 %E all:       g r=-0.62, $p<0.001$, h r=-0.08, $p=0.718$, m r=-0.96, $p<0.001$
 %EVAR(E) sml: g r=-0.75, $p<0.001$, h r=-0.4, ???       , m r=-0.95, $p<0.05$
@@ -497,27 +566,30 @@ Since one half of gerbils did not take into account changes in variance, but the
 \label{fig:underestimation}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%todo: underestimation extra long: grenzen des Models, breaks down
-%todo reason for range effect
-%Todo: what about the extremes? when does the model stop working
-The model is situated in a dynamic regime, that displays time reproductions close to real behavior.
-Error-minimizing parameters predict the regression and range effect.
-However, pushing the stimulus ranges to more extreme values causes the behavior to break down, by overly large numbers of timeouts or slopes in the behavior that are outside observed behavior. 
-Decreasing slopes for larger stimulus ranges occur because they approach the limit of the dynamic regime. 
-The regime of the model has to be adapted to the external statistics. 
-millisecond to seconds, adaptation due to same effects observed. 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
-% remapping zwischen ms und s, einem festen
-Shifting the threshold to higher or lower values of $y$ does not resolve under- or overestimation. However, the threshold has to be set in an appropriate scope to avoid exceeding timeouts. 
-% usage of model in second segment - needs remapping 
+It has been shown...
+Here, we extended the model and showed that...
+model different approch
+% in general models of time reproduction Einordung
+%relate to Bayes (statistical model different approach)
+%optimization and error minimizatoin
+
+%what is the prediction of the model? what dies the data say? 
+% there is remapping zwischen ms und s in real data, millisecond to seconds, adaptation due to same effects observed. 
+% no remapping in model
+% some gebrils are adapting regime others are not when var is increased
+
 
 This means, when using the model in experiments with even shorter or longer time intervals, the regime of the model has to be adjusted. 
 A sort of adjustment also happens in real behavior. This becomes apparent when comparing the regression between experiments conducted in different time domains, e.g. milliseconds vs. seconds. There is no much stronger regression in the second range compared to the millisecond range. Qualitatively the regression and range effect look the same for different stimulus ranges in both time domains (\cite{Jazayeri2010}, \cite{Henke2021}). 
 
+%experiment suggestion: inclunece of var graduatly, when remapping? more expreme changes, other chages like sampling? how does the discrepencey arises?
+
+%generalization to other modalities critique: metric to code different types of magnitudes. \cite{VanOpstal2013}
+
 \pagebreak
+%Shifting the threshold to higher or lower values of $y$ does not resolve under- or overestimation. However, the threshold has to be set in an appropriate scope to avoid exceeding timeouts. 
 
 \setcounter{section}{0}
 \addcontentsline{toc}{section}{Supplements}

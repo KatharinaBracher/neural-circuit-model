@@ -6,8 +6,8 @@
 #drawio -x -f pdf -o figures/ranges_new.pdf figures/ranges_new.drawio.svg
 #drawio -x -f pdf -o figures/delay.pdf figures/delay.drawio.svg
 #drawio -x -f pdf -o figures/underestimation.pdf figures/underestimation.drawio.svg
-#drawio -x -f pdf -o figures/ranges_new2.pdf figures/ranges_new2.drawio.svg
-# drawio -x -f pdf -o figures/highI.pdf figures/highI.drawio.svg
+drawio -x -f pdf -o figures/ranges_new2.pdf figures/ranges_new2.drawio.svg
+#drawio -x -f pdf -o figures/highI.pdf figures/highI.drawio.svg
 
 
 #drawio -x -f pdf -o figures/supp_regimes.pdf figures/supp_regimes.drawio.svg
@@ -19,7 +19,7 @@
 #drawio -x -f pdf -o figures/supp_comparison.pdf figures/supp_comparison.drawio.svg
 # drawio -x -f pdf -o figures/supp_delay.pdf figures/supp_delay.drawio.svg
 #drawio -x -f pdf -o figures/supp_ranges_new.pdf figures/supp_ranges_new.drawio.svg
-drawio -x -f pdf -o figures/supp_underestimationE.pdf figures/supp_underestimationE.drawio.svg
+#drawio -x -f pdf -o figures/supp_underestimationE.pdf figures/supp_underestimationE.drawio.svg
 #drawio -x -f pdf -o figures/codeStructure.pdf figures/codeStructure.drawio.svg
 
 #drawio -x -f pdf -o poster/poster.pdf poster/poster.drawio.svg
