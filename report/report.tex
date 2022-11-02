@@ -75,20 +75,19 @@
 
 
 \section{Introduction}
-%---> behavior, predictive coding/updates, noise
+%identify important and open research question (timing in brain unknown)
 Animals are able to produce complex and flexible behaviors that often rely on the interplay of motor and sensory systems.
-%internal models in motor control
-To guide behavior, animals are thought deploy predictive internal signaling, allowing the animal to contemplate sensory consequences. 
-In this sense the CNS uses intrinsic neural representations of motor actions and both control and prediction to achieve desired or expected sensory consequences \cite{Straka2018}.
-If there is a mismatch in predicted and actual sensory feedback, the internal model is updated by an error signal. 
-
+Timing is a critical ability for anticipating and coordinating interactions with the environment, thus crucial for many sensorimotor functions.
+Yet, no sensory organ exists that detects time.
+The neural implementation that allows the brain to internally perform complex temporal computations, however, remains unknown.
+%todo: connection
 Externally-derived inputs, however, are subject to noise that arises from the variability of the environment. An additional source of noise is neural representation of the input.
-Thus, sensory inputs need to be constantly processed and combined with prior expectations.
-Magnitude estimation involves establishing a relationship between external events and their perception by e.g. evaluating or reproducing a stimulus. Therefore, magnitude estimation is useful to explore sensory processing. 
-A variety of experimental studies have found characteristic behavioral effects on magnitude estimation across sensory modalities (\cite{Petzschner2015}).
+Sensory inputs need to be constantly processed and combined with expectations based on prior knowledge.
+Magnitude estimation is useful to explore sensory processing, since it involves establishing a relationship between external events and their perception by e.g. evaluating or reproducing a stimulus. 
+A variety of experimental studies have found characteristic behavioral effects across sensory modalities in magnitude reproduction experiments (\cite{Petzschner2015}).
 
 \subsection{Behavioral Effects in Magnitude Estimation}
-%---> magnitude estimation, optimization, bayes
+%---> magnitude estimation, optimization, Bayes
 The most prominent observation in stimulus reproduction is a regression to the mean of stimuli, i.e. small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
 This effect intensifies for ranges with larger stimuli (\textit{range effect}).
 For larger stimuli the standard deviation of estimates increases monotonically (\textit{scalar variability}). 
@@ -111,36 +110,54 @@ In Bayesian models sensory information is represented by a likelihood function i
 	\label{fig:behavioraleffects}
 \end{figure}
 
+\subsection{A Dynamical Systems Approach}
+%---> behavior, predictive coding/updates, noise
+%internal models in motor control
+To guide behavior, animals are thought use predictive internal signaling mechanisms, allowing the animal to contemplate sensory consequences of actions. 
+Intrinsic neural representations of motor actions (efference copy) are used as predictor of sensory consequences.
+If there is a mismatch in predicted (corollory discharge) and actual sensory feedback (reafference), the internal model is updated by an error signal. 
+Thus, the CNS needs to exert control and prediction to achieve desired or expected sensory consequences (\cite{Straka2018}, \cite{Clark2013}, \cite{Bubic2010}).
+%  the brain makes sense of the environment by predicting future events and by testing whether these are in line with incoming sensory information and previous experiences
 
-\subsection{working title: Neural Correlates of Timing}
+
+To flexibly adjust behavior to the interval time, the brain is thought to dynamically change patterns of neural activity. This has been described well with a dynamical systems approach, adjusting the initial conditions and external inputs of the system \cite{Paton2018}, \cite{Issa2020}, \cite{Zhou2022}
+
+
 %---> timing, time reproduction experiments, methods to measure time
-Timing, as an example of magnitude estimation, is a critical ability for anticipating and coordinating interactions with the environment. 
 Experiments in which subjects have to measure and reproduce time intervals, can be used to study how the brain integrates information from the past with current sensory input in order to achieve correct timing.
-Time reproduction is usually accomplished by one or more measurement periods in which the temporal stimulus is presented, and a reproduction period that is terminated by movement initiation from the subject.
-Time between two events can be measured in an absolute or predictive manner. In the case of absolute timing, time can be continuously estimated from an output that results from integration of ticks from a central clock  The rate at which activity increases does not depend on the time interval. In contrast, in predictive timing a fixed state is reached at the end of the time interval, by adjusting the rate of increase according to the anticipated time. 
+Time reproduction is usually accomplished by at least one presentation of the time interval e.g. between two visual events, and a reproduction period that is terminated by movement initiation from the subject.
+Time between two events can be measured in an absolute or predictive manner. In the case of absolute timing, time can be continuously estimated from an output that results from integration of ticks from a central clock.
+The rate at which activity increases does not depend on the time interval. In contrast, in predictive timing a fixed state is reached at the end of the time interval, by adjusting the rate of increase according to the anticipated time.
+Recently, evidence of predictive timing has emerged (\cite{Meirhaeghe2021}, \cite{Egger2018}).
 
 %---> nerual implementation, brain ares, scaling, trajectories, speed command, motor simulationk error signal
 To measure and produce time intervals, flexible control of neural mechanisms is required. 
 A brain area that has been associated with timing behavior is the medial prefrontal cortex (MFC) (\cite{Wang2018}, \cite{Emmons2017}, \cite{Genovesio2006}, \cite{Lewis2004}, \cite{Shima2000}).
-Single cell activity shows heterogeneous response profiles, but often temporally scaled according to produced time intervals (\cite{Henke2021}, \cite{Sohn2019}, \cite{Wang2018}).
-Scaling is a phenomenon that consistent at the population level. Population activity can be displayed in a low-dimensional state space, where the activity by all neurons is represented over time by a so-called neural trajectory.
-Activity at the level of neural populations displays characteristic trajectories in the state space (\cite{Henke2021}, \cite{Meirhaeghe2021}, \cite{Sohn2019}, \cite{Wang2018}). 
+In timing experiments, single cell activity in the MFC shows heterogeneous response profiles, that are often temporally scaled according to produced time intervals (\cite{Henke2021}, \cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
+Scaling is a phenomenon that consistent at the population level. Population activity can be displayed in a low-dimensional state space, where the activity by all neurons is represented over time by a so-called neural trajectory (\cite{Cueva2022}).
+Activity of neural populations displays characteristic trajectories in the state space (\cite{Henke2021}, \cite{Meirhaeghe2021}, \cite{Sohn2019}, \cite{Wang2018}). 
 
 %%%%%%%%%%%%%%%
 In time interval reproduction, neural trajectories have been shown to evolve to a fixed state in anticipation of a delayed response. The speed of the neural trajectory is inversely proportional to the time interval that is reproduced (\cite{Murakami2014}, \cite{Mita2009}).
-Neural trajectories reflect the internal estimate of a time interval.
-Thus, flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Wang2018}).
-Experiments with multiple, consecutive measurement periods before the reproduction showed a sequential updating of the estimate, providing evidence for a predictive process consisting of a simulated motor plan in the measurement epochs (\cite{Egger2019}).
-It is suggested, that the population activity reflects an interval-dependent speed command that is updated based on a mismatch between predicted and actual interval in measurement epochs. 
+Data indicates, that neural trajectories reflect the internal estimate of a time interval.
+Thus, flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
+\cite{Remington2018} showed that behavioral flexibility in interval reproduction can be understood in terms of external inputs 
+Experiments with multiple, consecutive measurement periods showed a sequential updating of the estimate, providing evidence for a predictive process, realized by a simulated motor plan in the measurement epochs and update based on an error signal before consecutive epochs.
+%Trial-by-trial update rules have been used by others to explain aspects of magnitude estimation (Hellström, 2003; Dyjas et al., 2012; Bausenhart et al., 2014) 
+Data also suggested, that the population activity reflects an interval-dependent speed command that is updated based on a mismatch between predicted and actual interval in measurement epochs (\cite{Egger2019}, \cite{Wang2018})). 
 
 %---> Curcuit model, decition making, elements
 %model used only for... in secific task
 %Here, we aimed to answer this question using a dynamical systems approach. 
-\cite{Wang2018} proposed a potential neural mechanism for speed control. Based on that mechanism \cite{Egger2020} developed an extended circuit model for sensorimotor timing.
+\cite{Wang2018} proposed a potential neural mechanism for speed control by flexibly adjusting the effective time constant of a network. In a two-neuron-model, that is well known for modeling decision-making (\cite{Roxin2008}), the input level can be used to adapt the effective time constant of the system.
+Based on that mechanism \cite{Egger2020} developed an extended circuit model for sensorimotor timing.
+The model was used in interval reproductions tasks and fitted to human data that exhibited classical effects of magnitude estimation. 
+However, different time intervals were presented separately and not in a random sequence as in classical experiments reproduction experiments. This way expectations of the presented time intervals emerge over the course of the experiment.
 
-%---> research questions
-%can the model be applied to experiment simulations? it was only fitted to data separatly. can the model be applied to more realistic experiment simulations?
-%does the model in experiment simulations exhibit typical effects of magnitude estimation? How much of the effects in real behavior does it capture?
+%---> research questions 
+This work addresses the question, whether the model can be applied to more realistic experiment simulations.
+It is demonstrated that in realistic experiment simulations, typical effects of magnitude estimation are captured by the model, that itself is based on sequential updates of estimates and scaling found in brain data.
+Following this result, the effects of interference with the external variability of time intervals are examined. The predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
 %are there other predictions the model does? variance; andere effecte ranges
 
 \section{Model Description}
@@ -271,7 +288,7 @@ To produce plausible slopes, $K$ takes on smaller values for the long range, put
 
 \subsection{Model Regime for Error-Minimized Behavior} %Parameters that Minimize Errors in Reproductions
 Can behavioral effects of magnitude estimation also be achieved by adjusting $K$ and $\tau$ in accordance with error minimization?
-To find such optimized parameters, the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq. \ref{MSE}).
+To find such optimized parameters, the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq. \ref{MSE}). This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
 For larger time constants~$\tau$, the optimized update parameter~$K$ increases. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
 The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau* = 120$ ms and $K* = 11$ yields an overall minimum, whereas $\tau* = 200$ ms, $K* = 20$ yields a overall minimum for the long range. 
 Assuming the same rate time constant across experiments, we had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
@@ -563,26 +580,63 @@ However, the model predicts correctly increasing error in reproductions with hig
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Discussion}
-It has been shown...
-Here, we extended the model and showed that...
-model different approch
-% in general models of time reproduction Einordung
+%--> summary what shown
+%what is the prediction of the model? what does the data say? 
+In time reproduction experiments there are two sources of noise: variability of stimuli and internal noise of neural representations.
+Previous results have suggested, that the brain uses a speed-control mechanism to anticipate movement initiation time of delayed responses.
+Based on this mechanism a circuit model was developed by \cite{Egger2019} and shown to capture classical effects of magnitude estimation when fitted to human data.
+Here, we have extended the model to simulations of realistic time reproduction experiments that reflect the variability of stimuli by presenting random time intervals drawn from a stimulus distribution.
+Simulations across a variety stimulus ranges confirmed, that the model captures behavioral effects such as the regression effect, the range effect and scalar variability under a parameter regime that minimizes errors in reproductions.
+By modifying the variance of the stimulus distribution, we were able to test the model  in the presence of different external variability.
+The model predicted no influence of the change in external variability on the regression effect, but did predict an effect on the error in reproductions.
+This finding was partially confirmed in gerbil data, but some animals differed from the group by accounting for the change in variance, increasing their performance of reproductions.
+
+Understanding how temporal statistics are learned and incorporated will help understand computations of timing in the brain. 
+
+% Internal representation of temporal statistic \cite{Acerbi2012}
+% Humans have been shown to adapt to the temporal statistics of timing tasks so as to optimize the accuracy of their responses. representations of the experimental distributions up to third-order moments, including variance 
+
+
+This suggests that adaptation of the dynamics happend to accommodate the new information. 
+Further experiments should be done to investigate this switch of taking into account infomration from changed varinace into reprductions. E.G. gradualty changing the variance could reveal a difference between animals when a adaptation is happending. Animals that did not increase perfomrance in the present data might do so if the variance is furher increased. 
+This also means that the model would have to be extended to incooperate this adaptaion of the dynamics that change performance.
+
+%flexibly reconfigure the intrinsic dynamics of cortical circuits by driving the system to different regions of the state space. We found that changing the level of a static input can be used to generalize an arbitrary stimulus response mapping in the RSG task to multiple contexts while preserving the computational mechanisms within contexts. \cite{Remington2018}
+
+% there is remapping zwischen ms und s in real data, millisecond to seconds, adaptation due to same effects observed.
+% no remapping in model
+% some gebrils are adapting regime others are not when var is increased
+Another finding that simulations of realistic experiments revealed is a limited regime in which the model displays the discussed effects. For stimulus ranges that are much larger or smaller than the ones used, the behavior of the behavior breaks down.
+
+This means, when using the model in experiments with even shorter or longer time intervals, the regime of the model has to be adjusted. 
+A sort of adjustment also happens in real behavior. This becomes apparent when comparing the regression between experiments conducted in different time domains, e.g. milliseconds vs. seconds. There is no much stronger regression in the second range compared to the millisecond range. Qualitatively the regression and range effect look the same for different stimulus ranges in both time domains (\cite{Jazayeri2010}, \cite{Henke2021}).
+%different timing regimes: subsecond, second \cite{Paton2018} 
+\cite{Buonomano2002}
+
+%--> experiment suggestion: 
+%inclunece of var graduatly, when remapping? more expreme changes, other chages like sampling? how does the discrepencey arises?
+
+%--> in general models of time reproduction Einordung
+% model different approch
+Dedicated models: specialized and centralized mechanisms (spectral models, oscillator models - pacemaker-accumulator models)
+Intrinsic models: local and general properties of neural circuits (ramping models, state-dependent network models)
+\cite{Goel2014} Timing in subsecond scale is product of intrinsic mechanisms
+\cite{Paton2018}
+Circuit model uses ramping behavior, and explains it due to interactions of neurons.
+dynamics are flexible adjusted based on sensory input and motor feedback.
+
+%--> generalization
+%model for other magnitude estimations:
+%generalization of magnitude estimaton mechanism to other modalities critique: metric to code different types of magnitudes. \cite{VanOpstal2013}
+
+%--> Optimization
 %relate to Bayes (statistical model different approach)
 %optimization and error minimizatoin
 
-%what is the prediction of the model? what dies the data say? 
-% there is remapping zwischen ms und s in real data, millisecond to seconds, adaptation due to same effects observed. 
-% no remapping in model
-% some gebrils are adapting regime others are not when var is increased
+%--> Outlook
 
-
-This means, when using the model in experiments with even shorter or longer time intervals, the regime of the model has to be adjusted. 
-A sort of adjustment also happens in real behavior. This becomes apparent when comparing the regression between experiments conducted in different time domains, e.g. milliseconds vs. seconds. There is no much stronger regression in the second range compared to the millisecond range. Qualitatively the regression and range effect look the same for different stimulus ranges in both time domains (\cite{Jazayeri2010}, \cite{Henke2021}). 
-
-%experiment suggestion: inclunece of var graduatly, when remapping? more expreme changes, other chages like sampling? how does the discrepencey arises?
-
-%generalization to other modalities critique: metric to code different types of magnitudes. \cite{VanOpstal2013}
 
 \pagebreak
 %Shifting the threshold to higher or lower values of $y$ does not resolve under- or overestimation. However, the threshold has to be set in an appropriate scope to avoid exceeding timeouts. 
@@ -738,7 +792,8 @@ For all optimized values, be it on the squared bias, the variance or combined in
 
 \pagebreak
 
-\section{Design}
+\section{Code}
+\subsection*{Design}
 The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality are accessing the same basic circuit, which is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.
 The implementation of the basic circuit can be reused for all epochs.
 Different experiments can have different result types, all of which can be found in \texttt{result.py}. After each experiment, the results are gathered and stored together, consisting of the parameter set, the simulation time course, a list of reset time points, a list of production times, a list of indices of timeout trials and the stimulus list.
@@ -754,7 +809,7 @@ After each epoch or pulse, the results of the network are joint to the time cour
 
 For an overview of the code structure see Figure \ref{fig:code} and for its usage see simulations.ipynb at \href{https://github.com/KatharinaBracher/MScThesis}{github.com/KatharinaBracher/MScThesis}. 
 
-\section{Implementation}
+\subsection*{Implementation}
 All simulations and analysis were performed with Python 3.9.7. 
 The following libraries were used: matplotlib (3.5.1), NumPy (1.22.3), SciPy (1.8.0), scikit-learn (1.0.2). 
 An experiment simulation can not be parallelized, since each step depends on the previous one.

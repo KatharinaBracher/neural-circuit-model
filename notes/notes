@@ -190,7 +190,7 @@ Effects result from an optimal strategy when noisy estimates are made about stim
 - Optimality and biological relevance
 
 
-## Wang, Jazayeri et al.: Flexible timing by temporal scaling of cortical responses
+## Wang, Jazayeri et al. (2018): Flexible timing by temporal scaling of cortical responses
 <details>
 <summary>
 
@@ -236,7 +236,7 @@ Introduction of two neuron model for general mechanism for translating input to 
 
 </details>
 
-## Egger, Jazayeri et al.: Internal models of sensorimotor integration regulate cortical dynamics
+## Egger, Jazayeri et al. (2019): Internal models of sensorimotor integration regulate cortical dynamics
 
 <details>
 <summary> 3 epoch experiment (2 presentations of same stimulus). They show sequential update of estimate during 2 epochs (simulated motor plan during 2nd presentation), whereas in first presentation no representation of stimulus is found (set to prior)
@@ -257,6 +257,23 @@ Population response:
 - DMFC population activity reflects an interval-dependent speed command
   - representation of internal estimate of stim. interv. through distance of trajectories
   - speed command may originate in thalamus (tonic thalamic input)
+</details>
+
+### Acerbi et al (2012).: Internal Representations of Temporal Statistics and Feedback Calibrate Motor-Sensory Interval Timing
+<details>
+<summary> Reproduction and representation of stimulus different distributions, including skewed and bimodal. 
+</summary>
+
+> whether people are able to acquire an internal representation of complex (e.g. very peaked, bimodal) distributions of inter-stimulus intervals in the first place, and what are their limitations.
+
+- Observers to have acquired, after training, an internal representation of the statistics of the temporal intervals which is an approximation of the true distribution.
+- subjects are integrating task-relevant temporal information with the provided error
+feedback to enhance their timing performance
+- humans can learn good approximations of unimodal distributions of time intervals
+used in the experiment, even for skewed distributions of durations; on the other hand, under similar conditions, we find that multimodal distributions of timing intervals are much harder to acquire.
+
+
+
 </details>
 
 **Thoughts**: 

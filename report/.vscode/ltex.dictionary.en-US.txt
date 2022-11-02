@@ -25,3 +25,4 @@ simulus
 simulus
 exterbal
 exernally-derived
+subsecond
