@@ -16,7 +16,7 @@
 \usepackage{caption}
 \DeclareCaptionFont{8pt}{\fontsize{8pt}{9pt}\selectfont}
 \captionsetup{font={8pt}}
-
+\usepackage{todonotes}
 
 \usepackage[
 	backend=biber,
@@ -78,18 +78,24 @@
 \pagebreak
 
 \section*{Abstract}
+%Background
 Time reproduction experiments are a useful approach to the study of sensory processing because a relationship is established between external events and their internal perception.
 In such experiments, behavioral responses are characterized by specific biases such as the central tendency or regression effect, i.e. the overestimation of small time intervals and the underestimation of large ones.
+\todo{remove explanation if you have a space contrain}
 Sensory information is combined expectations based on prior knowledge to minimize errors arising from noise in the environment and neural signal. 
 
+% Background
 To flexibly adjust behavior to the time actions, the brain is thought to dynamically change patterns of neural activity. The speed of neural dynamics is adjusted according to the reproduced time interval.
 This has been well described with a dynamical systems approach, adjusting the initial conditions and external inputs of the system \cite{Paton2018}, \cite{Issa2020}, \cite{Zhou2022}.
+\todo{cites are uncommon in abstracts}
 Here we investigate a neural circuit model that has been proposed recently to explain various timing behaviors, including the reproduction of time intervals (\cite{Egger2020}).
 
+% Method
 The input to the circuit controls at which speed the readout unit increases its activity and therefore scales its responses such that a threshold is reached at different times. 
 During the presentation of the stimulus interval, the circuit predicts the to-be-reproduced duration. 
 From the mismatch between this prediction and the actual stimulus duration, an error signal is derived, according to which the input and consequently the speed is adjusted for the subsequent reproduction.
 
+%Contributions
 We found robust conditions for realistic time reproduction experiments that are consistent with characteristic behavioral effects. 
 A crucial parameter is the weight with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
 Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
@@ -102,13 +108,28 @@ Timing is critical for many of these sensorimotor functions, ensuring the abilit
 Sensory and motor timing in the millisecond range is particularly important, as this timescale includes temporal cues for vocalization as well as fine motor coordination.
 Despite its importance, there is no sensory organ responsible for time perception, which means that time perception must be generated internally by extracting information from sensory inputs.
 Although time is pervasive in animal behavior, it is elusive and difficult to study and the neural implementation that allows the brain to perceive and internally perform complex temporal computations remains unknown.
+\todo{<- make two sentences here}
+\todo{provide an example for "time is pervasive"}
 Nevertheless, the mechanism of timing might provide powerful insights into general mechanisms of cognition and neural computations (\cite{Issa2020}).
 
 Magnitude estimation is a useful approach to explore sensory processing because it involves establishing a relationship between external events and their internal perception by, for example, evaluating or reproducing a time interval. 
 However, externally-derived inputs are subject to noise arising from the variability of the environment. In addition, noise arising from neural representations of the input affects the perception of time.
 A variety of experimental studies have found characteristic behavioral effects across sensory modalities in magnitude reproduction experiments that might arise to minimize errors in the presence of noise (\cite{Petzschner2015}).
 
+
+\todo{Add here an outline section or paragraph}
+
+\todo{For the unexperienced readers: Maybe introduce some more terms lighly: Magnitude, Interval, End of Interval, what is input/output? what is Error signals, regression, reproduciton etc. The introduction should be very easy to understand.}
+
+\todo{Maybe try to merge subsections here and use paragraphs. Also try to give each paragraph a heading.}
+
+\todo{The next to sections sound like: "Related Work"}
+
+
+\todo{Improve on the headlines. They go too much into the direction of How? Instead of the What?}
+
 \subsection{Behavioral Effects in Magnitude Estimation}
+\todo{Magnitude Estimation is not used in the paragraph below.}
 %---> magnitude estimation, optimization, Bayes
 The most striking observation in stimulus reproduction is regression to the mean of stimuli, in other words, small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
 This effect intensifies for ranges with larger stimuli (\textit{range effect}).
@@ -119,6 +140,7 @@ Modality-independence of these effects suggests the existence of a common underl
 Minimizing errors in judgment can be achieved by integrating prior experience with immediate sensory input, and is therefore often described with Bayesian models.
 In Bayesian models, sensory information is represented by a likelihood function and is combined with prior experience that together result in biased estimates.
 However, is has not been shown how the brain would implement such behavior. 
+\todo{Why not? I guess people have tried to. Either forward reference of give a short intuition.}
 
 \begin{figure}[ht]
 	\centering
@@ -134,35 +156,37 @@ However, is has not been shown how the brain would implement such behavior.
 
 \subsection{Time Estimation via Predictive Timing}
 %---> timing, time reproduction experiments, methods to measure time
-Experiments, in which subjects have to measure and reproduce time intervals, can be used to study how the brain integrates expectations with current sensory input in order to achieve correct timing.
+Experiments, in which subjects have to measure and reproduce time intervals, can be used \todo{just: "Time reproduction experiments can be used "} to study how the brain integrates expectations with current sensory input in order to achieve correct timing.
 Time reproduction is usually accomplished by at least one presentation of the time interval e.g. between two external events (sensory timing), and a reproduction period that is terminated by the subject's movement initiation (motor timing).
 In both epochs elapsed time needs to be estimated, the difference lies in the termination of the interval. In sensory timing, the time interval is terminated by an external event, while in the motor timing, the completion is internally generated and executed by a motor command.
 
 Time between two events can be measured in an absolute or predictive manner. 
 In the case of absolute timing, time can be continuously estimated from an output that results from integration of ticks from a central clock.
-The rate at which activity increases does not depend on the time interval. 
+The rate at which activity increases does not depend on the time interval.
+\todo{which rate is meant here?} 
 In contrast, for predictive timing a fixed state is reached at the end of the time interval, by adjusting the rate of a process according to the anticipated time.
-Recently, evidence of predictive timing has emerged suggesting, that the CNS makes use of predictive signaling mechanisms, allowing the animal to contemplate sensory consequences of actions (\cite{Meirhaeghe2021}, \cite{Egger2019}).
+Recently, evidence of predictive timing has emerged suggesting, that the CNS \todo{what is CNS?} makes use of predictive signaling mechanisms, allowing the animal to contemplate sensory consequences of actions (\cite{Meirhaeghe2021}, \cite{Egger2019}).
 
 Predictive coding is a framework, in which the brain is predicting its upcoming states and refining these predictions through error signals (\cite{Ficco2021}, \cite{Huang2011}, \cite{Rao1999}).
 Intrinsic neural representations of motor actions are used as predictor of sensory consequences. % representations (efference copy)
 If there is a mismatch in predicted and actual sensory feedback, an internal model is updated by the error signal (\cite{Straka2018}, \cite{Clark2013}, \cite{Bubic2010}). %mismatch (corollory discharge)  actual sensory feedback (reafference)
 The internal model can include a prior to integrate expectations into the time estimate.
 Based on predictions and expectations, flexible control of neural mechanisms is required to measure and produce time intervals.
-This raises the question of how flexible control over brain dynamics can be achieved? 
+This raises the question of how flexible control over brain dynamics can be achieved? \todo{what are brain dynamics?}
 
 % Accordingly, the CNS needs to exert control and prediction to achieve desired or expected sensory consequences.
 % the brain makes sense of the environment by predicting future events and by testing whether these are in line with incoming sensory information and previous experiences
 
 \subsection{A Dynamical Systems Approach}
 %---> nerual implementation, brain ares, scaling, trajectories, speed command, motor simulationk error signal
-A brain area that has been associated with timing behavior is the medial prefrontal cortex (MFC) (\cite{Wang2018}, \cite{Emmons2017}, \cite{Genovesio2006}, \cite{Lewis2004}, \cite{Shima2000}).
+A brain area that has been associated with timing behavior is the medial prefrontal cortex (MFC) \todo{add a glossary using Latex for these acronyms} (\cite{Wang2018}, \cite{Emmons2017}, \cite{Genovesio2006}, \cite{Lewis2004}, \cite{Shima2000}).
 In time reproduction experiments, the activity of individual cells in the MFC shows heterogeneous response profiles, many of which are temporally scaled according to the produced time interval (\cite{Henke2021}, \cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
 Indeed, time can be encoded predicatively relative to the mean of time intervals by temporal scaling activity.
 Scaling is a phenomenon that is consistent at the population level, when activity is displayed in a low-dimensional state space. In the state space, the activity of all neurons is represented over time by a so-called neural trajectory (\cite{Cueva2022}).
 It has been shown that for sensory timing, the population activity evolves along a common trajectory, whereas in motor timing, trajectories scale in speed to reach a common terminal state, that triggers an action (\cite{Henke2021}, \cite{Meirhaeghe2021}, \cite{Sohn2019}, \cite{Wang2018}, \cite{Murakami2014}, \cite{Mita2009}).
 %In this case speed of the neural trajectory is inversely proportional to the time interval that is reproduced, thus scaled by the stimulus time interval
 Experiments have shown a causal link for population dynamics encoding time. Cooling the MFC down, slowed population dynamics down, resulting in longer time estimates (\cite{Xu2014}). 
+\todo{What is population dynamic?}
 Therefore, the brain dynamically changes patterns of neural activity to flexibly adjust behavior to time actions, where flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Tsao2022}, \cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
 
 Data indicates that neural trajectories reflect the internal estimate of a time interval and are influenced by a prior.
@@ -181,11 +205,15 @@ The model was used in interval reproduction tasks and fitted to human data that 
 However, different time intervals were presented separately and not in a random sequence as in classical time reproduction experiments. 
 %This way expectations of the presented time intervals emerge over the course of the experiment.
 
+
+\paragraph{Research Questions}\todo{<- Add a paragraph heading here or create a subsection}
 %---> research questions 
 By applying the circuit model to simulations that reflect more realistic conditions of time reproduction experiments, this work addresses the questions which effects in behavior can be explained by the model. 
 We demonstrated that in realistic experiment simulations, classical effects of magnitude estimation are captured by the model, that itself is only based on principles found in brain data.
 Following this result, the effects of external variability of time intervals are examined. The predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
 %are there other predictions the model does? variance; andere effecte ranges
+
+\todo{Provide an outline again: Nextup Model, then...}
 
 \section{Model Description}
 Flexible speed control can be achieved by a simple model consisting of three units, $u, v, y$ that represent population activity. 
@@ -199,7 +227,7 @@ The dynamics of $u, v$, and $y$ are defined as follows:
 	\end{split}
 \end{equation}
 Two units, $u$ and $v$, receive a tonic symmetric input $I$ ($W_{uI}=W_{vI}=6$) and are mutually inhibiting each other ($W_{uv}=W_{vu}=6$). 
-The inputs to $u$ and $v$ are governed by a sigmoid activation function $\theta(x) = \frac{1}{1+exp(-x)}$.
+The inputs to $u$ and $v$ are governed by a sigmoid activation function $\theta(x) = \frac{1}{1+\text{exp}(-x)}$.\todo{Use text for exp}
 The output unit $y$ receives excitatory input from $u$ and inhibitory input from $v$ ($W_{yu}=W_{yv}=1$) which results in a ramp-like activity of $y$.
 All three units have a time constant $\tau = 100$~ms. 
 Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
@@ -293,6 +321,8 @@ Taking the mean over the distribution of reproduced time intervals for each stim
 \end{figure}
 
 \section{Parameters in Accordance with Error Minimization}
+\todo{Title is not snappy enough imo: "Reproducing Real World Data"}
+\todo{Also this should maybe be a subsection.}
 We asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by experiments with the circuit model, which itself is based on the scaling phenomenon found in brain data. 
 A crucial value to adapt was the memory parameter $K$, since this parameter defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
 Another parameter that had to be considered is the time constant $\tau$, which affects how fast $y$ behaves in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
@@ -305,7 +335,7 @@ For evaluating effects in behavior, two stimulus ranges were used in simulations
  
 \subsection{Behaviorally Plausible Slopes}
 The regression effect in behavior can be quantified by the slope that results from a linear regression between the stimuli and the reproductions.
-Biological plausible slopes lie around 0.83 for the short and 0.73 for the long range.
+Biological plausible slopes lie around 0.83 for the short and 0.73 for the long range.\todo{Are the exact values important here? Are they from an experiment, if so which one? Maybe a section about implementing the model and running the experiments is missing somewhere.}
 Interestingly, this is the case in across time domains, regardless of whether the short and long range are situated in the millisecond or second domain. (\cite{Thurley2018}, \cite{Jazayeri2010}). 
 The slopes of behavioral results for multiple combinations of the update parameter~$K$ and the time constant~$\tau$ were determined. 
 In broad parameter regimes, the reproductions show a regression to the mean, as indicated by a slope smaller than 1. 
@@ -314,10 +344,11 @@ The model also produced biological plausible slopes for different time constants
 To produce plausible slopes, $K$ takes on smaller values for the long range, putting less weight on the update compared to the short range.
 
 \subsection{Model Regime for Error-Minimized Behavior} %Parameters that Minimize Errors in Reproductions
+\todo{What is Model Regime? Maybe just: "Error Mimization" is enough}
 Can behavioral effects of magnitude estimation also be achieved by adjusting $K$ and $\tau$ in accordance with error minimization?
 To find such optimized parameters, the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions (Supplementary Eq. \ref{MSE}). This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
 For larger time constants~$\tau$, the optimized update parameter~$K$ increases. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
-The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau* = 120$ ms and $K* = 11$ yields an overall minimum, whereas $\tau* = 200$ ms, $K* = 20$ yields a overall minimum for the long range. 
+The corresponding time constant $\tau$ for the overall minimum of the MSE \todo{use glossary} differ between the two stimulus ranges. For the short stimulus range, $\tau* = 120$ ms and $K* = 11$ yields an overall minimum, whereas $\tau* = 200$ ms, $K* = 20$ yields a overall minimum for the long range. 
 Assuming the same rate time constant across experiments, we had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
 With a time constant of $\tau = 130$, $K* = 13$ for the short and $K* = 10$ for the long range (Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b).
 Behavioral results with error-minimizing parameters show a regression to the mean with a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
@@ -436,7 +467,7 @@ It is necessary to investigate whether the underestimation in the model's behavi
 Possible parameters of the model that could influence the behavior are the delay period between trials, the fixed threshold and the common time constant between stimulus ranges. 
 
 \subsection{Delay Period Influences Reproductions}
-The simulations were performed with a common time constant $\tau$ that was set between the optimal $\tau*$ for the short and long range, respectively.
+The simulations were performed with a common time constant $\tau$ that was set between the optimal $\tau*$ \todo{maybe put the * into subscript} for the short and long range, respectively.
 General underestimation in simulations with the long range can be compensated by increasing the time constant towards the optimum of the long range. However, this causes a general overestimation in the simulation with the short range (Supplementary Fig. \ref{sup:othererror}b). 
 Thus, a common time constant $\tau$ contributes to the under- and overestimation of stimuli, when it's too far from the range's optimum. But even at the optimum, simulations show a slight general underestimation in the long range.
 Hence, there are several causes for this problem.
@@ -525,7 +556,7 @@ The short-few and all-few range encompasses the short and the all range, respect
 For all ranges, the slope of the linear regression between stimuli and reproductions is below one. Thus, simulations with error-minimizing parameters predict the regression effect across several ranges. 
 The slopes decrease significantly as the mean of the stimulus range increases, except for the short and mid range (Fig. \ref{fig:new_ranges}c).
 Thus, the model predicts the range effect only for sufficiently large changes in the mean. 
-(Kolmogorov–Smirnov two-sample test, p$<$0.01, n=21 for each distribution, Bonferroni correction for multiple testing).
+(Kolmogorov–Smirnov \todo{Check dash - here} two-sample test, p$<$0.01, n=21 for each distribution, Bonferroni correction for multiple testing).
 Across ranges that only change their mean value (short, mid, long and extralong), the slope has a linear correlation with the mean value of the range (Pearson correlation r=-0.95, $p<0.05$).
 
 When the experiment was simulated with a common $\tau$ of 165~ms between ranges, $K*$ is significantly lower for the mid range (16.71) compared to the short range (21.33), but slopes show no significant difference (Supplementary Fig. \ref{sup:ranges}a, b).
@@ -569,9 +600,10 @@ However, increasing the variance of a range leads to a significant increase in M
 \end{figure}
 
 \subsection{Comparison of Behavioral Output of Model to Real Data}
-The circuit model predicts that a change in variance affects the MSE of the reproductions.
+The circuit model predicts that a change in variance affects the MSE \todo{use glossary} of the reproductions.
 It also predicts, that only the mean and not the variance has an effect on the regression of reproductions, which is in contrast to the noisy integrator model proposed by \cite{Thurley2016}.
 In the following section, we compare predictions of the model with behavioral data from time reproduction experiments with gerbils and humans. The stimuli in these experiments were several seconds long and came from either a short, mid, long or all range (data by Henke and Thurley).
+\todo{cite here the data, link or paper}
 
 Behavior in gebrils exhibits a regression effect for all ranges and a range effect for ranges with increasing mean. 
 The variation in slopes between gebrils is considerably larger when the variance is increased.
@@ -714,6 +746,7 @@ This work, however, provided further evidence that a dynamical systems perspecti
 \setcounter{section}{0}
 \addcontentsline{toc}{section}{Supplements}
 \section*{Supplements}
+\todo{I think you can definitely (and maybe should) include the methods into the main part. Also how you conducted the experiments with the model can go into the main part.}
 \setcounter{figure}{0}
 \setcounter{table}{0}
 \setcounter{equation}{0} 
@@ -863,6 +896,7 @@ For all optimized values, be it on the squared bias, the variance or combined in
 \pagebreak
 
 \section*{Code}
+\todo{I think the code design and programming stuff belongs probably to Method section}
 \subsection*{Design}
 The code is designed in a modular way, such that multiple types of experimental procedures with shared functionality are accessing the same basic circuit, which is implemented in \texttt{BaseSimulation} as shown in Figure \ref{fig:code}.
 The implementation of the basic circuit can be reused for all epochs.
