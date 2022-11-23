@@ -206,10 +206,12 @@ I demonstrate that in realistic experiment simulations, classical effects of mag
 %, that itself is only based on principles found in brain data.
 Following this result, I ask what effect external variability in time intervals has on behavior. 
 
-In the subsequent sections I describe the circuit model in detail and discuss different input regimes of the model. I then identify model parameters that minimize errors in the behavior and investigate the effects of stimulus statistics on behavior. The predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
+In the subsequent two sections, the circuit model is described in detail. 
+I discuss different input regimes of the model and identify model parameters that minimize errors in the behavior. 
+In Section 4, I examine the behavior of the model and make adjustments to the experiment design to then investigate the effects of stimulus statistics on behavior in section 5. Furthermore, the predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
 
 \section{A Circuit Model for Time Estimation}
-The model is build on a basic circuit, which I will introduce at the beginning. I then describe the extension of the circuit to include a mechanism for updating the inputs (\cite{Egger2020}).
+The model is build on a basic circuit, which is introduced at the beginning. I then describe the extension of the circuit to include a mechanism for updating the external input (\cite{Egger2020}).
 Depending on the input strength, the model operates in different regimes. 
 In this section we focus on the intermediate input regime, but I will discuss the high input regime in Section 3.
 
@@ -225,17 +227,15 @@ The dynamics of $u, v$, and $y$ are defined as follows:
 \end{equation}
 Two units, $u$ and $v$, receive a tonic symmetric input $I$ ($W_{uI}=W_{vI}=6$) and are mutually inhibiting each other ($W_{uv}=W_{vu}=6$). 
 The inputs to $u$ and $v$ are governed by a sigmoid activation function $\theta(x) = \frac{1}{1+\exp(-x)}$.
-The output unit $y$ receives excitatory input from $u$ and inhibitory input from $v$ ($W_{yu}=W_{yv}=1$) which results in a ramp-like activity of $y$.
+The output unit $y$ receives excitatory input from $u$ and inhibitory input from $v$ ($W_{yu}=W_{yv}=1$) which results in a ramp-like activity of $y$ (Fig. \ref{fig:circuit}a).
 Different external inputs to the sigmoid activation function, control the effective time constants of the system. Stronger inputs drive the activation more towards the saturating nonlinearity, which leads to larger effective time constants.
-Because of this, the model yields a repertoire of slopes that can be exploited for time reproduction (\cite{Egger2020}). 
-
+Because of this, the model yields a repertoire of slopes that can be exploited for time reproduction (Fig. \ref{fig:circuit}c)(\cite{Egger2020}). 
 Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
 %Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
-To begin with, all three units have a time constant $\tau = 100$~ms and initial conditions of $u, v$ and $y$ are set to $u_0=0.7, v_0=0.2, y_0=0.5$ (Fig. \ref{fig:circuit}a). %have been optimized for in \cite{Egger2020} and
-To simulate the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ that corresponds to 10 ms.
+To simulate the dynamics of $u, v, y$ and $I$, Euler's method was used with a step size $\Delta t$ that corresponds to 10 ms.
 Depending on the input $I$, the system shows different dynamics.
 
-\paragraph{The model has three input regimes.}
+\paragraph{The model has three distinct input regimes.}
 For low levels of~$I$ (0~$<I<$~0.5) the system has three fixed points (two stable, one unstable at $u=v$) and $y$ ramps up faster the higher input~$I$. 
 For intermediate values of $I$~(0.5~$<I<$~1) the system still shows three fixed points of the same sort as in the low input regime (Fig. \ref{fig:circuit}b) but $y$ ramps up with a slope that is inversely proportional to the input $I$ ($y$ ramps up slower the higher input $I$, cf. Fig. \ref{fig:circuit}c). 
 For high $I$ (1~$<I$) the system has only one, but stable fixed point (at $u=v$), and $y$ ramps down faster for higher $I$.
@@ -259,7 +259,7 @@ In this section, the intermediate input regime is explored: higher inputs result
 Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). Typically, a delay is introduced between subsequent trials. 
 The basic circuit described above is modified to perform interval reproduction (cf. Figure \ref{fig:epochs}a for schematic of the modified circuit).
 To achieve time reproduction, the relation of input $I$ with the slope of the ramping activity of $y$ is used in combination with a fixed threshold $y_{\text{th}}$.
-By adding an update mechanism that flexibly adjusts $I$, the threshold crossing of $y$ can be delayed or moved to earlier times.
+By introducing an update mechanism that flexibly adjusts $I$, the threshold crossing of $y$ can be delayed or moved to earlier times.
 This way, measuring and reproducing an interval is done predictively, by adjusting the slope of the ramp such that the output reaches the threshold after the intended time.
 %In other scenarios, time could be encoded by the level a ramp reaches with a fixed slope.
 In the model, the measurement epoch is specified by the stimulus interval $t_s$, whereas the reproduction ends when $y$ reaches the fixed threshold $y_{\text{th}}$ from below. 
@@ -275,8 +275,9 @@ The time from the end of the measurement epoch until the threshold-crossing of $
 \label{fig:epochs}
 \end{figure}
 
-\paragraph{The input to the model is updated for time reproduction.}
-At the end of the measurement epoch, an error signal is determined from the difference of $y$ to the threshold $y_{\text{th}}$.
+\paragraph{An update mechanism adjusts the input for reproductions.}
+In each measurement epoch, the external input $I$ is inherited from the previous trial and needs to be adjusted for the subsequent reproduction. 
+An error signal is determined from the difference of $y$ to the threshold $y_{\text{th}}$.
 If the threshold $y_{\text{th}}$ is not reached during the measurement epoch, the slope has to be adjusted, such that $y$ ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
 If $y$ crossed the threshold before the measurement epoch ends, so is above $y_{\text{th}}$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased (Fig. \ref{fig:epochs}c).
 The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
@@ -294,11 +295,31 @@ Moreover, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamic
 	\tau\frac{\text{d}v}{\text{d}t} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v + I_r) \;.\\
 	\end{split}
 \end{equation}
-The reset mechanism is switched on for one time step after every epoch, which allows the model to reproduce any number of stimulus intervals in succession.
+The reset mechanism is turned on for one time step after each epoch, allowing the model to reproduce any number of stimulus intervals in succession.
+In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
+
+\paragraph{Procedure of experiment simulation.}
+In order to simulate a realistic time reproduction experiment, special attention had to be paid to the choice of stimuli and the noise level.  
+In the full experiment simulation, a series of 500 trials was presented to the model.
+Stimuli were randomly chosen from a uniform distribution of time intervals denoted as the stimulus range. 
+The stimulus range consisted of seven stimuli ranging from 400-700 ms (Fig. \ref{fig:experiment}b).
+To ensure that there were no side effects influencing the behavioral results, a repetition of all seven stimuli in a time window of 20 trials and no remarkable oscillation were required.
+In all simulations that were conducted in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly. 
+To begin with, all three units had a time constant $\tau = 100$~ms and initial conditions of $u, v$ and $y$ were set to $u_0=0.7, v_0=0.2, y_0=0.5$.
+Besides a fixed delay period of 700~ms between each trial, an initial interval at the beginning of the simulation was introduced which allowed the system to approach its steady-state before the first trial. 
+The experiment simulation results in a distribution of inputs that drive the activity of $y$ in the reproduction epoch and a distribution of reproduced time intervals for each stimulus (Fig. \ref{fig:experiment}c).
+Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of the behavioral results (Fig. \ref{fig:experiment}d). 
+
+To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation as mentioned above. In data, a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
+The standard deviation of reproductions grows monotonically for increasing stimulus intervals for all tested noise levels (Supplementary Fig. \ref{sup:CV}b).
+However, the increase of the standard deviation of reproductions plateaus with noise levels $\sigma > 0.1$.
+The coefficient of variation (CV) was used to quantify the degree of variation. It is defined as $\text{CV}=\frac{\sigma_\text{reproduction}}{\mu}$ for each stimulus, where $\mu$ corresponds to the stimulus interval and $\sigma_\text{reproduction}$ to the standard deviation of the corresponding reproductions. 
+To achieve variations close to real data, reproductions should have a CV of 0.1 to 0.4 that is constant over all stimulus intervals.
+For all simulations the noise level $\sigma$ was set to 0.02, for which the mean CV for the was 0.1 (Supplementary Fig. \ref{sup:CV}c).
 
 \paragraph{Timeout trials.}
 Reproductions that do not reach the threshold in a certain time span or cross the threshold particularly early are classified as timeout trial.
-If the threshold is crossed before 20~\% of the stimulus interval has passed, the trial is classified as early timeout trial.
+If the threshold is crossed before 20~\% of the stimulus interval has passed, the trial is categorized as early timeout trial.
 A late timeout is reported, when twice the stimulus interval has elapsed and the threshold has not been reached.
 Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis.
 If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
@@ -316,49 +337,12 @@ If timeout trials occurred for a single stimulus more than 10\% of all trials of
 \label{fig:experiment}
 \end{figure}
 
-\paragraph{Procedure of an experiment simulation.}
-In all simulations in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly.  
-For experiment simulations with 500 trials, the increase of the standard deviation of reproductions plateaus with noise levels $\sigma > 0.1$. This was tested with parameters set to $\tau=100$, $K_\text{short}=8.5$ and $K_\text{long}=6$.
-The standard deviation of reproductions grows monotonically for increasing stimulus intervals for tested noise levels (Supplementary Fig. \ref{sup:CV}b).
-Further, the coefficient of variation (CV) was used to quantify the degree of variation. It is defined as $\text{CV}=\frac{\sigma_\text{reproduction}}{\mu}$ for each stimulus, where $\mu$ corresponds to the stimulus interval and $\sigma_\text{reproduction}$ to the standard deviation of the corresponding reproductions. 
-To achieve variations close to real data, reproductions should have a CV of 0.2 to 0.4 that is constant over all stimulus intervals (Supplementary Fig. \ref{sup:CV}c).
-For all simulations the noise level $\sigma$ was set to 0.02, where the mean CV for the short range was 0.1 and for the long range 0.15 with the parameters from above.
-
-
-To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data, a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
-If noise levels in the model are too high ($\sigma>0.2$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}).
-For all simulations, $\sigma$ was set to 0.02, which results in a realistic coefficient of variation (CV) of time reproductions (CV = 0.1, Supplementary Fig. \ref{sup:CV}b, c).
-
-
-In all experiment simulations, a series of 500 trials was presented to the model.
-
-Besides a fixed delay period between each trial, an initial interval at the beginning of the experiment is introduced which allows the model approach the steady-state before the first trial starts (Fig. \ref{fig:epochs}c).
-%with the initial values of $u, v, y$ and an initial input $I_0$ . 
-
-Stimuli were randomly chosen from the short (400-700 ms) or the long (700-1000 ms) stimulus range (Supplementary Fig. \ref{sup:CV}a).
-The stimulus series had a uniform distribution of stimuli, a repetition of all seven stimuli in every 20 trial windows and no remarkable oscillation.
-To allow for optimization of $K$ the same stimulus series was used. Added noise was initialized equally to extract changes in results only based on parameter changes.
-Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations with $\tau=140$ and $\sigma=0.02$ the mean optimal $K$ and standard deviation for the short range were $K = 14.45$, std = 0.49 and for the long range $K = 9.91$, std = 0.77. 
-
-
-In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
-In the full simulation, 500 stimuli randomly chosen from a stimulus distribution were presented. The uniform distribution of time intervals is denoted as stimulus range. 
-The stimulus range consisted of seven stimuli ranging from 400-700 ms (Fig. \ref{fig:experiment}b).
-
-The experiment simulation results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the activity of $y$ in the reproduction (Fig. \ref{fig:experiment}c).
-Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:experiment}d). 
-
-
-
-
 \section{Model Parameters for Error Minimization}
-I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by experiments with the circuit model, which itself is based on the scaling phenomenon found in brain data. 
+I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by experiments with the circuit model. 
 A crucial value to adapt was the memory parameter $K$, since this parameter defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
 Another parameter that had to be considered is the time constant $\tau$, which affects how fast $y$ behaves in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
+To allow an examination of the parameters that was decoupled from the influence of the noise, I first used the same stimulus series and second initialized the added noise equally in each simulation. This way, I was able to extract changes in the results based only on parameter changes.
 In contrast to \citeauthor{Egger2020} (\citeyear{Egger2020}), parameters such as the initial values, especially $I_0$ did not need to be adjusted in advance. This is because the input will have settled after the first one or two trials and will not be affected by the initial values thereafter.
-%weights 
-%noise adjusted to plausible CV in results
-In the following, the threshold was set to 0.7, but smaller and larger thresholds were tested as well.
 For evaluating effects in behavior, two stimulus ranges were used in simulations, denoted as short and long range. 
 The short range contained seven stimuli ranging from 400-700~ms. 
 The long range contained the same number of stimuli but was shifted by 300~ms compared to the short range, thus ranging from 700-1000~ms.
@@ -382,13 +366,15 @@ For larger time constants~$\tau$, the optimized update parameter~$K$ increases. 
 The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau^* = 120$ ms and $K^* = 11$ yields an overall minimum, whereas $\tau^* = 200$ ms, $K^* = 20$ yields a overall minimum for the long range. 
 Assuming the same rate time constant across experiments, I had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
 With a time constant of $\tau = 130$, $K^* = 13$ for the short and $K^* = 10$ for the long range (Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b).
+%%%
+Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations the mean optimal $K$ and standard deviation for the short range were $K = 12.88$, std = 0.34 and for the long range $K = 8.57$, std = 0.99. 
+%%%
 Behavioral results with error-minimizing parameters show a regression to the mean with a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
 Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biologically plausible.
 The model produces behavior that shows the regression and the range effect.
 Yet, the slope for the small range lies slightly below the biological plausible slopes found in data. 
 The standard variation of reproductions increases linearly (scalar variability), the mean coefficient of variation (CV) for the short range is 0.09, for the long range 0.11 (Fig. \ref{fig:parameter}c).
 No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance instead of the MSE. The relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d).  
-%supp
 
 \begin{figure}[ht]
 	\centering
@@ -825,8 +811,8 @@ For all optimized values, be it on the squared bias, the variance or combined in
 	\includegraphics{figures/supp_CV.pdf}
 	\caption{\textbf{Experiment description and noise levels.} 
 	\textbf{(a)} The short and the long stimulus range comprised time intervals from 400 to 700 ms and 700 to 1000 ms, respectively.
-	\textbf{(b)} Standard deviation of reproductions for each stimulus in an experiment simulation with 500 trials and $\tau=100$. $K$ was set to 8.5 and 6 for the short and long range respectively. 
-	\textbf{(c)} Same as (a) but standard deviation of reproductions normalized by stimulus duration (CV).
+	\textbf{(b)} Standard deviation of reproductions for each stimulus in an experiment simulation with 500 trials and $\tau=100$. $K$ was set to 8.5 and 6 for the short and long range respectively.
+	\textbf{(c)} Same as (a) but standard deviation of reproductions normalized by stimulus duration (CV). For a noise level of $\sigma$ = 0.02, the mean CV was 0.1 for the short range and 0.15 for the long range.
 	}
 \label{sup:CV}
 \end{figure}
