@@ -17,6 +17,7 @@
 \DeclareCaptionFont{8pt}{\fontsize{8pt}{9pt}\selectfont}
 \captionsetup{font={8pt}}
 \usepackage{todonotes}
+%\usepackage[disable]{todonotes}
 
 \usepackage[
 	backend=biber,
@@ -44,7 +45,11 @@
 
 
 \begin{document}
-
+%\the\textwidth 
+%\makeatletter\f@size
+% 345 pt = 4.79167 in -> figures 4.75 in 
+% text 10 pt, fig caption 8 pt
+% in drawio 10 pt -> 13.3; 8 pt -> 10.66 
 
 \begin{titlepage}
 	\centering
@@ -71,35 +76,35 @@
 
 
 \normalsize
-\tableofcontents
-
-%\the\textwidth 
-%\makeatletter\f@size
-% 345 pt = 4.79167 in -> figures 4.75 in 
-% text 10 pt, fig caption 8 pt
-% in drawio 10 pt -> 13.3; 8 pt -> 10.66 
-\pagebreak
 
 \section*{Abstract}
-%Background
-Time reproduction experiments are a useful approach to the study of sensory processing because a relationship is established between external events and their internal perception.
+
+% Background brain
+Timing in the brain is thought to be encoded through population state dynamics of neurons.
+Experimentally, reproduction tasks are a useful approach to study sensory processing pf time because a relationship between external events and their internal perception is established.
 In such experiments, behavioral responses are characterized by specific biases such as the central tendency or regression effect, i.e. the overestimation of small time intervals and the underestimation of large ones.
-Sensory information is combined expectations based on prior knowledge to minimize errors arising from noise in the environment and neural signal. 
+How this is implemented, however, remains unknown.
+Here I investigate a neural circuit model that has been proposed recently to explain various timing behaviors, and apply it to realistic time reproduction experiments.  Parameters that yield minimal error in behavior predict the characteristic behavioral effects. 
 
-% Background
-To flexibly adjust behavior to the time actions, the brain is thought to dynamically change patterns of neural activity. The speed of neural dynamics is adjusted according to the reproduced time interval.
-This has been well described with a dynamical systems approach, adjusting the initial conditions and external inputs of the system \cite{Paton2018}, \cite{Issa2020}, \cite{Zhou2022}.
-Here we investigate a neural circuit model that has been proposed recently to explain various timing behaviors, including the reproduction of time intervals (\cite{Egger2020}).
+Using these parameters, I further investigate the effects of stimulus statistics on the behavior and found that the model predicts no influence of stimulus variance on behavior. 
+These results are partially confirmed in gerbil data, suggesting an adjustment to accommodate stimulus statistics leads to better performance in cases of high variance. 
+This work provides further evidence that a dynamical systems perspective has the potential to explain flexible timing.
 
-% Method
-The input to the circuit controls at which speed the readout unit increases its activity and therefore scales its responses such that a threshold is reached at different times. 
-During the presentation of the stimulus interval, the circuit predicts the to-be-reproduced duration. 
-From the mismatch between this prediction and the actual stimulus duration, an error signal is derived, according to which the input and consequently the speed is adjusted for the subsequent reproduction.
 
-%Contributions
-We found robust conditions for realistic time reproduction experiments that are consistent with characteristic behavioral effects. 
-A crucial parameter is the weight with which the input to the circuit is adjusted to balance the mismatch between the predicted interval and the stimulus duration. 
-Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
+%Robust conditions for were identified that are consistent with the key behavioral effects. 
+%Increasing evidence suggests, that the brain encodes time in population state dynamics. 
+%In order to flexibly adjust behavior, the brain is thought to dynamically change these patterns of neural activity.
+%A crucial parameter is the weight with which error signal is weighted to update 
+%Adjusting this weight in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biological plausible.
+%The model makes use of a predictive coding mechanism and adjusts the speed of a readout unit according to an error signal.
+%In the dynamical systems approach, adjusting the initial conditions and external inputs to the system leads to control of population dynamics.
+%The speed of neural dynamics is adjusted according to the reproduced time interval.
+%Humans and animals are able to flexibly coordinate and anticipate behaviors. 
+%Sensory information is combined expectations based on prior knowledge to minimize errors arising from noise in the environment and neural signal. 
+
+\pagebreak
+
+\tableofcontents
 
 \pagebreak
 
@@ -107,31 +112,29 @@ Adjusting this weight in accordance with error minimization, leads to putting mo
 Animals are capable of producing complex and flexible behaviors that rely on the interplay of motor and sensory systems.
 Timing is critical for many of these sensorimotor functions, ensuring the ability to anticipate and coordinate interactions with the environment.
 Sensory and motor timing in the millisecond range is particularly important, as this timescale includes temporal cues for vocalization as well as fine motor coordination.
-Despite its importance, there is no sensory organ responsible for time perception, which means that time perception must be generated internally by extracting information from sensory inputs.
-Although time is pervasive in animal behavior, it is elusive and difficult to study and the neural implementation that allows the brain to perceive and internally perform complex temporal computations remains unknown.
-\todo{<- make two sentences here}
+Despite its importance, there is no sensory organ responsible for time perception, which means that perception must be generated internally by extracting information from sensory inputs.
+Although time is pervasive in animal behavior, it is elusive and difficult to study. The neural implementation that allows the brain to perceive and internally perform complex temporal computations remains unknown.
 Nevertheless, the mechanism of timing might provide powerful insights into general mechanisms of cognition and neural computations (\cite{Issa2020}).
 
 Magnitude estimation is a useful approach to explore sensory processing because it involves establishing a relationship between external events and their internal perception by, for example, evaluating or reproducing a time interval. 
 However, externally-derived inputs are subject to noise arising from the variability of the environment. In addition, noise arising from neural representations of the input affects the perception.
-A variety of experimental studies have found characteristic behavioral effects across sensory modalities in magnitude estimation experiments that might arise to minimize errors in the presence of noise (\cite{Petzschner2015}).
-\todo{only 1 author citation bib}
+A variety of experimental studies have found characteristic behavioral effects in magnitude estimation that might arise to minimize errors in the presence of noise (\cite{Petzschner2015}).
 
-\todo{Add here an outline paragraph for the introduction}
-
+In the following, key effects of magnitude estimation are discussed. I then summarize evidence for brain dynamics underlying time perception and introduce a model that I use in this work to simulate time perception.
 
 \subsection{Behavioral Effects in Magnitude Estimation}
 %---> magnitude estimation, optimization, Bayes
-The most striking observation in magnitude estimation is regression to the mean of stimuli, in other words, small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
+Magnitude estimation exhibits characteristic effects across sensory modalities.
+The most striking observation is regression to the mean of stimuli, in other words, small stimuli are overestimated whereas large stimuli are underestimated (\textit{regression effect}). 
 This effect intensifies for ranges with larger stimuli (\textit{range effect}).
 Also, the standard deviation of estimates increases monotonically for larger stimuli (\textit{scalar variability}). 
 Finally, the recent history of stimuli presentations influences the current stimuli estimation (\textit{sequential effects}).
 All effects mentioned above are displayed in Fig. \ref{fig:behavioraleffects}. 
 Modality-independence of these effects suggests the existence of a common underlying principle or processing mechanisms, that would explain e.g. an optimal strategy for unreliable judgments due to noise.
 Minimizing errors in judgment can be achieved by integrating prior experience with immediate sensory input, and is therefore often described with Bayesian models.
-In Bayesian models, sensory information is represented by a likelihood function and is combined with prior experience that together result in biased estimates (\cite{Knill2004}).
-However, is has not been shown how the brain would implement such behavior. 
-\todo{Why not? I guess people have tried to. Either forward reference of give a short intuition.}
+In Bayesian models, sensory information is represented by a likelihood function and is combined with prior experience that together result in biased estimates (\cite{Knill2004}). 
+Ongoing research is trying to identify mechanisms of how the brain would implement such behavior. %a bayesian framework?; 
+\todo{However, is has not been shown how the brain would implement such behavior. -- Why not? I guess people have tried to. Either forward reference of give a short intuition.}
 
 \begin{figure}[ht]
 	\centering
@@ -146,8 +149,8 @@ However, is has not been shown how the brain would implement such behavior.
 \end{figure}
 
 \subsection{Time Estimation via Predictive Timing}
-%---> timing, time reproduction experiments, methods to measure time
-Experiments, in which subjects have to measure and reproduce time intervals, can be used to study how the brain integrates expectations with current sensory input in order to achieve correct timing.
+%---> timing, time reproduction experiments, methods to measure time 
+Experiments, in which subjects have to measure and reproduce time intervals, allow us to study how the brain integrates expectations with current sensory input in order to achieve correct timing.
 Time reproduction is usually accomplished by at least one presentation of the time interval e.g. between two external events (sensory timing), and a reproduction period that is indicated by the subject's response (motor timing).
 In both epochs elapsed time needs to be estimated, the difference lies in the termination of the interval. In sensory timing, the time interval is terminated by an external event, while in motor timing, the completion is internally generated and executed by the subject's response (\cite{Grondin2010}).
 
@@ -162,13 +165,14 @@ Intrinsic neural representations of motor actions are used as predictor of senso
 If there is a mismatch in predicted and actual sensory feedback, an internal model is updated by the error signal (\cite{Straka2018}, \cite{Clark2013}, \cite{Bubic2010}). %mismatch (corollory discharge)  actual sensory feedback (reafference)
 The internal model can include a prior to integrate expectations into the time estimate.
 Based on predictions and expectations, flexible control of neural mechanisms is required to measure and produce time intervals.
-This raises the question of how flexible control over brain dynamics can be achieved?
+This raises the question of how flexible control over brain dynamics can be achieved.
 
 % Accordingly, the CNS needs to exert control and prediction to achieve desired or expected sensory consequences.
 % the brain makes sense of the environment by predicting future events and by testing whether these are in line with incoming sensory information and previous experiences
 
 \subsection{Brain Dynamics Underlying Time Perception}
 %---> nerual implementation, brain ares, scaling, trajectories, speed command, motor simulationk error signal
+Increasing evidence suggests, that the brain encodes time in population state dynamics. 
 A brain area that has been associated with timing behavior is the frontal (\cite{Shima2000}, \cite{Lewis2004}, \cite{Genovesio2006}, \cite{Emmons2017}, \cite{Wang2018}).
 In time reproduction experiments, the activity of individual cells in the frontal cortex heterogeneous response profiles, many of which are temporally scaled according to the produced time interval (\cite{Henke2021}, \cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
 Indeed, time can be encoded predictively relative to the mean of time intervals by temporal scaling activity.
@@ -178,6 +182,7 @@ It has been shown that for sensory timing, the population activity evolves along
 Experiments have shown a causal link for population dynamics encoding time. Cooling the  medial prefrontal cortex in rats, slowed population dynamics down, resulting in longer time estimates (\cite{Xu2014}). 
 Therefore, the brain dynamically changes patterns of neural activity to flexibly adjust behavior to time actions, where flexible motor timing can be achieved by controlling the speed of neural dynamics (\cite{Remington2018}, \cite{Wang2018}, \cite{Sohn2019}, \cite{Tsao2022}).
 
+\paragraph{A Circuit Model for Time Estimation.}
 Data indicates that neural trajectories reflect the internal estimate of a time interval and are influenced by a prior.
 Experiments with multiple, consecutive measurement periods showed a sequential update of the estimate, providing evidence for a predictive process with an error signal extracted from the previous epoch to correct the speed of the neural trajectory.
 \citeauthor{Wang2018} (\citeyear{Wang2018}) proposed a potential neural mechanism for speed control by flexibly adjusting the effective time constant of a network.
@@ -185,7 +190,7 @@ In fact, the population activity reflects an interval-dependent speed command th
 
 %---> Curcuit model, decision making, elements
 %model used only for... in secific task
-%Here, we aimed to answer this question using a dynamical systems approach. 
+%Here, I aimed to answer this question using a dynamical systems approach. 
 
 Building on these findings, \citeauthor{Remington2018} (\citeyear{Remington2018}) showed that flexible control of behavior in interval reproduction can be understood in terms of a dynamical system that is characterized by the initial state and an external input.
  In a two-neuron-model, which is well known for modeling decision-making (\cite{Wang2002}, \cite{Roxin2008}), the input level can be used to adapt the effective time constant of the system.
@@ -195,19 +200,21 @@ However, different time intervals were presented separately and not in a random 
 %This way expectations of the presented time intervals emerge over the course of the experiment.
 
 
-\paragraph{Research Questions}
-By applying the circuit model to simulations that reflect more realistic conditions of time reproduction experiments, the present work addresses the questions which effects in behavior can be explained by the model. 
-I demonstrate that in realistic experiment simulations, classical effects of magnitude estimation are captured by the model.
+\paragraph{Research Questions.}
+By applying the circuit model to simulations that reflect more realistic conditions of time reproduction experiments, the present work addresses the question of which behavioral effects can be explained by the model. 
+I demonstrate that in realistic experiment simulations, classical effects of magnitude estimation are reproduced by the model with parameters that minimize errors in behavior, providing further evidence that a dynamical systems perspective has the potential to explain flexible timing.
 %, that itself is only based on principles found in brain data.
-Following this result, the effects of external variability of time intervals are examined. The predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
-%are there other predictions the model does? variance; andere effecte ranges
+Following this result, I ask what effect external variability in time intervals has on behavior. 
 
-\todo{Provide an outline again: Nextup Model, then...}
+In the subsequent sections I describe the circuit model in detail and discuss different input regimes of the model. I then identify model parameters that minimize errors in the behavior and investigate the effects of stimulus statistics on behavior. The predictions of the model are evaluated and compared to data of time reproduction experiments with gerbils and humans.
 
 \section{A Circuit Model for Time Estimation}
-Flexible speed control can be achieved by a simple model consisting of three units, $u, v, y$ that represent population activity. 
-\todo{outline, first intermediate input regime then in sectoin 3 high regime is discussed,... }
+The model is build on a basic circuit, which I will introduce at the beginning. I then describe the extension of the circuit to include a mechanism for updating the inputs (\cite{Egger2020}).
+Depending on the input strength, the model operates in different regimes. 
+In this section we focus on the intermediate input regime, but I will discuss the high input regime in Section 3.
+
 \subsection{Basic Circuit}
+Flexible speed control can be achieved by a model consisting only of three units, $u, v, y$ that represent population activity.
 The dynamics of $u, v$, and $y$ are defined as follows:
 \begin{equation} \label{circuit}
 	\begin{split}
@@ -218,18 +225,23 @@ The dynamics of $u, v$, and $y$ are defined as follows:
 \end{equation}
 Two units, $u$ and $v$, receive a tonic symmetric input $I$ ($W_{uI}=W_{vI}=6$) and are mutually inhibiting each other ($W_{uv}=W_{vu}=6$). 
 The inputs to $u$ and $v$ are governed by a sigmoid activation function $\theta(x) = \frac{1}{1+\exp(-x)}$.
-Different external inputs to the sigmoid activation function, control the effective time constants of the system. Stronger inputs drive the activation more towards the saturating nonlinearity, which leads to larger effective time constants (\cite{Egger2020}). 
 The output unit $y$ receives excitatory input from $u$ and inhibitory input from $v$ ($W_{yu}=W_{yv}=1$) which results in a ramp-like activity of $y$.
-All three units have a time constant $\tau = 100$~ms. 
-Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
-Initial conditions of $u, v$ and $y$ are set to $u_0=0.7, v_0=0.2, y_0=0.5$ (Fig. \ref{fig:circuit}a). %have been optimized for in \cite{Egger2020} and
+Different external inputs to the sigmoid activation function, control the effective time constants of the system. Stronger inputs drive the activation more towards the saturating nonlinearity, which leads to larger effective time constants.
+Because of this, the model yields a repertoire of slopes that can be exploited for time reproduction (\cite{Egger2020}). 
 
-Depending on the input $I$, the system shows different dynamics. For low levels of $I$ (0$<$I$<$0.5) the system has three fixed points (two stable, one unstable at $u=v$) and $y$ ramps up faster the higher input $I$. 
-For intermediate values of $I$ (0.5$<$I$<$1) the system still shows three fixed points of the same sort as in the low input regime (Fig. \ref{fig:circuit}b) but $y$ ramps up with a slope that is inversely proportional to the input $I$ ($y$ ramps up slower the higher input $I$, see Fig. \ref{fig:circuit}c). 
-For high $I$ (1$<$I) the system has only one, but stable fixed point (at $u=v$), and $y$ ramps down faster for higher $I$.
+Stochastic synaptic inputs are modeled as independent white noise $\eta_u, \eta_v, \eta_y$ with standard deviation $\sigma$.
+%Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
+To begin with, all three units have a time constant $\tau = 100$~ms and initial conditions of $u, v$ and $y$ are set to $u_0=0.7, v_0=0.2, y_0=0.5$ (Fig. \ref{fig:circuit}a). %have been optimized for in \cite{Egger2020} and
+To simulate the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ that corresponds to 10 ms.
+Depending on the input $I$, the system shows different dynamics.
+
+\paragraph{The model has three input regimes.}
+For low levels of~$I$ (0~$<I<$~0.5) the system has three fixed points (two stable, one unstable at $u=v$) and $y$ ramps up faster the higher input~$I$. 
+For intermediate values of $I$~(0.5~$<I<$~1) the system still shows three fixed points of the same sort as in the low input regime (Fig. \ref{fig:circuit}b) but $y$ ramps up with a slope that is inversely proportional to the input $I$ ($y$ ramps up slower the higher input $I$, cf. Fig. \ref{fig:circuit}c). 
+For high $I$ (1~$<I$) the system has only one, but stable fixed point (at $u=v$), and $y$ ramps down faster for higher $I$.
 Thus, the speed at which the output $y$ evolves can be controlled by the input $I$ (Fig. \ref{fig:circuit}d) and determines the time interval after which $y$ reaches a fixed threshold $y_{\text{th}}$. 
 In interval reproduction experiments, reaching a threshold $y_{\text{th}}$ can be understood as movement initiation time, which can be controlled for by adjusting $I$.
-In this report, the intermediate input regime is explored: higher inputs result in a shallower slope of $y$, such that the threshold $y_{\text{th}}$ is reached after a longer time interval.
+In this section, the intermediate input regime is explored: higher inputs result in a shallower slope of $y$, such that the threshold $y_{\text{th}}$ is reached after a longer time interval.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% nullcline
 \begin{figure}[ht]
@@ -243,14 +255,14 @@ In this report, the intermediate input regime is explored: higher inputs result 
 \label{fig:circuit}
 \end{figure}
 
-\subsection{Update Mechanism and Experiment Procedure}
-Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). 
-The basic circuit described above is modified to perform interval reproduction (see Figure \ref{fig:epochs}a for schematic of modified circuit).
-The relation of input $I$ with the slope of the ramping activity of $y$ is used in combination with a fixed threshold $y_{\text{th}}$.
+\subsection{Extended Circuit for Experiment Simulation} %Update Mechanism and Experiment Procedure
+Basic interval reproduction experiments can be designed with only two epochs: a measurement epoch that has the duration of the stimulus interval and a reproduction epoch that starts immediately after the measurement epoch (Fig. \ref{fig:epochs}b). Typically, a delay is introduced between subsequent trials. 
+The basic circuit described above is modified to perform interval reproduction (cf. Figure \ref{fig:epochs}a for schematic of the modified circuit).
+To achieve time reproduction, the relation of input $I$ with the slope of the ramping activity of $y$ is used in combination with a fixed threshold $y_{\text{th}}$.
 By adding an update mechanism that flexibly adjusts $I$, the threshold crossing of $y$ can be delayed or moved to earlier times.
 This way, measuring and reproducing an interval is done predictively, by adjusting the slope of the ramp such that the output reaches the threshold after the intended time.
 %In other scenarios, time could be encoded by the level a ramp reaches with a fixed slope.
-In the model the measurement epoch is fixed to the stimulus interval $t_s$, and the reproduction epoch ends, when $y$ reaches the fixed threshold $y_{\text{th}}$ from below. 
+In the model, the measurement epoch is specified by the stimulus interval $t_s$, whereas the reproduction ends when $y$ reaches the fixed threshold $y_{\text{th}}$ from below. 
 The time from the end of the measurement epoch until the threshold-crossing of $y$ yields the reproduced time interval $t_r$ that is aimed to equal the stimulus interval $t_s$ (Fig. \ref{fig:epochs}c).
 
 \begin{figure}
@@ -263,40 +275,34 @@ The time from the end of the measurement epoch until the threshold-crossing of $
 \label{fig:epochs}
 \end{figure}
 
-\noindent
- The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
-The error signal is determined at the end of the measurement epoch and is composed of the difference of $y$ to the threshold $y_{\text{th}}$.
+\paragraph{The input to the model is updated for time reproduction.}
+At the end of the measurement epoch, an error signal is determined from the difference of $y$ to the threshold $y_{\text{th}}$.
 If the threshold $y_{\text{th}}$ is not reached during the measurement epoch, the slope has to be adjusted, such that $y$ ramps up faster to reach the threshold at exactly the time of the stimulus interval. For a steeper slope, $I$ is reduced.
 If $y$ crossed the threshold before the measurement epoch ends, so is above $y_{\text{th}}$ by the end of the stimulus interval, the slope needs to be reduced in order to reach the threshold at a later time in the reproduction. For a shallower slope, $I$ is increased (Fig. \ref{fig:epochs}c).
+The following update mechanism of $I$ is based on the intermediate input regime, that shows an inverse relation of $I$ to the slope of $y$ (Fig. \ref{fig:circuit}b).
 $I$ is adjusted according to the error $(y-y_{\text{th}})$, weighted by a memory parameter $K$ right at the end of the measurement epoch
 \begin{equation} \label{Iupdate}
 	\begin{split}
 	\tau\frac{\text{d}I}{\text{d}t} & = sK(y-y_{\text{th}}) \;.
 	\end{split}
 \end{equation}
-The update of $I$ is only active for a pulse between the measurement and reproduction epoch ($s=1$) and inactive for all other times ($s=0$).
-Further, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamics for the subsequent epoch (Fig. \ref{fig:epochs}c)
+The update of $I$ is only active for a pulse (one time step) between the measurement and reproduction epoch ($s=1$) and inactive for all other times ($s=0$).
+Moreover, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamics for the subsequent epoch (Fig. \ref{fig:epochs}c)
 \begin{equation} \label{experimentcircuit}
 	\begin{split}
 	\tau\frac{\text{d}u}{\text{d}t} & = -u + \theta(W_{uI}I - W_{uv}v + \eta_u - I_r) \;,\\
 	\tau\frac{\text{d}v}{\text{d}t} & = -v + \theta(W_{vI}I - W_{vu}v + \eta_v + I_r) \;.\\
 	\end{split}
 \end{equation}
-Resetting the dynamics after the reproduction epoch enables the model to simulate an arbitrary number of stimulus intervals. 
-Before a new stimulus presentation there is a delay period: at the beginning of an experiment with a sequence of stimuli there is an initial interval with the initial values of $u, v, y$ and an initial input $I_0$ (Fig. \ref{fig:epochs}c). 
-This initial interval allows the model to get closer to steady-state before the stimulus presentation starts. 
-Reproductions that do not reach the threshold in a certain time span  or too early are classified as timeout trial.
-%sup
+The reset mechanism is switched on for one time step after every epoch, which allows the model to reproduce any number of stimulus intervals in succession.
 
-To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data, a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
-If noise levels in the model are too high ($\sigma>0.2$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}).
-For all simulations, $\sigma$ was set to 0.02, which results in a realistic coefficient of variation (CV) of time reproductions (CV = 0.1, Supplementary Fig. \ref{sup:CV}b, c).
-In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
-In the full simulation, 500 stimuli randomly chosen from a stimulus distribution were presented. The uniform distribution of time intervals is denoted as stimulus range. 
-The stimulus range consisted of seven stimuli ranging from 400-700 ms (Fig. \ref{fig:experiment}b).
-
-The experiment simulation results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the activity of $y$ in the reproduction (Fig. \ref{fig:experiment}c).
-Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:experiment}d). 
+\paragraph{Timeout trials.}
+Reproductions that do not reach the threshold in a certain time span or cross the threshold particularly early are classified as timeout trial.
+If the threshold is crossed before 20~\% of the stimulus interval has passed, the trial is classified as early timeout trial.
+A late timeout is reported, when twice the stimulus interval has elapsed and the threshold has not been reached.
+Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis.
+If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
+%For different parameters, the number of timeouts were exceeded (a combination of too small $\tau$ and too high $K$).
 
 \begin{figure}[ht]
 	\centering
@@ -309,6 +315,41 @@ Taking the mean over the distribution of reproduced time intervals for each stim
 	}
 \label{fig:experiment}
 \end{figure}
+
+\paragraph{Procedure of an experiment simulation.}
+In all simulations in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly.  
+For experiment simulations with 500 trials, the increase of the standard deviation of reproductions plateaus with noise levels $\sigma > 0.1$. This was tested with parameters set to $\tau=100$, $K_\text{short}=8.5$ and $K_\text{long}=6$.
+The standard deviation of reproductions grows monotonically for increasing stimulus intervals for tested noise levels (Supplementary Fig. \ref{sup:CV}b).
+Further, the coefficient of variation (CV) was used to quantify the degree of variation. It is defined as $\text{CV}=\frac{\sigma_\text{reproduction}}{\mu}$ for each stimulus, where $\mu$ corresponds to the stimulus interval and $\sigma_\text{reproduction}$ to the standard deviation of the corresponding reproductions. 
+To achieve variations close to real data, reproductions should have a CV of 0.2 to 0.4 that is constant over all stimulus intervals (Supplementary Fig. \ref{sup:CV}c).
+For all simulations the noise level $\sigma$ was set to 0.02, where the mean CV for the short range was 0.1 and for the long range 0.15 with the parameters from above.
+
+
+To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation. In data, a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
+If noise levels in the model are too high ($\sigma>0.2$) the standard deviation of reproductions is not growing monotonically with $\sigma$ (\cite{Egger2020}).
+For all simulations, $\sigma$ was set to 0.02, which results in a realistic coefficient of variation (CV) of time reproductions (CV = 0.1, Supplementary Fig. \ref{sup:CV}b, c).
+
+
+In all experiment simulations, a series of 500 trials was presented to the model.
+
+Besides a fixed delay period between each trial, an initial interval at the beginning of the experiment is introduced which allows the model approach the steady-state before the first trial starts (Fig. \ref{fig:epochs}c).
+%with the initial values of $u, v, y$ and an initial input $I_0$ . 
+
+Stimuli were randomly chosen from the short (400-700 ms) or the long (700-1000 ms) stimulus range (Supplementary Fig. \ref{sup:CV}a).
+The stimulus series had a uniform distribution of stimuli, a repetition of all seven stimuli in every 20 trial windows and no remarkable oscillation.
+To allow for optimization of $K$ the same stimulus series was used. Added noise was initialized equally to extract changes in results only based on parameter changes.
+Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations with $\tau=140$ and $\sigma=0.02$ the mean optimal $K$ and standard deviation for the short range were $K = 14.45$, std = 0.49 and for the long range $K = 9.91$, std = 0.77. 
+
+
+In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
+In the full simulation, 500 stimuli randomly chosen from a stimulus distribution were presented. The uniform distribution of time intervals is denoted as stimulus range. 
+The stimulus range consisted of seven stimuli ranging from 400-700 ms (Fig. \ref{fig:experiment}b).
+
+The experiment simulation results in a distribution of reproduced time intervals for each stimulus and a distribution of inputs that drive the activity of $y$ in the reproduction (Fig. \ref{fig:experiment}c).
+Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of effects in the behavioral results (Fig. \ref{fig:experiment}d). 
+
+
+
 
 \section{Model Parameters for Error Minimization}
 I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by experiments with the circuit model, which itself is based on the scaling phenomenon found in brain data. 
@@ -339,7 +380,7 @@ To find such optimized parameters, the mean squared error was minimized, which i
 (Eq. \ref{MSE}). This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
 For larger time constants~$\tau$, the optimized update parameter~$K$ increases. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
 The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau^* = 120$ ms and $K^* = 11$ yields an overall minimum, whereas $\tau^* = 200$ ms, $K^* = 20$ yields a overall minimum for the long range. 
-Assuming the same rate time constant across experiments, we had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
+Assuming the same rate time constant across experiments, I had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
 With a time constant of $\tau = 130$, $K^* = 13$ for the short and $K^* = 10$ for the long range (Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b).
 Behavioral results with error-minimizing parameters show a regression to the mean with a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
 Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biologically plausible.
@@ -363,13 +404,12 @@ No range effect can be observed when minimizing the error in reproductions based
 \label{fig:parameter}
 \end{figure}
 
-\section{Comparison of Intermediate and High Input Regime}
-\todo{subsection: merge to section 3 and add paragraph headings}
+\subsection{High Input Regime}
 There are differences between the intermediate and high input regimes in terms of fixed points and dynamics.
 Nevertheless, simulations of time reproduction experiments are possible in both regimes. 
 In the following, simulations in the high input regime are performed and compared with those in the intermediate input regime.
 
-\subsection{Comparison of Dynamics}
+\paragraph{Comparison of dynamics to the intermediate input regime.}
 While in the intermediate input regime three fixed points emerge in the phase plane (two stable and one unstable), in the high input regime the fixed points merge to a single one. 
 The single fixed point is located at comparatively high activity of $u$ and $v$ 
 (Fig. \ref{regimes}b, d).
@@ -390,7 +430,7 @@ Increasing $I$ results in steeper activity of $y$ in the high input regime. This
 \label{regimes}
 \end{figure}
 
-\subsection{Experiment Simulation in the High Input Regime}
+\paragraph{Experiment simulation and error-minimizing parameters.}
 To simulate time reproduction experiments in the high input regime, the following changes must be made. 
 The threshold was set to a value lower than 0 (e.g. 0.1) and initial $I$ was increased to a value above 1 ($I_0 = 1.02$). The reset impulse after each epoch had to be stronger by a factor of 10 and with opposite sign to bring the activity in $y$ back to a higher level.
 
@@ -406,7 +446,7 @@ There is no need to change the update mechanism, even though the relation of the
 The noise was set to the same value as in simulations in the intermediate regime ($\sigma$ = 0.02). The standard deviations increased linearly. For increasing $\sigma$ the standard deviation drops slightly and then plateaus for $\sigma$ larger than 0.1. The CV has similar values as in the intermediate regime with 0.13 for the short and 0.12 for the long range for a $\sigma$ of 0.02 (Supplementary Fig. \ref{sup:highI}a). 
 An example of the experiment dynamics for four consecutive simuli is displayed in Fig. \ref{highI}a.
 
-\subsection{Error-Minimizing Parameters in the High Input Regime}
+%\paragraph{Error-minimizing parameters }
 Just as for the intermediate input regime, I identified parameters $K$ and $\tau$ that minimize the MSE of reproductions. 
 Again, the model is able to produce biologically plausible slopes for most time constants. 
 For all $\tau$ larger 40~ms, optimal $K$ is smaller for the long range compared to the short range.
@@ -426,8 +466,8 @@ For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:ex
 \label{highI}
 \end{figure}
 
-\subsection{Comparison of Experiment Simulations}
-\todo{Motivate why we compare regimes: which one is better suited for simulation. Conclude in the end that intermediate regime is better.}
+\paragraph{The intermediate input regime is a better approach to data.}%Comparison of experiment simulations between the intermediate and high input regime
+\todo{Motivate why I compare regimes: which one is better suited for simulation. Conclude in the end that intermediate regime is better.}
 The results of simulations with optimal parameter combinations were used to compare the simulations in the intermediate and high input regimes.
 Their behavioral results are displayed in Fig. \ref{fig:parameter}c for the intermediate and Fig. \ref{highI}b for the high input regime.
 The mean input $I$ for each stimulus shows an almost linear increase (or decrease for the high input regime) within a range. The increase (or decrease) is shallower for the long range due to the lower $K^*$ used in the simulation (Fig. \ref{fig:comparison}b, d).
@@ -465,7 +505,7 @@ Thus, a common time constant $\tau$ contributes to the under- and overestimation
 Hence, there are several causes for this problem.
 
 Another observation is that for both the long and short range, the best reproductions were obtained for stimuli near to 700~ms.
-Following this observation, we simulated an experiment with a stimulus range that was situated around 700~ms (550, 600, 650, 700, 750, 800, 850 ms). 
+Following this observation, I simulated an experiment with a stimulus range that was situated around 700~ms (550, 600, 650, 700, 750, 800, 850 ms). 
 The mean of 700~ms corresponds to the maximum of the short range and the minimum of the long range, and also complies with the length of the fixed delay period between trials.
 In Fig. \ref{fig:delay}a the behavioral results show regression to the mean with a slope of 0.82 and an indifference point of 657~ms.
 When setting the delay period at the maximum of the long range instead (1000 ms), a general overestimation of stimuli from the short range occurs (Supplementary Fig. \ref{sup:delay}c).
@@ -592,7 +632,7 @@ However, increasing the variance of a range leads to a significant increase in M
 \subsection{Comparison of Model Output to Real Data}
 The circuit model predicts that a change in variance affects the MSE \todo{use glossary} of the reproductions.
 It also predicts, that only the mean and not the variance has an effect on the regression of reproductions, which is in contrast to the noisy integrator model proposed by \citeauthor{Thurley2016} (\citeyear{Thurley2016}).
-In the following section, we compare predictions of the model with behavioral data from time reproduction experiments with gerbils and humans. The stimuli in these experiments were several seconds long and came from either a short, mid, long or all range (data by Henke and Thurley).
+In the following section, I compare predictions of the model with behavioral data from time reproduction experiments with gerbils and humans. The stimuli in these experiments were several seconds long and came from either a short, mid, long or all range (data by Henke and Thurley).
 \todo{cite here the data, link or paper}
 
 Behavior in gerbils exhibits a regression effect for all ranges and a range effect for ranges with increasing mean. 
@@ -653,14 +693,14 @@ It has already been shown that the model captures the classical effects of magni
 
 %-----> summary what shown
 %what is the prediction of the model? what does the data say? 
-Here, we extended the model to simulations of realistic time reproduction experiments that reflect stimulus variability by presenting random time intervals drawn from a stimulus distribution.
+Here, I extended the model to simulations of realistic time reproduction experiments that reflect stimulus variability by presenting random time intervals drawn from a stimulus distribution.
 
 \subsection{Representation of Stimulus Statistics}
 Simulations across a variety of stimulus ranges confirmed, that the model captures classical behavioral effects in realistic experiment settings under a parameter regime that minimizes errors in reproductions. %such as the regression effect, the range effect and scalar variability
 This suggests, that adjusting neural dynamics based on an internal reference in the presence of noise could lead to the key effects found in time reproduction experiments such as the regression effect, the range effect and scalar variability. 
 \citeauthor{Sohn2019} (\citeyear{Sohn2019}) suggested that optimal integration of prior beliefs arise from the curved nature of neural trajectories. Based on the results from the circuit model, curvature of manifolds would not be necessary to achieve biases in the reproduction, as they result from a sequential weighted update of the speed command (external input), where the weight is adjusted based on the stimulus statistics. 
 
-Since the key effects of time estimation were reproduced in simulations, we tested additional parameters in the stimulus statistics, e.g. modifying the variance of the stimulus distribution, to test the model's behavior for different external variability.
+Since the key effects of time estimation were reproduced in simulations, I tested additional parameters in the stimulus statistics, e.g. modifying the variance of the stimulus distribution, to test the model's behavior for different external variability.
 Only few studies have investigated an internal representation of temporal statistics. \citeauthor{Acerbi2012} (\citeyear{Acerbi2012}) showed that humans are able to represent the statistics of stimulus distributions to their third moment in reproductions.  
 However, the model did not predict an impact of the change in external variability on the regression effect, but did predict an impact on the error in reproductions.
 This finding was partially confirmed in gerbil data, but some animals differed from the group by accounting for the change in variance, as evidenced by an increase in performance of interval reproductions.
@@ -686,13 +726,13 @@ This becomes apparent when comparing the regression effect between experiments c
 The range effect does not propagate from the subsecond scale to ranges in the suprasecond scale, in other words, the slopes for regression are independent and start close to 1 for short ranges in the suprasecond scale. 
 
 Simulations with the circuit model revealed that there is a limited regime in which the model exhibits the classical magnitude estimation effects. 
-For stimulus ranges that are much larger or smaller than those we used, the behavior of the model breaks down.
+For stimulus ranges that are much larger or smaller than those I used, the behavior of the model breaks down.
 This means that when the model is used in experiments with even shorter or longer time intervals, the operating regime of the model must be adjusted to accommodate for the new timescale.
 To return to the model implementation: No statement is made about the timescale.  Rather, the scale is set arbitrarily from the outside by assigning a unit to the time bins. Thus, the model's operating regime can be moved to other timescales by resealing the time axis, which is equivalent to changing the units of time bins.
 
 How the adaptation to different timescales is realized in terms of neural trajectories is unknown. 
 A different form of adaptation of neural trajectories to experiment setting has been shown by \citeauthor{Remington2018} (\citeyear{Remington2018}). In experiments that involved a gain in reproductions, they identified a flexible displacement of neural trajectories in the state space.
-%flexibly reconfigure the intrinsic dynamics of cortical circuits by driving the system to different regions of the state space. We found that changing the level of a static input can be used to generalize an arbitrary stimulus response mapping in the RSG task to multiple contexts while preserving the computational mechanisms within contexts. 
+%flexibly reconfigure the intrinsic dynamics of cortical circuits by driving the system to different regions of the state space. I found that changing the level of a static input can be used to generalize an arbitrary stimulus response mapping in the RSG task to multiple contexts while preserving the computational mechanisms within contexts. 
 Further experiments need to investigate if a displacement of neural trajectories could explain an adaptation to new timescales. It must be clarified whether this adaptation to the timescale is gradual or immediate. 
 %experiment, how and when is the adaptation between time scales done?
 Further work on the model will need to figure out how to incorporate this adaptation to timescales into the model, rather than imposing it externally.
@@ -750,34 +790,17 @@ This work, however, provided further evidence that a dynamical systems perspecti
 
 \section*{Methods}
 \subsection*{Circuit}
-For simulating the dynamics of $u, v, y$ and $I$ Euler's method was used with a step size $\Delta t$ set to 10 ms.
-The reset mechanism of $u$ and $v$ is switched on for one time step after every epoch and the update mechanism of $I$ is switched on for one time step after the measurement epoch only.
-Noise is independently sampled for every time step from a Gaussian distribution with standard deviation $\sigma$.
+
 
 \subsection*{Timeouts}
-Reproductions that do not reach the threshold in a certain time span (twice the stimulus interval) are classified as timeout trials. 
-If the threshold is crossed particularly early, the trial is also classified as (early) timeout trial (crossing before 0.2 of stimulus interval).
-Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis.
-If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
-For different parameter combinations, the number of timeouts were exceeded (a combination of too small $\tau$ and too high $K$).
+
 
 
 \subsection*{Experiment Simulation}
-In all simulations in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly.  
-For experiment simulations with 500 trials, the increase of the standard deviation of reproductions plateaus with noise levels $\sigma > 0.1$. This was tested with parameters set to $\tau=100$, $K_\text{short}=8.5$ and $K_\text{long}=6$.
-The standard deviation of reproductions grows monotonically for increasing stimulus intervals for tested noise levels (Supplementary Fig. \ref{sup:CV}b).
-Further, the coefficient of variation (CV) was used to quantify the degree of variation. It is defined as $\text{CV}=\frac{\sigma_\text{reproduction}}{\mu}$ for each stimulus, where $\mu$ corresponds to the stimulus interval and $\sigma_\text{reproduction}$ to the standard deviation of the corresponding reproductions. 
-To achieve variations close to real data, reproductions should have a CV of 0.2 to 0.4 that is constant over all stimulus intervals (Supplementary Fig. \ref{sup:CV}c).
-For all simulations the noise level $\sigma$ was set to 0.02, where the mean CV for the short range was 0.1 and for the long range 0.15 with the parameters from above.
 
-In all experiment simulations, a series of 500 trials was presented to the model.
-Stimuli were randomly chosen from the short (400-700 ms) or the long (700-1000 ms) stimulus range (Supplementary Fig. \ref{sup:CV}a).
-The stimulus series had a uniform distribution of stimuli, a repetition of all seven stimuli in every 20 trial windows and no remarkable oscillation.
-To allow for optimization of $K$ the same stimulus series was used. Added noise was initialized equally to extract changes in results only based on parameter changes.
-Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations with $\tau=140$ and $\sigma=0.02$ the mean optimal $K$ and standard deviation for the short range were $K = 14.45$, std = 0.49 and for the long range $K = 9.91$, std = 0.77. 
 
 \subsection*{Optimality by Minimizing MSE}
-We minimized the error in the interval reproductions across the experiment, we defined the $\text{MSE} = \text{bias}^2+\text{var}$, with the bias specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
+The error in the interval reproductions across the experiment was minimized, with the MSE defined as $\text{MSE} = \text{bias}^2+\text{var}$. The bias was specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
 \begin{equation} \label{MSE}
 	\begin{split}
 	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
