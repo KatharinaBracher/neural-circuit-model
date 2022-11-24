@@ -338,9 +338,10 @@ If timeout trials occurred for a single stimulus more than 10\% of all trials of
 \end{figure}
 
 \section{Model Parameters for Error Minimization}
-I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by experiments with the circuit model. 
-A crucial value to adapt was the memory parameter $K$, since this parameter defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
-Another parameter that had to be considered is the time constant $\tau$, which affects how fast $y$ behaves in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
+ I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by the circuit model.
+For this purpose, I focused on two model parameters $K$ and $\tau$ in order to adjust them in terms of error-minimization in behavior. 
+The memory parameter $K$ is crucial value to adapt, since this parameter defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
+The second parameter that had to be considered was the time constant $\tau$, which affects how fast $y$ behaves in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
 To allow an examination of the parameters that was decoupled from the influence of the noise, I first used the same stimulus series and second initialized the added noise equally in each simulation. This way, I was able to extract changes in the results based only on parameter changes.
 In contrast to \citeauthor{Egger2020} (\citeyear{Egger2020}), parameters such as the initial values, especially $I_0$ did not need to be adjusted in advance. This is because the input will have settled after the first one or two trials and will not be affected by the initial values thereafter.
 For evaluating effects in behavior, two stimulus ranges were used in simulations, denoted as short and long range. 
@@ -356,29 +357,50 @@ For fixed $\tau$, the regression increases as $K$ increases, since more weight i
 The model also produced biological plausible slopes for different time constants (Fig. \ref{fig:parameter}a), where $K$ must be adjusted depending on the stimulus range and time constant. 
 To produce plausible slopes, $K$ takes on smaller values for the long range, putting less weight on the update compared to the short range.
 
+
+%Can behavioral effects of magnitude estimation also be achieved by adjusting $K$ and $\tau$ in accordance with error minimization?
+\paragraph{MSE}
+With parameters that minimize errors in reproductions, the effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by the model.
+To find such optimized parameters, I minimized the error in the mean interval reproductions across the experiment. The mean squared error (MSE) was defined as $\text{MSE} = \text{bias}^2+\text{var}$, where the bias was specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
+\begin{equation} \label{MSE}
+	\begin{split}
+	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
+	 \text{bias}^2 & = \frac{1}{S} \sum \limits_{i=1}^{S}(\bar{t_{r_i}} - t_{s_i})^2 \;,\\
+	 \text{var} & = \frac{1}{S} \sum \limits_{i=1}^{S}(\sigma_i^2) \;.\\
+	\end{split}
+\end{equation}
+%the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions 
+This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
+
 \subsection{Model Regime for Error-Minimized Behavior} 
-\todo{rewrite section in a positive way: interestingly, behavioral plausible parameters are very similar to error minimized parameters. Although they do not directly coincide}
-Can behavioral effects of magnitude estimation also be achieved by adjusting $K$ and $\tau$ in accordance with error minimization?
-To find such optimized parameters, the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions 
-\todo{move Eq. from supp up.}
-(Eq. \ref{MSE}). This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
 For larger time constants~$\tau$, the optimized update parameter~$K$ increases. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
 The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau^* = 120$ ms and $K^* = 11$ yields an overall minimum, whereas $\tau^* = 200$ ms, $K^* = 20$ yields a overall minimum for the long range. 
+\todo{rewrite section in a positive way: interestingly, behavioral plausible parameters are very similar to error minimized parameters. Although they do not directly coincide}
 Assuming the same rate time constant across experiments, I had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
 With a time constant of $\tau = 130$, $K^* = 13$ for the short and $K^* = 10$ for the long range (Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b).
-%%%
+%%%%%%%%%%%%%%%
 Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations the mean optimal $K$ and standard deviation for the short range were $K = 12.88$, std = 0.34 and for the long range $K = 8.57$, std = 0.99. 
-%%%
+%%%%%%%%%%%%%%%%%%%%
 Behavioral results with error-minimizing parameters show a regression to the mean with a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
 Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biologically plausible.
 The model produces behavior that shows the regression and the range effect.
 Yet, the slope for the small range lies slightly below the biological plausible slopes found in data. 
 The standard variation of reproductions increases linearly (scalar variability), the mean coefficient of variation (CV) for the short range is 0.09, for the long range 0.11 (Fig. \ref{fig:parameter}c).
-No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance instead of the MSE. The relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d).  
+
+\paragraph{Parameters that minimize other errors.}
+No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance instead of the MSE. The relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d). 
+%%%%%%%%%%%%%%
+Optimal values of $K$ are based on the MSE, which composed of the squared bias and the variance of reproductions. 
+Time constants $\tau$ with the minimal MSE for a value of $K$ differ between the short and the long range. For the short range the optimal time constant $\tau = 120$~ms, for the long range $\tau = 200$~ms (Supplementary Fig. \ref{sup:othererror}a, b). If optimization is based only on the squared bias, optimal time constants are 100 ms for the short and 110 ms for the long range. 
+The variance is pushing the optimal time constant to lager values for both stimulus ranges. 
+Similarly, optimal $K$ is pushed to lower values by the variance (Supplementary Fig. \ref{sup:othererror}c, d).
+For all optimized values, be it on the squared bias, the variance or combined in the MSE, there is a general underestimation of stimulus intervals from the long range, which becomes appeared in Supplementary Fig. \ref{sup:othererror}e.
+%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/interIparams.pdf}
+	\todo{rename optimization to error minimitzinh}
 	\caption{\textbf{Behavioral effects and parameter optimization.} 
 	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$ and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope of the linear fit between stimuli and reproductions. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behaviorally plausible slopes are encircled in blue and lie around 0.83 for the short and 0.73 for the long range. Empty space corresponds to simulations, that exceeded the number of timeout trials and were thus excluded from analysis.
 	\textbf{(b)} Optimization of the weight given to the update $K$ for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimulus range. The minimal error for each $\tau$ is encircled in black and minimal error across all $\tau$ is additionally crossed. Parameter combinations that result in behaviorally plausible slopes (a) are shaded in blue.
@@ -767,43 +789,12 @@ This work, however, provided further evidence that a dynamical systems perspecti
 \setcounter{section}{0}
 \addcontentsline{toc}{section}{Supplements}
 \section*{Supplements}
-\todo{I think you can definitely (and maybe should) include the methods into the main part. Also how you conducted the experiments with the model can go into the main part.}
+
 \setcounter{figure}{0}
 \setcounter{table}{0}
 \setcounter{equation}{0} 
 \renewcommand{\figurename}{Supplementary Figure}
 \renewcommand{\tablename}{Supplementary Table}
-
-\section*{Methods}
-\subsection*{Circuit}
-
-
-\subsection*{Timeouts}
-
-
-
-\subsection*{Experiment Simulation}
-
-
-\subsection*{Optimality by Minimizing MSE}
-The error in the interval reproductions across the experiment was minimized, with the MSE defined as $\text{MSE} = \text{bias}^2+\text{var}$. The bias was specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
-\begin{equation} \label{MSE}
-	\begin{split}
-	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
-	 \text{bias}^2 & = \frac{1}{S} \sum \limits_{i=1}^{S}(\bar{t_{r_i}} - t_{s_i})^2 \;,\\
-	 \text{var} & = \frac{1}{S} \sum \limits_{i=1}^{S}(\sigma_i^2) \;.\\
-	\end{split}
-\end{equation}
-
-\subsection*{Errors Minimization with Other Metrics}
-Optimal values of $K$ are based on the MSE, which composed of the squared bias and the variance of reproductions. 
-Time constants $\tau$ with the minimal MSE for a value of $K$ differ between the short and the long range. For the short range the optimal time constant $\tau = 120$~ms, for the long range $\tau = 200$~ms (Supplementary Fig. \ref{sup:othererror}a, b). If optimization is based only on the squared bias, optimal time constants are 100 ms for the short and 110 ms for the long range. 
-The variance is pushing the optimal time constant to lager values for both stimulus ranges. 
-Similarly, optimal $K$ is pushed to lower values by the variance (Supplementary Fig. \ref{sup:othererror}c, d).
-For all optimized values, be it on the squared bias, the variance or combined in the MSE, there is a general underestimation of stimulus intervals from the long range, which becomes appeared in Supplementary Fig. \ref{sup:othererror}e.
-
-\subsection*{Statistical Analysis}
-%If p-values are not provided, significance is indicated by * p<0.05, ** p< 0.01, *** p<0.001
 
 \section*{Supplementary Figures}
 \begin{figure}[!htb]
