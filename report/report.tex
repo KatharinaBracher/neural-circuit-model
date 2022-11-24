@@ -81,13 +81,13 @@
 
 % Background brain
 Timing in the brain is thought to be encoded through population state dynamics of neurons.
-Experimentally, reproduction tasks are a useful approach to study sensory processing pf time because a relationship between external events and their internal perception is established.
+Experimentally, reproduction tasks are a useful approach to study sensory processing of time because a relationship between external events and their internal perception is established.
 In such experiments, behavioral responses are characterized by specific biases such as the central tendency or regression effect, i.e. the overestimation of small time intervals and the underestimation of large ones.
 How this is implemented, however, remains unknown.
 Here I investigate a neural circuit model that has been proposed recently to explain various timing behaviors, and apply it to realistic time reproduction experiments.  Parameters that yield minimal error in behavior predict the characteristic behavioral effects. 
 
 Using these parameters, I further investigate the effects of stimulus statistics on the behavior and found that the model predicts no influence of stimulus variance on behavior. 
-These results are partially confirmed in gerbil data, suggesting an adjustment to accommodate stimulus statistics leads to better performance in cases of high variance. 
+These results are partially confirmed in gerbil data, suggesting an adjustment to accommodate stimulus statistics leads to better performance in cases of high variance. \todo{data from experiments with gerbils, unclear phrase}
 This work provides further evidence that a dynamical systems perspective has the potential to explain flexible timing.
 
 
@@ -486,12 +486,12 @@ For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:ex
 \label{highI}
 \end{figure}
 
-\paragraph{The high input regime provides no improvement of.}
+\paragraph{The high input regime provides no improvement over the intermediate input regime.}
 The common steady state in the high input regime was an intriguing feature.
 However, previous results have shown that the intermediate regime exhibits behavior closer to characteristic effects found in time estimation, e.g. monotonic increase of standard deviations of the reproductions. 
 To compare one last property, I looked at the relation of the mean input in the reproduction epoch for each stimulus in an experiment.
 The mean input $I$ an almost linear increase (or decrease for the high input regime) within a range. The increase (or decrease) is shallower for the long range due to the lower $K^*$ used in the simulation (Fig. \ref{fig:comparison}b, d).
-The maximum and minimum input $I$ during the simulation for the short or the long range were used to examine the most distant nullclines of $u$ and $v$ in the phase plane(Fig. \ref{fig:comparison}a, c). 
+The maximum and minimum input $I$ during the simulation for the short or the long range were used to examine the most distant nullclines of $u$ and $v$ in the phase plane (Fig. \ref{fig:comparison}a, c). 
 In the intermediate regime, the difference between maximal and minimal $I$ is larger and the nullclines are also further apart. Other than that, no difference can be identified between the regimes. 
 Taken together, the high input regime offers no improvement, if not a deterioration over the intermediate regime. Therefore, I discarded the high input regime and based the following analysis only on the intermediate regime. 
 
@@ -512,8 +512,8 @@ The indifference point of the reproductions to the stimuli is shifted to lower v
 However, because of the central tendency of reproductions, the indifference point of a linear regression between stimuli and reproductions should correspond to the mean of the stimulus range.
 This is the case for the short range, where the indifference point corresponds to 595~ms, which is close to the range's mean value of 550~ms. For the long range, the indifference point is 710~ms, and thus considerably smaller than the range's mean of 850~ms (for behavioral results cf. Fig. \ref{fig:parameter}c). This means that simuli in the long range are in general underestimated. 
 
-What is the reason for the general underestimation of larger inputs? 
-It is not uncommon for stimuli in larger ranges to be generally underestimated in magnitude estimation across time domains. Time reproduction experiments with gerbils show a general underestimation across ranges (Fig. \ref{fig:underestimation}a, \cite{Henke2022}). 
+What is the reason for the general underestimation of larger inputs (Fig. \ref{fig:underestimation}a)? 
+It is not uncommon for stimuli in larger ranges to be generally underestimated in magnitude estimation across time domains. Time reproduction experiments with gerbils show a general underestimation across ranges (\cite{Henke2022}). 
 The cause has not yet been researched and could be due to many reasons ranging from lapsing attention to impatience. 
 It is necessary to investigate whether the underestimation in the model's behavioral output is caused by the regime in which the model operates, or whether it is a phenomenon that arises from optimal choice of parameters.
 Possible parameters of the model that could influence the behavior are the delay period between trials, the fixed threshold and the common time constant between stimulus ranges.
@@ -616,12 +616,12 @@ The short-few and all-few range encompasses the short and the all range, respect
 For all ranges, the slope of the linear regression between stimuli and reproductions is below one. Thus, simulations with error-minimizing parameters predict the regression effect across several ranges. 
 The slopes decrease significantly as the mean of the stimulus range increases, except for the short and mid range (Fig. \ref{fig:new_ranges}c).
 Thus, the model predicts the range effect only for sufficiently large changes in the mean. 
-(Kolmogorov-Smirnov two-sample test, p$<$0.01, n=21 for each distribution, Bonferroni correction for multiple testing).
-Across ranges that only change their mean value (short, mid, long and extralong), the slope has a linear correlation with the mean value of the range (Pearson correlation r=-0.95, $p<0.05$).
+(Kolmogorov-Smirnov two-sample test, p $<$ 0.01, n = 21 for each distribution, Bonferroni correction for multiple testing).
+Across ranges that only change their mean value (short, mid, long and extralong), the slope has a linear correlation with the mean value of the range (Pearson correlation r = -0.95, p $<$ 0.05).
 
 When the experiment was simulated with a common $\tau$ of 165~ms between ranges, $K^*$ is significantly lower for the mid range (16.71) compared to the short range (21.33), but slopes show no significant difference (Supplementary Fig. \ref{sup:ranges}a, b).
 Decreasing $K^*$ for increasing mean of ranges is captured by the model beyond the short and the long range.
-(Kolmogorov-Smirnov two-sample test, n=20 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).\\
+(Kolmogorov-Smirnov two-sample test, n = 20 for each distribution, p $<$ 0.01, Bonferroni correction for multiple testing).\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%Grenzen des Models%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %underestimation extra long: grenzen des Models, breaks down
@@ -638,11 +638,11 @@ How does the slope change when the mean of stimuli remains constant, but varianc
 The statistics of stimuli can be summarized by the ratio of the mean and variance of the stimulus range: $\frac{\text{E(t)}}{\text{Var(t)}}$.
 Higher variance in ranges with lower stimulus sampling (short-few, all-few) shows no significant difference from their counterparts with normal stimulus sampling (short, all).
 Furthermore, a larger width of stimuli does not result in a significant larger or smaller slope (all range vs mid range).
-Therefore, increasing variance is not affecting the reproduction of stimuli in the model (Kolmogorov-Smirnov two-sample test, n=21 for each distribution, Bonferroni correction for multiple testing).
-Considering only the mean, there is a significant correlation with the slope (Pearson correlation r=-0.96, $p<0.001$), but not with the external variability ratio (Pearson correlation r=-0.65, $p=0.12$) (Fig. \ref{fig:new_ranges}c).
+Therefore, increasing variance is not affecting the reproduction of stimuli in the model (Kolmogorov-Smirnov two-sample test, n = 21 for each distribution, Bonferroni correction for multiple testing).
+Considering only the mean, there is a significant correlation with the slope (Pearson correlation r = -0.96, p $<$ 0.001), but not with the external variability ratio (Pearson correlation r = -0.65, $p$ = 0.12) (Fig. \ref{fig:new_ranges}c).
 In the simulation with a common $\tau$ there is no significant difference in $K^*$ when the variance is changed (Supplementary Fig. \ref{sup:ranges}a, b).
 However, increasing the variance of a range leads to a significant increase in MSE in all cases (Fig. \ref{fig:new_ranges}d).  
-(Kolmogorov-Smirnov two-sample test, n=21 for each distribution, p$<$0.01, Bonferroni correction for multiple testing).
+(Kolmogorov-Smirnov two-sample test, n = 21 for each distribution, p $<$ 0.01, Bonferroni correction for multiple testing).
 
 \begin{figure}[ht]
 	\centering
@@ -659,28 +659,26 @@ However, increasing the variance of a range leads to a significant increase in M
 \end{figure}
 
 \subsection{Comparison of Model Output to Real Data}
-The circuit model predicts that a change in variance affects the MSE \todo{use glossary} of the reproductions.
+The circuit model predicts that a change in variance affects the MSE of the reproductions.
 It also predicts, that only the mean and not the variance has an effect on the regression of reproductions, which is in contrast to the noisy integrator model proposed by \citeauthor{Thurley2016} (\citeyear{Thurley2016}).
 In the following section, I compare predictions of the model with behavioral data from time reproduction experiments with gerbils and humans. The stimuli in these experiments were several seconds long and came from either a short, mid, long or all range (data by Henke and Thurley).
-\todo{cite here the data, link or paper}
 
+\paragraph{Time reproduction experiments with gerbils and humans.}
 Behavior in gerbils exhibits a regression effect for all ranges and a range effect for ranges with increasing mean. 
 The variation in slopes between gerbils is considerably larger when the variance is increased.
 At the individual level, both consistent and increasing performance with increasing variance is observed. 
 There are three gerbils that show a linear increase in performance with decreasing ratio of the mean and variance of the stimulus range (Fig. \ref{fig:underestimation}b). The remaining four gerbils however, show no effect of variance on reproductions (Supplementary Fig. \ref{sup:underestimation}a).
-On average Pearson correlation shows a significant linear relation of the slope with the mean (r=-0.62, $p<0.001$) and ratio of mean and variance (r=-0.61, $p<0.001$) in gerbils.
-This correlation gets stronger when the all range is excluded (r=-0.75, $p<0.001$).
+On average, Pearson correlation shows a significant linear relation of the slope with the mean (r = -0.62, p $<$ 0.001) and ratio of mean and variance (r = -0.61, p $<$ 0.001) in gerbils.
+This correlation gets stronger when the all range is excluded (r = -0.75, p $<$ 0.001).
 In humans, behavior is heterogeneous, and there is no range effect on average, but there is in some individuals (Fig. \ref{fig:underestimation}). There is no significant correlations of the slope with the mean or external variability ratio.
 The root MSE increases as the variance increases across all subjects (Supplementary Fig. \ref{sup:underestimation}b).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% comparison
-The circuit model predicted no effect of variance on the regression, but on the error in reproductions. 
+\paragraph{The model captures only parts of the observed behavior.}
+The circuit model predicted no effect of variance on the regression, but only on the error in reproductions. 
 Gerbils show a discrepancy in performance when variance is increased. 
-The model captures only one possible behavior, namely not taking into account a change in variance. 
-There is no significant correlation of the slope with the external variability ratio in the model, when in gerbils there is.
-\todo{Check what you mean by this}
-However, the model predicts correctly increasing error in reproductions with higher variance (Fig. \ref{fig:new_ranges}b).
-
+The model captures only one observed behavior, namely not taking into account the information from a change in variance. 
+There is no significant correlation of the slope with the external variability ratio in the model, when in gerbils there is significant correlation (r=-0.61, $p<0.001$).
+However, the model captures correctly an increasing error in reproductions with higher variance (Fig. \ref{fig:new_ranges}b).
 
 %EVAR all:    g r=-0.61, $p<0.001$, h r=-0.05, $p=0.802$, m r=-0.64 $p=0.12$
 %E all:       g r=-0.62, $p<0.001$, h r=-0.08, $p=0.718$, m r=-0.96, $p<0.001$
@@ -702,7 +700,7 @@ However, the model predicts correctly increasing error in reproductions with hig
 
 \section{Discussion}
 Previous results indicated, that time is encoded in dynamical changes of population activity, the rate of which is adjusted to the expected timing of movement initiation (\cite{Remington2018}, \cite{Wang2018}, \cite{Egger2019}, \cite{Henke2021}).
-This led to the hypothesis, that control over timed behavior can be understood in terms of adjustments to initial conditions and external inputs of a dynamical system (\cite{Tsao2022}, \cite{Remington2018}, \cite{Wang2018}).
+This led to the hypothesis, that control over timed behavior can be understood in terms of adjustments to initial conditions and external inputs of a dynamical system (\cite{Remington2018}, \cite{Wang2018}, \cite{Tsao2022}).
 Further support was provided by the study of RNNs, that were trained on time reproduction tasks. When trained with a tonic input, RNNs generated smooth temporal scaling when exposed to novel inputs. This was not the case for RNNs trained on transient inputs, supporting the hypothesis of the speed-control mechanism via a tonic input (\cite{Remington2018}, \cite{Bi2020}, \cite{Zhou2022}).
 The circuit model takes the core of this mechanism i.e. a dynamical systems approach and combines it with other evidence, like an action triggering state or an error signal, to facilitate time reproduction. 
 
