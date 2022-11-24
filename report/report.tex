@@ -144,7 +144,7 @@ Ongoing research is trying to identify mechanisms of how the brain would impleme
 	\textit{Range effect}: the regression to the mean gets more pronounced for ranges that comprise larger stimuli. 
 	\textit{Scalar variability}: the standard deviation of the reproduced magnitude grows linearly with larger estimates. 
 	\textit{Sequential effects}: the history of presented stimuli (e.g. ascending or descending order) has an influence on the reproduced magnitude. 
-	Adapted from \cite{Petzschner2015}.}
+	(Adapted from \cite{Petzschner2015}, reproduced with permission from F. Petzschner.)}
 	\label{fig:behavioraleffects}
 \end{figure}
 
@@ -162,7 +162,7 @@ Recently, evidence of predictive timing has emerged suggesting, that the central
 
 Predictive coding is a framework, in which the brain is predicting its upcoming states and refining these predictions through error signals (\cite{Rao1999}, \cite{Huang2011}, \cite{Ficco2021}).
 Intrinsic neural representations of motor actions are used as predictor of sensory consequences. % representations (efference copy)
-If there is a mismatch in predicted and actual sensory feedback, an internal model is updated by the error signal (\cite{Straka2018}, \cite{Clark2013}, \cite{Bubic2010}). %mismatch (corollory discharge)  actual sensory feedback (reafference)
+If there is a mismatch in predicted and actual sensory feedback, an internal model is updated by the error signal (\cite{Bubic2010}, \cite{Clark2013}, \cite{Straka2018}). %mismatch (corollory discharge)  actual sensory feedback (reafference)
 The internal model can include a prior to integrate expectations into the time estimate.
 Based on predictions and expectations, flexible control of neural mechanisms is required to measure and produce time intervals.
 This raises the question of how flexible control over brain dynamics can be achieved.
@@ -174,7 +174,7 @@ This raises the question of how flexible control over brain dynamics can be achi
 %---> nerual implementation, brain ares, scaling, trajectories, speed command, motor simulationk error signal
 Increasing evidence suggests, that the brain encodes time in population state dynamics. 
 A brain area that has been associated with timing behavior is the frontal (\cite{Shima2000}, \cite{Lewis2004}, \cite{Genovesio2006}, \cite{Emmons2017}, \cite{Wang2018}).
-In time reproduction experiments, the activity of individual cells in the frontal cortex heterogeneous response profiles, many of which are temporally scaled according to the produced time interval (\cite{Henke2021}, \cite{Sohn2019}, \cite{Remington2018}, \cite{Wang2018}).
+In time reproduction experiments, the activity of individual cells in the frontal cortex heterogeneous response profiles, many of which are temporally scaled according to the produced time interval (\cite{Remington2018}, \cite{Wang2018}, \cite{Sohn2019}, \cite{Henke2021}).
 Indeed, time can be encoded predictively relative to the mean of time intervals by temporal scaling activity.
 Scaling is a phenomenon that is consistent at the population level, when activity is displayed in a low-dimensional state space. In the state space, the activity of all neurons is represented over time by a so-called neural trajectory (\cite{Cueva2022}).
 It has been shown that for sensory timing, the population activity evolves along a common trajectory, whereas in motor timing, trajectories scale in speed to reach a common terminal state, that triggers an action (\cite{Mita2009}, \cite{Murakami2014}, \cite{Wang2018}, \cite{Sohn2019}, \cite{Henke2021}, \cite{Meirhaeghe2021}).
@@ -298,17 +298,16 @@ Moreover, $u$ and $v$ receive a transient input pulse $I_r$ to reset the dynamic
 The reset mechanism is turned on for one time step after each epoch, allowing the model to reproduce any number of stimulus intervals in succession.
 In Figure \ref{fig:experiment}a five example trials and the activity of $u, v, y$ and $I$ are depicted. 
 
-\paragraph{Procedure of experiment simulation.}
+\paragraph{Simulation of realistic time reproduction experiment.}
 In order to simulate a realistic time reproduction experiment, special attention had to be paid to the choice of stimuli and the noise level.  
 In the full experiment simulation, a series of 500 trials was presented to the model.
 Stimuli were randomly chosen from a uniform distribution of time intervals denoted as the stimulus range. 
 The stimulus range consisted of seven stimuli ranging from 400-700 ms (Fig. \ref{fig:experiment}b).
-To ensure that there were no side effects influencing the behavioral results, a repetition of all seven stimuli in a time window of 20 trials and no remarkable oscillation were required.
+To ensure that there were no side effects influencing the behavioral results, a repetition of all seven stimuli in a time window of 20 trials and no remarkable oscillation in the sequence of stimuli was required.
 In all simulations that were conducted in the intermediate regime, the threshold $y_\text{th}$ was set to 0.7. The model worked with higher and lower thresholds robustly. 
 To begin with, all three units had a time constant $\tau = 100$~ms and initial conditions of $u, v$ and $y$ were set to $u_0=0.7, v_0=0.2, y_0=0.5$.
 Besides a fixed delay period of 700~ms between each trial, an initial interval at the beginning of the simulation was introduced which allowed the system to approach its steady-state before the first trial. 
 The experiment simulation results in a distribution of inputs that drive the activity of $y$ in the reproduction epoch and a distribution of reproduced time intervals for each stimulus (Fig. \ref{fig:experiment}c).
-Taking the mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of the behavioral results (Fig. \ref{fig:experiment}d). 
 
 To simulate variability in the reproductions as it is found in real data, noise is added to $u, v$ and $y$ in the implementation as mentioned above. In data, a monotonic increase of the standard deviation of reproductions is found (\textit{scalar variability}). 
 The standard deviation of reproductions grows monotonically for increasing stimulus intervals for all tested noise levels (Supplementary Fig. \ref{sup:CV}b).
@@ -317,12 +316,12 @@ The coefficient of variation (CV) was used to quantify the degree of variation. 
 To achieve variations close to real data, reproductions should have a CV of 0.1 to 0.4 that is constant over all stimulus intervals.
 For all simulations the noise level $\sigma$ was set to 0.02, for which the mean CV for the was 0.1 (Supplementary Fig. \ref{sup:CV}c).
 
-\paragraph{Timeout trials.}
+\paragraph{Classification of timeout trials.}
 Reproductions that do not reach the threshold in a certain time span or cross the threshold particularly early are classified as timeout trial.
 If the threshold is crossed before 20~\% of the stimulus interval has passed, the trial is categorized as early timeout trial.
 A late timeout is reported, when twice the stimulus interval has elapsed and the threshold has not been reached.
 Simulations that exceed a fixed number of timeout trials (10\% of all trials in the experiment) were excluded from analysis.
-If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discharged.
+If timeout trials occurred for a single stimulus more than 10\% of all trials of this stimulus, the simulation was also discarded.
 %For different parameters, the number of timeouts were exceeded (a combination of too small $\tau$ and too high $K$).
 
 \begin{figure}[ht]
@@ -337,71 +336,82 @@ If timeout trials occurred for a single stimulus more than 10\% of all trials of
 \label{fig:experiment}
 \end{figure}
 
+Taken together, the model can be applied to simulate realistic time reproduction experiment with many consecutive trials. The noise level and weights were kept throughout the work. 
+In contrast to \citeauthor{Egger2020} (\citeyear{Egger2020}), initial values, especially $I_0$ did not need to be adjusted in advance. 
+This is because the input will have settled after the first one or two trials and will not be affected by the initial values thereafter.
+The mean over the distribution of reproduced time intervals for each stimulus allows for the investigation of the behavioral results (Fig. \ref{fig:experiment}d). 
+
 \section{Model Parameters for Error Minimization}
- I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by the circuit model.
-For this purpose, I focused on two model parameters $K$ and $\tau$ in order to adjust them in terms of error-minimization in behavior. 
-The memory parameter $K$ is crucial value to adapt, since this parameter defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
-The second parameter that had to be considered was the time constant $\tau$, which affects how fast $y$ behaves in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
-To allow an examination of the parameters that was decoupled from the influence of the noise, I first used the same stimulus series and second initialized the added noise equally in each simulation. This way, I was able to extract changes in the results based only on parameter changes.
-In contrast to \citeauthor{Egger2020} (\citeyear{Egger2020}), parameters such as the initial values, especially $I_0$ did not need to be adjusted in advance. This is because the input will have settled after the first one or two trials and will not be affected by the initial values thereafter.
-For evaluating effects in behavior, two stimulus ranges were used in simulations, denoted as short and long range. 
+I asked whether the behavioral effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by the circuit model.
+For this purpose, I focused on two model parameters, $K$ and $\tau$, and adjusted them to minimize errors in the behavior. 
+As mentioned above, other parameters like the noise level and initial conditions were always kept the same. 
+The memory parameter $K$ however, is a crucial value to adapt, since it defines the weight with which the input is adjusted to compensate for the discrepancy between the predicted interval and the stimulus duration.
+The second parameter that I considered was the time constant $\tau$, which affects how fast the dynamics react in response to the input. Therefore, $\tau$ can be interpreted as a biophysical parameter of the model that describes the rate of a population.
+To allow an investigation of the parameters decoupled from the influence of noise, I first used the same stimulus series and second initialized the added noise equally in each simulation. This way, I was able to extract changes in the behavioral results based on parameters only.
+
+For evaluating behavioral characteristics like the range effect, two stimulus ranges were used in simulations, denoted as short and long range. 
 The short range contained seven stimuli ranging from 400-700~ms. 
-The long range contained the same number of stimuli but was shifted by 300~ms compared to the short range, thus ranging from 700-1000~ms.
+The long range contained the same number of stimuli but was shifted by 300~ms compared to the short range, thus ranging from 700-1000~ms (Supplementary Fig. \ref{sup:CV}a).
  
 \subsection{Behaviorally Plausible Time Reproductions}
+Before evaluating the behavior of the model, I introduce a more rigorous description of the behavioral effects. 
 The regression effect in behavior can be quantified by the slope that results from a linear regression between the stimuli and the reproductions.
-Biological plausible slopes lie around 0.83 for the short and 0.73 for the long range(\cite{Sohn2019}, \cite{Henke2021}). 
-The slopes of behavioral results for multiple combinations of the update parameter~$K$ and the time constant~$\tau$ were determined. 
-In broad parameter regimes, the reproductions show a regression to the mean, as indicated by a slope smaller than 1. 
+Biological plausible slopes lie around 0.83 for the short and 0.73 for the long range (\cite{Sohn2019}, \cite{Henke2021}). 
+To evaluate the model, the slopes of behavioral results were obtained for several combinations of the update parameter~$K$ and the time constant~$\tau$.
+This resulted in broad parameter regimes in which reproductions show a regression to the mean, as indicated by a slope less than one. 
 For fixed $\tau$, the regression increases as $K$ increases, since more weight is given to the current update, and consequently less reliance is placed on the prior. 
-The model also produced biological plausible slopes for different time constants (Fig. \ref{fig:parameter}a), where $K$ must be adjusted depending on the stimulus range and time constant. 
+The model exhibits biological plausible slopes in the behavior for different time constants (Fig. \ref{fig:parameter}a), where $K$ must be adjusted depending on the stimulus range and time constant. 
 To produce plausible slopes, $K$ takes on smaller values for the long range, putting less weight on the update compared to the short range.
-
+This raises the question based on which criteria parameters should be chosen for the simulation.
 
 %Can behavioral effects of magnitude estimation also be achieved by adjusting $K$ and $\tau$ in accordance with error minimization?
-\paragraph{MSE}
-With parameters that minimize errors in reproductions, the effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced by the model.
-To find such optimized parameters, I minimized the error in the mean interval reproductions across the experiment. The mean squared error (MSE) was defined as $\text{MSE} = \text{bias}^2+\text{var}$, where the bias was specified as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ in the stimulus range $S$ and variance as mean $\sigma^2$ for all stimulus intervals in $S$.
+\paragraph{Mean squared error to determine model parameters.}
+To find suitable parameters independently of the slopes, I minimized the error of mean interval reproductions. The mean squared error (MSE) was defined as $\text{MSE} = \text{bias}^2+\text{var}$, where the bias was expressed as the squared difference between the mean reproduction $\bar{t_{r}}$ for each stimulus interval $t_s$ and variance as mean $\sigma^2$ for all stimulus intervals.
 \begin{equation} \label{MSE}
 	\begin{split}
-	 \text{bias} & = \frac{1}{S} \sum \limits_{i=1}^{S} (\bar{t_{r_i}} - t_{s_i}) \;,\\
-	 \text{bias}^2 & = \frac{1}{S} \sum \limits_{i=1}^{S}(\bar{t_{r_i}} - t_{s_i})^2 \;,\\
-	 \text{var} & = \frac{1}{S} \sum \limits_{i=1}^{S}(\sigma_i^2) \;.\\
+	 \text{bias} & = \frac{1}{N} \sum \limits_{i=1}^{N} (\bar{t_{r_i}} - t_{s_i}) \;,\\
+	 \text{bias}^2 & = \frac{1}{N} \sum \limits_{i=1}^{N}(\bar{t_{r_i}} - t_{s_i})^2 \;,\\
+	 \text{var} & = \frac{1}{N} \sum \limits_{i=1}^{N}(\sigma_i^2) \;.\\
 	\end{split}
 \end{equation}
-%the mean squared error was minimized, which is defined as the sum of the squared bias and variance of the mean reproductions 
-This error reflects the trade-off between bias and variance, with bias error indicating over-assumptions (underfitting) and the variance error indicating variability across reproduction and thus sensitivity to noise (overfitting).
+This error reflects the trade-off between bias and variance, with the bias error indicating over-assumptions (underfitting) and the variance indicating variability across reproduction and thus sensitivity to noise (overfitting).
 
-\subsection{Model Regime for Error-Minimized Behavior} 
-For larger time constants~$\tau$, the optimized update parameter~$K$ increases. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
-The corresponding time constant $\tau$ for the overall minimum of the MSE differ between the two stimulus ranges. For the short stimulus range, $\tau^* = 120$ ms and $K^* = 11$ yields an overall minimum, whereas $\tau^* = 200$ ms, $K^* = 20$ yields a overall minimum for the long range. 
-\todo{rewrite section in a positive way: interestingly, behavioral plausible parameters are very similar to error minimized parameters. Although they do not directly coincide}
-Assuming the same rate time constant across experiments, I had to find a shared $\tau$ for both the short and long range. Consequently, a time constant between the optima was chosen, considering the overlap with biological plausible slopes. Only with a time constant of 130~ms, optimal $K$ coincided with biological plausible slopes in both ranges. 
-With a time constant of $\tau = 130$, $K^* = 13$ for the short and $K^* = 10$ for the long range (Fig. \ref{fig:parameter}b, Supplementary Fig. \ref{sup:othererror}a, b).
-%%%%%%%%%%%%%%%
-Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations the mean optimal $K$ and standard deviation for the short range were $K = 12.88$, std = 0.34 and for the long range $K = 8.57$, std = 0.99. 
-%%%%%%%%%%%%%%%%%%%%
-Behavioral results with error-minimizing parameters show a regression to the mean with a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
-Adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biologically plausible.
-The model produces behavior that shows the regression and the range effect.
-Yet, the slope for the small range lies slightly below the biological plausible slopes found in data. 
-The standard variation of reproductions increases linearly (scalar variability), the mean coefficient of variation (CV) for the short range is 0.09, for the long range 0.11 (Fig. \ref{fig:parameter}c).
+\subsection{Model Regime for Error-Minimized Behavior}
+Parameters that minimize errors in reproductions, are close to those that result in behaviorally plausible slopes. Furthermore, the effects observed in real data (Fig. \ref{fig:behavioraleffects}) could be reproduced with these parameters.
 
-\paragraph{Parameters that minimize other errors.}
-No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance instead of the MSE. The relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d). 
-%%%%%%%%%%%%%%
-Optimal values of $K$ are based on the MSE, which composed of the squared bias and the variance of reproductions. 
-Time constants $\tau$ with the minimal MSE for a value of $K$ differ between the short and the long range. For the short range the optimal time constant $\tau = 120$~ms, for the long range $\tau = 200$~ms (Supplementary Fig. \ref{sup:othererror}a, b). If optimization is based only on the squared bias, optimal time constants are 100 ms for the short and 110 ms for the long range. 
-The variance is pushing the optimal time constant to lager values for both stimulus ranges. 
-Similarly, optimal $K$ is pushed to lower values by the variance (Supplementary Fig. \ref{sup:othererror}c, d).
-For all optimized values, be it on the squared bias, the variance or combined in the MSE, there is a general underestimation of stimulus intervals from the long range, which becomes appeared in Supplementary Fig. \ref{sup:othererror}e.
-%%%%%%%%%%%%%%%%%%
+For increasing time constants~$\tau$, the optimized update parameter~$K$ increases as well. Values of $K$ that minimize errors are smaller for the long range compared to the short range for all $\tau$, as already found for values of $K$ that result in plausible slopes.
+The weight parameter that minimizes the MSE for each $\tau$ is denoted as $K^*$. Across time constants,  $K^*$ is slightly lower compared to the weights that yield plausible slopes for the short range. In contrast, for the long range, $K^*$ is slightly larger compared to  weights that yield plausible slopes. Only for very small $\tau$ (below 120~ms), $K^*$ becomes very small.
+Although the parameters do not directly coincide, weights that minimize errors are strikingly close to weights that yield plausible behavior (Fig. \ref{fig:parameter}b). 
+
+The time constant that corresponds to the overall minimum of the MSE is denoted as $\tau^*$. 
+It differs between the two stimulus ranges:
+For the short stimulus range, $\tau^* = 120$~ms and $K^* = 11$ yield an overall minimum, whereas for the long range parameters are $\tau^* = 200$~ms and $K^* = 20$ (For behavioral results cf. Supplementary Fig. \ref{sup:othererror}a, b).
+Assuming a constant $\tau$ across experiments, I had to find a shared time constant for both the short and long range. 
+Consequently, a time constant between the optima was chosen, considering the overlap with biologically plausible slopes.
+With a time constant of 130~ms, optimal $K$ matched with biologically plausible slopes for both ranges (Fig. \ref{fig:parameter}b).
+Different noise initialization influence the optimal value of $K$ slightly. For 20 simulations mean $K^*$ and standard deviation for the short range were $K = 12.88$, std = 0.34 and for the long range $K = 8.57$, std = 0.99. 
+
+\paragraph{Behavioral results with error-minimizing parameters.}
+Behavioral results of simulations with error-minimizing parameters show a regression to the mean. The range effect is reflected by a stronger regression for the long range (slope of 0.73) compared to the short range (slope of 0.77) (Fig. \ref{fig:parameter}c). 
+Furthermore, the standard variation of reproductions increases linearly (scalar variability). The mean coefficient of variation (CV) for the short range is 0.09 and 0.11 for the long range (Fig. \ref{fig:parameter}c).
+Summarizing, adjusting $K$ in accordance with error minimization, leads to putting more weight on the prior experience for longer stimuli, which naturally entail more uncertainty, and is thus biologically plausible.
+Error-minimized parameter are close to parameters that yield plausible slopes and key behavioral effects are reproduced.
+However, for all optimized values, there is a general underestimation of stimulus intervals for the long range, which becomes appeared in Supplementary Fig. \ref{sup:othererror}e.
+For dynamics of $y$ for single trials over the course of the experiment, see Supplementary Fig. \ref{sup:experiment}.
+
+\paragraph{Parameters choice based on minimal bias and variance.}
+Next, I disentangled the MSE and investigated the contributions of variance and (squared) bias separately (Eq. \ref{MSE}).
+If error-minimization is based on the squared bias, $\tau^*$ is smaller for both stimulus ranges. This means, the variance is pushing the optimal time constant to lager values. %100 ms for the short and 110 ms for the long range. 
+Similarly, $K^*$ is pushed to lower values by the variance (Supplementary Fig. \ref{sup:othererror}c, d).
+No range effect can be observed when minimizing the error in reproductions based on the squared bias or the variance. 
+Moreover, relation of stronger weighting of the prior for the long range due to decreased $K$ is not apparent for either error metrics (Supplementary Fig. \ref{sup:othererror}c, d).
+This is why I conclude, that the MSE is a suitable choice to determine $K$ and $\tau$.
+
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{figures/interIparams.pdf}
-	\todo{rename optimization to error minimitzinh}
-	\caption{\textbf{Behavioral effects and parameter optimization.} 
+	\caption{\textbf{Time reproductions with parameter that minimize errors.} 
 	\textbf{(a)} Simulations with 500 trials for each pair of memory parameter $K$ and time constant $\tau$ at noise level $\sigma = 0.02$. Simulations were performed with stimuli chosen from the short (left) or long range (right). Color scale represents the slope of the linear fit between stimuli and reproductions. A slope of 1 on the identity line corresponds to perfect reproduction of the stimuli. Behaviorally plausible slopes are encircled in blue and lie around 0.83 for the short and 0.73 for the long range. Empty space corresponds to simulations, that exceeded the number of timeout trials and were thus excluded from analysis.
 	\textbf{(b)} Optimization of the weight given to the update $K$ for different time constants $\tau$ at noise level $\sigma = 0.02$. Color scale represents the MSE for an experiment stimulation with 500 trials for each pair of $K$ and $\tau$. Stimuli were either chosen from the short (left) or the long stimulus range. The minimal error for each $\tau$ is encircled in black and minimal error across all $\tau$ is additionally crossed. Parameter combinations that result in behaviorally plausible slopes (a) are shaded in blue.
 	\textbf{(c)} Top: Mean reproductions for simulation with 500 trials for each stimulation with the short (black) and long (gray) stimulus range. The value of $K$ is optimized for a time constant of $\tau = 130$ ms. For the simulation with short stimulus range $K^*$ was 13, with the long stimulus range optimal $K^*$ was 10. 
@@ -413,9 +423,9 @@ For all optimized values, be it on the squared bias, the variance or combined in
 \end{figure}
 
 \subsection{High Input Regime}
-There are differences between the intermediate and high input regimes in terms of fixed points and dynamics.
-Nevertheless, simulations of time reproduction experiments are possible in both regimes. 
-In the following, simulations in the high input regime are performed and compared with those in the intermediate input regime.
+Even tough, there are differences between the intermediate and high input regime in terms of fixed points and dynamics, simulations of time reproduction experiments are possible in both regimes. 
+One reason to look closer at the high input regime is, that the dynamics of $y$ all converge towards the same steady state, whereas in the intermediate input regime, for different inputs, $y$ evolves towards different steady states. 
+In the following, I investigate simulations in the high input regime and compare results with those in the intermediate input regime.
 
 \paragraph{Comparison of dynamics to the intermediate input regime.}
 While in the intermediate input regime three fixed points emerge in the phase plane (two stable and one unstable), in the high input regime the fixed points merge to a single one. 
@@ -455,11 +465,13 @@ The noise was set to the same value as in simulations in the intermediate regime
 An example of the experiment dynamics for four consecutive simuli is displayed in Fig. \ref{highI}a.
 
 %\paragraph{Error-minimizing parameters }
-Just as for the intermediate input regime, I identified parameters $K$ and $\tau$ that minimize the MSE of reproductions. 
-Again, the model is able to produce biologically plausible slopes for most time constants. 
-For all $\tau$ larger 40~ms, optimal $K$ is smaller for the long range compared to the short range.
-The MSE is minimal for $\tau^* = 60$~ms for both the short and the long range, with $K^* = 4$ and $K^* = 2.5$  for the short and the long range, respectively. Optimal $\tau^*$ and $K^*$ result in a biologically plausible slope only for the long range (slope of 0.68). For the short range the slope of 0.74 lies below the biologically plausible slopes around 0.83.
-Behavioral results of experiment simulation with error-minimizing parameters show a regression to the mean. In contrast to the intermediate input regime, standard deviations of the reproductions do not grow linearly in the long range (Fig. \ref{highI}b).
+Just as for the intermediate input regime, I identified parameters $K^*$ and $\tau^*$ that minimize the MSE of reproductions. 
+Again, the model is able to produce biologically plausible slopes for most time constants (Supplementary Fig. \ref{sup:highI}b). The weight $K$ that minimized errors is smaller compared to the weights that yield plausible slopes for both ranges. 
+For all $\tau$ larger 40~ms, optimal $K$ is smaller for the long range compared to the short range (Supplementary Fig. \ref{sup:highI}c).
+The MSE is minimal for $\tau^* = 60$~ms for both the short and the long range, with $K^* = 4$ and $K^* = 2.5$  for the short and the long range, respectively. 
+Behavioral results of experiment simulation with error-minimizing parameters show a regression to the mean.
+For the long range the regression has a slope of 0.68 and for the short range the slope is 0.74, hence a range effect is present.
+In contrast to the intermediate input regime, however, standard deviations of the reproductions do not grow linearly in the long range (Fig. \ref{highI}b).
 For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:experiment_high}.
 
 \begin{figure}[ht]
@@ -474,14 +486,14 @@ For dynamics of $y$ over the whole experiment see Supplementary Fig. \ref{sup:ex
 \label{highI}
 \end{figure}
 
-\paragraph{The intermediate input regime is a better approach to data.}%Comparison of experiment simulations between the intermediate and high input regime
-\todo{Motivate why I compare regimes: which one is better suited for simulation. Conclude in the end that intermediate regime is better.}
-The results of simulations with optimal parameter combinations were used to compare the simulations in the intermediate and high input regimes.
-Their behavioral results are displayed in Fig. \ref{fig:parameter}c for the intermediate and Fig. \ref{highI}b for the high input regime.
-The mean input $I$ for each stimulus shows an almost linear increase (or decrease for the high input regime) within a range. The increase (or decrease) is shallower for the long range due to the lower $K^*$ used in the simulation (Fig. \ref{fig:comparison}b, d).
+\paragraph{The high input regime provides no improvement of.}
+The common steady state in the high input regime was an intriguing feature.
+However, previous results have shown that the intermediate regime exhibits behavior closer to characteristic effects found in time estimation, e.g. monotonic increase of standard deviations of the reproductions. 
+To compare one last property, I looked at the relation of the mean input in the reproduction epoch for each stimulus in an experiment.
+The mean input $I$ an almost linear increase (or decrease for the high input regime) within a range. The increase (or decrease) is shallower for the long range due to the lower $K^*$ used in the simulation (Fig. \ref{fig:comparison}b, d).
 The maximum and minimum input $I$ during the simulation for the short or the long range were used to examine the most distant nullclines of $u$ and $v$ in the phase plane(Fig. \ref{fig:comparison}a, c). 
-In the intermediate regime, the difference between maximal and minimal $I$ is larger and the nullclines are also further apart.
-
+In the intermediate regime, the difference between maximal and minimal $I$ is larger and the nullclines are also further apart. Other than that, no difference can be identified between the regimes. 
+Taken together, the high input regime offers no improvement, if not a deterioration over the intermediate regime. Therefore, I discarded the high input regime and based the following analysis only on the intermediate regime. 
 
 \begin{figure}[!htb]
 	\centering
@@ -504,7 +516,7 @@ What is the reason for the general underestimation of larger inputs?
 It is not uncommon for stimuli in larger ranges to be generally underestimated in magnitude estimation across time domains. Time reproduction experiments with gerbils show a general underestimation across ranges (Fig. \ref{fig:underestimation}a, \cite{Henke2022}). 
 The cause has not yet been researched and could be due to many reasons ranging from lapsing attention to impatience. 
 It is necessary to investigate whether the underestimation in the model's behavioral output is caused by the regime in which the model operates, or whether it is a phenomenon that arises from optimal choice of parameters.
-Possible parameters of the model that could influence the behavior are the delay period between trials, the fixed threshold and the common time constant between stimulus ranges. 
+Possible parameters of the model that could influence the behavior are the delay period between trials, the fixed threshold and the common time constant between stimulus ranges.
 
 \subsection{Delay Period Influences Reproductions}
 The simulations were performed with a common time constant $\tau$ that was set between the optimal $\tau^*$ for the short and long range, respectively.
