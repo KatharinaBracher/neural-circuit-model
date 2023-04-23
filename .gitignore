@@ -4,12 +4,36 @@ leseliste.pdf
 letzte_seite_masterarbeit.pdf
 master_thesis_colloq.pdf
 thesis_bracher.pdf
+letzte_seite_masterarbeit_unterschrieben.pdf
+thesis_bracher_print1.pdf
+thesis_bracher_print2.pdf
 erklaerung_zur_arbeit.pdf
 notes/notes.backup
+defense
+notes
+report/figures/unused
+report/empty.bib
+report/make-figures.sh
+
+
 
 __pycache__
 
+
 code/SE_NL_MJ_2020-master
+code/onetwogo
+code/Egger_SAM_extracted.ipynb
+code/OneTwoGo.ipynb
+code/OneTwoGo.py 
+code/development_code.ipynb
+code/download-from-server.sh
+code/download-results.sh
+code/dynamics.ipynb
+code/noise_outside_sig.ipynb
+code/parameter_tuning.ipynb
+code/stimlst*
+code/upload*
+
 results
 logo
 BCCN_Conf

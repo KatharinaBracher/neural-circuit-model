@@ -60,7 +60,7 @@ class SimulationPlot:
         simulation = data.simulation
 
         self.steps = np.arange(len(simulation[:, 0])) * params.dt
-        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(6.4,4)) #4.4,3.5 20, 7 #FIT: 6.4,4, small: 3.2,2.9
+        self.subplots = plt.subplots(4, 1, sharex=True, figsize=(3.2,2.9)) #4.4,3.5 20, 7 #FIT: 6.4,4, small: 3.2,2.9
 
     def plot_example_trial(self, stimulus, trial=0):
         '''plots example trial to highlight one trial over all parallel trials'''
@@ -259,7 +259,7 @@ class SortedPlot:
             colors = colors_mid
 
 
-        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(20,7))  # text: 7.2,3.5
+        _, ax = plt.subplots(3,stimulus_range_len, sharex=True, sharey='row', figsize=(7.2,3.5))  # 20,7 text: 7.2,3.5
         ax.flatten()[0].set_ylabel(r'$y$'+' measur.', fontsize=11)
         ax.flatten()[stimulus_range_len].set_ylabel(r'$y$'+' reprod.', fontsize=11)
         ax.flatten()[stimulus_range_len*2].set_ylabel(r'$I$'+' reprod.', fontsize=11)

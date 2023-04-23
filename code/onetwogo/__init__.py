@@ -120,20 +120,23 @@ class BaseSimulation:
         for i in range(nbin):
             Input += (reset * K * (y - params.th)) / params.tau * params.dt
             # Input -= (reset * K * (-y - params.th)) / params.tau * params.dt
-            '''            
+                       
             u += (-u + sigmoid(params.Wui * Input - params.Wuv * v - params.IF * reset +
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
             v += (-v + sigmoid(params.Wvi * Input - params.Wvu * u + params.IF * reset + # does *2 make sense here?
                   np.random.randn(ntrials) * params.sigma)) / params.tau * params.dt
             y += (-y + u - v + np.random.randn(ntrials)
                   * params.sigma) / params.tau * params.dt
-            '''
+            
+            '''          
+            # noise outside sigmoid
             u += (-u + sigmoid(params.Wui * Input - params.Wuv * v - params.IF * reset) +
                   np.random.randn(ntrials) * params.sigma) / params.tau * params.dt
             v += (-v + sigmoid(params.Wvi * Input - params.Wvu * u + params.IF * reset) +
                   np.random.randn(ntrials) * params.sigma) / params.tau * params.dt
             y += (-y + u - v + np.random.randn(ntrials)
                   * params.sigma) / params.tau * params.dt
+            '''
 
             simulation[i] = [u.copy(), v.copy(), y.copy(), Input.copy()]
             reset_lst.append(reset)

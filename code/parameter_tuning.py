@@ -59,9 +59,9 @@ def create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst, cmap, 
         norm = matplotlib.colors.LogNorm(vmin=minmin, vmax=maxmax)
         
     if not norm:
-        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
-        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
-        h3 = sns.heatmap(shortlong, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[2],  cmap = cmap)#, vmin=minmin, vmax=maxmax) #cbar_ax= cbar_ax,
+        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=True,  vmin=minmin, vmax=maxmax)
+        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True,  vmin=minmin, vmax=maxmax)
+        h3 = sns.heatmap(shortlong, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[2],  cmap = cmap, cbar_ax= cbar_ax,vmin=minmin, vmax=maxmax) #cbar_ax= cbar_ax,
     else:
         cbar_ax = fig.add_axes([.91, .25, .01, .5]) #x, y, breite, höhe
         h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=False,  vmin=minmin, vmax=maxmax, norm=norm)
@@ -93,15 +93,15 @@ def figure_create_parameter_plot(short, long, shortlong, p1, p1_lst, p2, p2_lst,
         norm = mpl.colors.LogNorm(vmin=minmin, vmax=maxmax)
         
     if not norm:
-        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
-        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True)#,  vmin=minmin, vmax=maxmax)
+        h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[0], cmap = cmap, cbar=True,  vmin=minmin, vmax=maxmax)
+        h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, ax=ax[1], cmap = cmap, cbar=True,  vmin=minmin, vmax=maxmax)
         
     else:
         cbar_ax = fig.add_axes([.91, 0.2, .02, .6]) #x, y, breite, höhe
         h1 = sns.heatmap(short, xticklabels=p2_lst, yticklabels=p1_lst, 
-                         ax=ax[0], cmap = cmap, cbar=False)
+                         ax=ax[0], cmap = cmap, vmin=minmin, vmax=maxmax, norm=norm, cbar=False)
         h2 = sns.heatmap(long, xticklabels=p2_lst, yticklabels=p1_lst, 
-                         ax=ax[1], cmap = cmap, cbar_ax= cbar_ax)
+                         ax=ax[1], cmap = cmap, cbar_ax= cbar_ax, vmin=minmin, vmax=maxmax, norm=norm)
         #annot=mask,  fmt=".0", annot_kws={"size": 13})
 
     ax[0].locator_params(axis='y', nbins=4)

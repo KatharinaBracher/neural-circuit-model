@@ -1,11 +1,14 @@
 \documentclass[10pt, a4paper]{article} 
 %0 a4paper, twoside
+\usepackage[pass]{geometry}
 
 
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{emptypage}
 
 \usepackage[section]{placeins}
 
@@ -56,6 +59,9 @@
 % text 10 pt, fig caption 8 pt
 % in drawio 10 pt -> 13.3; 8 pt -> 10.66 
 
+
+
+% \newgeometry{hmarginratio=1:1}   
 \begin{titlepage}
 	\centering
 	{\scshape\LARGE Ludwig-Maximilians-Universität München \par}
@@ -66,6 +72,7 @@
 	\vspace{0.5cm}
 
 	{\scshape\LARGE Master's Thesis}
+	\vspace{0.5cm}
 	\rule{\textwidth}{1.pt}
 	{\huge\bfseries Computational Simulation of Time Perception \par}
 	\rule{\textwidth}{1.pt}
@@ -73,15 +80,17 @@
 
 	{\Large Katharina \textsc{M Bracher} \par}
 	%{Student ID: 11754625 \par}
-	\vspace{0.7cm}
+	\vspace{1cm}
 
 	{\large Supervision: Dr. Kay \textsc{Thurley} \par}
 	{\large Prof. Dr. Andreas \textsc{Herz} \par}
 \end{titlepage}
 
+%\includepdf[pages=-]{titlepage.pdf}
+%\restoregeometry
 \pagenumbering{gobble}
-%1 \newpage\null\thispagestyle{empty}\newpage
 \normalsize
+
 \section*{Abstract}
 % Background brain
 Timing in the brain is thought to be encoded through state dynamics of neuronal populations.
@@ -108,13 +117,13 @@ This work provides further evidence that a dynamical systems perspective has the
 %Humans and animals are able to flexibly coordinate and anticipate behaviors. 
 %Sensory information is combined expectations based on prior knowledge to minimize errors arising from noise in the environment and neural signal. 
 
-\clearpage
-%1 \newpage\null\newpage
-
-\tableofcontents
-
+%\clearpage
+%\newpage\ \newpage
 \pagebreak
-%1 \newpage\null\newpage
+\tableofcontents
+\pagebreak
+
+%\newpage\null\newpage
 \pagenumbering{arabic}
 \section{Introduction}
 Animals are capable of producing complex and flexible behaviors that rely on the interplay between motor and sensory systems.
@@ -963,5 +972,8 @@ For an overview of the code structure see Figure \ref{fig:code} and for its usag
 \clearpage
 \addcontentsline{toc}{section}{References}
 \printbibliography
+
+%\includepdf[pages=-]{../erklaerung_zur_arbeit.pdf}
+\includepdf[pages=-]{../letzte_seite_masterarbeit_neu.pdf}
 
 \end{document}
