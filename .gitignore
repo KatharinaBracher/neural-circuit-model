@@ -18,8 +18,8 @@ report/make-figures.sh
 __pycache__
 
 code/SE_NL_MJ_2020-master
-code/onetwogo
 code/Egger_SAM_extracted.ipynb
+code/Egger_SAM.ipynb
 code/OneTwoGo.ipynb
 code/OneTwoGo.py 
 code/development_code.ipynb
