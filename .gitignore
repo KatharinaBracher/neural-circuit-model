@@ -5,6 +5,7 @@ letzte_seite_masterarbeit.pdf
 master_thesis_colloq.pdf
 thesis_bracher.pdf
 letzte_seite_masterarbeit_unterschrieben.pdf
+letzte_seite_masterarbeit_neu.pdf
 thesis_bracher_print1.pdf
 thesis_bracher_print2.pdf
 erklaerung_zur_arbeit.pdf
@@ -14,6 +15,11 @@ notes
 report/figures/unused
 report/empty.bib
 report/make-figures.sh
+report/beh.png
+report/mse.png
+report/slope.png
+report/poster/*.svg
+
 
 __pycache__
 
