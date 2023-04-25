@@ -1,4 +1,4 @@
-# Neural circuit model for time perception
+# Neural Circuit Model for Time Perception
 
 This code is an implementation of the circuit as published by Seth W. Egger, Nhat M. Le, and Mehrdad Jazayeri. "A neural circuit model for human sensorimotor timing." Nature Communications (2020).
 
@@ -18,9 +18,9 @@ Analysis of the results is performed in the same file.
 
 Visualization of results is implemented in `plot.py`.
 
-## Simulation results
+## Simulation Results
 The Jupyter notebooks in the code folder explore different model regimes and simulation results. 
 
 ### Thesis
-A concise overview of the model is illustrated in report/poster
-in the thesis PDF a detailed description of the model and the experiment simulation results can be found.
+A concise overview of the model is illustrated in the [report and poster](https://github.com/KatharinaBracher/neural-circuit-model/raw/suggestions/report/build/report.pdf).
+The document shows a detailed description of the model and the experiment simulation results.
