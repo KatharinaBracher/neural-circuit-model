@@ -1,5 +1,9 @@
 # Neural Circuit Model for Time Perception
 
+<p align="center">
+<img width="200" height="200" src="https://github.com/KatharinaBracher/neural-circuit-model/raw/suggestions/logo.jpg">
+</p>
+
 This code is an implementation of the circuit as published by Seth W. Egger, Nhat M. Le, and Mehrdad Jazayeri. "A neural circuit model for human sensorimotor timing." Nature Communications (2020).
 
 The circuit is used to simulate time interval reproduction. 
