@@ -19,7 +19,7 @@ Analysis of the results is performed in the same file.
 Visualization of results is implemented in `plot.py`.
 
 ## Simulation results
-The Ipython notebooks in the code folder explore different model regimes and simulation results. 
+The Jupyter notebooks in the code folder explore different model regimes and simulation results. 
 
 ### Thesis
 A concise overview of the model is illustrated in report/poster
