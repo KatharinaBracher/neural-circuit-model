@@ -22,5 +22,5 @@ Visualization of results is implemented in `plot.py`.
 The Ipython notebooks in the code folder explore different model regimes and simulation results. 
 
 ### Thesis
-A concise overview of the model is illustrated in report/poster
-in the thesis PDF a detailed description of the model and the experiment simulation results can be found.
+A concise overview of the model is illustrated in report/poster.
+In the thesis PDF a detailed description of the model and the experiment simulation results can be found.
